@@ -74,6 +74,12 @@
     <Compile Include="AbmRol\Baja.Designer.cs">
       <DependentUpon>Baja.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmRol\FormularioModificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\FormularioModificacion.Designer.cs">
+      <DependentUpon>FormularioModificacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmRol\Modificacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\Baja.resx">
       <DependentUpon>Baja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\FormularioModificacion.resx">
+      <DependentUpon>FormularioModificacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\Modificacion.resx">
+      <DependentUpon>Modificacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\PantallaInicio.resx">
       <DependentUpon>PantallaInicio.cs</DependentUpon>
