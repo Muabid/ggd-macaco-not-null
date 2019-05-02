@@ -1,6 +1,6 @@
-﻿namespace FrbaCrucero.AbmPuerto
+﻿namespace FrbaCrucero.AbmRol
 {
-    partial class Form1
+    partial class Rol
     {
         /// <summary>
         /// Required designer variable.

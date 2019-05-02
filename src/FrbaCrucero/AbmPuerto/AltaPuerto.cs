@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace FrbaCrucero.AbmPuerto
 {
-    public partial class Form1 : Form
+    public partial class AltaPuerto : Form
     {
-        public Form1()
+        public AltaPuerto()
         {
             InitializeComponent();
+        }
+
+        private void AltaPuerto_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
