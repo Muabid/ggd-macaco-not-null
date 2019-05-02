@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaCrucero.AbmPuerto
+namespace FrbaCrucero.AbmRol
 {
-    public partial class Form1 : Form
+    public partial class Rol : Form
     {
-        public Form1()
+        public Rol()
         {
             InitializeComponent();
         }
