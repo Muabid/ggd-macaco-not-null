@@ -348,14 +348,16 @@ INSERT INTO [MACACO_NOT_NULL].[USUARIO] (
 		   ('JOSE','Gonzalez',40987234,'Medrano 876',45237825,'almagro@gmail.com',CONVERT(datetime2,'1998-04-22 00:00:00.000',121),1,1),
 		   ('ANDRES','Montana',61248982,'Avenida Cordoba 8568',48916685,'montana@gmail.com',CONVERT(datetime2,'1964-11-18 00:00:00.000',121),1,1),
 		   ('MICAELA','MOZART',37918442,'Avenida Corrientes 6732',42359645,'sinfonia@gmail.com',CONVERT(datetime2,'1976-12-24 00:00:00.000',121),1,1),
-		   ('ROCIO','TESORO',15948315,'Avenida Callao 458',46549821,'rtesoro@gmail.com',CONVERT(datetime2,'1982-04-06 00:00:00.000',121),1,1);
+		   ('ROCIO','TESORO',15948315,'Avenida Callao 458',46549821,'rtesoro@gmail.com',CONVERT(datetime2,'1982-04-06 00:00:00.000',121),1,1),
+		   ('Administrador','General',1,'Admin12345',45231111,'admin@gmail.com',CONVERT(datetime2,'1962-09-16 00:00:00.000',121),1,1);
 	
 INSERT INTO [MACACO_NOT_NULL].LOGIN (logi_username,logi_password,logi_usuario_id,logi_intento_fallido)	
 	VALUES ('rtesoro','w23e',(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 15948315 and usua_direccion = 'Avenida Callao 458'),0),
 		   ('mMozart','w23e',(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 37918442 and usua_direccion = 'Avenida Corrientes 6732'),0),
 	       ('aMontana','w23e',(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 61248982 and usua_direccion = 'Avenida Cordoba 8568'),0),
 	       ('jGonzalez','w23e',(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 40987234 and usua_direccion = 'Medrano 876'),0),
-		   ('jPerez','w23e',(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 40545987 and usua_direccion = 'Gestion123'),0);
+		   ('jPerez','w23e',(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 40545987 and usua_direccion = 'Gestion123'),0),
+		   ('admin','w23e',(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 1 and usua_direccion = 'Admin12345'),0);
 		  
 INSERT INTO [MACACO_NOT_NULL].COMPANIA (comp_nombre)
 	select distinct CRU_FABRICANTE FROM [GD1C2019].[gd_esquema].[Maestra];
@@ -371,17 +373,21 @@ INSERT INTO [MACACO_NOT_NULL].PUERTO (puer_nombre)
  INSERT INTO [MACACO_NOT_NULL].CRUCERO(
 											cruc_nombre,
 											cruc_modelo ,
-											cruc_compañia_id																														
+											cruc_compañia_id,
+											cruc_cantidad_cabinas																														
 										)
-	select distinct CRUCERO_IDENTIFICADOR,CRUCERO_MODELO,
-		(	
-			 select comp_id
-			 from [MACACO_NOT_NULL].COMPANIA 
-			 where comp_nombre = CRU_FABRICANTE
-		)
-		FROM [GD1C2019].[gd_esquema].[Maestra];
-
---PREGUNTAR QUE HACER CON CANTIDAD DE CABINAS DE LOS CRUCEROS DE LA TABLA MAESTRA
+	select a.CRUCERO_IDENTIFICADOR,a.CRUCERO_MODELO,company,COUNT(*)
+	from 
+		(
+			select distinct m2.CABINA_NRO,m2.CABINA_PISO,m2.CRUCERO_IDENTIFICADOR,m2.CRUCERO_MODELO,
+				(	
+					 select comp_id
+					 from [MACACO_NOT_NULL].COMPANIA 
+					 where comp_nombre = m2.CRU_FABRICANTE
+				) as company
+			FROM [GD1C2019].[gd_esquema].[Maestra] m2   
+		) a  
+	group by a.CRUCERO_IDENTIFICADOR,a.CRUCERO_MODELO,company;
 
 INSERT INTO [MACACO_NOT_NULL].CABINA(
 											cabi_nro,
@@ -546,8 +552,174 @@ GO
 ALTER SEQUENCE [MACACO_NOT_NULL].CountBy1 
 RESTART WITH 1;
   
+  
+  
+------------- ABM Rol---------------
+---------------ALTA---------------
 
+CREATE PROCEDURE [MACACO_NOT_NULL].AltaRol
+@nombre_rol NVARCHAR(255),
+@id_rol INT,
+@activo BIT
+AS
+	BEGIN
+	IF(NOT EXISTS(SELECT rol_nombre FROM [MACACO_NOT_NULL].ROL WHERE rol_nombre = @nombre_rol))
+		BEGIN
+			BEGIN TRANSACTION
+				INSERT INTO [MACACO_NOT_NULL].ROL(rol_nombre,rol_activo)	
+				VALUES(@nombre_rol,@activo)
+			COMMIT TRANSACTION
+		END
+	ELSE
+		BEGIN
+			RAISERROR('ERROR: El rol ingresado ya existe',16,1)
+		END
+END
+GO
 
+---------------BAJA---------------
+CREATE PROCEDURE [MACACO_NOT_NULL].BajaRol
+@rol_id int
+AS
+	BEGIN
+		BEGIN TRANSACTION
+			UPDATE [MACACO_NOT_NULL].ROL SET rol_activo = 0	WHERE rol_id = @rol_id		
+			UPDATE [MACACO_NOT_NULL].USUARIO SET usua_rol_id = NULL	WHERE usua_rol_id = @rol_id
+		COMMIT TRANSACTION
+	END
+GO
+
+---------------MODIFICACION---------------
+--Se llama este procedure primero al querer modificar un rol
+CREATE PROCEDURE [MACACO_NOT_NULL].ModificarNombreRol
+@rol_id int,
+@nuevoNombreRol NVARCHAR(255)
+AS
+	IF(NOT EXISTS(SELECT rol_nombre FROM [MACACO_NOT_NULL].ROL WHERE rol_nombre = @nuevoNombreRol))
+	BEGIN
+		BEGIN TRANSACTION
+			UPDATE [MACACO_NOT_NULL].ROL SET rol_nombre = @nuevoNombreRol WHERE rol_id = @rol_id
+			DELETE from [MACACO_NOT_NULL].ROL_FUNCIONALIDAD where rol_id = @rol_id
+		END TRANSACTION
+	END
+	ELSE
+	BEGIN
+		RAISERROR('ERROR: Nombre de rol ya existente',16,1)
+	END
+END
+GO
+
+-- Si en la tabla de funcionalidad  pantalla de modificacion de Rol hay N filas, llamar a este procedure N veces
+CREATE PROCEDURE [MACACO_NOT_NULL].AgregarFuncionalidadRol 
+@rol_id int,
+@nombreNuevaFuncionalidadRol NVARCHAR(255)
+AS
+	BEGIN
+	DECLARE @idNuevaFuncionalidadRol int
+	SET @idNuevaFuncionalidadRol = (SELECT func_id FROM [MACACO_NOT_NULL].[FUNCIONALIDAD] where func_detalle = @nombreNuevaFuncionalidadRol)
+	IF(NOT EXISTS(SELECT func_id FROM [MACACO_NOT_NULL].ROL_FUNCIONALIDAD WHERE func_id = @idNuevaFuncionalidadRol AND rol_id = @rol_id))
+		BEGIN
+			BEGIN TRANSACTION
+				INSERT INTO [MACACO_NOT_NULL].ROL_FUNCIONALIDAD(rol_id,func_id)	VALUES (@rol_id,@idNuevaFuncionalidadRol)
+			COMMIT TRANSACTION
+		END
+	ELSE 
+		BEGIN
+			RAISERROR('ERROR: Funcionalidad existente para este rol',16,1)
+		END	
+END
+GO
+
+CREATE PROCEDURE [MACACO_NOT_NULL].HabilitarRol 
+@rol_id int
+AS
+BEGIN
+	UPDATE [MACACO_NOT_NULL].ROL SET rol_activo = 1 WHERE rol_id = @rol_id
+END
+GO
+ 
+ 
+------------------------- LOGIN Y SEGURIDAD ------------
+
+---------------- FUNCION ENCRIPTACION PASSWORD ------------------------------------
+CREATE FUNCTION [MACACO_NOT_NULL].EncriptarPassword(@password NVARCHAR(255))
+RETURNS nvarchar(255)
+AS
+BEGIN
+	RETURN CONVERT(nvarchar(255),HASHBYTES('SHA2_256',@password),1)
+END
+
+GO
+ 
+CREATE PROCEDURE [MACACO_NOT_NULL].LoguearUsuario 
+@username NVARCHAR(255),
+@password NVARCHAR(255)
+AS
+BEGIN
+	DECLARE @intentosFallidosActuales int
+	IF(NOT EXISTS(SELECT logi_usuario_id FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username))
+	BEGIN
+			RAISERROR ('ERROR: Loggin incorrecto, no existe ningun usuario con el username ingresado')
+	END
+	ELSE
+	BEGIN	
+		SET @intentosFallidosActuales = (SELECT logi_intento_fallido FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username)
+		IF(NOT EXISTS(SELECT logi_usuario_id FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username AND logi_password	= [MACACO_NOT_NULL].EncriptarPassword(@password)))
+		BEGIN						
+			BEGIN TRANSACTION
+				UPDATE [MACACO_NOT_NULL].LOGIN SET logi_intento_fallido = (@intentosFallidosActuales + 1) WHERE logi_username = @username
+			COMMIT TRANSACTION
+			RAISERROR ('ERROR: Loggin incorrecto para el usuario %s .',16,1,@username)
+		END
+		ELSE 
+		BEGIN
+			BEGIN TRANSACTION
+				UPDATE [MACACO_NOT_NULL].LOGIN SET logi_intento_fallido = 0 WHERE logi_username = @username
+				DECLARE @idUsuarioLoggeado INT
+				SET @idUsuarioLoggeado = (SELECT logi_usuario_id FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username)
+				UPDATE [MACACO_NOT_NULL].USUARIO set usua_activo = 1 WHERE usua_id = @idUsuarioLoggeado
+			COMMIT TRANSACTION
+		END				
+	END	
+END
+GO
+ 
+ 
+-----------------------------TRIGGERS-------------------------------------
+----- SE EJECUTA POST LOGIN FALLIDO --------
+CREATE TRIGGER [MACACO_NOT_NULL].TRIGGER_BLOQUEAR_USUARIO_POR_LOGIN_FALLIDO ON [MACACO_NOT_NULL].LOGIN AFTER UPDATE
+AS
+BEGIN
+	IF (select logi_intento_fallido from inserted)>=3
+		UPDATE [MACACO_NOT_NULL].USUARIO set usua_activo = 0 WHERE usua_id = (select logi_usuario_id from inserted)
+END
+
+GO
+  
+  
+CREATE PROCEDURE [MACACO_NOT_NULL].CrearViaje 
+@fechaSalida datetime2(3),
+@fechaLlegada datetime2(3),
+@fechaLlegadaEstimada datetime2(2),
+@cruceroId int,
+@recorridoId int,
+AS
+BEGIN
+	INSERT INTO [MACACO_NOT_NULL].VIAJE(viaj_fecha_salida,viaj_fecha_llegada,viaj_fecha_llegada_estimada,viaj_crucero_id,viaj_recorrido_id)
+		VALUES(@fechaSalida,@fechaLlegada,@fechaLlegadaEstimada,@cruceroId,@recorridoId)
+END
+GO
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
 /* DROP TABLE [MACACO_NOT_NULL].[TRAMO]
 DROP TABLE [MACACO_NOT_NULL].[PASAJE]
 DROP TABLE [MACACO_NOT_NULL].[VIAJE]
@@ -569,4 +741,7 @@ DROP TABLE [MACACO_NOT_NULL].[ROL]
 DROP SEQUENCE [MACACO_NOT_NULL].CountBy1 
 
 DROP SCHEMA MACACO_NOT_NULL */
+
+
+
 
