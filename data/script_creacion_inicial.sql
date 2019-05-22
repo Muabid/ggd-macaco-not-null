@@ -206,12 +206,27 @@ CREATE TABLE  [MACACO_NOT_NULL].[CRUCERO] (
 	cruc_nombre [nvarchar](255),
 	cruc_modelo  [nvarchar](50),
 	cruc_fuera_de_servicio [bit],
-	cruc_fecha_fuera_servicio [datetime2](3),
 	cruc_fecha_alta [datetime2](3),
-	cruc_fecha_baja_definitiva [datetime2](3),
-	cruc_fecha_reinicio_servicio [datetime2](3),
+	cruc_fecha_baja_definitiva [datetime2](3),	
 	cruc_baja_por_vida_util [bit],
 	cruc_cantidad_cabinas [int]
+);
+END
+GO
+
+IF NOT EXISTS (
+	SELECT 1
+	FROM INFORMATION_SCHEMA.TABLES 
+	WHERE TABLE_TYPE = 'BASE TABLE'
+	AND TABLE_NAME = 'BAJA_CRUCERO'
+	AND TABLE_SCHEMA = 'MACACO_NOT_NULL'
+)
+BEGIN
+CREATE TABLE  [MACACO_NOT_NULL].[BAJA_CRUCERO] (
+	baja_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	baja_cruc_id int FOREIGN KEY REFERENCES [MACACO_NOT_NULL].[CRUCERO] (cruc_id), 
+	baja_cruc_fecha_fuera_servicio [datetime2](3),
+	baja_cruc_fecha_reinicio_servicio [datetime2](3)
 );
 END
 GO
@@ -556,10 +571,9 @@ RESTART WITH 1;
   
 ------------- ABM Rol---------------
 ---------------ALTA---------------
-
+GO
 CREATE PROCEDURE [MACACO_NOT_NULL].AltaRol
 @nombre_rol NVARCHAR(255),
-@id_rol INT,
 @activo BIT
 AS
 	BEGIN
@@ -709,16 +723,8 @@ BEGIN
 		VALUES(@fechaSalida,@fechaLlegada,@fechaLlegadaEstimada,@cruceroId,@recorridoId)
 END
 GO
-  
-  
-  
-  
-  
-  
-  
-  
+ 
 
-  
   
 /* DROP TABLE [MACACO_NOT_NULL].[TRAMO]
 DROP TABLE [MACACO_NOT_NULL].[PASAJE]
