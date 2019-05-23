@@ -724,8 +724,83 @@ BEGIN
 END
 GO
  
+ 
+ -------------------- REPORTES ---------------------
+
+CREATE PROCEDURE [MACACO_NOT_NULL].RecorridosConMasPasajesComprados 
+AS
+BEGIN
+	DECLARE @tablaRecorridos TABLE(pasajes_comprados int,recorrido_id int, recorrido_codigo int);
+	insert into @tablaRecorridos (pasajes_comprados,recorrido_id,recorrido_codigo)
+		select COUNT(pasa_id),reco_id,reco_codigo
+		from [MACACO_NOT_NULL].[PASAJE] 	
+		INNER JOIN [MACACO_NOT_NULL].VIAJE ON pasa_viaje_id = viaj_id
+		INNER JOIN [MACACO_NOT_NULL].[RECORRIDO] ON reco_id = viaj_recorrido_id
+		where pasa_pago_id IS NOT NULL
+		group by reco_id,reco_codigo
+
+	SELECT TOP 5 recorrido_id,recorrido_codigo --atributos
+	FROM @tablaRecorridos
+	order by pasajes_comprados DESC 
+END
+GO
+  
 
   
+ --select tram_recorrido_id, P1.puer_nombre, P2.puer_nombre, tram_precio_base 
+ --from [MACACO_NOT_NULL].[TRAMO]
+ --INNER JOIN [MACACO_NOT_NULL].[PUERTO] P1 ON P1.puer_id = tram_puerto_desde
+ --INNER JOIN [MACACO_NOT_NULL].[PUERTO] P2 ON P2.puer_id = tram_puerto_hasta
+ --order by tram_recorrido_id
+  -- Hacer que para mostrar los recorridos en una tabla: 
+  -- Mostar en una fila el reco_codigo,ciudad inicio y ciudad destino.
+  -- Poner al costado un boton de ver mas detalles, que te lleva a otra ventana en donde te muestra 
+  -- 	todos los tramos (con sus atributos) del recorrido que elegiste.
+  
+
+CREATE PROCEDURE [MACACO_NOT_NULL].CrucerosConMasReparaciones 
+AS
+BEGIN
+  SELECT TOP 5 cruc_modelo,cruc_nombre,comp_nombre 
+  FROM [MACACO_NOT_NULL].[CRUCERO]
+  INNER JOIN [MACACO_NOT_NULL].[COMPANIA] ON cruc_compañia_id = comp_id
+  order by  (
+				SELECT SUM(DATEDIFF(day,baja_cruc_fecha_fuera_servicio, baja_cruc_fecha_reinicio_servicio))
+				FROM [MACACO_NOT_NULL].[BAJA_CRUCERO] 	
+				where baja_cruc_id = cruc_id
+			) DESC 
+ END
+GO 
+ 
+-- CONVERT(datetime2,'1962-09-16 00:00:00.000',121)
+  
+CREATE PROCEDURE [MACACO_NOT_NULL].RecorridosConMasCabinasLibresEnSusViajes 
+AS
+BEGIN
+	DECLARE @tablaPasajes TABLE(cab_ocupados int,viaje_id int);
+	insert into @tablaPasajes (cab_ocupados,viaje_id)
+		select COUNT(distinct (pasa_cab_id)),pasa_viaje_id
+		from [MACACO_NOT_NULL].[PASAJE] 
+		group by pasa_viaje_id
+
+	DECLARE @tabla TABLE(cab_libres int,recorrido_id int);
+	insert into @tabla (cab_libres,recorrido_id)
+		select cruc_cantidad_cabinas - (select cab_ocupados from @tablaPasajes where viaje_id = viaj_id),viaj_recorrido_id
+		FROM [MACACO_NOT_NULL].[RECORRIDO] 	
+		INNER JOIN [MACACO_NOT_NULL].VIAJE ON reco_id = viaj_recorrido_id
+		INNER JOIN [MACACO_NOT_NULL].[CRUCERO] ON cruc_id = viaj_crucero_id	
+		
+	  SELECT TOP 5 reco_id,reco_codigo --atributos
+	  FROM [MACACO_NOT_NULL].[RECORRIDO]
+	  order by  (
+					SELECT AVG(cab_libres) from @tabla t
+					where t.recorrido_id = reco_id
+				) DESC 
+  
+ END
+GO 
+  
+ 
 /* DROP TABLE [MACACO_NOT_NULL].[TRAMO]
 DROP TABLE [MACACO_NOT_NULL].[PASAJE]
 DROP TABLE [MACACO_NOT_NULL].[VIAJE]
