@@ -556,10 +556,10 @@ RESTART WITH 1;
   
 ------------- ABM Rol---------------
 ---------------ALTA---------------
-
+GO
 CREATE PROCEDURE [MACACO_NOT_NULL].AltaRol
 @nombre_rol NVARCHAR(255),
-@id_rol INT,
+---@id_rol INT,----
 @activo BIT
 AS
 	BEGIN

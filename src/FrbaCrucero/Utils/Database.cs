@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FrbaCrucero.Utils
 {
@@ -35,7 +36,8 @@ namespace FrbaCrucero.Utils
                 res = command.ExecuteNonQuery();
             }
             catch (Exception exception)
-            { 
+            {
+                MessageBox.Show("Fallo !");
             }
             connection.Close();
             return res;

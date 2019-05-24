@@ -38,5 +38,19 @@ namespace FrbaCrucero.AbmRol
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Baja frm2 = new Baja();
+
+            frm2.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            FormularioModificacion frm2 = new FormularioModificacion();
+
+            frm2.Show();
+        }
     }
 }

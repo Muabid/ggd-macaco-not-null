@@ -27,8 +27,9 @@ namespace FrbaCrucero
         private void button1_Click(object sender, EventArgs e)
         {
             AbmRol.InicioRol fm1 = new AbmRol.InicioRol();
+            this.Hide();
             fm1.Show();
-
+            
 
         }
 
