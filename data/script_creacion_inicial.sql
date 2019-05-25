@@ -260,7 +260,7 @@ BEGIN
  CREATE TABLE [MACACO_NOT_NULL].[RECORRIDO] (
 	reco_id int IDENTITY(1,1) PRIMARY KEY NOT NULL, 
 	reco_codigo decimal (18,0) NOT NULL,
-	reco_activo bit 
+	reco_activo bit DEFAULT 1
  );
  END
  GO
