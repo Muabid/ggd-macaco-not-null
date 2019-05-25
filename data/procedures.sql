@@ -58,4 +58,38 @@ BEGIN
 	RETURN(@origen);
 END
 
+CREATE TYPE [MACACO_NOT_NULL].TRAMOTYPE AS TABLE   
+( ciudadOrigen INT 
+, ciudadDestino INT
+,precio DECIMAL(18,0) );  
+GO  
 
+CREATE PROCEDURE [MACACO_NOT_NULL].InsertRecorrido @reco_codigo decimal(18,0),
+ @tramos TRAMOTYPE READONLY
+AS
+BEGIN  
+	IF EXISTS (SELECT reco_id FROM [MACACO_NOT_NULL].RECORRIDO
+	 WHERE reco_codigo =@reco_codigo)
+		THROW 51000, 'Código ya existente', 1;
+	 ELSE
+	BEGIN TRANSACTION
+	BEGIN TRY
+		INSERT INTO [MACACO_NOT_NULL].RECORRIDO (reco_codigo,reco_activo)
+			VALUES (@reco_codigo,1);
+
+		DECLARE @reco_id INT;
+
+		SET @reco_id = (SELECT reco_id FROM  [MACACO_NOT_NULL].RECORRIDO
+					WHERE reco_codigo = @reco_codigo);
+
+		INSERT INTO [MACACO_NOT_NULL].TRAMO 
+		SELECT @reco_id, ciudadOrigen, ciudadDestino, precio 
+		FROM @tramos
+
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK;
+		THROW;
+	END CATCH
+END 
