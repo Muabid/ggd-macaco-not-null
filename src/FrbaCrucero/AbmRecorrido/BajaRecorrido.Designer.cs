@@ -1,6 +1,6 @@
 ﻿namespace FrbaCrucero.AbmRecorrido
 {
-    partial class Form3
+    partial class BajaRecorrido
     {
         /// <summary>
         /// Required designer variable.
@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.codigo = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.from = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.to = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.end = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.detail = new System.Windows.Forms.DataGridViewButtonColumn();
             this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button1 = new System.Windows.Forms.Button();
@@ -51,12 +51,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Código";
             // 
-            // textBox1
+            // codigo
             // 
-            this.textBox1.Location = new System.Drawing.Point(92, 37);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
+            this.codigo.Location = new System.Drawing.Point(92, 37);
+            this.codigo.Name = "codigo";
+            this.codigo.Size = new System.Drawing.Size(100, 20);
+            this.codigo.TabIndex = 1;
             // 
             // dataGridView1
             // 
@@ -64,38 +64,43 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.code,
             this.from,
-            this.to,
-            this.Precio,
+            this.end,
+            this.price,
             this.detail,
             this.delete});
             this.dataGridView1.Location = new System.Drawing.Point(25, 132);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(540, 100);
+            this.dataGridView1.Size = new System.Drawing.Size(560, 298);
             this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // code
             // 
+            this.code.DataPropertyName = "code";
             this.code.HeaderText = "Código";
             this.code.Name = "code";
             this.code.ReadOnly = true;
             // 
             // from
             // 
+            this.from.DataPropertyName = "origin";
             this.from.HeaderText = "Origen";
             this.from.Name = "from";
             this.from.ReadOnly = true;
             // 
-            // to
+            // end
             // 
-            this.to.HeaderText = "Destino";
-            this.to.Name = "to";
-            this.to.ReadOnly = true;
+            this.end.DataPropertyName = "end";
+            this.end.HeaderText = "Destino";
+            this.end.Name = "end";
+            this.end.ReadOnly = true;
             // 
-            // Precio
+            // price
             // 
-            this.Precio.HeaderText = "Price";
-            this.Precio.Name = "Precio";
-            this.Precio.ReadOnly = true;
+            this.price.DataPropertyName = "price";
+            this.price.HeaderText = "Precio";
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
             // 
             // detail
             // 
@@ -133,18 +138,19 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "Buscar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.onBuscar);
             // 
-            // Form3
+            // BajaRecorrido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(577, 266);
+            this.ClientSize = new System.Drawing.Size(605, 442);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.codigo);
             this.Controls.Add(this.label1);
-            this.Name = "Form3";
+            this.Name = "BajaRecorrido";
             this.Text = "Baja";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -155,15 +161,15 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox codigo;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn from;
-        private System.Windows.Forms.DataGridViewTextBoxColumn to;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
-        private System.Windows.Forms.DataGridViewButtonColumn detail;
-        private System.Windows.Forms.DataGridViewButtonColumn delete;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn from;
+        private System.Windows.Forms.DataGridViewTextBoxColumn end;
+        private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.DataGridViewButtonColumn detail;
+        private System.Windows.Forms.DataGridViewButtonColumn delete;
     }
 }

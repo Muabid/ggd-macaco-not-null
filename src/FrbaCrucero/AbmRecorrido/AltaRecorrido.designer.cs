@@ -28,43 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.from = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.to = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tramosTable = new System.Windows.Forms.DataGridView();
+            this.ciudadOrigen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciudadDestino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.code = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.addTramoButton = new System.Windows.Forms.Button();
+            this.clean = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.tramosTable)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // tramosTable
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.from,
-            this.to,
+            this.tramosTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tramosTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ciudadOrigen,
+            this.ciudadDestino,
             this.precio});
-            this.dataGridView1.Location = new System.Drawing.Point(34, 80);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(345, 90);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.tramosTable.Location = new System.Drawing.Point(34, 80);
+            this.tramosTable.Name = "tramosTable";
+            this.tramosTable.Size = new System.Drawing.Size(345, 90);
+            this.tramosTable.TabIndex = 0;
+            this.tramosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // from
+            // ciudadOrigen
             // 
-            this.from.HeaderText = "Ciudad origen";
-            this.from.Name = "from";
+            this.ciudadOrigen.DataPropertyName = "ciudadOrigen";
+            this.ciudadOrigen.HeaderText = "Ciudad origen";
+            this.ciudadOrigen.Name = "ciudadOrigen";
             // 
-            // to
+            // ciudadDestino
             // 
-            this.to.HeaderText = "Ciudad destino";
-            this.to.Name = "to";
+            this.ciudadDestino.DataPropertyName = "ciudadDestino";
+            this.ciudadDestino.HeaderText = "Ciudad destino";
+            this.ciudadDestino.Name = "ciudadDestino";
             // 
             // precio
             // 
+            this.precio.DataPropertyName = "precio";
             this.precio.HeaderText = "Precio";
             this.precio.Name = "precio";
             // 
@@ -85,49 +88,50 @@
             this.label1.Text = "Código";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // button1
+            // addTramoButton
             // 
-            this.button1.Location = new System.Drawing.Point(249, 26);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 22);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Agregar Tramo";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.add_click);
+            this.addTramoButton.Location = new System.Drawing.Point(249, 26);
+            this.addTramoButton.Name = "addTramoButton";
+            this.addTramoButton.Size = new System.Drawing.Size(98, 22);
+            this.addTramoButton.TabIndex = 3;
+            this.addTramoButton.Text = "Agregar Tramo";
+            this.addTramoButton.UseVisualStyleBackColor = true;
+            this.addTramoButton.Click += new System.EventHandler(this.onAgregarTramo);
             // 
-            // button2
+            // clean
             // 
-            this.button2.Location = new System.Drawing.Point(34, 205);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Limpiar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.clean.Location = new System.Drawing.Point(34, 205);
+            this.clean.Name = "clean";
+            this.clean.Size = new System.Drawing.Size(75, 23);
+            this.clean.TabIndex = 4;
+            this.clean.Text = "Limpiar";
+            this.clean.UseVisualStyleBackColor = true;
+            this.clean.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // saveButton
             // 
-            this.button3.Location = new System.Drawing.Point(304, 205);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Guardar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.saveButton.Location = new System.Drawing.Point(304, 205);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 5;
+            this.saveButton.Text = "Guardar";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // Form1
+            // AltaRecorrido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(400, 260);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.saveButton);
+            this.Controls.Add(this.clean);
+            this.Controls.Add(this.addTramoButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.code);
-            this.Controls.Add(this.dataGridView1);
-            this.Name = "Form1";
+            this.Controls.Add(this.tramosTable);
+            this.Name = "AltaRecorrido";
             this.Text = "Alta recorrido";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tramosTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,14 +139,14 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn from;
-        private System.Windows.Forms.DataGridViewTextBoxColumn to;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precio;
+        private System.Windows.Forms.DataGridView tramosTable;
         private System.Windows.Forms.TextBox code;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button addTramoButton;
+        private System.Windows.Forms.Button clean;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ciudadOrigen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ciudadDestino;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precio;
     }
 }

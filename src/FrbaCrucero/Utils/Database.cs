@@ -59,7 +59,8 @@ namespace FrbaCrucero.Utils
                 adapter.Fill(data);
             }
             catch(Exception exception){
-                Console.WriteLine(exception.Message);
+                MessageBox.Show(exception.Message, "ERROR",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             Console.WriteLine(data.Columns.Count);
             return data;

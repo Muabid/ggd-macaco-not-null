@@ -69,11 +69,11 @@
     <Compile Include="AbmRecorrido\BajaRecorrido.Designer.cs">
       <DependentUpon>BajaRecorrido.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRecorrido\Tramo.cs">
+    <Compile Include="AbmRecorrido\AltaTramo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmRecorrido\Tramo.Designer.cs">
-      <DependentUpon>Tramo.cs</DependentUpon>
+    <Compile Include="AbmRecorrido\AltaTramo.Designer.cs">
+      <DependentUpon>AltaTramo.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\AltaRol.cs">
       <SubType>Form</SubType>
@@ -129,6 +129,7 @@
     <Compile Include="ListadoEstadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Recorridos\Puerto.cs" />
     <Compile Include="Model\Recorridos\Recorrido.cs" />
     <Compile Include="Model\Recorridos\Tramo.cs" />
     <Compile Include="PagoReserva\Form1.cs">
@@ -139,6 +140,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\RecorridosDAo.cs" />
     <Compile Include="Utils\PuertoDAO.cs" />
     <Compile Include="Utils\Database.cs" />
     <EmbeddedResource Include="AbmCrucero\Form1.resx">
@@ -153,8 +155,8 @@
     <EmbeddedResource Include="AbmRecorrido\BajaRecorrido.resx">
       <DependentUpon>BajaRecorrido.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmRecorrido\Tramo.resx">
-      <DependentUpon>Tramo.cs</DependentUpon>
+    <EmbeddedResource Include="AbmRecorrido\AltaTramo.resx">
+      <DependentUpon>AltaTramo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\AltaRol.resx">
       <DependentUpon>AltaRol.cs</DependentUpon>
