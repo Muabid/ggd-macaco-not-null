@@ -724,8 +724,278 @@ BEGIN
 END
 GO
  
+  --------- COMPROBACION VENCIMIENTO DE TODAS LAS RESERVAS DEL SISTEMA --------------
+ 
+CREATE PROCEDURE [MACACO_NOT_NULL].ComprobarVigenciaReservasDelSistema
+@fecha_sistema DATETIME2(3)
+AS
+BEGIN 
+	DECLARE @loopCounter INT,@maxReservaId INT,@reserva_codigo decimal (18,0),@reserva_fecha DATETIME2(3)
+	SELECT @loopCounter = min(rese_id),@maxReservaId = max(rese_id) FROM [MACACO_NOT_NULL].[RESERVA]
+	WHILE (@loopCounter IS NOT NULL AND @loopCounter <= @maxReservaId)
+	BEGIN
+	   SELECT @reserva_codigo = rese_codigo FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_id = @loopCounter 
+	   SELECT @reserva_fecha = rese_fecha FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_id = @loopCounter 
+	   IF (DATEDIFF(day, @reserva_fecha, @fecha_sistema) > 3) 
+	   BEGIN
+			DELETE FROM [MACACO_NOT_NULL].[PASAJE] WHERE pasa_reserva_id = @loopCounter
+			DELETE FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_codigo = @reserva_codigo
+	   END
+	   SELECT @loopCounter = min(rese_id) FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_id > @loopCounter
+	END
+END
+ 
+GO
+ 
+ --------- COMPROBACION VENCIMIENTO RESERVA --------------
+
+CREATE PROCEDURE [MACACO_NOT_NULL].ComprobarVigenciaReserva
+@codigo_reserva [decimal] (18,0),
+@fecha_sistema DATETIME2(3)
+AS
+BEGIN 
+	DECLARE @fecha_reserva DATETIME2(3)
+	SET @fecha_reserva = (SELECT rese_fecha from [MACACO_NOT_NULL].[RESERVA] WHERE rese_codigo = @codigo_reserva)
+	IF (@fecha_reserva IS NULL)
+	BEGIN
+		RAISERROR ('ERROR: No existe ninguna reserva cuyo codigo sea: %d .',16,1,@codigo_reserva)
+	END
+	ELSE
+	BEGIN
+		DECLARE @id_reserva INT
+		SET @id_reserva = (SELECT rese_id from [MACACO_NOT_NULL].[RESERVA] WHERE rese_codigo = @codigo_reserva)
+		IF (DATEDIFF(day, @fecha_reserva, @fecha_sistema) > 3) 
+		BEGIN
+			DELETE FROM [MACACO_NOT_NULL].[PASAJE] WHERE pasa_reserva_id = @id_reserva
+			DELETE FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_codigo = @codigo_reserva
+		END
+	END
+END
+
+GO
+
+------------------------------- PAGO DE RESERVA --------------
+
+-------------- FUNCIONAMIENTO ----------------
+---------- 1) AL INGRESAR EL CODIGO DE UNA RESERVA SE DEBE VERIFICAR QUE EXISTA ALGUNA CON ESE NUMERO. LLAMAR A FUNCION ComprobarExistenciaReserva
+---------- 2) SE LLAMA A LA FUNCION detallesReserva(codigoReserva) QUE DEVUELVE TODA LA INFORMACION ASOCIADA A LA RESERVA
+---------- 3) LUEGO DE INGRESAR TODOS LOS MEDIOS DE PAGO DESEADOS SE LLAMA 1 VEZ AL PROCEDURE AgregarPago_A_Reserva
+---------- 4) LUEGO SE LLAMA AL PROCEDURE AgregarMedioDePago_Al_PagoDeLaReserva TANTAS VECES COMO MEDIO DE PAGO INGRESO EL USUARIO (PASANDO LOS PARAMETROS CORRECTOS EN CADA LLAMADA)
+---------- 5) LUEGO SE LLAMA AL PROCEDURE EliminarReserva
+
+CREATE FUNCTION [MACACO_NOT_NULL].ComprobarExistenciaReserva(@codigo_reserva [decimal] (18,0))
+    RETURNS INT 
+AS
+BEGIN 
+	DECLARE @fecha_reserva DATETIME2(3)
+	SET @fecha_reserva = (SELECT rese_fecha from [MACACO_NOT_NULL].[RESERVA] WHERE rese_codigo = @codigo_reserva)
+	IF (@fecha_reserva IS NULL)
+	BEGIN
+		RETURN 0
+	END
+	RETURN 1 
+END
+
+GO
+
+CREATE PROCEDURE [MACACO_NOT_NULL].AgregarPago_A_Reserva
+@codigo_reserva DECIMAL(18,0)
+AS
+BEGIN 
+	DECLARE @id_reserva INT, @id_usuario INT
+	SET @id_reserva = (SELECT rese_id FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_codigo = @codigo_reserva)
+	SET @id_usuario = (SELECT rese_usuario_id FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_id = @id_reserva)
+	INSERT INTO [MACACO_NOT_NULL].[PAGO] (pago_usuario_id) VALUES (@id_usuario)
+	UPDATE [MACACO_NOT_NULL].[PASAJE] SET pasa_pago_id = (SELECT TOP 1 pago_id FROM [MACACO_NOT_NULL].[PAGO] ORDER BY pago_id DESC)
+		WHERE pasa_reserva_id = @id_reserva
+END
+
+GO
+
+CREATE PROCEDURE [MACACO_NOT_NULL].AgregarMedioDePago_Al_PagoDeLaReserva
+@codigo_reserva DECIMAL(18,0),
+@medio_Pago NVARCHAR(255),
+@cantidad_cuotas INT
+AS
+BEGIN
+	DECLARE @id_pago INT, @id_reserva INT
+	SET @id_reserva = (SELECT rese_id FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_codigo = @codigo_reserva)
+	SET @id_pago = (SELECT pago_id FROM [MACACO_NOT_NULL].[PAGO] INNER JOIN [MACACO_NOT_NULL].[PASAJE] ON pago_id = pasa_pago_id
+					 WHERE pasa_reserva_id = @id_reserva)
+	INSERT INTO [MACACO_NOT_NULL].MEDIO_DE_PAGO (pago_id,medi_descripcion,medi_cantidad_cuotas) 
+		VALUES (@id_pago,@medio_Pago,@cantidad_cuotas)
+
+END
+
+GO
+
+CREATE PROCEDURE [MACACO_NOT_NULL].EliminarReserva
+@codigo_reserva DECIMAL(18,0)
+AS
+BEGIN 
+	DECLARE @id_reserva INT
+	SET @id_reserva = (SELECT rese_id FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_codigo = @codigo_reserva)
+	UPDATE [MACACO_NOT_NULL].PASAJE SET pasa_reserva_id = NULL WHERE pasa_reserva_id = @id_reserva 
+	DELETE FROM [MACACO_NOT_NULL].RESERVA WHERE rese_id = @id_reserva 
+END
+
+GO
+
+------- FUNCION QUE RETORNA TODA LA INFORMACION ASOCIADA A UNA RESERVA --------------
+
+-- Agregar a la consulta la logica para que devuelva el puerto origen y destino del recorrido -------  VER ------
+
+CREATE FUNCTION [MACACO_NOT_NULL].DetallesReserva(@codigo_reserva [decimal] (18,0))
+    RETURNS @datosReserva TABLE (		
+      rese_codigo [decimal](18,0),
+      rese_fecha  [datetime2](3),
+	  usua_nombre [nvarchar](255),
+	  usua_apellido [nvarchar](255),
+	  usua_dni [decimal](18, 0),
+	  usua_direccion [nvarchar](255),
+	  usua_telefono [int],
+	  usua_fecha_nac [datetime2](3),
+	  pasa_codigo decimal(18,0),
+	  pasa_precio decimal (18,2),
+	  viaj_fecha_salida datetime2(3), 
+	  viaj_fecha_llegada datetime2(3),
+	  viaj_fecha_llegada_estimada datetime2(2), 
+	  cabi_nro decimal (18,0),
+	  cabi_piso decimal (18,0),
+	  tipo_servicio_descripcion nvarchar(255),
+	  tipo_servicio_porc_recargo [decimal](18,2),
+	  cruc_nombre [nvarchar](255),
+	  cruc_modelo [nvarchar](255),
+	  comp_nombre [nvarchar](255),
+	  reco_codigo [decimal](18, 0),
+	  puer_origen [nvarchar](255),
+	  puer_destino [nvarchar](255),
+	  tram_precio_base [decimal](18,2)
+    )
+AS
+BEGIN
+    INSERT INTO @datosReserva
+    SELECT 
+      rese_codigo ,
+      rese_fecha ,
+	  usua_nombre,
+	  usua_apellido,
+	  usua_dni,
+	  usua_direccion,
+	  usua_telefono ,
+	  usua_fecha_nac ,
+	  pasa_codigo,
+	  pasa_precio,
+	  viaj_fecha_salida, 
+	  viaj_fecha_llegada,
+	  viaj_fecha_llegada_estimada, 
+	  cabi_nro,
+	  cabi_piso,
+	  tipo_servicio_descripcion,
+	  tipo_servicio_porc_recargo,
+	  cruc_nombre,
+	  cruc_modelo,
+	  comp_nombre,
+	  reco_codigo,
+	  P1.puer_nombre,
+	  P2.puer_id,
+	  tram_precio_base
+    FROM [MACACO_NOT_NULL].[RESERVA]
+	INNER JOIN [MACACO_NOT_NULL].USUARIO ON usua_id = rese_usuario_id
+	INNER JOIN [MACACO_NOT_NULL].PASAJE on rese_id = pasa_reserva_id
+	INNER JOIN [MACACO_NOT_NULL].VIAJE on viaj_id = pasa_viaje_id
+	INNER JOIN [MACACO_NOT_NULL].CRUCERO on viaj_crucero_id = cruc_id
+	INNER JOIN [MACACO_NOT_NULL].COMPANIA on comp_id = cruc_compañia_id
+	INNER JOIN [MACACO_NOT_NULL].CABINA on cabi_id = pasa_cab_id
+	INNER JOIN [MACACO_NOT_NULL].TIPO_SERVICIO on cabi_tipo_servicio_id = tipo_servicio_id
+	INNER JOIN [MACACO_NOT_NULL].RECORRIDO on reco_id = viaj_recorrido_id
+	INNER JOIN [MACACO_NOT_NULL].TRAMO on tram_recorrido_id = reco_id
+	INNER JOIN [MACACO_NOT_NULL].PUERTO P1 on tram_puerto_desde = P1.puer_id
+	INNER JOIN [MACACO_NOT_NULL].PUERTO P2 on tram_puerto_hasta = P2.puer_id
+	WHERE rese_codigo = @codigo_reserva 
+ 
+    RETURN;
+END;
+
+
+GO
+
+ -------------------- REPORTES ---------------------
+
+CREATE PROCEDURE [MACACO_NOT_NULL].RecorridosConMasPasajesComprados 
+AS
+BEGIN
+	DECLARE @tablaRecorridos TABLE(pasajes_comprados int,recorrido_id int, recorrido_codigo int);
+	insert into @tablaRecorridos (pasajes_comprados,recorrido_id,recorrido_codigo)
+		select COUNT(pasa_id),reco_id,reco_codigo
+		from [MACACO_NOT_NULL].[PASAJE] 	
+		INNER JOIN [MACACO_NOT_NULL].VIAJE ON pasa_viaje_id = viaj_id
+		INNER JOIN [MACACO_NOT_NULL].[RECORRIDO] ON reco_id = viaj_recorrido_id
+		where pasa_pago_id IS NOT NULL
+		group by reco_id,reco_codigo
+
+	SELECT TOP 5 recorrido_id,recorrido_codigo --atributos
+	FROM @tablaRecorridos
+	order by pasajes_comprados DESC 
+END
+GO
+  
 
   
+ --select tram_recorrido_id, P1.puer_nombre, P2.puer_nombre, tram_precio_base 
+ --from [MACACO_NOT_NULL].[TRAMO]
+ --INNER JOIN [MACACO_NOT_NULL].[PUERTO] P1 ON P1.puer_id = tram_puerto_desde
+ --INNER JOIN [MACACO_NOT_NULL].[PUERTO] P2 ON P2.puer_id = tram_puerto_hasta
+ --order by tram_recorrido_id
+  -- Hacer que para mostrar los recorridos en una tabla: 
+  -- Mostar en una fila el reco_codigo,ciudad inicio y ciudad destino.
+  -- Poner al costado un boton de ver mas detalles, que te lleva a otra ventana en donde te muestra 
+  -- 	todos los tramos (con sus atributos) del recorrido que elegiste.
+  
+
+CREATE PROCEDURE [MACACO_NOT_NULL].CrucerosConMasReparaciones 
+AS
+BEGIN
+  SELECT TOP 5 cruc_modelo,cruc_nombre,comp_nombre 
+  FROM [MACACO_NOT_NULL].[CRUCERO]
+  INNER JOIN [MACACO_NOT_NULL].[COMPANIA] ON cruc_compañia_id = comp_id
+  order by  (
+				SELECT SUM(DATEDIFF(day,baja_cruc_fecha_fuera_servicio, baja_cruc_fecha_reinicio_servicio))
+				FROM [MACACO_NOT_NULL].[BAJA_CRUCERO] 	
+				where baja_cruc_id = cruc_id
+			) DESC 
+ END
+GO 
+ 
+-- CONVERT(datetime2,'1962-09-16 00:00:00.000',121)
+  
+CREATE PROCEDURE [MACACO_NOT_NULL].RecorridosConMasCabinasLibresEnSusViajes 
+AS
+BEGIN
+	DECLARE @tablaPasajes TABLE(cab_ocupados int,viaje_id int);
+	insert into @tablaPasajes (cab_ocupados,viaje_id)
+		select COUNT(distinct (pasa_cab_id)),pasa_viaje_id
+		from [MACACO_NOT_NULL].[PASAJE] 
+		group by pasa_viaje_id
+
+	DECLARE @tabla TABLE(cab_libres int,recorrido_id int);
+	insert into @tabla (cab_libres,recorrido_id)
+		select cruc_cantidad_cabinas - (select cab_ocupados from @tablaPasajes where viaje_id = viaj_id),viaj_recorrido_id
+		FROM [MACACO_NOT_NULL].[RECORRIDO] 	
+		INNER JOIN [MACACO_NOT_NULL].VIAJE ON reco_id = viaj_recorrido_id
+		INNER JOIN [MACACO_NOT_NULL].[CRUCERO] ON cruc_id = viaj_crucero_id	
+		
+	  SELECT TOP 5 reco_id,reco_codigo --atributos
+	  FROM [MACACO_NOT_NULL].[RECORRIDO]
+	  order by  (
+					SELECT AVG(cab_libres) from @tabla t
+					where t.recorrido_id = reco_id
+				) DESC 
+  
+ END
+GO 
+  
+ 
 /* DROP TABLE [MACACO_NOT_NULL].[TRAMO]
 DROP TABLE [MACACO_NOT_NULL].[PASAJE]
 DROP TABLE [MACACO_NOT_NULL].[VIAJE]
