@@ -13,6 +13,8 @@ BEGIN
 	ORDER BY tram_id
 END
 
+GO
+
 CREATE FUNCTION MACACO_NOT_NULL.ciudad_origen (@reco_codigo decimal(18,0))  
 RETURNS nvarchar(255)
 AS
@@ -28,6 +30,8 @@ BEGIN
 	RETURN(@origen);
 END
 
+GO
+
 CREATE FUNCTION MACACO_NOT_NULL.ciudad_destino (@reco_codigo decimal(18,0))  
 RETURNS nvarchar(255)
 AS
@@ -42,6 +46,7 @@ BEGIN
 
 	RETURN(@origen);
 END
+
 
 CREATE PROCEDURE [MACACO_NOT_NULL].getRecorridos @reco_codigo DECIMAL(18,0),
 	@ciudad_origen INT, @ciudad_destino INT
@@ -77,7 +82,7 @@ AS
 BEGIN  
 	IF EXISTS (SELECT reco_id FROM [MACACO_NOT_NULL].RECORRIDO
 	 WHERE reco_codigo =@reco_codigo)
-		THROW 51000, 'Código ya existente', 1;
+		THROW 51000, 'CÃ³digo ya existente', 1;
 	 ELSE
 	BEGIN TRANSACTION
 	BEGIN TRY
@@ -101,6 +106,7 @@ BEGIN
 	END CATCH
 END 
 
+GO
 
 CREATE PROCEDURE [MACACO_NOT_NULL].BajaRecorrido @reco_codigo decimal(18,0)
 AS

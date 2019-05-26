@@ -200,15 +200,13 @@ IF NOT EXISTS (
 	AND TABLE_SCHEMA = 'MACACO_NOT_NULL'
 )
 BEGIN
-CREATE TABLE  [MACACO_NOT_NULL].[CRUCERO] (
+CREATE TABLE [MACACO_NOT_NULL].[CRUCERO] (
 	cruc_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	cruc_compañia_id  int FOREIGN KEY REFERENCES [MACACO_NOT_NULL].[COMPANIA] (comp_id), 
 	cruc_nombre [nvarchar](255),
-	cruc_modelo  [nvarchar](50),
-	cruc_fuera_de_servicio [bit],
+	cruc_modelo [nvarchar](50),
+	cruc_activo [bit],
 	cruc_fecha_alta [datetime2](3),
-	cruc_fecha_baja_definitiva [datetime2](3),	
-	cruc_baja_por_vida_util [bit],
 	cruc_cantidad_cabinas [int]
 );
 END
@@ -222,11 +220,12 @@ IF NOT EXISTS (
 	AND TABLE_SCHEMA = 'MACACO_NOT_NULL'
 )
 BEGIN
-CREATE TABLE  [MACACO_NOT_NULL].[BAJA_CRUCERO] (
+CREATE TABLE [MACACO_NOT_NULL].[BAJA_CRUCERO] (
 	baja_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	baja_cruc_id int FOREIGN KEY REFERENCES [MACACO_NOT_NULL].[CRUCERO] (cruc_id), 
 	baja_cruc_fecha_fuera_servicio [datetime2](3),
-	baja_cruc_fecha_reinicio_servicio [datetime2](3)
+	baja_cruc_fecha_reinicio_servicio [datetime2](3),
+	baja_cruc_motivo [nvarchar](255)
 );
 END
 GO
@@ -300,7 +299,8 @@ CREATE TABLE [MACACO_NOT_NULL].[PASAJE] (
 	pasa_cab_id int FOREIGN KEY REFERENCES [MACACO_NOT_NULL].[CABINA](cabi_id),
 	pasa_viaje_id int FOREIGN KEY REFERENCES [MACACO_NOT_NULL].[VIAJE](viaj_id),
 	pasa_reserva_id int FOREIGN KEY REFERENCES [MACACO_NOT_NULL].[RESERVA](rese_id),
-	pasa_pago_id int FOREIGN KEY REFERENCES [MACACO_NOT_NULL].[PAGO] (pago_id)
+	pasa_pago_id int FOREIGN KEY REFERENCES [MACACO_NOT_NULL].[PAGO](pago_id),
+	pasa_baja_id int FOREIGN KEY REFERENCES [MACACO_NOT_NULL].[BAJA_CRUCERO](baja_id)
 );
 END
 GO
@@ -359,12 +359,12 @@ INSERT INTO [MACACO_NOT_NULL].[USUARIO] (
 											usua_rol_id,
 											usua_activo											
 										)	
-	VALUES ('JUAN','Perez',40545987,'Gestion123',78543625,'gdd@gmail.com',CONVERT(datetime2,'1988-08-28 00:00:00.000',121),1,1),
-		   ('JOSE','Gonzalez',40987234,'Medrano 876',45237825,'almagro@gmail.com',CONVERT(datetime2,'1998-04-22 00:00:00.000',121),1,1),
-		   ('ANDRES','Montana',61248982,'Avenida Cordoba 8568',48916685,'montana@gmail.com',CONVERT(datetime2,'1964-11-18 00:00:00.000',121),1,1),
-		   ('MICAELA','MOZART',37918442,'Avenida Corrientes 6732',42359645,'sinfonia@gmail.com',CONVERT(datetime2,'1976-12-24 00:00:00.000',121),1,1),
-		   ('ROCIO','TESORO',15948315,'Avenida Callao 458',46549821,'rtesoro@gmail.com',CONVERT(datetime2,'1982-04-06 00:00:00.000',121),1,1),
-		   ('Administrador','General',1,'Admin12345',45231111,'admin@gmail.com',CONVERT(datetime2,'1962-09-16 00:00:00.000',121),1,1);
+	VALUES ('JUAN','Perez',40545987,'Gestion123',78543625,'gdd@gmail.com',CONVERT(datetime2(3),'1988-08-28 00:00:00.000',121),1,1),
+		   ('JOSE','Gonzalez',40987234,'Medrano 876',45237825,'almagro@gmail.com',CONVERT(datetime2(3),'1998-04-22 00:00:00.000',121),1,1),
+		   ('ANDRES','Montana',61248982,'Avenida Cordoba 8568',48916685,'montana@gmail.com',CONVERT(datetime2(3),'1964-11-18 00:00:00.000',121),1,1),
+		   ('MICAELA','MOZART',37918442,'Avenida Corrientes 6732',42359645,'sinfonia@gmail.com',CONVERT(datetime2(3),'1976-12-24 00:00:00.000',121),1,1),
+		   ('ROCIO','TESORO',15948315,'Avenida Callao 458',46549821,'rtesoro@gmail.com',CONVERT(datetime2(3),'1982-04-06 00:00:00.000',121),1,1),
+		   ('Administrador','General',1,'Admin12345',45231111,'admin@gmail.com',CONVERT(datetime2(3),'1962-09-16 00:00:00.000',121),1,1);
 	
 INSERT INTO [MACACO_NOT_NULL].LOGIN (logi_username,logi_password,logi_usuario_id,logi_intento_fallido)	
 	VALUES ('rtesoro','w23e',(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 15948315 and usua_direccion = 'Avenida Callao 458'),0),
@@ -609,12 +609,11 @@ CREATE PROCEDURE [MACACO_NOT_NULL].ModificarNombreRol
 @rol_id int,
 @nuevoNombreRol NVARCHAR(255)
 AS
+BEGIN
 	IF(NOT EXISTS(SELECT rol_nombre FROM [MACACO_NOT_NULL].ROL WHERE rol_nombre = @nuevoNombreRol))
 	BEGIN
-		BEGIN TRANSACTION
-			UPDATE [MACACO_NOT_NULL].ROL SET rol_nombre = @nuevoNombreRol WHERE rol_id = @rol_id
-			DELETE from [MACACO_NOT_NULL].ROL_FUNCIONALIDAD where rol_id = @rol_id
-		END TRANSACTION
+		UPDATE [MACACO_NOT_NULL].ROL SET rol_nombre = @nuevoNombreRol WHERE rol_id = @rol_id
+		DELETE from [MACACO_NOT_NULL].ROL_FUNCIONALIDAD where rol_id = @rol_id		
 	END
 	ELSE
 	BEGIN
@@ -673,7 +672,7 @@ BEGIN
 	DECLARE @intentosFallidosActuales int
 	IF(NOT EXISTS(SELECT logi_usuario_id FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username))
 	BEGIN
-			RAISERROR ('ERROR: Loggin incorrecto, no existe ningun usuario con el username ingresado')
+			RAISERROR ('ERROR: Loggin incorrecto, no existe ningun usuario con el username ingresado',16,1)
 	END
 	ELSE
 	BEGIN	
@@ -699,7 +698,7 @@ END
 GO
  
  
------------------------------TRIGGERS-------------------------------------
+-----------------------------TRIGGER-------------------------------------
 ----- SE EJECUTA POST LOGIN FALLIDO --------
 CREATE TRIGGER [MACACO_NOT_NULL].TRIGGER_BLOQUEAR_USUARIO_POR_LOGIN_FALLIDO ON [MACACO_NOT_NULL].LOGIN AFTER UPDATE
 AS
@@ -710,13 +709,74 @@ END
 
 GO
   
+ ---------------------- ABM DE CRUCERO -------------
   
+  
+ GO
+-------------------- AGREGAR BAJA A CRUCERO ------------
+-------- EN LA PANTALLA DE DAR DE BAJA A UN CRUCERO, AGREGAR UN COMBOBOX AL FINAL EN DONDE EL ADMIN TENGA A ELEGIR LO QUE SE DEBE HACER CON LOS PASAJES VENDIDOS DE TODOS LOS VIAJES QUE REALIZABA EL CRUCERO ---
+------- ESTO HACE QUE LUEGO DE ESTE PROCEDURE, SE DEBA EJECUTAR ALGUNO DE LOS 2 DE ABAJO, DEPENDIENDO DE LA OPCION ELEGIDA ------------
+CREATE PROCEDURE [MACACO_NOT_NULL].AgregarBajaCrucero
+@idCrucero int,
+@baja_cruc_fecha_fuera_servicio [datetime2](3),
+@baja_cruc_fecha_reinicio_servicio [datetime2](3),
+@motivo [nvarchar](255)
+AS
+BEGIN
+	INSERT INTO [MACACO_NOT_NULL].[BAJA_CRUCERO] (baja_cruc_id,baja_cruc_fecha_fuera_servicio,baja_cruc_fecha_reinicio_servicio,baja_cruc_motivo)
+		VALUES (@idCrucero,@baja_cruc_fecha_fuera_servicio,@baja_cruc_fecha_reinicio_servicio,@motivo)
+END
+
+GO
+  
+  -------------------------------- CANCELACION DE PASAJES VENDIDOS ---------------------------
+----------- SE EJECUTAR LUEGO DE AGREGAR UNA BAJA A UN CRUCERO (SIEMPRE Y CUANDO LA ACCION POSTERIOR ELEGIDA POR EL ADMIN ERA CANCELAR LOS PASAJES VENDIDOS DEL VIAJE) ------------
+-- REALIZA 4 CONSULTAS:
+-- 1) BORRA LOS MEDIOS DE PAGOS ASOCIADOS AL PAGO DE LOS PASAJES CUYO VIAJE LO REALIZA EL CRUCERO QUE SE ACABA DE DAR DE BAJA
+-- 2) BORRA EL PAGO ASOCIADO
+-- 3) SETEA LA FOREIGN KEY DE LOS PASAJES CANCELADOS, RELACIONANDOLOS CON LA BAJA QUE SE ACABA DE REALIZAR
+-- 4) BORRA LAS RESERVAS ASOCIADAS (SI LAS HAY) A TODOS LOS PASAJES CANCELADOS
+
+CREATE PROCEDURE [MACACO_NOT_NULL].CancelarPasajes
+@idCrucero int
+AS
+BEGIN
+	DELETE MedioPago
+		FROM [MACACO_NOT_NULL].MEDIO_DE_PAGO MedioPago
+		INNER JOIN [MACACO_NOT_NULL].PAGO Pago ON MedioPago.medi_pago_id = Pago.pago_id
+		INNER JOIN [MACACO_NOT_NULL].PASAJE Pasaje ON Pago.pago_id = Pasaje.pasa_pago_id 
+		INNER JOIN [MACACO_NOT_NULL].VIAJE Viaje ON Pasaje.pasa_viaje_id = Viaje.viaj_id
+		WHERE Viaje.viaj_crucero_id = @idCrucero
+	UPDATE Pasaje SET pasa_baja_id = (SELECT MAX(baja_id) from [MACACO_NOT_NULL].BAJA_CRUCERO)
+		FROM [MACACO_NOT_NULL].PASAJE Pasaje
+		INNER JOIN [MACACO_NOT_NULL].VIAJE Viaje ON Pasaje.pasa_viaje_id = Viaje.viaj_id
+		WHERE Viaje.viaj_crucero_id = @idCrucero
+	DELETE Pago
+		FROM [MACACO_NOT_NULL].PAGO Pago 
+		INNER JOIN [MACACO_NOT_NULL].PASAJE Pasaje ON Pago.pago_id = Pasaje.pasa_pago_id 
+		WHERE pasa_baja_id = (SELECT MAX(baja_id) from [MACACO_NOT_NULL].BAJA_CRUCERO)
+	DELETE Reserva
+		FROM [MACACO_NOT_NULL].RESERVA Reserva 
+		INNER JOIN [MACACO_NOT_NULL].PASAJE Pasaje ON Reserva.rese_id = Pasaje.pasa_reserva_id
+		WHERE pasa_baja_id = (SELECT MAX(baja_id) from [MACACO_NOT_NULL].BAJA_CRUCERO)
+END
+
+ -------------------------------- REEMPLAZAR CRUCERO POR OTRO ---------------------------
+----------- SE EJECUTAR LUEGO DE AGREGAR UNA BAJA A UN CRUCERO (SIEMPRE Y CUANDO LA ACCION POSTERIOR ELEGIDA POR EL ADMIN ERA REEMPLAZAR EL CRUCERO POR OTRO QUE PUEDA CUMPLIR TODOS LOS VIAJES) ------------
+
+ 
+  
+  
+GO
+ 
+---------------------- CREACION DE UN NUEVO VIAJE ----------------------
+
 CREATE PROCEDURE [MACACO_NOT_NULL].CrearViaje 
 @fechaSalida datetime2(3),
 @fechaLlegada datetime2(3),
 @fechaLlegadaEstimada datetime2(2),
 @cruceroId int,
-@recorridoId int,
+@recorridoId int
 AS
 BEGIN
 	INSERT INTO [MACACO_NOT_NULL].VIAJE(viaj_fecha_salida,viaj_fecha_llegada,viaj_fecha_llegada_estimada,viaj_crucero_id,viaj_recorrido_id)
@@ -771,6 +831,46 @@ BEGIN
 		END
 	END
 END
+
+GO
+
+----------- GENERACION RESERVA ------------
+CREATE PROCEDURE [MACACO_NOT_NULL].GenerarReserva
+@nombre_usuario  NVARCHAR(255) ,
+@apellido_usuario NVARCHAR(255),
+@dni_usuario INT,
+@direccion_usuario NVARCHAR(255)
+--agregar fechaNac telefono y mail y generar el rese_codigo para q no se repita
+AS
+BEGIN
+	INSERT INTO [MACACO_NOT_NULL].RESERVA (rese_usuario_id,rese_codigo,rese_fecha)
+	VALUES (
+		(SELECT usua_id,(SELECT MAX(rese_id) from [MACACO_NOT_NULL].RESERVA) + 1 ,CONVERT(datetime2(3), GETDATE(),121)
+		FROM [MACACO_NOT_NULL].USUARIO
+		WHERE usua_apellido = @apellido_usuario and usua_nombre = @nombre_usuario and usua_dni = @dni_usuario
+		and @direccion_usuario = usua_direccion)
+	)
+
+END
+
+
+GO
+
+--------- PROCEDURE QUE AGREGA 1 PASAJE -----------
+CREATE PROCEDURE [MACACO_NOT_NULL].AgregarPasaje
+	@precio_pasaje decimal (18,2),
+	@cab_id_pasaje int,
+	@viaje_id_pasaje int,
+	@pasa_reserva_id int = NULL, -- si es una reserva el valor = SELECT MAX(rese_id) from [MACACO_NOT_NULL].RESERVA ; si es directamente una comprar = null
+	@pasa_pago_id int = NULL -- si es una reserva el valor = NULL, si es una compra directa el valor = pago ; Se debe llamar a este procedure luego de agregar un Pago al usuario ejecutando: INSERT INTO [MACACO_NOT_NULL].[PAGO] (pago_usuario_id) VALUES (@id_usuario)
+AS
+BEGIN
+	INSERT INTO [MACACO_NOT_NULL].PASAJE (pasa_codigo,pasa_precio,pasa_fecha_compra,pasa_cab_id,pasa_viaje_id,pasa_reserva_id,pasa_pago_id)
+	VALUES (
+		 (SELECT MAX(pasa_id) from [MACACO_NOT_NULL].PASAJE) + 1 ,@precio_pasaje,CONVERT(datetime2(3), GETDATE(),121),
+		 @cab_id_pasaje,@viaje_id_pasaje,@pasa_reserva_id,@pasa_pago_id)
+END
+
 
 GO
 
@@ -835,6 +935,7 @@ AS
 BEGIN 
 	DECLARE @id_reserva INT
 	SET @id_reserva = (SELECT rese_id FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_codigo = @codigo_reserva)
+	UPDATE [MACACO_NOT_NULL].PASAJE SET pasa_fecha_compra = CONVERT(datetime2(3), GETDATE(),121) WHERE pasa_reserva_id = @id_reserva 
 	UPDATE [MACACO_NOT_NULL].PASAJE SET pasa_reserva_id = NULL WHERE pasa_reserva_id = @id_reserva 
 	DELETE FROM [MACACO_NOT_NULL].RESERVA WHERE rese_id = @id_reserva 
 END
@@ -967,7 +1068,7 @@ BEGIN
  END
 GO 
  
--- CONVERT(datetime2,'1962-09-16 00:00:00.000',121)
+-- CONVERT(datetime2(3),'1962-09-16 00:00:00.000',121)
   
 CREATE PROCEDURE [MACACO_NOT_NULL].RecorridosConMasCabinasLibresEnSusViajes 
 AS

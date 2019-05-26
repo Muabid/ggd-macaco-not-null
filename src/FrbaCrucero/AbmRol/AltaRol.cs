@@ -33,19 +33,20 @@ namespace FrbaCrucero.AbmRol
         {
            // SqlConnection connection = Utils.Database.getConnection();
             //connection.Open();
-            SqlCommand procedure = Utils.Database.createCommand("exec [MACACO_NOT_NULL].AltaRol");
+            SqlCommand procedure = Utils.Database.createCommand("MACACO_NOT_NULL.AltaRol");
             procedure.Parameters.Add("@nombre_rol", SqlDbType.VarChar).Value = NombreNuevoRol.Text;
             procedure.Parameters.Add("@activo", SqlDbType.VarChar).Value = true;
-
+            Utils.Database.execute(procedure);
 
             procedure.CommandType = CommandType.StoredProcedure;
             Utils.Database.execute(procedure);
             SqlCommand query = Utils.Database.createCommand("SELECT max (rol_id) FROM [MACACO_NOT_NULL].ROL");
-            int id = Utils.Database.execute(query);
-            SqlCommand procedure2 = Utils.Database.createCommand("exec [MACACO_NOT_NULL].AgregarFuncionalidadRol");
+            int id = Utils.Database.executeScalar(query);
+            SqlCommand procedure2 = Utils.Database.createCommand("MACACO_NOT_NULL.AgregarFuncionalidadRol");
             String funcionalidad =Funcionalidades.Text;
             procedure2.Parameters.Add("@nombreNuevaFuncionalidadRol", SqlDbType.VarChar).Value = Funcionalidades.Text;
-            procedure2.Parameters.Add("@rol_id", SqlDbType.Int).Value = Utils.Database.execute(query);
+            procedure2.Parameters.Add("@rol_id", SqlDbType.Int).Value = id;
+            Utils.Database.executeProcedure(procedure2);
            // connection.Close();
            
             
@@ -78,11 +79,11 @@ namespace FrbaCrucero.AbmRol
 
                 SqlConnection connection = Utils.Database.getConnection();
                 connection.Open();
-                SqlCommand sql = Utils.Database.createCommand("SELECT rol_nombre FROM [MACACO_NOT_NULL].[ROL]");
+                SqlCommand sql = Utils.Database.createCommand("SELECT func_detalle FROM [MACACO_NOT_NULL].[FUNCIONALIDAD]");
                 SqlDataReader sdr = sql.ExecuteReader();
                 while (sdr.Read())
                 {
-                    cb.Items.Add(sdr["rol_nombre"].ToString());
+                    cb.Items.Add(sdr["func_detalle"].ToString());
                 }
                 cb.SelectedIndex = 0;
                 sdr.Close();
