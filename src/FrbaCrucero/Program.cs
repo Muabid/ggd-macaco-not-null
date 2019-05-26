@@ -1,4 +1,5 @@
 ﻿using FrbaCrucero.AbmRecorrido;
+using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace FrbaCrucero
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run();
+            Application.Run(new BajaRecorrido());
         }
     }
 }

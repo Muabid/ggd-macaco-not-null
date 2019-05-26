@@ -1,4 +1,5 @@
-﻿using FrbaCrucero.Utils;
+﻿using FrbaCrucero.Model.Recorridos;
+using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,8 @@ namespace FrbaCrucero.AbmRecorrido
 {
     public partial class BajaRecorrido : Form
     {
+
+        private RecorridoDAO recorridoDao = new RecorridoDAO();
         public BajaRecorrido()
         {
             InitializeComponent();
@@ -27,9 +30,16 @@ namespace FrbaCrucero.AbmRecorrido
 
         private void onBuscar(object sender, EventArgs e)
         {
-            SqlCommand command = Database.createCommand("MACACO_NOT_NULL.getRecorridos");
-            command.CommandType = CommandType.StoredProcedure;
-            dataGridView1.DataSource = Database.getData(command);
+            
+            String codigo = codigoField.Text;
+            String origen = (String)ciudadOrigenCombo.SelectedValue;
+            String destino = (String)ciudadDestinoCombo.SelectedValue;
+            recorridosTable.DataSource = recorridoDao.getRecorridos(codigo,origen,destino);
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

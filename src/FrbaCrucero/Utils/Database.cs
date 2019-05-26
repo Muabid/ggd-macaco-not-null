@@ -65,6 +65,12 @@ namespace FrbaCrucero.Utils
             Console.WriteLine(data.Columns.Count);
             return data;
         }
+
+        public static DataTable getDataProcedure(SqlCommand query)
+        {
+            query.CommandType = CommandType.StoredProcedure;
+            return getData(query);
+        }
         
 
 

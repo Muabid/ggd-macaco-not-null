@@ -51,6 +51,7 @@ namespace FrbaCrucero.AbmRecorrido
             Puerto destino = (Puerto)destinoComboBox.SelectedItem;
             Decimal precio = Convert.ToDecimal(precioField.Text);
             altaRecorrido.addTramo(new Tramo(precio,origen,destino));
+            destinoComboBox.SelectedIndex = -1;
             this.Close();
         }
 
@@ -68,7 +69,6 @@ namespace FrbaCrucero.AbmRecorrido
         {
             this.ShowDialog();
             Puerto puertoOrigen = altaRecorrido.getProximoOrigenPuerto();
-            Console.WriteLine(puertoOrigen);
             if (puertoOrigen != null)
             {
                 origenComboBox.SelectedItem = puertoOrigen;

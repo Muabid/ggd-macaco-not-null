@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tramosTable = new System.Windows.Forms.DataGridView();
-            this.ciudadOrigen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ciudadDestino = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.code = new System.Windows.Forms.TextBox();
+            this.codigo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.addTramoButton = new System.Windows.Forms.Button();
             this.clean = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
+            this.ciudadOrigen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciudadDestino = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.tramosTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,30 +54,12 @@
             this.tramosTable.TabIndex = 0;
             this.tramosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // ciudadOrigen
+            // codigo
             // 
-            this.ciudadOrigen.DataPropertyName = "ciudadOrigen";
-            this.ciudadOrigen.HeaderText = "Ciudad origen";
-            this.ciudadOrigen.Name = "ciudadOrigen";
-            // 
-            // ciudadDestino
-            // 
-            this.ciudadDestino.DataPropertyName = "ciudadDestino";
-            this.ciudadDestino.HeaderText = "Ciudad destino";
-            this.ciudadDestino.Name = "ciudadDestino";
-            // 
-            // precio
-            // 
-            this.precio.DataPropertyName = "precio";
-            this.precio.HeaderText = "Precio";
-            this.precio.Name = "precio";
-            // 
-            // code
-            // 
-            this.code.Location = new System.Drawing.Point(80, 28);
-            this.code.Name = "code";
-            this.code.Size = new System.Drawing.Size(100, 20);
-            this.code.TabIndex = 1;
+            this.codigo.Location = new System.Drawing.Point(80, 28);
+            this.codigo.Name = "codigo";
+            this.codigo.Size = new System.Drawing.Size(100, 20);
+            this.codigo.TabIndex = 1;
             // 
             // label1
             // 
@@ -106,7 +89,7 @@
             this.clean.TabIndex = 4;
             this.clean.Text = "Limpiar";
             this.clean.UseVisualStyleBackColor = true;
-            this.clean.Click += new System.EventHandler(this.button2_Click);
+            this.clean.Click += new System.EventHandler(this.limpiar_Click);
             // 
             // saveButton
             // 
@@ -118,6 +101,27 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
+            // ciudadOrigen
+            // 
+            this.ciudadOrigen.DataPropertyName = "ciudadOrigen";
+            this.ciudadOrigen.HeaderText = "Ciudad origen";
+            this.ciudadOrigen.Name = "ciudadOrigen";
+            // 
+            // ciudadDestino
+            // 
+            this.ciudadDestino.DataPropertyName = "ciudadDestino";
+            this.ciudadDestino.HeaderText = "Ciudad destino";
+            this.ciudadDestino.Name = "ciudadDestino";
+            // 
+            // precio
+            // 
+            this.precio.DataPropertyName = "precio";
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = "0";
+            this.precio.DefaultCellStyle = dataGridViewCellStyle1;
+            this.precio.HeaderText = "Precio";
+            this.precio.Name = "precio";
+            // 
             // AltaRecorrido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -127,7 +131,7 @@
             this.Controls.Add(this.clean);
             this.Controls.Add(this.addTramoButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.code);
+            this.Controls.Add(this.codigo);
             this.Controls.Add(this.tramosTable);
             this.Name = "AltaRecorrido";
             this.Text = "Alta recorrido";
@@ -140,7 +144,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView tramosTable;
-        private System.Windows.Forms.TextBox code;
+        private System.Windows.Forms.TextBox codigo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button addTramoButton;
         private System.Windows.Forms.Button clean;

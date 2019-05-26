@@ -31,11 +31,6 @@ namespace FrbaCrucero.AbmRecorrido
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void onAgregarTramo(object sender, EventArgs e)
         {
             altaTramo.show();
@@ -90,7 +85,14 @@ namespace FrbaCrucero.AbmRecorrido
                 }
                 
             }
-            recorridosDao.insertRecorrido(Convert.ToDecimal(code.Text), dt);
+            recorridosDao.insertRecorrido(Convert.ToDecimal(codigo.Text), dt);
+        }
+
+        private void limpiar_Click(object sender, EventArgs e)
+        {
+            this.tramosTable.Rows.Clear();
+            this.tramosTable.Refresh();
+            this.codigo.Clear();
         }
 
     }

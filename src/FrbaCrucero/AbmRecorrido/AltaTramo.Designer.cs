@@ -40,6 +40,8 @@
             // 
             // origenComboBox
             // 
+            this.origenComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.origenComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.origenComboBox.FormattingEnabled = true;
             this.origenComboBox.Location = new System.Drawing.Point(128, 32);
             this.origenComboBox.Name = "origenComboBox";
@@ -69,6 +71,8 @@
             // 
             // destinoComboBox
             // 
+            this.destinoComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.destinoComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.destinoComboBox.FormattingEnabled = true;
             this.destinoComboBox.Location = new System.Drawing.Point(128, 72);
             this.destinoComboBox.Name = "destinoComboBox";

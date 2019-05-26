@@ -40,5 +40,46 @@ namespace FrbaCrucero.Utils
             cmd.Parameters.AddWithValue("@tramos", tramos);
             Database.executeProcedure(cmd);
         }
+
+        public DataTable getRecorridos(String codRecorrido, String ciudadOrigen, String ciudadDestino)
+        {
+            
+            SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].getRecorridos");
+
+            SqlParameter origen =  cmd.Parameters.AddWithValue("@ciudad_origen", SqlDbType.NVarChar);
+            SqlParameter destino = cmd.Parameters.AddWithValue("@ciudad_destino", SqlDbType.NVarChar);
+            SqlParameter codigo = cmd.Parameters.Add("@reco_codigo", SqlDbType.Decimal);
+
+            if (!String.IsNullOrEmpty(codRecorrido))
+                codigo.Value = Convert.ToDecimal(codRecorrido);
+            else
+                codigo.Value = DBNull.Value;
+
+            if (!String.IsNullOrEmpty(ciudadOrigen))
+               origen.Value = ciudadOrigen;
+            else
+               origen.Value = DBNull.Value;
+
+            if (!String.IsNullOrEmpty(ciudadDestino))
+                destino.Value = ciudadDestino;
+            else
+                destino.Value = DBNull.Value;
+           
+            return Database.getDataProcedure(cmd);
+        }
+
+        public DataTable getTramos(Decimal codRecorrido)
+        {
+            SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].GetTramos");
+            cmd.Parameters.Add("@reco_codigo", SqlDbType.Decimal).Value = codRecorrido;
+            return Database.getDataProcedure(cmd);
+        }
+
+        public void darDeBaja(Decimal codRecorrido)
+        {
+            SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].BajaRecorrido");
+            cmd.Parameters.Add("@reco_codigo", SqlDbType.Decimal).Value = codRecorrido;
+            Database.executeProcedure(cmd);
+        }
     }
 }
