@@ -46,8 +46,8 @@ namespace FrbaCrucero.Utils
             
             SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].getRecorridos");
 
-            SqlParameter origen =  cmd.Parameters.AddWithValue("@ciudad_origen", SqlDbType.NVarChar);
-            SqlParameter destino = cmd.Parameters.AddWithValue("@ciudad_destino", SqlDbType.NVarChar);
+            SqlParameter origen =  cmd.Parameters.Add("@ciudad_origen", SqlDbType.NVarChar);
+            SqlParameter destino = cmd.Parameters.Add("@ciudad_destino", SqlDbType.NVarChar);
             SqlParameter codigo = cmd.Parameters.Add("@reco_codigo", SqlDbType.Decimal);
 
             if (!String.IsNullOrEmpty(codRecorrido))
