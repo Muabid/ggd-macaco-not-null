@@ -44,7 +44,7 @@ BEGIN
 END
 
 CREATE PROCEDURE MACACO_NOT_NULL.getRecorridos @reco_codigo DECIMAL(18,0),
-	@ciudad_origen NVARCHAR(256), @ciudad_destino NVARCHAR(256)
+	@ciudad_origen INT, @ciudad_destino INT
 AS
 BEGIN
 	SELECT r.reco_codigo as codigo, MACACO_NOT_NULL.ciudad_origen(t.tram_recorrido_id) as ciudadOrigen, MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) as ciudadDestino, SUM(t.tram_precio_base) as price
