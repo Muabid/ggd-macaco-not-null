@@ -113,5 +113,6 @@ IF EXISTS (SELECT pasa_id FROM [MACACO_NOT_NULL].RECORRIDO AS r
 		THROW 51000, 'Existen pasajes de viajes que contienen al recorrido', 1;
 	 ELSE
 		UPDATE [MACACO_NOT_NULL].RECORRIDO
-		SET reco_activo = 0;
+		SET reco_activo = 0
+		WHERE reco_codigo = @reco_codigo
 END
