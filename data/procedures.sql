@@ -43,11 +43,11 @@ BEGIN
 	RETURN(@origen);
 END
 
-CREATE PROCEDURE MACACO_NOT_NULL.getRecorridos @reco_codigo DECIMAL(18,0),
+CREATE PROCEDURE [MACACO_NOT_NULL].getRecorridos @reco_codigo DECIMAL(18,0),
 	@ciudad_origen INT, @ciudad_destino INT
 AS
 BEGIN
-	SELECT r.reco_codigo as codigo, MACACO_NOT_NULL.ciudad_origen(t.tram_recorrido_id) as ciudadOrigen, MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) as ciudadDestino, SUM(t.tram_precio_base) as price
+	SELECT r.reco_codigo as codigo, MACACO_NOT_NULL.ciudad_origen(t.tram_recorrido_id) as ciudadOrigen, MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) as ciudadDestino, SUM(t.tram_precio_base) as precio
 	FROM MACACO_NOT_NULL.RECORRIDO AS r
 	LEFT JOIN MACACO_NOT_NULL.TRAMO t
 	ON r.reco_id = t.tram_recorrido_id
@@ -61,6 +61,8 @@ BEGIN
 	AND (@ciudad_destino IS NULL OR (MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) = @ciudad_destino))) 
 	GROUP BY r.reco_codigo,t.tram_recorrido_id
 END
+
+DROP PROCEDURE MACACO_NOT_NULL.getRecorridos
 
 CREATE TYPE [MACACO_NOT_NULL].TRAMOTYPE AS TABLE   
 ( ciudadOrigen INT 

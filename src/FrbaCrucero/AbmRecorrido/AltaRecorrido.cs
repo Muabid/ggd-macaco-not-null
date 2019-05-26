@@ -76,7 +76,7 @@ namespace FrbaCrucero.AbmRecorrido
                 Puerto destino = (Puerto)row.Cells[1].Value;
                 Decimal precio = Convert.ToDecimal(row.Cells[2].Value);
                 DataRow dRow = dt.NewRow();
-                if (origen != null && destino != null && precio != null)
+                if (origen != null && destino != null)
                 {
                     dRow[0] = origen.id;
                     dRow[1] = destino.id;
