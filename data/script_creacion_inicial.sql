@@ -609,12 +609,11 @@ CREATE PROCEDURE [MACACO_NOT_NULL].ModificarNombreRol
 @rol_id int,
 @nuevoNombreRol NVARCHAR(255)
 AS
+BEGIN
 	IF(NOT EXISTS(SELECT rol_nombre FROM [MACACO_NOT_NULL].ROL WHERE rol_nombre = @nuevoNombreRol))
 	BEGIN
-		BEGIN TRANSACTION
-			UPDATE [MACACO_NOT_NULL].ROL SET rol_nombre = @nuevoNombreRol WHERE rol_id = @rol_id
-			DELETE from [MACACO_NOT_NULL].ROL_FUNCIONALIDAD where rol_id = @rol_id
-		END TRANSACTION
+		UPDATE [MACACO_NOT_NULL].ROL SET rol_nombre = @nuevoNombreRol WHERE rol_id = @rol_id
+		DELETE from [MACACO_NOT_NULL].ROL_FUNCIONALIDAD where rol_id = @rol_id		
 	END
 	ELSE
 	BEGIN
@@ -673,7 +672,7 @@ BEGIN
 	DECLARE @intentosFallidosActuales int
 	IF(NOT EXISTS(SELECT logi_usuario_id FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username))
 	BEGIN
-			RAISERROR ('ERROR: Loggin incorrecto, no existe ningun usuario con el username ingresado')
+			RAISERROR ('ERROR: Loggin incorrecto, no existe ningun usuario con el username ingresado',16,1)
 	END
 	ELSE
 	BEGIN	
@@ -713,7 +712,7 @@ GO
  ---------------------- ABM DE CRUCERO -------------
   
   
-  
+ GO
 -------------------- AGREGAR BAJA A CRUCERO ------------
 -------- EN LA PANTALLA DE DAR DE BAJA A UN CRUCERO, AGREGAR UN COMBOBOX AL FINAL EN DONDE EL ADMIN TENGA A ELEGIR LO QUE SE DEBE HACER CON LOS PASAJES VENDIDOS DE TODOS LOS VIAJES QUE REALIZABA EL CRUCERO ---
 ------- ESTO HACE QUE LUEGO DE ESTE PROCEDURE, SE DEBA EJECUTAR ALGUNO DE LOS 2 DE ABAJO, DEPENDIENDO DE LA OPCION ELEGIDA ------------
@@ -728,7 +727,7 @@ BEGIN
 		VALUES (@idCrucero,@baja_cruc_fecha_fuera_servicio,@baja_cruc_fecha_reinicio_servicio,@motivo)
 END
 
-
+GO
   
   -------------------------------- CANCELACION DE PASAJES VENDIDOS ---------------------------
 ----------- SE EJECUTAR LUEGO DE AGREGAR UNA BAJA A UN CRUCERO (SIEMPRE Y CUANDO LA ACCION POSTERIOR ELEGIDA POR EL ADMIN ERA CANCELAR LOS PASAJES VENDIDOS DEL VIAJE) ------------
@@ -777,7 +776,7 @@ CREATE PROCEDURE [MACACO_NOT_NULL].CrearViaje
 @fechaLlegada datetime2(3),
 @fechaLlegadaEstimada datetime2(2),
 @cruceroId int,
-@recorridoId int,
+@recorridoId int
 AS
 BEGIN
 	INSERT INTO [MACACO_NOT_NULL].VIAJE(viaj_fecha_salida,viaj_fecha_llegada,viaj_fecha_llegada_estimada,viaj_crucero_id,viaj_recorrido_id)
