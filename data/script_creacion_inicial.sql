@@ -225,7 +225,7 @@ CREATE TABLE [MACACO_NOT_NULL].[BAJA_CRUCERO] (
 	baja_cruc_id int FOREIGN KEY REFERENCES [MACACO_NOT_NULL].[CRUCERO] (cruc_id), 
 	baja_cruc_fecha_fuera_servicio [datetime2](3),
 	baja_cruc_fecha_reinicio_servicio [datetime2](3),
-	baja_cruc_motivo [nvarchar](50)
+	baja_cruc_motivo [nvarchar](255)
 );
 END
 GO
@@ -717,7 +717,18 @@ GO
 -------------------- AGREGAR BAJA A CRUCERO ------------
 -------- EN LA PANTALLA DE DAR DE BAJA A UN CRUCERO, AGREGAR UN COMBOBOX AL FINAL EN DONDE EL ADMIN TENGA A ELEGIR LO QUE SE DEBE HACER CON LOS PASAJES VENDIDOS DE TODOS LOS VIAJES QUE REALIZABA EL CRUCERO ---
 ------- ESTO HACE QUE LUEGO DE ESTE PROCEDURE, SE DEBA EJECUTAR ALGUNO DE LOS 2 DE ABAJO, DEPENDIENDO DE LA OPCION ELEGIDA ------------
-  
+CREATE PROCEDURE [MACACO_NOT_NULL].AgregarBajaCrucero
+@idCrucero int,
+@baja_cruc_fecha_fuera_servicio [datetime2](3),
+@baja_cruc_fecha_reinicio_servicio [datetime2](3),
+@motivo [nvarchar](255)
+AS
+BEGIN
+	INSERT INTO [MACACO_NOT_NULL].[BAJA_CRUCERO] (baja_cruc_id,baja_cruc_fecha_fuera_servicio,baja_cruc_fecha_reinicio_servicio,baja_cruc_motivo)
+		VALUES (@idCrucero,@baja_cruc_fecha_fuera_servicio,@baja_cruc_fecha_reinicio_servicio,@motivo)
+END
+
+
   
   -------------------------------- CANCELACION DE PASAJES VENDIDOS ---------------------------
 ----------- SE EJECUTAR LUEGO DE AGREGAR UNA BAJA A UN CRUCERO (SIEMPRE Y CUANDO LA ACCION POSTERIOR ELEGIDA POR EL ADMIN ERA CANCELAR LOS PASAJES VENDIDOS DEL VIAJE) ------------
