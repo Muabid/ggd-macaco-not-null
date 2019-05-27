@@ -34,8 +34,9 @@ namespace FrbaCrucero.AbmRol
            // SqlConnection connection = Utils.Database.getConnection();
             //connection.Open();
             SqlCommand procedure = Utils.Database.createCommand("MACACO_NOT_NULL.AltaRol");
-            procedure.Parameters.Add("@nombre_rol", SqlDbType.VarChar).Value = NombreNuevoRol.Text;
-            procedure.Parameters.Add("@activo", SqlDbType.VarChar).Value = true;
+            procedure.Parameters.AddWithValue("@nombre_rol", SqlDbType.NVarChar).Value = NombreNuevoRol.Text;
+            MessageBox.Show(NombreNuevoRol.Text);
+            procedure.Parameters.Add("@activo", SqlDbType.Bit).Value = true;
             Utils.Database.execute(procedure);
 
             procedure.CommandType = CommandType.StoredProcedure;
@@ -53,8 +54,7 @@ namespace FrbaCrucero.AbmRol
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           // SqlCommand sql = Utils.Database.createCommand("");
-             //  sql.Parameters.Add
+           
                 
 
 
@@ -97,10 +97,13 @@ namespace FrbaCrucero.AbmRol
 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void NombreNuevoRol_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+
+
 
    
     }

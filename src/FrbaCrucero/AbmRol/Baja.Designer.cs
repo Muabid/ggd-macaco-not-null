@@ -32,13 +32,9 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.columnRol_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnRol_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnFunction = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.columnActive = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.columnSelection = new System.Windows.Forms.DataGridViewButtonColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.button3 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -58,6 +54,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 1;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // button1
             // 
@@ -67,6 +64,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Limpiar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -76,64 +74,40 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "Buscar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // dataGridView1
+            // dataGridView2
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.columnRol_Id,
-            this.columnRol_Name,
-            this.columnFunction,
-            this.columnActive,
-            this.columnSelection});
-            this.dataGridView1.Location = new System.Drawing.Point(26, 130);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(555, 176);
-            this.dataGridView1.TabIndex = 4;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(27, 145);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(404, 150);
+            this.dataGridView2.TabIndex = 5;
             // 
-            // columnRol_Id
+            // button3
             // 
-            this.columnRol_Id.HeaderText = "Rol ID";
-            this.columnRol_Id.Name = "columnRol_Id";
-            this.columnRol_Id.ReadOnly = true;
-            // 
-            // columnRol_Name
-            // 
-            this.columnRol_Name.HeaderText = "Nombre del Rol";
-            this.columnRol_Name.Name = "columnRol_Name";
-            this.columnRol_Name.ReadOnly = true;
-            // 
-            // columnFunction
-            // 
-            this.columnFunction.HeaderText = "Funcionalidades";
-            this.columnFunction.Name = "columnFunction";
-            this.columnFunction.ReadOnly = true;
-            // 
-            // columnActive
-            // 
-            this.columnActive.HeaderText = "Esta Activo";
-            this.columnActive.Name = "columnActive";
-            this.columnActive.ReadOnly = true;
-            // 
-            // columnSelection
-            // 
-            this.columnSelection.HeaderText = "Seleccionar";
-            this.columnSelection.Name = "columnSelection";
-            this.columnSelection.ReadOnly = true;
+            this.button3.Location = new System.Drawing.Point(332, 91);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "Guardar";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Baja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(619, 331);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Name = "Baja";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,12 +119,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnRol_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnRol_Name;
-        private System.Windows.Forms.DataGridViewComboBoxColumn columnFunction;
-        private System.Windows.Forms.DataGridViewComboBoxColumn columnActive;
-        private System.Windows.Forms.DataGridViewButtonColumn columnSelection;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button button3;
 
     }
 }

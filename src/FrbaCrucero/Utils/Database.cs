@@ -64,6 +64,27 @@ namespace FrbaCrucero.Utils
         }
 
 
+
+
+        public static String executeString(SqlCommand command)
+        {
+
+            connection.Open();
+            String res=  "";
+            try
+            {
+                res = (String)command.ExecuteScalar();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "ERROR",
+                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            connection.Close();
+            return res;
+        }
+
+
         public static int executeProcedure(SqlCommand command)
         {
             command.CommandType = CommandType.StoredProcedure;
