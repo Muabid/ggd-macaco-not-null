@@ -112,6 +112,7 @@
             this.tramoId.DataPropertyName = "tramoId";
             this.tramoId.HeaderText = "ID";
             this.tramoId.Name = "tramoId";
+            this.tramoId.Visible = false;
             // 
             // TramosLista
             // 

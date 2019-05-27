@@ -34,12 +34,13 @@ namespace FrbaCrucero.AbmRecorrido
 
         private void onBuscar(object sender, EventArgs e)
         {
-            String codigo = codigoField.Text;
+            String codigo = codigoBox.Text;
             String origen = (String)ciudadOrigenCombo.SelectedItem;
             String destino = (String)ciudadDestinoCombo.SelectedItem;
             Console.WriteLine(destino);
             
             recorridosTable.DataSource = recorridoDao.getRecorridos(codigo,origen,destino);
+            Console.WriteLine(recorridosTable.Rows.Count);
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -62,8 +63,24 @@ namespace FrbaCrucero.AbmRecorrido
             else if (e.ColumnIndex == recorridosTable.Columns["bajaColumn"].Index)
             {
                 recorridoDao.darDeBaja(codRecorrido);
+                
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void limpiar_Click(object sender, EventArgs e)
+        {
+
+            DataTable dt =(DataTable) this.recorridosTable.DataSource;
+            dt.Clear();
+            this.codigoBox.Clear();
+            this.ciudadDestinoCombo.SelectedIndex = -1;
+            this.ciudadOrigenCombo.SelectedIndex = -1;
         }
 
     }

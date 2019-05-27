@@ -14,36 +14,36 @@ BEGIN
 END
 GO
 
-CREATE FUNCTION MACACO_NOT_NULL.ciudad_origen (@reco_codigo decimal(18,0))  
+CREATE FUNCTION MACACO_NOT_NULL.ciudad_origen (@reco_id INT)  
 RETURNS nvarchar(255)
 AS
 BEGIN
 	DECLARE @origen nvarchar(255);
 	SET @origen = (select puer_nombre from MACACO_NOT_NULL.PUERTO as p 
 		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_desde)
-		where t.tram_recorrido_id = @reco_codigo
+		where t.tram_recorrido_id = @reco_id
 		and t.tram_id = (select MIN(t.tram_id) from MACACO_NOT_NULL.PUERTO as p 
 		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_desde)
-		where t.tram_recorrido_id = @reco_codigo))
+		where t.tram_recorrido_id = @reco_id))
 
 	RETURN(@origen);
 END
 GO;
 
 
-CREATE FUNCTION MACACO_NOT_NULL.ciudad_destino (@reco_codigo decimal(18,0))  
+CREATE FUNCTION MACACO_NOT_NULL.ciudad_destino (@reco_id INT)  
 RETURNS nvarchar(255)
 AS
 BEGIN
-	DECLARE @origen nvarchar(255);
-	SET @origen = (select puer_nombre from MACACO_NOT_NULL.PUERTO as p 
-		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_desde)
-		where t.tram_recorrido_id = @reco_codigo
+	DECLARE @destino nvarchar(255);
+	SET @destino = (select puer_nombre from MACACO_NOT_NULL.PUERTO as p 
+		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_hasta)
+		where t.tram_recorrido_id = @reco_id
 		and t.tram_id = (select MAX(t.tram_id) from MACACO_NOT_NULL.PUERTO as p 
-		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_desde)
-		where t.tram_recorrido_id = @reco_codigo))
+		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_hasta)
+		where t.tram_recorrido_id = @reco_id))
 
-	RETURN(@origen);
+	RETURN(@destino);
 END
 GO;
 

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.codigoField = new System.Windows.Forms.TextBox();
+            this.codigoBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.ciudadOrigenCombo = new System.Windows.Forms.ComboBox();
@@ -55,12 +55,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Código";
             // 
-            // codigoField
+            // codigoBox
             // 
-            this.codigoField.Location = new System.Drawing.Point(125, 82);
-            this.codigoField.Name = "codigoField";
-            this.codigoField.Size = new System.Drawing.Size(100, 20);
-            this.codigoField.TabIndex = 1;
+            this.codigoBox.Location = new System.Drawing.Point(125, 82);
+            this.codigoBox.Name = "codigoBox";
+            this.codigoBox.Size = new System.Drawing.Size(100, 20);
+            this.codigoBox.TabIndex = 1;
             // 
             // button1
             // 
@@ -70,6 +70,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Limpiar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.limpiar_Click);
             // 
             // button2
             // 
@@ -186,7 +187,7 @@
             this.Controls.Add(this.ciudadOrigenCombo);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.codigoField);
+            this.Controls.Add(this.codigoBox);
             this.Controls.Add(this.label1);
             this.Name = "BajaRecorrido";
             this.Text = "Baja";
@@ -199,7 +200,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox codigoField;
+        private System.Windows.Forms.TextBox codigoBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox ciudadOrigenCombo;
