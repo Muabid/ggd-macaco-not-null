@@ -1,7 +1,7 @@
 CREATE PROCEDURE [MACACO_NOT_NULL].GetTramos @reco_codigo decimal(18,0)
 AS
 BEGIN
-	SELECT p_d.puer_nombre as desde, p_h.puer_nombre as hasta, tram_precio_base as precio
+	SELECT tram_id as tramoId, p_d.puer_nombre as desde, p_h.puer_nombre as hasta, tram_precio_base as precio
 	FROM MACACO_NOT_NULL.RECORRIDO AS r
 	LEFT JOIN MACACO_NOT_NULL.TRAMO t
 	ON r.reco_id = t.tram_recorrido_id
@@ -12,42 +12,49 @@ BEGIN
 	WHERE reco_codigo = @reco_codigo AND reco_activo = 1
 	ORDER BY tram_id
 END
+GO
 
-CREATE FUNCTION MACACO_NOT_NULL.ciudad_origen (@reco_codigo decimal(18,0))  
+CREATE FUNCTION MACACO_NOT_NULL.ciudad_origen (@reco_id INT)  
 RETURNS nvarchar(255)
 AS
 BEGIN
 	DECLARE @origen nvarchar(255);
 	SET @origen = (select puer_nombre from MACACO_NOT_NULL.PUERTO as p 
 		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_desde)
-		where t.tram_recorrido_id = @reco_codigo
+		where t.tram_recorrido_id = @reco_id
 		and t.tram_id = (select MIN(t.tram_id) from MACACO_NOT_NULL.PUERTO as p 
 		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_desde)
-		where t.tram_recorrido_id = @reco_codigo))
+		where t.tram_recorrido_id = @reco_id))
 
 	RETURN(@origen);
 END
+GO;
 
-CREATE FUNCTION MACACO_NOT_NULL.ciudad_destino (@reco_codigo decimal(18,0))  
+
+CREATE FUNCTION MACACO_NOT_NULL.ciudad_destino (@reco_id INT)  
 RETURNS nvarchar(255)
 AS
 BEGIN
-	DECLARE @origen nvarchar(255);
-	SET @origen = (select puer_nombre from MACACO_NOT_NULL.PUERTO as p 
-		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_desde)
-		where t.tram_recorrido_id = @reco_codigo
+	DECLARE @destino nvarchar(255);
+	SET @destino = (select puer_nombre from MACACO_NOT_NULL.PUERTO as p 
+		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_hasta)
+		where t.tram_recorrido_id = @reco_id
 		and t.tram_id = (select MAX(t.tram_id) from MACACO_NOT_NULL.PUERTO as p 
-		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_desde)
-		where t.tram_recorrido_id = @reco_codigo))
+		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_hasta)
+		where t.tram_recorrido_id = @reco_id))
 
-	RETURN(@origen);
+	RETURN(@destino);
 END
+GO;
 
-CREATE PROCEDURE MACACO_NOT_NULL.getRecorridos @reco_codigo DECIMAL(18,0),
-	@ciudad_origen INT, @ciudad_destino INT
+
+CREATE PROCEDURE [MACACO_NOT_NULL].getRecorridos @reco_codigo DECIMAL(18,0),
+	@ciudad_origen NVARCHAR(256), @ciudad_destino NVARCHAR(256)
 AS
 BEGIN
-	SELECT r.reco_codigo as codigo, MACACO_NOT_NULL.ciudad_origen(t.tram_recorrido_id) as ciudadOrigen, MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) as ciudadDestino, SUM(t.tram_precio_base) as price
+	SELECT r.reco_codigo as codigo, MACACO_NOT_NULL.ciudad_origen(t.tram_recorrido_id) as
+	 ciudadOrigen, MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) as
+	  ciudadDestino, SUM(t.tram_precio_base) as precio
 	FROM MACACO_NOT_NULL.RECORRIDO AS r
 	LEFT JOIN MACACO_NOT_NULL.TRAMO t
 	ON r.reco_id = t.tram_recorrido_id
@@ -56,17 +63,20 @@ BEGIN
 	LEFT JOIN MACACO_NOT_NULL.PUERTO AS p_h
 	ON p_h.puer_id = tram_puerto_hasta
 	WHERE reco_activo = 1 
-	AND (@reco_codigo IS NULL OR (CONVERT(NVARCHAR(18),reco_codigo) LIKE CONCAT('%',@reco_codigo,'%')))
-	AND (@ciudad_origen IS NULL OR (MACACO_NOT_NULL.ciudad_origen(t.tram_recorrido_id) = @ciudad_origen)
-	AND (@ciudad_destino IS NULL OR (MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) = @ciudad_destino))) 
 	GROUP BY r.reco_codigo,t.tram_recorrido_id
+	HAVING (@reco_codigo IS NULL OR (CONVERT(NVARCHAR(18),reco_codigo) LIKE CONCAT('%',@reco_codigo,'%')))
+	AND (@ciudad_origen IS NULL OR (MACACO_NOT_NULL.ciudad_origen(t.tram_recorrido_id) = @ciudad_origen))
+	AND (@ciudad_destino IS NULL OR (MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) = @ciudad_destino)) 
 END
+GO;
+
 
 CREATE TYPE [MACACO_NOT_NULL].TRAMOTYPE AS TABLE   
 ( ciudadOrigen INT 
 , ciudadDestino INT
-,precio DECIMAL(18,0) );  
-GO  
+,precio DECIMAL(18,0)
+,indice INT );  
+GO; 
 
 
 CREATE PROCEDURE [MACACO_NOT_NULL].InsertRecorrido @reco_codigo decimal(18,0),
@@ -75,7 +85,7 @@ AS
 BEGIN  
 	IF EXISTS (SELECT reco_id FROM [MACACO_NOT_NULL].RECORRIDO
 	 WHERE reco_codigo =@reco_codigo)
-		THROW 51000, 'Código ya existente', 1;
+		THROW 51000, 'CÃ³digo ya existente', 1;
 	 ELSE
 	BEGIN TRANSACTION
 	BEGIN TRY
@@ -90,6 +100,7 @@ BEGIN
 		INSERT INTO [MACACO_NOT_NULL].TRAMO 
 		SELECT @reco_id, ciudadOrigen, ciudadDestino, precio 
 		FROM @tramos
+		ORDER BY indice
 
 		COMMIT TRANSACTION
 	END TRY
@@ -98,7 +109,7 @@ BEGIN
 		THROW;
 	END CATCH
 END 
-
+GO;
 
 CREATE PROCEDURE [MACACO_NOT_NULL].BajaRecorrido @reco_codigo decimal(18,0)
 AS
@@ -109,10 +120,11 @@ IF EXISTS (SELECT pasa_id FROM [MACACO_NOT_NULL].RECORRIDO AS r
 			JOIN [MACACO_NOT_NULL].PASAJE AS p
 			ON (v.viaj_recorrido_id = p.pasa_viaje_id)
 			WHERE reco_codigo = @reco_codigo
-			AND v.viaj_fecha_salida < GETDATE())
+			AND v.viaj_fecha_llegada > GETDATE())
 		THROW 51000, 'Existen pasajes de viajes que contienen al recorrido', 1;
 	 ELSE
 		UPDATE [MACACO_NOT_NULL].RECORRIDO
 		SET reco_activo = 0
 		WHERE reco_codigo = @reco_codigo
 END
+GO;

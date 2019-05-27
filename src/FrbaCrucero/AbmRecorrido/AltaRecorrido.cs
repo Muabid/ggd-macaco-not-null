@@ -69,18 +69,19 @@ namespace FrbaCrucero.AbmRecorrido
             {
                 dt.Columns.Add(col.Name);
             }
-            List<Tramo> tramos = new List<Tramo>();
+            dt.Columns.Add("indice");
             foreach (DataGridViewRow row in tramosTable.Rows)
             {
                 Puerto origen = (Puerto)row.Cells[0].Value;
                 Puerto destino = (Puerto)row.Cells[1].Value;
                 Decimal precio = Convert.ToDecimal(row.Cells[2].Value);
                 DataRow dRow = dt.NewRow();
-                if (origen != null && destino != null && precio != null)
+                if (origen != null && destino != null)
                 {
                     dRow[0] = origen.id;
                     dRow[1] = destino.id;
                     dRow[2] = precio;
+                    dRow[3] = row.Index;
                     dt.Rows.Add(dRow);
                 }
                 

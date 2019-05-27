@@ -609,12 +609,11 @@ CREATE PROCEDURE [MACACO_NOT_NULL].ModificarNombreRol
 @rol_id int,
 @nuevoNombreRol NVARCHAR(255)
 AS
+BEGIN
 	IF(NOT EXISTS(SELECT rol_nombre FROM [MACACO_NOT_NULL].ROL WHERE rol_nombre = @nuevoNombreRol))
 	BEGIN
-		BEGIN TRANSACTION
-			UPDATE [MACACO_NOT_NULL].ROL SET rol_nombre = @nuevoNombreRol WHERE rol_id = @rol_id
-			DELETE from [MACACO_NOT_NULL].ROL_FUNCIONALIDAD where rol_id = @rol_id
-		END TRANSACTION
+		UPDATE [MACACO_NOT_NULL].ROL SET rol_nombre = @nuevoNombreRol WHERE rol_id = @rol_id
+		DELETE from [MACACO_NOT_NULL].ROL_FUNCIONALIDAD where rol_id = @rol_id		
 	END
 	ELSE
 	BEGIN
@@ -650,10 +649,10 @@ AS
 BEGIN
 	UPDATE [MACACO_NOT_NULL].ROL SET rol_activo = 1 WHERE rol_id = @rol_id
 END
+
 GO
  
- 
-------------------------- LOGIN Y SEGURIDAD ------------
+-------------------------- LOGIN Y SEGURIDAD ------------
 
 ---------------- FUNCION ENCRIPTACION PASSWORD ------------------------------------
 CREATE FUNCTION [MACACO_NOT_NULL].EncriptarPassword(@password NVARCHAR(255))
@@ -673,7 +672,7 @@ BEGIN
 	DECLARE @intentosFallidosActuales int
 	IF(NOT EXISTS(SELECT logi_usuario_id FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username))
 	BEGIN
-			RAISERROR ('ERROR: Loggin incorrecto, no existe ningun usuario con el username ingresado')
+			RAISERROR ('ERROR: Loggin incorrecto, no existe ningun usuario con el username ingresado',16,1)
 	END
 	ELSE
 	BEGIN	
@@ -710,12 +709,72 @@ END
 
 GO
   
+  
+----------- FUNCION QUE DEVUELVE LOS TRAMOS DE LOS RECORRIDOS ORDENADOS LOGICAMENTE ---------------
+  CREATE FUNCTION [MACACO_NOT_NULL].OrdenarTramosRecorridos()
+ RETURNS @tablaTramosOrdenados TABLE (reco_id int,puertoDesde[nvarchar](255),puertoHasta [nvarchar](255))
+AS
+BEGIN
+	 DECLARE @tablaRecorridos TABLE(reco_id int,origen1 NVARCHAR(255),destino1 NVARCHAR(255), origen2 NVARCHAR(255), destino2 NVARCHAR(255));
+	 insert into @tablaRecorridos (reco_id,origen1,destino1,origen2,destino2)
+		SELECT reco_id,P1.puer_nombre, P2.puer_nombre, P3.puer_nombre, P4.puer_nombre
+		from MACACO_NOT_NULL.RECORRIDO 
+		inner join [MACACO_NOT_NULL].[TRAMO] T1 on reco_id = tram_recorrido_id
+		inner join MACACO_NOT_NULL.[TRAMO] T2 on T1.tram_recorrido_id = T2.tram_recorrido_id
+		INNER JOIN [MACACO_NOT_NULL].[PUERTO] P1 ON P1.puer_id = T1.tram_puerto_desde 
+		INNER JOIN [MACACO_NOT_NULL].[PUERTO] P2 ON P2.puer_id = T1.tram_puerto_hasta 
+		INNER JOIN [MACACO_NOT_NULL].[PUERTO] P3 ON P3.puer_id = T2.tram_puerto_desde 
+		INNER JOIN [MACACO_NOT_NULL].[PUERTO] P4 ON P4.puer_id = T2.tram_puerto_hasta
+		where  P2.puer_nombre = P3.puer_nombre
+		order by reco_id
+	 insert into @tablaRecorridos (reco_id,origen1,destino1)
+		SELECT tram_recorrido_id, P1.puer_nombre, P2.puer_nombre
+		from [MACACO_NOT_NULL].[TRAMO]
+		INNER JOIN [MACACO_NOT_NULL].[PUERTO] P1 ON P1.puer_id = tram_puerto_desde
+		INNER JOIN [MACACO_NOT_NULL].[PUERTO] P2 ON P2.puer_id = tram_puerto_hasta 
+		where tram_recorrido_id not in (select reco_id from @tablaRecorridos)
+
+	-- SELECT reco_id,origen1,destino1,origen2,destino2
+	 --FROM @tablaRecorridos
+	 --order by reco_id
+	IF NOT EXISTS (
+	SELECT *
+	FROM INFORMATION_SCHEMA.SEQUENCES
+	WHERE SEQUENCE_NAME = 'CountBy1'
+	)
+	BEGIN	 
+	CREATE SEQUENCE [MACACO_NOT_NULL].IncrementoEn1  
+		START WITH 1  
+		INCREMENT BY 1 ; 
+	END
+	
+		ALTER SEQUENCE [MACACO_NOT_NULL].IncrementoEn1 
+		RESTART WITH 1
+
+	-- DECLARE @tablaTramosOrdenados TABLE(reco_id int,tram_id int ,puertoDesde NVARCHAR(255),puertoHasta NVARCHAR(255))
+	 insert into @tablaTramosOrdenados (reco_id,tram_id,puertoDesde,puertoHasta)
+		SELECT reco_id, (NEXT VALUE FOR [MACACO_NOT_NULL].IncrementoEn1),origen1,destino1 from @tablaRecorridos
+	 insert into @tablaTramosOrdenados (reco_id,tram_id,puertoDesde,puertoHasta)
+		SELECT reco_id,(NEXT VALUE FOR [MACACO_NOT_NULL].IncrementoEn1),origen2,destino2 from @tablaRecorridos where origen2 is not null and destino2 is not null
+
+	-- SELECT reco_id,puertoDesde,puertoHasta
+	-- FROM @tablaTramosOrdenados
+	-- order by reco_id,tram_id
+	RETURN
+END
+  
+  
+GO
+  
+  
+  
+  
  ---------------------- ABM DE CRUCERO -------------
   
   
-  
+ GO
 -------------------- AGREGAR BAJA A CRUCERO ------------
--------- EN LA PANTALLA DE DAR DE BAJA A UN CRUCERO, AGREGAR UN COMBOBOX AL FINAL EN DONDE EL ADMIN TENGA A ELEGIR LO QUE SE DEBE HACER CON LOS PASAJES VENDIDOS DE TODOS LOS VIAJES QUE REALIZABA EL CRUCERO ---
+-------- EN LA PANTALLA DE DAR DE BAJA A UN CRUCERO, AGREGAR UN COMBOBOX AL FINAL EN DONDE EL ADMIN TENGA A ELEGIR LO QUE SE DEBE HACER CON LOS PASAJES VENDIDOS DE TODOS LOS VIAJES QUE REALIZABA EL CRUCERO (CANCELAR LOS PASAJES O REEMPLAZAR EL CRUCERO POR OTRO) ---
 ------- ESTO HACE QUE LUEGO DE ESTE PROCEDURE, SE DEBA EJECUTAR ALGUNO DE LOS 2 DE ABAJO, DEPENDIENDO DE LA OPCION ELEGIDA ------------
 CREATE PROCEDURE [MACACO_NOT_NULL].AgregarBajaCrucero
 @idCrucero int,
@@ -728,7 +787,7 @@ BEGIN
 		VALUES (@idCrucero,@baja_cruc_fecha_fuera_servicio,@baja_cruc_fecha_reinicio_servicio,@motivo)
 END
 
-
+GO
   
   -------------------------------- CANCELACION DE PASAJES VENDIDOS ---------------------------
 ----------- SE EJECUTAR LUEGO DE AGREGAR UNA BAJA A UN CRUCERO (SIEMPRE Y CUANDO LA ACCION POSTERIOR ELEGIDA POR EL ADMIN ERA CANCELAR LOS PASAJES VENDIDOS DEL VIAJE) ------------
@@ -762,11 +821,72 @@ BEGIN
 		WHERE pasa_baja_id = (SELECT MAX(baja_id) from [MACACO_NOT_NULL].BAJA_CRUCERO)
 END
 
+GO
+ 
  -------------------------------- REEMPLAZAR CRUCERO POR OTRO ---------------------------
 ----------- SE EJECUTAR LUEGO DE AGREGAR UNA BAJA A UN CRUCERO (SIEMPRE Y CUANDO LA ACCION POSTERIOR ELEGIDA POR EL ADMIN ERA REEMPLAZAR EL CRUCERO POR OTRO QUE PUEDA CUMPLIR TODOS LOS VIAJES) ------------
+---- LOS PASOS SON:
+-- 1) SI LA OPCION ELEGIDA PARA ESE CRUCERO ERA POSPONER LOS VIAJES QUE TENIA ASIGNADO: LLAMAR AL PROCEDURE PosponerViajes (SI NO SE DEBE POSPONER SALTEAR ESTE PASO)
+-- 2) LLAMAR A LA FUNCION BUSCARCRUCEROREEMPLAZANTE, QUE DEVUELVE EL CRUC_ID DEL CRUCERO QUE PUEDE REALIZAR TODOS LOS VIAJES DEL CRUCERO QUE SE ACABA DE DAR DE BAJA.
+-- 3) A) SI LA FUNCION DEVOLVIO UN ID VALIDO DE UN CRUCERO EXISTENTE: LLAMAR AL PROCEDURE ReemplazarCrucero PASANDO LOS ID DE LOS 2 CRUCEROS (EL DADODEBAJA Y EL REEMPLAZANTE)
+-- 3) B) SI LA FUNCION DEVOLVIO -1: QUIERE DECIR QUE NO EXISTE NINGUN CRUCERO QUE PUEDA CUMPLIR CON TODOS LOS VIAJES, 
+---------CON LO QUE EL SISTEMA DEBE LLAMAR A LA PANTALLA DE ALTA DE NUEVO CRUCERO, REGISTRAR UN NUEVO CRUCERO Y LUEGO LLAMAR AL PROCEDURE ReemplazarCrucero PASANDOLE EL ID DEL CRUCERO QUE SE ACABA DE DAR DE ALTA (SELECT MAX(cruc_id) FROM MACACO_NOT_NULL.CRUCERO) Y EL ID DEL DADODEBAJA)
 
+
+------------ PROCEDURE PARA POSPONER, UNA CIERTA CANTIDAD DE DIAS, LOS VIAJES DEL CRUCERO QUE SE ACABA DE DAR DE BAJA ---------------
+----------- REVISAR DESPUES SI ESTO FUNCIONA BIEN... --------------
+CREATE PROCEDURE [MACACO_NOT_NULL].PosponerViajes
+@idCruceroInactivo int,
+@cantidadDias int
+AS
+BEGIN
+	UPDATE Viaje1 
+	SET
+		Viaje1.viaj_fecha_llegada = (
+							SELECT DATEADD(day,@cantidadDias,Viaje2.viaj_fecha_llegada)
+							FROM [MACACO_NOT_NULL].VIAJE Viaje2
+							INNER JOIN [MACACO_NOT_NULL].CRUCERO Crucero ON Crucero.cruc_id = Viaje2.viaj_crucero_id
+							WHERE Viaje2.viaj_crucero_id = @idCruceroInactivo 
+							AND Viaje1.viaj_id = Viaje2.viaj_id
+									)   ,
+		Viaje1.viaj_fecha_salida = (
+							SELECT DATEADD(day,@cantidadDias,Viaje2.viaj_fecha_salida)
+							FROM [MACACO_NOT_NULL].VIAJE Viaje2
+							INNER JOIN [MACACO_NOT_NULL].CRUCERO Crucero ON Crucero.cruc_id = Viaje2.viaj_crucero_id
+							WHERE Viaje2.viaj_crucero_id = @idCruceroInactivo 
+							AND Viaje1.viaj_id = Viaje2.viaj_id
+									)  ,
+		Viaje1.viaj_fecha_llegada_estimada = (
+							SELECT DATEADD(day,@cantidadDias,Viaje2.viaj_fecha_llegada_estimada)
+							FROM [MACACO_NOT_NULL].VIAJE Viaje2
+							INNER JOIN [MACACO_NOT_NULL].CRUCERO Crucero ON Crucero.cruc_id = Viaje2.viaj_crucero_id
+							WHERE Viaje2.viaj_crucero_id = @idCruceroInactivo 
+							AND Viaje1.viaj_id = Viaje2.viaj_id
+											)
+	FROM [MACACO_NOT_NULL].VIAJE Viaje1
+	INNER JOIN [MACACO_NOT_NULL].CRUCERO Crucero ON Crucero.cruc_id = Viaje1.viaj_crucero_id
+	WHERE Viaje1.viaj_crucero_id = @idCruceroInactivo
+END
+
+
+GO
+
+
+
+GO
+
+CREATE PROCEDURE [MACACO_NOT_NULL].ReemplazarCrucero
+@idCruceroInactivo int,
+@idCruceroReemplazante int
+AS
+BEGIN
+	UPDATE Viaje1 
+	SET Viaje1.viaj_crucero_id = @idCruceroReemplazante
+	FROM [MACACO_NOT_NULL].VIAJE Viaje1
+	INNER JOIN [MACACO_NOT_NULL].CRUCERO Crucero ON Crucero.cruc_id = Viaje1.viaj_crucero_id
+	WHERE Viaje1.viaj_crucero_id = @idCruceroInactivo
+END
  
-  
   
 GO
  
@@ -777,12 +897,14 @@ CREATE PROCEDURE [MACACO_NOT_NULL].CrearViaje
 @fechaLlegada datetime2(3),
 @fechaLlegadaEstimada datetime2(2),
 @cruceroId int,
-@recorridoId int,
+@recorridoId int
 AS
 BEGIN
 	INSERT INTO [MACACO_NOT_NULL].VIAJE(viaj_fecha_salida,viaj_fecha_llegada,viaj_fecha_llegada_estimada,viaj_crucero_id,viaj_recorrido_id)
 		VALUES(@fechaSalida,@fechaLlegada,@fechaLlegadaEstimada,@cruceroId,@recorridoId)
 END
+
+
 GO
  
   --------- COMPROBACION VENCIMIENTO DE TODAS LAS RESERVAS DEL SISTEMA --------------

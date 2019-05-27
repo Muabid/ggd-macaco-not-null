@@ -14,10 +14,23 @@ namespace FrbaCrucero.AbmRecorrido
     public partial class TramosLista : Form
     {
         private RecorridoDAO recorridoDao = new RecorridoDAO();
-        public TramosLista(Decimal codigoRecorrido)
+        public TramosLista(BajaRecorrido form)
         {
             InitializeComponent();
-            tramosTable.DataSource = recorridoDao.getTramos(codigoRecorrido);
+        }
+
+        private void TramosLista_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public void show(Decimal codigoRecorrido, Decimal precio)
+        {
+           tramosTable.DataSource = recorridoDao.getTramos(codigoRecorrido);
+           codigoBox.Text = codigoRecorrido.ToString();
+           precioBox.Text = precio.ToString(); 
+           this.ShowDialog();
+          
         }
     }
 }
