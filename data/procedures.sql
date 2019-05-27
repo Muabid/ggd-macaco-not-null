@@ -30,6 +30,7 @@ BEGIN
 END
 GO;
 
+
 CREATE FUNCTION MACACO_NOT_NULL.ciudad_destino (@reco_codigo decimal(18,0))  
 RETURNS nvarchar(255)
 AS
@@ -45,6 +46,7 @@ BEGIN
 	RETURN(@origen);
 END
 GO;
+
 
 CREATE PROCEDURE [MACACO_NOT_NULL].getRecorridos @reco_codigo DECIMAL(18,0),
 	@ciudad_origen NVARCHAR(256), @ciudad_destino NVARCHAR(256)
@@ -67,6 +69,7 @@ BEGIN
 	AND (@ciudad_destino IS NULL OR (MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) = @ciudad_destino)) 
 END
 GO;
+
 
 CREATE TYPE [MACACO_NOT_NULL].TRAMOTYPE AS TABLE   
 ( ciudadOrigen INT 
