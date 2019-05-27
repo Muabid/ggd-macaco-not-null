@@ -1,7 +1,7 @@
 CREATE PROCEDURE [MACACO_NOT_NULL].GetTramos @reco_codigo decimal(18,0)
 AS
 BEGIN
-	SELECT p_d.puer_nombre as desde, p_h.puer_nombre as hasta, tram_precio_base as precio
+	SELECT tram_id as tramoId, p_d.puer_nombre as desde, p_h.puer_nombre as hasta, tram_precio_base as precio
 	FROM MACACO_NOT_NULL.RECORRIDO AS r
 	LEFT JOIN MACACO_NOT_NULL.TRAMO t
 	ON r.reco_id = t.tram_recorrido_id
@@ -12,7 +12,6 @@ BEGIN
 	WHERE reco_codigo = @reco_codigo AND reco_activo = 1
 	ORDER BY tram_id
 END
-
 GO
 
 CREATE FUNCTION MACACO_NOT_NULL.ciudad_origen (@reco_codigo decimal(18,0))  
@@ -29,7 +28,6 @@ BEGIN
 
 	RETURN(@origen);
 END
-
 GO;
 
 CREATE FUNCTION MACACO_NOT_NULL.ciudad_destino (@reco_codigo decimal(18,0))  
@@ -46,7 +44,7 @@ BEGIN
 
 	RETURN(@origen);
 END
-
+GO;
 
 CREATE PROCEDURE [MACACO_NOT_NULL].getRecorridos @reco_codigo DECIMAL(18,0),
 	@ciudad_origen NVARCHAR(256), @ciudad_destino NVARCHAR(256)
@@ -68,15 +66,14 @@ BEGIN
 	AND (@ciudad_origen IS NULL OR (MACACO_NOT_NULL.ciudad_origen(t.tram_recorrido_id) = @ciudad_origen))
 	AND (@ciudad_destino IS NULL OR (MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) = @ciudad_destino)) 
 END
-
-DROP PROCEDURE [MACACO_NOT_NULL].getRecorridos
-
+GO;
 
 CREATE TYPE [MACACO_NOT_NULL].TRAMOTYPE AS TABLE   
 ( ciudadOrigen INT 
 , ciudadDestino INT
-,precio DECIMAL(18,0) );  
-GO  
+,precio DECIMAL(18,0)
+,indice INT );  
+GO; 
 
 
 CREATE PROCEDURE [MACACO_NOT_NULL].InsertRecorrido @reco_codigo decimal(18,0),
@@ -100,6 +97,7 @@ BEGIN
 		INSERT INTO [MACACO_NOT_NULL].TRAMO 
 		SELECT @reco_id, ciudadOrigen, ciudadDestino, precio 
 		FROM @tramos
+		ORDER BY indice
 
 		COMMIT TRANSACTION
 	END TRY
@@ -108,8 +106,7 @@ BEGIN
 		THROW;
 	END CATCH
 END 
-
-GO
+GO;
 
 CREATE PROCEDURE [MACACO_NOT_NULL].BajaRecorrido @reco_codigo decimal(18,0)
 AS
@@ -127,3 +124,4 @@ IF EXISTS (SELECT pasa_id FROM [MACACO_NOT_NULL].RECORRIDO AS r
 		SET reco_activo = 0
 		WHERE reco_codigo = @reco_codigo
 END
+GO;

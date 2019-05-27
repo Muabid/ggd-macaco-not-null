@@ -106,12 +106,14 @@
             this.ciudadOrigen.DataPropertyName = "ciudadOrigen";
             this.ciudadOrigen.HeaderText = "Ciudad origen";
             this.ciudadOrigen.Name = "ciudadOrigen";
+            this.ciudadOrigen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ciudadDestino
             // 
             this.ciudadDestino.DataPropertyName = "ciudadDestino";
             this.ciudadDestino.HeaderText = "Ciudad destino";
             this.ciudadDestino.Name = "ciudadDestino";
+            this.ciudadDestino.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // precio
             // 
@@ -121,6 +123,7 @@
             this.precio.DefaultCellStyle = dataGridViewCellStyle1;
             this.precio.HeaderText = "Precio";
             this.precio.Name = "precio";
+            this.precio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // AltaRecorrido
             // 

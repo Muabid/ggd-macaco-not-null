@@ -23,7 +23,10 @@ namespace FrbaCrucero.AbmRecorrido
             InitializeComponent();
             foreach (Puerto puerto in puertoDao.getPuertos())
             {
-                ciudadOrigenCombo.Items.Add(puerto.nombre);
+                ciudadOrigenCombo.Items.Add(puerto.nombre);               
+            }
+            foreach (Puerto puerto in puertoDao.getPuertos())
+            {
                 ciudadDestinoCombo.Items.Add(puerto.nombre);
             }
            
@@ -34,6 +37,7 @@ namespace FrbaCrucero.AbmRecorrido
             String codigo = codigoField.Text;
             String origen = (String)ciudadOrigenCombo.SelectedItem;
             String destino = (String)ciudadDestinoCombo.SelectedItem;
+            Console.WriteLine(destino);
             
             recorridosTable.DataSource = recorridoDao.getRecorridos(codigo,origen,destino);
         }
@@ -50,14 +54,17 @@ namespace FrbaCrucero.AbmRecorrido
                 return;
             }
             Decimal codRecorrido = Convert.ToDecimal(recorridosTable["codigoColumn", e.RowIndex].Value);
+            Decimal precio = Convert.ToDecimal(recorridosTable["precioColumn", e.RowIndex].Value);
             if (e.ColumnIndex == recorridosTable.Columns["verColumn"].Index)
             {
-                                  
+                new TramosLista(this).show(codRecorrido, precio);                  
             }
-            else if (e.ColumnIndex == recorridosTable.Columns["baja"].Index)
+            else if (e.ColumnIndex == recorridosTable.Columns["bajaColumn"].Index)
             {
+                recorridoDao.darDeBaja(codRecorrido);
             }
 
         }
+
     }
 }
