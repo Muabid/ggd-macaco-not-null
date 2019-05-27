@@ -709,6 +709,66 @@ END
 
 GO
   
+  
+----------- FUNCION QUE DEVUELVE LOS TRAMOS DE LOS RECORRIDOS ORDENADOS LOGICAMENTE ---------------
+  CREATE FUNCTION [MACACO_NOT_NULL].OrdenarTramosRecorridos()
+ RETURNS @tablaTramosOrdenados TABLE (reco_id int,puertoDesde[nvarchar](255),puertoHasta [nvarchar](255))
+AS
+BEGIN
+	 DECLARE @tablaRecorridos TABLE(reco_id int,origen1 NVARCHAR(255),destino1 NVARCHAR(255), origen2 NVARCHAR(255), destino2 NVARCHAR(255));
+	 insert into @tablaRecorridos (reco_id,origen1,destino1,origen2,destino2)
+		SELECT reco_id,P1.puer_nombre, P2.puer_nombre, P3.puer_nombre, P4.puer_nombre
+		from MACACO_NOT_NULL.RECORRIDO 
+		inner join [MACACO_NOT_NULL].[TRAMO] T1 on reco_id = tram_recorrido_id
+		inner join MACACO_NOT_NULL.[TRAMO] T2 on T1.tram_recorrido_id = T2.tram_recorrido_id
+		INNER JOIN [MACACO_NOT_NULL].[PUERTO] P1 ON P1.puer_id = T1.tram_puerto_desde 
+		INNER JOIN [MACACO_NOT_NULL].[PUERTO] P2 ON P2.puer_id = T1.tram_puerto_hasta 
+		INNER JOIN [MACACO_NOT_NULL].[PUERTO] P3 ON P3.puer_id = T2.tram_puerto_desde 
+		INNER JOIN [MACACO_NOT_NULL].[PUERTO] P4 ON P4.puer_id = T2.tram_puerto_hasta
+		where  P2.puer_nombre = P3.puer_nombre
+		order by reco_id
+	 insert into @tablaRecorridos (reco_id,origen1,destino1)
+		SELECT tram_recorrido_id, P1.puer_nombre, P2.puer_nombre
+		from [MACACO_NOT_NULL].[TRAMO]
+		INNER JOIN [MACACO_NOT_NULL].[PUERTO] P1 ON P1.puer_id = tram_puerto_desde
+		INNER JOIN [MACACO_NOT_NULL].[PUERTO] P2 ON P2.puer_id = tram_puerto_hasta 
+		where tram_recorrido_id not in (select reco_id from @tablaRecorridos)
+
+	-- SELECT reco_id,origen1,destino1,origen2,destino2
+	 --FROM @tablaRecorridos
+	 --order by reco_id
+	IF NOT EXISTS (
+	SELECT *
+	FROM INFORMATION_SCHEMA.SEQUENCES
+	WHERE SEQUENCE_NAME = 'CountBy1'
+	)
+	BEGIN	 
+	CREATE SEQUENCE [MACACO_NOT_NULL].IncrementoEn1  
+		START WITH 1  
+		INCREMENT BY 1 ; 
+	END
+	
+		ALTER SEQUENCE [MACACO_NOT_NULL].IncrementoEn1 
+		RESTART WITH 1
+
+	-- DECLARE @tablaTramosOrdenados TABLE(reco_id int,tram_id int ,puertoDesde NVARCHAR(255),puertoHasta NVARCHAR(255))
+	 insert into @tablaTramosOrdenados (reco_id,tram_id,puertoDesde,puertoHasta)
+		SELECT reco_id, (NEXT VALUE FOR [MACACO_NOT_NULL].IncrementoEn1),origen1,destino1 from @tablaRecorridos
+	 insert into @tablaTramosOrdenados (reco_id,tram_id,puertoDesde,puertoHasta)
+		SELECT reco_id,(NEXT VALUE FOR [MACACO_NOT_NULL].IncrementoEn1),origen2,destino2 from @tablaRecorridos where origen2 is not null and destino2 is not null
+
+	-- SELECT reco_id,puertoDesde,puertoHasta
+	-- FROM @tablaTramosOrdenados
+	-- order by reco_id,tram_id
+	RETURN
+END
+  
+  
+GO
+  
+  
+  
+  
  ---------------------- ABM DE CRUCERO -------------
   
   
