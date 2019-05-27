@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Data.SqlClient;
 namespace FrbaCrucero.AbmRol
 {
     public partial class Baja : Form
-    {
+    {   
+       
         public Baja()
         {
             InitializeComponent();
@@ -19,6 +20,99 @@ namespace FrbaCrucero.AbmRol
 
         private void label1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (Control c in Controls)
+            {
+                if (c is TextBox)
+                {
+                    c.Text = "";
+                }
+            }
+        }
+
+
+
+
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+
+            try
+            {
+
+                SqlConnection connection = Utils.Database.getConnection();
+                connection.Open();
+                string textboxValue = textBox1.Text;
+                string query = "SELECT rol_id,rol_nombre,rol_activo FROM [MACACO_NOT_NULL].[ROL]" +
+                               "WHERE rol_nombre LIKE '" + textboxValue + "'";
+                SqlCommand sql = Utils.Database.createCommand(query);
+                SqlDataAdapter sqlDataAdap = new SqlDataAdapter(sql);
+                DataTable dtRecord = new DataTable();
+                sqlDataAdap.Fill(dtRecord);
+                dataGridView2.DataSource = dtRecord;
+                dataGridView2.ReadOnly = false;
+                dataGridView2.Columns[0].ReadOnly = true;
+                dataGridView2.Columns[1].ReadOnly = true;
+                Boolean str = this.prueba();
+                //Integer a = dataGridView2.Columns[0].DataGridView.Rows[0].ToString;
+               // str =(Boolean) dataGridView2.Rows[dataGridView2.SelectedRows[2].Index].Cells[2].Value;
+              //  Boolean a = this.dataGridView2_CellContentClick(dataGridView2);
+                connection.Close();
+                 
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se lleno el ComboBox: " + ex.ToString());
+            }
+        }
+
+        
+
+        private Boolean prueba(){
+        
+            Boolean item = (Boolean)dataGridView2.Rows[0].Cells[2].Value;
+            return item;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Boolean str = this.prueba();
+            if (str)
+            {
+                SqlCommand procedure1 = Utils.Database.createCommand("MACACO_NOT_NULL.AltaRol");
+                procedure1.Parameters.Add("@nombre_rol", SqlDbType.VarChar).Value = textBox1.Text;
+                procedure1.Parameters.Add("@activo", SqlDbType.Bit).Value = str;
+                Utils.Database.execute(procedure1);
+                MessageBox.Show("guardo true");
+
+                
+            }
+            else
+            {
+                String query = "select rol_id from MACACO_NOT_NULL.ROL where rol_nombre = ";
+
+                SqlCommand procedure2 = Utils.Database.createCommand(query + "'" + textBox1.Text + "';");
+                int resultado = Utils.Database.executeScalar(procedure2);
+                MessageBox.Show(resultado.ToString());
+                SqlCommand procedure3 = Utils.Database.createCommand("MACACO_NOT_NULL.BajaRol");
+                procedure3.Parameters.Add("@rol_id", SqlDbType.Int).Value = resultado;
+                Utils.Database.execute(procedure3);
+                MessageBox.Show("guardo falso");
+
+            } 
+
 
         }
     }

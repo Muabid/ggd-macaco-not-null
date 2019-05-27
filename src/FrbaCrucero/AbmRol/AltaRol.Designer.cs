@@ -62,6 +62,7 @@
             this.NombreNuevoRol.Name = "NombreNuevoRol";
             this.NombreNuevoRol.Size = new System.Drawing.Size(100, 20);
             this.NombreNuevoRol.TabIndex = 2;
+            this.NombreNuevoRol.TextChanged += new System.EventHandler(this.NombreNuevoRol_TextChanged);
             // 
             // button1
             // 

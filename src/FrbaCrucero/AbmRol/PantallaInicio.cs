@@ -41,9 +41,9 @@ namespace FrbaCrucero.AbmRol
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Baja frm2 = new Baja();
+            Baja frm3 = new Baja();
 
-            frm2.Show();
+            frm3.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
