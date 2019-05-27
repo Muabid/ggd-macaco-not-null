@@ -14,6 +14,8 @@ BEGIN
 END
 GO
 
+exec MACACO_NOT_NULL.GetTramos @reco_codigo = 43820888
+
 CREATE FUNCTION MACACO_NOT_NULL.ciudad_origen (@reco_id INT)  
 RETURNS nvarchar(255)
 AS
@@ -70,6 +72,9 @@ BEGIN
 END
 GO;
 
+SELECT * from [MACACO_NOT_NULL].RECORRIDO;
+exec [MACACO_NOT_NULL].getRecorridos @reco_codigo = 43820888, @ciudad_origen = NULL, @ciudad_destino = NULL
+exec [MACACO_NOT_NULL].GetTramos @reco_codigo = 43820903
 
 CREATE TYPE [MACACO_NOT_NULL].TRAMOTYPE AS TABLE   
 ( ciudadOrigen INT 
@@ -128,3 +133,6 @@ IF EXISTS (SELECT pasa_id FROM [MACACO_NOT_NULL].RECORRIDO AS r
 		WHERE reco_codigo = @reco_codigo
 END
 GO;
+
+
+

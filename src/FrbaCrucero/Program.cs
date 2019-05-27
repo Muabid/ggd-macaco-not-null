@@ -19,7 +19,7 @@ namespace FrbaCrucero
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new BajaRecorrido());
-            Application.Run(new PantallaPrincipal());
+            Application.Run(new AltaRecorrido());
         }
     }
 }
