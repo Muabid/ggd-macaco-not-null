@@ -120,7 +120,7 @@ IF EXISTS (SELECT pasa_id FROM [MACACO_NOT_NULL].RECORRIDO AS r
 			JOIN [MACACO_NOT_NULL].PASAJE AS p
 			ON (v.viaj_recorrido_id = p.pasa_viaje_id)
 			WHERE reco_codigo = @reco_codigo
-			AND v.viaj_fecha_salida < GETDATE())
+			AND v.viaj_fecha_llegada > GETDATE())
 		THROW 51000, 'Existen pasajes de viajes que contienen al recorrido', 1;
 	 ELSE
 		UPDATE [MACACO_NOT_NULL].RECORRIDO
