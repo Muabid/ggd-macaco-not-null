@@ -14,8 +14,6 @@ BEGIN
 END
 GO
 
-exec MACACO_NOT_NULL.GetTramos @reco_codigo = 43820888
-
 CREATE FUNCTION MACACO_NOT_NULL.ciudad_origen (@reco_id INT)  
 RETURNS nvarchar(255)
 AS

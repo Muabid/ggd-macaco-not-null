@@ -19,7 +19,7 @@ BEGIN
 CREATE TABLE [MACACO_NOT_NULL].[ROL] (
 	rol_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	rol_nombre [nvarchar](255) NOT NULL,
-	rol_activo [bit] NOT NULL
+	rol_activo [bit] NOT NULL DEFAULT 1
 );
 END
 GO
@@ -448,7 +448,51 @@ INSERT INTO [MACACO_NOT_NULL].RESERVA(
 	select distinct RECORRIDO_CODIGO,1
    FROM [GD1C2019].[gd_esquema].[Maestra];
 
-   
+
+--INSERTA EN ORDEN LOS TRAMOS--
+
+BEGIN TRANSACTION
+	BEGIN
+	DECLARE @reco_cod DECIMAL(18,0)
+	DECLARE @origen nvarchar(256)
+	DECLARE @destino nvarchar(256)
+	DECLARE @precio DECIMAL(18,2)	
+	DECLARE reco_cod CURSOR FOR SELECT reco_codigo FROM MACACO_NOT_NULL.RECORRIDO 
+	OPEN reco_cod
+	FETCH NEXT FROM reco_cod INTO @reco_cod
+	WHILE  @@FETCH_STATUS = 0  
+	BEGIN
+		SET @origen= (select DISTINCT  PUERTO_DESDE
+			FROM gd_esquema.Maestra
+			WHERE PUERTO_DESDE not in (select PUERTO_HASTA from gd_esquema.Maestra where RECORRIDO_CODIGO =@reco_cod)
+			 AND RECORRIDO_CODIGO = @reco_cod)
+		SET @destino = (SELECT DISTINCT PUERTO_HASTA FROM gd_esquema.Maestra
+						 WHERE PUERTO_DESDE = @origen AND RECORRIDO_CODIGO = @reco_cod) 
+		
+
+		WHILE  @destino IS NOT NULL
+		BEGIN
+			SET @precio = (SELECT DISTINCT RECORRIDO_PRECIO_BASE FROM gd_esquema.Maestra
+					 WHERE PUERTO_DESDE = @origen AND PUERTO_HASTA = @destino AND RECORRIDO_CODIGO = @reco_cod)
+
+			INSERT INTO MACACO_NOT_NULL.TRAMO (tram_puerto_desde, tram_puerto_hasta,tram_recorrido_id,tram_precio_base) 
+			VALUES ((SELECT puer_id FROM MACACO_NOT_NULL.PUERTO WHERE puer_nombre = @origen),
+			(SELECT puer_id FROM MACACO_NOT_NULL.PUERTO WHERE puer_nombre = @destino),
+			(SELECT reco_id FROM MACACO_NOT_NULL.RECORRIDO WHERE reco_codigo = @reco_cod),
+			@precio)
+
+			SET @origen = @destino
+			SET @destino = (SELECT DISTINCT PUERTO_HASTA FROM gd_esquema.Maestra
+							 WHERE PUERTO_DESDE = @origen AND RECORRIDO_CODIGO = @reco_cod)
+		END
+		FETCH NEXT FROM reco_cod INTO @reco_cod
+	END
+	CLOSE reco_cod;  
+	DEALLOCATE reco_cod;
+	COMMIT TRANSACTION;
+END
+
+/*   
 INSERT INTO [MACACO_NOT_NULL].TRAMO(
 										tram_precio_base,
 										tram_recorrido_id,
@@ -472,7 +516,7 @@ INSERT INTO [MACACO_NOT_NULL].TRAMO(
 			 where puer_nombre = PUERTO_HASTA
 	) 
    FROM [GD1C2019].[gd_esquema].[Maestra];
-   
+*/  
  INSERT INTO [MACACO_NOT_NULL].VIAJE(
 										viaj_fecha_salida,
 										viaj_fecha_llegada,
@@ -576,12 +620,10 @@ CREATE PROCEDURE [MACACO_NOT_NULL].AltaRol
 @activo BIT
 AS
 	BEGIN
-	IF(NOT EXISTS(SELECT rol_nombre FROM [MACACO_NOT_NULL].ROL WHERE rol_nombre = @nombre_rol))
+	IF  EXISTS(SELECT rol_nombre FROM [MACACO_NOT_NULL].ROL WHERE rol_nombre = @nombre_rol)
 		BEGIN
-			BEGIN TRANSACTION
 				INSERT INTO [MACACO_NOT_NULL].ROL(rol_nombre,rol_activo)	
 				VALUES(@nombre_rol,@activo)
-			COMMIT TRANSACTION
 		END
 	ELSE
 		BEGIN
@@ -589,6 +631,7 @@ AS
 		END
 END
 GO
+
 
 ---------------BAJA---------------
 CREATE PROCEDURE [MACACO_NOT_NULL].BajaRol
@@ -1240,45 +1283,3 @@ DROP TABLE [MACACO_NOT_NULL].[ROL]
 DROP SEQUENCE [MACACO_NOT_NULL].CountBy1 
 
 DROP SCHEMA MACACO_NOT_NULL */
-
-
-
-
-BEGIN 
-	DECLARE @reco_cod DECIMAL(18,0)
-	DECLARE @origen nvarchar(256)
-	DECLARE @destino nvarchar(256)
-	DECLARE @precio DECIMAL(18,2)	
-	DECLARE reco_cod CURSOR FOR SELECT reco_codigo FROM MACACO_NOT_NULL.RECORRIDO 
-	OPEN reco_cod
-	FETCH NEXT FROM reco_cod INTO @reco_cod
-	WHILE  @@FETCH_STATUS = 0  
-	BEGIN
-		SET @origen= (select DISTINCT  PUERTO_DESDE
-			FROM gd_esquema.Maestra
-			WHERE PUERTO_DESDE not in (select PUERTO_HASTA from gd_esquema.Maestra where RECORRIDO_CODIGO =@reco_cod)
-			 AND RECORRIDO_CODIGO = @reco_cod)
-		SET @destino = (SELECT DISTINCT PUERTO_HASTA FROM gd_esquema.Maestra
-						 WHERE PUERTO_DESDE = @origen AND RECORRIDO_CODIGO = @reco_cod) 
-		
-
-		WHILE  @destino IS NOT NULL
-		BEGIN
-			SET @precio = (SELECT DISTINCT RECORRIDO_PRECIO_BASE FROM gd_esquema.Maestra
-					 WHERE PUERTO_DESDE = @origen AND PUERTO_HASTA = @destino AND RECORRIDO_CODIGO = @reco_cod)
-
-			INSERT INTO MACACO_NOT_NULL.TRAMO (tram_puerto_desde, tram_puerto_hasta,tram_recorrido_id,tram_precio_base) 
-			VALUES ((SELECT puer_id FROM MACACO_NOT_NULL.PUERTO WHERE puer_nombre = @origen),
-			(SELECT puer_id FROM MACACO_NOT_NULL.PUERTO WHERE puer_nombre = @destino),
-			(SELECT reco_id FROM MACACO_NOT_NULL.RECORRIDO WHERE reco_codigo = @reco_cod),
-			@precio)
-
-			SET @origen = @destino
-			SET @destino = (SELECT DISTINCT PUERTO_HASTA FROM gd_esquema.Maestra
-							 WHERE PUERTO_DESDE = @origen AND RECORRIDO_CODIGO = @reco_cod)
-		END
-		FETCH NEXT FROM reco_cod INTO @reco_cod
-	END
-	CLOSE reco_cod;  
-	DEALLOCATE reco_cod;  
-END

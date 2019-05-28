@@ -34,13 +34,10 @@ namespace FrbaCrucero.AbmRol
            // SqlConnection connection = Utils.Database.getConnection();
             //connection.Open();
             SqlCommand procedure = Utils.Database.createCommand("MACACO_NOT_NULL.AltaRol");
-            procedure.Parameters.AddWithValue("@nombre_rol", SqlDbType.NVarChar).Value = NombreNuevoRol.Text;
-            MessageBox.Show(NombreNuevoRol.Text);
-            procedure.Parameters.Add("@activo", SqlDbType.Bit).Value = true;
-            Utils.Database.execute(procedure);
+            procedure.Parameters.Add("@nombre_rol", SqlDbType.NVarChar).Value = NombreNuevoRol.Text;
+            procedure.Parameters.Add("@activo", SqlDbType.Bit).Value = 1;
+            Utils.Database.executeProcedure(procedure);
 
-            procedure.CommandType = CommandType.StoredProcedure;
-            Utils.Database.execute(procedure);
             SqlCommand query = Utils.Database.createCommand("SELECT max (rol_id) FROM [MACACO_NOT_NULL].ROL");
             int id = Utils.Database.executeScalar(query);
             SqlCommand procedure2 = Utils.Database.createCommand("MACACO_NOT_NULL.AgregarFuncionalidadRol");
