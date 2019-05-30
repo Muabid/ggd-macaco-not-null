@@ -1,4 +1,5 @@
 ﻿using FrbaCrucero.AbmRecorrido;
+using FrbaCrucero.ListadoEstadistico;
 using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace FrbaCrucero
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new BajaRecorrido());
-            Application.Run(new AltaRecorrido());
+           // Application.Run(new AltaRecorrido());
+            Application.Run(new ListadoEstadisticoForm());
         }
     }
 }
