@@ -620,7 +620,7 @@ CREATE PROCEDURE [MACACO_NOT_NULL].AltaRol
 @activo BIT
 AS
 	BEGIN
-	IF  EXISTS(SELECT rol_nombre FROM [MACACO_NOT_NULL].ROL WHERE rol_nombre = @nombre_rol)
+	IF(NOT EXISTS(SELECT rol_nombre FROM [MACACO_NOT_NULL].ROL WHERE rol_nombre = @nombre_rol))
 		BEGIN
 				INSERT INTO [MACACO_NOT_NULL].ROL(rol_nombre,rol_activo)	
 				VALUES(@nombre_rol,@activo)
