@@ -40,7 +40,7 @@ namespace FrbaCrucero.AbmRecorrido
             Console.WriteLine(destino);
             
             recorridosTable.DataSource = recorridoDao.getRecorridos(codigo,origen,destino);
-            Console.WriteLine(recorridosTable.Rows.Count);
+            
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -65,11 +65,6 @@ namespace FrbaCrucero.AbmRecorrido
                 recorridoDao.darDeBaja(codRecorrido);
                 
             }
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
 
         }
 

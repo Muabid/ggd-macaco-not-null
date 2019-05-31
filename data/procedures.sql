@@ -35,7 +35,7 @@ CREATE FUNCTION MACACO_NOT_NULL.ciudad_destino (@reco_id INT)
 RETURNS nvarchar(255)
 AS
 BEGIN
-	DECLARE @destino nvarchar(255);
+	DECLARE @destino nvarchar(255)
 	SET @destino = (select puer_nombre from MACACO_NOT_NULL.PUERTO as p 
 		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_hasta)
 		where t.tram_recorrido_id = @reco_id
@@ -43,7 +43,7 @@ BEGIN
 		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_hasta)
 		where t.tram_recorrido_id = @reco_id))
 
-	RETURN(@destino);
+	RETURN(@destino)
 END
 GO;
 
@@ -70,9 +70,6 @@ BEGIN
 END
 GO;
 
-SELECT * from [MACACO_NOT_NULL].RECORRIDO;
-exec [MACACO_NOT_NULL].getRecorridos @reco_codigo = 43820888, @ciudad_origen = NULL, @ciudad_destino = NULL
-exec [MACACO_NOT_NULL].GetTramos @reco_codigo = 43820903
 
 CREATE TYPE [MACACO_NOT_NULL].TRAMOTYPE AS TABLE   
 ( ciudadOrigen INT 
@@ -133,4 +130,22 @@ END
 GO;
 
 
+CREATE FUNCTION [MACACO_NOT_NULL].GetPuertoId (@puerto NVARCHAR(256))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @id INT
+	SET @id = (SELECT puer_id FROM [MACACO_NOT_NULL].PUERTO WHERE puer_nombre = @puerto)
+	RETURN (@id)
+END
+GO;
+
+CREATE PROCEDURE [MACACO_NOT_NULL].GetPuertoByName @name NVARCHAR(256)
+AS 
+	SELECT puer_id,puer_nombre FROM [MACACO_NOT_NULL].PUERTO WHERE puer_nombre = @name
+END
+
+CREATE PROCEDURE [MACACO_NOT_NULL].ModificarRecorrido @reco_codigo decimal(18,0),
+@tramos [MACACO_NOT_NULL].TRAMOTYPE READONLY 
+AS
 

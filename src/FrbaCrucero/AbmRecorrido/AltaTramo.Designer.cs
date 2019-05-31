@@ -58,7 +58,6 @@
             this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Ciudad origen";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -131,6 +130,7 @@
             this.Controls.Add(this.origenComboBox);
             this.Name = "AltaTramo";
             this.Text = "Tramo";
+            this.Load += new System.EventHandler(this.label1_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
