@@ -87,6 +87,12 @@
     <Compile Include="AbmRecorrido\ModificacionRecorrido.Designer.cs">
       <DependentUpon>ModificacionRecorrido.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmRecorrido\ModificarTramo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRecorrido\ModificarTramo.Designer.cs">
+      <DependentUpon>ModificarTramo.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmRecorrido\TramosLista.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -181,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRecorrido\ModificacionRecorrido.resx">
       <DependentUpon>ModificacionRecorrido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRecorrido\ModificarTramo.resx">
+      <DependentUpon>ModificarTramo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRecorrido\TramosLista.resx">
       <DependentUpon>TramosLista.cs</DependentUpon>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.codigoText = new System.Windows.Forms.TextBox();
             this.precioText = new System.Windows.Forms.TextBox();
@@ -37,14 +38,18 @@
             this.destinoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precioColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modificarColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.borrarColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.tramoId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.agregarTramoButton = new System.Windows.Forms.Button();
+            this.cancelarButton = new System.Windows.Forms.Button();
+            this.guardarButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tramosTable)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 49);
+            this.label1.Location = new System.Drawing.Point(38, 34);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 0;
@@ -52,7 +57,7 @@
             // 
             // codigoText
             // 
-            this.codigoText.Location = new System.Drawing.Point(97, 46);
+            this.codigoText.Location = new System.Drawing.Point(119, 31);
             this.codigoText.Name = "codigoText";
             this.codigoText.ReadOnly = true;
             this.codigoText.Size = new System.Drawing.Size(100, 20);
@@ -60,7 +65,7 @@
             // 
             // precioText
             // 
-            this.precioText.Location = new System.Drawing.Point(386, 46);
+            this.precioText.Location = new System.Drawing.Point(386, 31);
             this.precioText.Name = "precioText";
             this.precioText.ReadOnly = true;
             this.precioText.Size = new System.Drawing.Size(100, 20);
@@ -69,7 +74,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(316, 49);
+            this.label2.Location = new System.Drawing.Point(316, 34);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 3;
@@ -83,11 +88,13 @@
             this.destinoColumn,
             this.precioColumn,
             this.modificarColumn,
+            this.borrarColumn,
             this.tramoId});
-            this.tramosTable.Location = new System.Drawing.Point(38, 151);
+            this.tramosTable.Location = new System.Drawing.Point(19, 239);
             this.tramosTable.Name = "tramosTable";
-            this.tramosTable.Size = new System.Drawing.Size(448, 150);
+            this.tramosTable.Size = new System.Drawing.Size(492, 150);
             this.tramosTable.TabIndex = 4;
+            this.tramosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tramosTable_CellContentClick);
             // 
             // origenColumn
             // 
@@ -106,6 +113,9 @@
             // precioColumn
             // 
             this.precioColumn.DataPropertyName = "precio";
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.precioColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.precioColumn.HeaderText = "Precio";
             this.precioColumn.Name = "precioColumn";
             this.precioColumn.ReadOnly = true;
@@ -116,6 +126,15 @@
             this.modificarColumn.Name = "modificarColumn";
             this.modificarColumn.Text = "Modificar";
             this.modificarColumn.UseColumnTextForButtonValue = true;
+            this.modificarColumn.Width = 60;
+            // 
+            // borrarColumn
+            // 
+            this.borrarColumn.HeaderText = "";
+            this.borrarColumn.Name = "borrarColumn";
+            this.borrarColumn.Text = "Borrar";
+            this.borrarColumn.UseColumnTextForButtonValue = true;
+            this.borrarColumn.Width = 60;
             // 
             // tramoId
             // 
@@ -124,11 +143,44 @@
             this.tramoId.Name = "tramoId";
             this.tramoId.Visible = false;
             // 
+            // agregarTramoButton
+            // 
+            this.agregarTramoButton.Location = new System.Drawing.Point(386, 95);
+            this.agregarTramoButton.Name = "agregarTramoButton";
+            this.agregarTramoButton.Size = new System.Drawing.Size(89, 26);
+            this.agregarTramoButton.TabIndex = 5;
+            this.agregarTramoButton.Text = "Agregar Tramo";
+            this.agregarTramoButton.UseVisualStyleBackColor = true;
+            this.agregarTramoButton.Click += new System.EventHandler(this.agregarTramoButton_Click);
+            // 
+            // cancelarButton
+            // 
+            this.cancelarButton.Location = new System.Drawing.Point(41, 172);
+            this.cancelarButton.Name = "cancelarButton";
+            this.cancelarButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelarButton.TabIndex = 6;
+            this.cancelarButton.Text = "Cancelar";
+            this.cancelarButton.UseVisualStyleBackColor = true;
+            this.cancelarButton.Click += new System.EventHandler(this.cancelarButton_Click);
+            // 
+            // guardarButton
+            // 
+            this.guardarButton.Location = new System.Drawing.Point(411, 172);
+            this.guardarButton.Name = "guardarButton";
+            this.guardarButton.Size = new System.Drawing.Size(75, 23);
+            this.guardarButton.TabIndex = 7;
+            this.guardarButton.Text = "Guardar";
+            this.guardarButton.UseVisualStyleBackColor = true;
+            this.guardarButton.Click += new System.EventHandler(this.guardarButton_Click);
+            // 
             // ModificacionRecorrido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 401);
+            this.ClientSize = new System.Drawing.Size(545, 401);
+            this.Controls.Add(this.guardarButton);
+            this.Controls.Add(this.cancelarButton);
+            this.Controls.Add(this.agregarTramoButton);
             this.Controls.Add(this.tramosTable);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.precioText);
@@ -149,10 +201,14 @@
         private System.Windows.Forms.TextBox precioText;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView tramosTable;
+        private System.Windows.Forms.Button agregarTramoButton;
+        private System.Windows.Forms.Button cancelarButton;
+        private System.Windows.Forms.Button guardarButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn origenColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn destinoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn precioColumn;
         private System.Windows.Forms.DataGridViewButtonColumn modificarColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn borrarColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tramoId;
     }
 }

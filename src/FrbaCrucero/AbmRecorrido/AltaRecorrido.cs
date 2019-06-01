@@ -65,24 +65,29 @@ namespace FrbaCrucero.AbmRecorrido
         private void saveButton_Click(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
-            foreach (DataGridViewColumn col in tramosTable.Columns)
-            {
-                dt.Columns.Add(col.Name);
-            }
+            dt.Columns.Add("ciudadOrigen");
+            dt.Columns.Add("ciudadDestino");
+            DataColumn column;
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.Decimal");
+            column.ColumnName = "precio";
+            dt.Columns.Add(column);
             dt.Columns.Add("indice");
+            dt.Columns.Add("tramoId");
             foreach (DataGridViewRow row in tramosTable.Rows)
             {
                 Puerto origen = (Puerto)row.Cells[0].Value;
                 Puerto destino = (Puerto)row.Cells[1].Value;
-                Decimal precio = Convert.ToDecimal(row.Cells[2].Value);
                 DataRow dRow = dt.NewRow();
                 if (origen != null && destino != null)
                 {
+                    Decimal precio = decimal.Parse(row.Cells[2].Value.ToString());
                     dRow[0] = origen.id;
                     dRow[1] = destino.id;
                     dRow[2] = precio;
                     dRow[3] = row.Index;
                     dt.Rows.Add(dRow);
+                    
                 }
                 
             }

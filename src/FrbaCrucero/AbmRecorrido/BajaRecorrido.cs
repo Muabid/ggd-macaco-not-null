@@ -55,15 +55,16 @@ namespace FrbaCrucero.AbmRecorrido
                 return;
             }
             Decimal codRecorrido = Convert.ToDecimal(recorridosTable["codigoColumn", e.RowIndex].Value);
-            Decimal precio = Convert.ToDecimal(recorridosTable["precioColumn", e.RowIndex].Value);
             if (e.ColumnIndex == recorridosTable.Columns["verColumn"].Index)
             {
+               
+                Decimal precio = Convert.ToDecimal(recorridosTable["precioColumn", e.RowIndex].Value);
                 new TramosLista(this).show(codRecorrido, precio);                  
             }
             else if (e.ColumnIndex == recorridosTable.Columns["bajaColumn"].Index)
             {
                 recorridoDao.darDeBaja(codRecorrido);
-                
+                recorridosTable.Rows.RemoveAt(e.RowIndex);
             }
 
         }

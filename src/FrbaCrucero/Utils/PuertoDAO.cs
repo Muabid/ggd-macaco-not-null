@@ -25,9 +25,10 @@ namespace FrbaCrucero.Utils
         public Puerto getPuertoByName(String name)
         {
             SqlCommand command = Database.createCommand("[MACACO_NOT_NULL].GetPuertoByName");
+            command.Parameters.Add("@name", SqlDbType.NVarChar).Value = name;
             DataTable table = Database.getDataProcedure(command);
             DataRow puerto = table.Rows[0];
-            String id = (String)puerto["puer_id"];
+            String id = puerto["puer_id"].ToString();
             String nombre = (String) puerto["puer_nombre"];
             return new Puerto(id, nombre);
         }
