@@ -58,7 +58,8 @@ namespace FrbaCrucero.AbmRecorrido
                 return;
             }
             Decimal codRecorrido = Convert.ToDecimal(recorridosTable["codigoColumn", e.RowIndex].Value);
-            Decimal precio = Convert.ToDecimal(recorridosTable["precioColumn", e.RowIndex].Value);
+            object precioV = recorridosTable["precioColumn", e.RowIndex].Value;
+            Decimal precio = Convert.ToDecimal(precioV == DBNull.Value ? 0 : precioV);
             if (e.ColumnIndex == recorridosTable.Columns["modificarColumn"].Index)
             {
                 new ModificacionRecorrido(this).show(codRecorrido, precio);
