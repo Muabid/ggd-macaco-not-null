@@ -74,15 +74,17 @@ namespace FrbaCrucero.ListadoEstadistico
             }
         }
 
-        private object crucerosConMasReparaciones(string p1, string p2)
+        private object crucerosConMasReparaciones(string anio, string semestre)
         {
             DataTable dataTable = new DataTable();
             using (SqlCommand command = new SqlCommand("[MACACO_NOT_NULL].CrucerosConMasReparaciones", Database.getConnection()))
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                // this.AddInputParametersToCommandIfTheyAreNotNull(inputParameters, command);
-
+                command.Parameters.Add(new SqlParameter("@anio", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@semestre", SqlDbType.Int));
+                command.Parameters["@anio"].Value = Int32.Parse(anio);
+                command.Parameters["@semestre"].Value = Int32.Parse(semestre);
                 try
                 {
                     dataAdapter.Fill(dataTable);
@@ -96,15 +98,17 @@ namespace FrbaCrucero.ListadoEstadistico
             // throw new NotImplementedException();
         }
 
-        private object recorridosConMasCabinasLibresEnSusViajes(string p1, string p2)
+        private object recorridosConMasCabinasLibresEnSusViajes(string anio, string semestre)
         {
             DataTable dataTable = new DataTable();
             using (SqlCommand command = new SqlCommand("[MACACO_NOT_NULL].RecorridosConMasCabinasLibresEnSusViajes", Database.getConnection()))
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                // this.AddInputParametersToCommandIfTheyAreNotNull(inputParameters, command);
-
+                command.Parameters.Add(new SqlParameter("@anio", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@semestre", SqlDbType.Int));
+                command.Parameters["@anio"].Value = Int32.Parse(anio);
+                command.Parameters["@semestre"].Value = Int32.Parse(semestre);
                 try
                 {
                     dataAdapter.Fill(dataTable);
@@ -124,8 +128,10 @@ namespace FrbaCrucero.ListadoEstadistico
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
             {
                 command.CommandType = CommandType.StoredProcedure;
-               // this.AddInputParametersToCommandIfTheyAreNotNull(inputParameters, command);
-
+                command.Parameters.Add(new SqlParameter("@anio", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@semestre", SqlDbType.Int));
+                command.Parameters["@anio"].Value = Int32.Parse(anio);
+                command.Parameters["@semestre"].Value = Int32.Parse(semestre);
                 try
                 {
                     dataAdapter.Fill(dataTable);

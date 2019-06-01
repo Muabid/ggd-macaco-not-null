@@ -1286,7 +1286,9 @@ GO
 
  -------------------- REPORTES ---------------------
 
-CREATE PROCEDURE [MACACO_NOT_NULL].RecorridosConMasPasajesComprados 
+CREATE PROCEDURE [MACACO_NOT_NULL].[RecorridosConMasPasajesComprados] 
+@anio int,
+@semestre int
 AS
 BEGIN
 	DECLARE @tablaRecorridos TABLE(pasajes_comprados int,recorrido_id int, recorrido_codigo int);
@@ -1296,12 +1298,18 @@ BEGIN
 		INNER JOIN [MACACO_NOT_NULL].VIAJE ON pasa_viaje_id = viaj_id
 		INNER JOIN [MACACO_NOT_NULL].[RECORRIDO] ON reco_id = viaj_recorrido_id
 		where pasa_pago_id IS NOT NULL
+		and YEAR(viaj_fecha_salida) = @anio
+		and @semestre = CASE
+				WHEN DATEPART(month,viaj_fecha_salida) <= 6 THEN 1
+				WHEN DATEPART(month,viaj_fecha_salida) > 7 THEN 2
+			END
 		group by reco_id,reco_codigo
 
 	SELECT TOP 5 recorrido_id,recorrido_codigo --atributos
 	FROM @tablaRecorridos
 	order by pasajes_comprados DESC 
 END
+
 GO
   
 
@@ -1317,7 +1325,9 @@ GO
   -- 	todos los tramos (con sus atributos) del recorrido que elegiste.
   
 
-CREATE PROCEDURE [MACACO_NOT_NULL].CrucerosConMasReparaciones 
+CREATE PROCEDURE [MACACO_NOT_NULL].[CrucerosConMasReparaciones] 
+@anio int,
+@semestre int
 AS
 BEGIN
   SELECT TOP 5 cruc_modelo,cruc_nombre,comp_nombre 
@@ -1327,19 +1337,33 @@ BEGIN
 				SELECT SUM(DATEDIFF(day,baja_cruc_fecha_fuera_servicio, baja_cruc_fecha_reinicio_servicio))
 				FROM [MACACO_NOT_NULL].[BAJA_CRUCERO] 	
 				where baja_cruc_id = cruc_id
+				and YEAR(baja_cruc_fecha_fuera_servicio) = @anio
+				and @semestre = CASE
+						WHEN DATEPART(month,baja_cruc_fecha_fuera_servicio) <= 6 THEN 1
+						WHEN DATEPART(month,baja_cruc_fecha_fuera_servicio) > 7 THEN 2
+					END
 			) DESC 
  END
+
 GO 
  
 -- CONVERT(datetime2(3),'1962-09-16 00:00:00.000',121)
   
-CREATE PROCEDURE [MACACO_NOT_NULL].RecorridosConMasCabinasLibresEnSusViajes 
+CREATE PROCEDURE [MACACO_NOT_NULL].[RecorridosConMasCabinasLibresEnSusViajes] 
+@anio int,
+@semestre int
 AS
 BEGIN
 	DECLARE @tablaPasajes TABLE(cab_ocupados int,viaje_id int);
 	insert into @tablaPasajes (cab_ocupados,viaje_id)
 		select COUNT(distinct (pasa_cab_id)),pasa_viaje_id
 		from [MACACO_NOT_NULL].[PASAJE] 
+		INNER JOIN [MACACO_NOT_NULL].VIAJE on viaj_id = pasa_viaje_id
+		WHERE YEAR(viaj_fecha_salida) = @anio
+		and @semestre = CASE
+				WHEN DATEPART(month,viaj_fecha_salida) <= 6 THEN 1
+				WHEN DATEPART(month,viaj_fecha_salida) > 7 THEN 2
+			END
 		group by pasa_viaje_id
 
 	DECLARE @tabla TABLE(cab_libres int,recorrido_id int);
@@ -1357,6 +1381,7 @@ BEGIN
 				) DESC 
   
  END
+ 
 GO 
   
  
