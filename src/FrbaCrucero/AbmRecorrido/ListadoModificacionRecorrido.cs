@@ -33,8 +33,11 @@ namespace FrbaCrucero.AbmRecorrido
         private void limpiarButton_Click(object sender, EventArgs e)
         {
             DataTable dt = (DataTable)this.recorridosTable.DataSource;
-            dt.Clear();
+            if(dt!=null)
+                dt.Clear();
             this.codigoBox.Clear();
+            this.destinoCombo.SelectedIndex = -1;
+            this.origenCombo.SelectedIndex = -1;
 
         }
 

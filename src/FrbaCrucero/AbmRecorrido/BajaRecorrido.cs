@@ -73,7 +73,8 @@ namespace FrbaCrucero.AbmRecorrido
         {
 
             DataTable dt =(DataTable) this.recorridosTable.DataSource;
-            dt.Clear();
+            if(dt!=null)
+                dt.Clear();
             this.codigoBox.Clear();
             this.ciudadDestinoCombo.SelectedIndex = -1;
             this.ciudadOrigenCombo.SelectedIndex = -1;
