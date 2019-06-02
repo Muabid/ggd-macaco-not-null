@@ -52,7 +52,7 @@ namespace FrbaCrucero.ListadoEstadistico
 
         private void buscarButton_Click(object sender, EventArgs e)
         {
-            if (!checkearFiltros())
+            if (checkearFiltros())
             {
                 //TODO separar en clases
                 switch (tipoListado.SelectedItem.ToString())
@@ -147,13 +147,64 @@ namespace FrbaCrucero.ListadoEstadistico
 
         private bool checkearFiltros()
         {
-            if (semestre.SelectedItem == null)
-            {
-                return true;
-            }
-            return (semestre.SelectedItem.ToString() != "1" && semestre.SelectedItem.ToString() != "2") || tipoListado.SelectedItem == null
-                || anio.Text == null || semestre.SelectedItem.ToString() == null ;
-                //throw new NotImplementedException();
+            //if (semestre.SelectedItem == null)
+            //{
+            //    return true;
+            //}
+            //return (semestre.SelectedItem.ToString() != "1" && semestre.SelectedItem.ToString() != "2") || tipoListado.SelectedItem == null
+            //    || anio.Text == null || semestre.SelectedItem.ToString() == null ;
+            //    //throw new NotImplementedException();
+           return this.ValidateChildren(ValidationConstraints.Enabled);
         }
+
+        private void anio_Validating(object sender, CancelEventArgs e)
+        {
+            if (validateAnio())
+            {
+                e.Cancel = false;
+                anioErrorProvider.SetError(this.anio, String.Empty);
+            }
+            else
+            {
+                e.Cancel = true;
+                anioErrorProvider.SetError(this.anio, "Debe ingresar el año");
+            }
+        }
+
+        private bool validateAnio()
+        {
+            return !String.IsNullOrEmpty(anio.Text);
+        }
+
+        private void semestre_Validating(object sender, CancelEventArgs e)
+        {
+            if (semestre.SelectedItem != null)
+            {
+                e.Cancel = false;
+                semestreErrorProvider.SetError(this.semestre, String.Empty);
+            }
+            else
+            {
+                e.Cancel = true;
+                semestreErrorProvider.SetError(this.semestre, "Debe indicar el semestre");
+            }
+        }
+
+        private void tipoListado_Validating(object sender, CancelEventArgs e)
+        {
+            if (semestre.SelectedItem != null)
+            {
+                e.Cancel = false;
+                tipoErrorProvider.SetError(this.tipoListado, String.Empty);
+            }
+            else
+            {
+                e.Cancel = true;
+                tipoErrorProvider.SetError(this.tipoListado, "Debe ingresar la categoría");
+            }
+        }
+
+
+
     }
 }

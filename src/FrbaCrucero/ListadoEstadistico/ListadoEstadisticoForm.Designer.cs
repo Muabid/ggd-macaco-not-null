@@ -28,21 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tipoListado = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.anio = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.semestre = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.buscarButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.semestre = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.anio = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tipoListado = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gridResultados = new System.Windows.Forms.DataGridView();
             this.volverButton = new System.Windows.Forms.Button();
+            this.tipoErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.anioErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.semestreErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.anioErrorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.semestreErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -61,39 +68,35 @@
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // tipoListado
+            // buscarButton
             // 
-            this.tipoListado.FormattingEnabled = true;
-            this.tipoListado.Location = new System.Drawing.Point(156, 23);
-            this.tipoListado.Name = "tipoListado";
-            this.tipoListado.Size = new System.Drawing.Size(318, 21);
-            this.tipoListado.TabIndex = 0;
+            this.buscarButton.BackColor = System.Drawing.SystemColors.Control;
+            this.buscarButton.Location = new System.Drawing.Point(385, 112);
+            this.buscarButton.Name = "buscarButton";
+            this.buscarButton.Size = new System.Drawing.Size(89, 23);
+            this.buscarButton.TabIndex = 7;
+            this.buscarButton.Text = "Buscar";
+            this.buscarButton.UseVisualStyleBackColor = false;
+            this.buscarButton.Click += new System.EventHandler(this.buscarButton_Click);
             // 
-            // label1
+            // label4
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(70, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Tipo de Listado";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Filtros de Búsqueda";
             // 
-            // label2
+            // semestre
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(115, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Año";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // anio
-            // 
-            this.anio.Location = new System.Drawing.Point(156, 71);
-            this.anio.Name = "anio";
-            this.anio.Size = new System.Drawing.Size(100, 20);
-            this.anio.TabIndex = 3;
+            this.semestre.FormattingEnabled = true;
+            this.semestre.Location = new System.Drawing.Point(358, 71);
+            this.semestre.Name = "semestre";
+            this.semestre.Size = new System.Drawing.Size(63, 21);
+            this.semestre.TabIndex = 5;
+            this.semestre.SelectedIndexChanged += new System.EventHandler(this.semestre_SelectedIndexChanged);
+            this.semestre.Validating += new System.ComponentModel.CancelEventHandler(this.semestre_Validating);
             // 
             // label3
             // 
@@ -105,34 +108,41 @@
             this.label3.Text = "Semestre";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // semestre
+            // anio
             // 
-            this.semestre.FormattingEnabled = true;
-            this.semestre.Location = new System.Drawing.Point(358, 71);
-            this.semestre.Name = "semestre";
-            this.semestre.Size = new System.Drawing.Size(63, 21);
-            this.semestre.TabIndex = 5;
-            this.semestre.SelectedIndexChanged += new System.EventHandler(this.semestre_SelectedIndexChanged);
+            this.anio.Location = new System.Drawing.Point(156, 71);
+            this.anio.Name = "anio";
+            this.anio.Size = new System.Drawing.Size(100, 20);
+            this.anio.TabIndex = 3;
+            this.anio.Validating += new System.ComponentModel.CancelEventHandler(this.anio_Validating);
             // 
-            // label4
+            // label2
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(100, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Filtros de Búsqueda";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(115, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(26, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Año";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // buscarButton
+            // label1
             // 
-            this.buscarButton.BackColor = System.Drawing.SystemColors.Control;
-            this.buscarButton.Location = new System.Drawing.Point(385, 112);
-            this.buscarButton.Name = "buscarButton";
-            this.buscarButton.Size = new System.Drawing.Size(89, 23);
-            this.buscarButton.TabIndex = 7;
-            this.buscarButton.Text = "Buscar";
-            this.buscarButton.UseVisualStyleBackColor = false;
-            this.buscarButton.Click += new System.EventHandler(this.buscarButton_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(70, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Tipo de Listado";
+            // 
+            // tipoListado
+            // 
+            this.tipoListado.FormattingEnabled = true;
+            this.tipoListado.Location = new System.Drawing.Point(156, 23);
+            this.tipoListado.Name = "tipoListado";
+            this.tipoListado.Size = new System.Drawing.Size(318, 21);
+            this.tipoListado.TabIndex = 0;
+            this.tipoListado.Validating += new System.ComponentModel.CancelEventHandler(this.tipoListado_Validating);
             // 
             // groupBox1
             // 
@@ -162,10 +172,23 @@
             this.volverButton.Text = "Volver";
             this.volverButton.UseVisualStyleBackColor = false;
             // 
+            // tipoErrorProvider
+            // 
+            this.tipoErrorProvider.ContainerControl = this;
+            // 
+            // anioErrorProvider
+            // 
+            this.anioErrorProvider.ContainerControl = this;
+            // 
+            // semestreErrorProvider
+            // 
+            this.semestreErrorProvider.ContainerControl = this;
+            // 
             // ListadoEstadisticoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.ClientSize = new System.Drawing.Size(538, 441);
             this.Controls.Add(this.volverButton);
             this.Controls.Add(this.groupBox1);
@@ -176,6 +199,9 @@
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.anioErrorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.semestreErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -194,5 +220,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView gridResultados;
         private System.Windows.Forms.Button volverButton;
+        private System.Windows.Forms.ErrorProvider tipoErrorProvider;
+        private System.Windows.Forms.ErrorProvider anioErrorProvider;
+        private System.Windows.Forms.ErrorProvider semestreErrorProvider;
     }
 }
