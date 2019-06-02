@@ -87,6 +87,7 @@
             this.precioText.Name = "precioText";
             this.precioText.Size = new System.Drawing.Size(100, 20);
             this.precioText.TabIndex = 5;
+            this.precioText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioText_KeyPress);
             // 
             // cancelarButton
             // 

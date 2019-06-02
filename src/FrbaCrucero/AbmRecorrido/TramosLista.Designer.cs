@@ -48,8 +48,10 @@
             this.ciudadDestino,
             this.precio,
             this.tramoId});
+            this.tramosTable.Cursor = System.Windows.Forms.Cursors.Default;
             this.tramosTable.Location = new System.Drawing.Point(54, 129);
             this.tramosTable.Name = "tramosTable";
+            this.tramosTable.ReadOnly = true;
             this.tramosTable.Size = new System.Drawing.Size(345, 134);
             this.tramosTable.TabIndex = 1;
             // 
@@ -94,24 +96,32 @@
             this.ciudadOrigen.DataPropertyName = "desde";
             this.ciudadOrigen.HeaderText = "Ciudad origen";
             this.ciudadOrigen.Name = "ciudadOrigen";
+            this.ciudadOrigen.ReadOnly = true;
+            this.ciudadOrigen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ciudadDestino
             // 
             this.ciudadDestino.DataPropertyName = "hasta";
             this.ciudadDestino.HeaderText = "Ciudad destino";
             this.ciudadDestino.Name = "ciudadDestino";
+            this.ciudadDestino.ReadOnly = true;
+            this.ciudadDestino.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // precio
             // 
             this.precio.DataPropertyName = "precio";
             this.precio.HeaderText = "Precio";
             this.precio.Name = "precio";
+            this.precio.ReadOnly = true;
+            this.precio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // tramoId
             // 
             this.tramoId.DataPropertyName = "tramoId";
             this.tramoId.HeaderText = "ID";
             this.tramoId.Name = "tramoId";
+            this.tramoId.ReadOnly = true;
+            this.tramoId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.tramoId.Visible = false;
             // 
             // TramosLista

@@ -94,6 +94,7 @@
             this.precioField.Size = new System.Drawing.Size(121, 20);
             this.precioField.TabIndex = 5;
             this.precioField.TextChanged += new System.EventHandler(this.precioField_TextChanged);
+            this.precioField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioField_KeyPress);
             // 
             // limpiarButton
             // 

@@ -30,14 +30,14 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tramosTable = new System.Windows.Forms.DataGridView();
+            this.ciudadOrigen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciudadDestino = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codigo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.addTramoButton = new System.Windows.Forms.Button();
             this.clean = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
-            this.ciudadOrigen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ciudadDestino = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.tramosTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,9 +50,37 @@
             this.precio});
             this.tramosTable.Location = new System.Drawing.Point(80, 115);
             this.tramosTable.Name = "tramosTable";
+            this.tramosTable.ReadOnly = true;
             this.tramosTable.Size = new System.Drawing.Size(348, 159);
             this.tramosTable.TabIndex = 0;
             this.tramosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // ciudadOrigen
+            // 
+            this.ciudadOrigen.DataPropertyName = "ciudadOrigen";
+            this.ciudadOrigen.HeaderText = "Ciudad origen";
+            this.ciudadOrigen.Name = "ciudadOrigen";
+            this.ciudadOrigen.ReadOnly = true;
+            this.ciudadOrigen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ciudadDestino
+            // 
+            this.ciudadDestino.DataPropertyName = "ciudadDestino";
+            this.ciudadDestino.HeaderText = "Ciudad destino";
+            this.ciudadDestino.Name = "ciudadDestino";
+            this.ciudadDestino.ReadOnly = true;
+            this.ciudadDestino.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // precio
+            // 
+            this.precio.DataPropertyName = "precio";
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = "0";
+            this.precio.DefaultCellStyle = dataGridViewCellStyle1;
+            this.precio.HeaderText = "Precio";
+            this.precio.Name = "precio";
+            this.precio.ReadOnly = true;
+            this.precio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // codigo
             // 
@@ -100,30 +128,6 @@
             this.saveButton.Text = "Guardar";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // ciudadOrigen
-            // 
-            this.ciudadOrigen.DataPropertyName = "ciudadOrigen";
-            this.ciudadOrigen.HeaderText = "Ciudad origen";
-            this.ciudadOrigen.Name = "ciudadOrigen";
-            this.ciudadOrigen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ciudadDestino
-            // 
-            this.ciudadDestino.DataPropertyName = "ciudadDestino";
-            this.ciudadDestino.HeaderText = "Ciudad destino";
-            this.ciudadDestino.Name = "ciudadDestino";
-            this.ciudadDestino.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // precio
-            // 
-            this.precio.DataPropertyName = "precio";
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = "0";
-            this.precio.DefaultCellStyle = dataGridViewCellStyle1;
-            this.precio.HeaderText = "Precio";
-            this.precio.Name = "precio";
-            this.precio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // AltaRecorrido
             // 

@@ -92,6 +92,8 @@ namespace FrbaCrucero.AbmRecorrido
                 
             }
             recorridosDao.insertRecorrido(Convert.ToDecimal(codigo.Text), dt);
+            MessageBox.Show("Se dio de alta el recorrido" + codigo.Text, "Operacion exitosa",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void limpiar_Click(object sender, EventArgs e)

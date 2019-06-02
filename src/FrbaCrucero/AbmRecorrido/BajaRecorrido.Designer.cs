@@ -129,6 +129,7 @@
             this.bajaColumn});
             this.recorridosTable.Location = new System.Drawing.Point(12, 237);
             this.recorridosTable.Name = "recorridosTable";
+            this.recorridosTable.ReadOnly = true;
             this.recorridosTable.Size = new System.Drawing.Size(625, 144);
             this.recorridosTable.TabIndex = 9;
             this.recorridosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.recorridosTable_CellContentClick);
@@ -138,12 +139,16 @@
             this.codigoColumn.DataPropertyName = "codigo";
             this.codigoColumn.HeaderText = "Código";
             this.codigoColumn.Name = "codigoColumn";
+            this.codigoColumn.ReadOnly = true;
+            this.codigoColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ciudadOrigenColumn
             // 
             this.ciudadOrigenColumn.DataPropertyName = "ciudadOrigen";
             this.ciudadOrigenColumn.HeaderText = "Ciudad de origen";
             this.ciudadOrigenColumn.Name = "ciudadOrigenColumn";
+            this.ciudadOrigenColumn.ReadOnly = true;
+            this.ciudadOrigenColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.ciudadOrigenColumn.Width = 120;
             // 
             // ciudadDestinoColumn
@@ -151,6 +156,8 @@
             this.ciudadDestinoColumn.DataPropertyName = "ciudadDestino";
             this.ciudadDestinoColumn.HeaderText = "Ciudad destino";
             this.ciudadDestinoColumn.Name = "ciudadDestinoColumn";
+            this.ciudadDestinoColumn.ReadOnly = true;
+            this.ciudadDestinoColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.ciudadDestinoColumn.Width = 120;
             // 
             // precioColumn
@@ -158,11 +165,14 @@
             this.precioColumn.DataPropertyName = "precio";
             this.precioColumn.HeaderText = "Precio";
             this.precioColumn.Name = "precioColumn";
+            this.precioColumn.ReadOnly = true;
+            this.precioColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // verColumn
             // 
             this.verColumn.HeaderText = "";
             this.verColumn.Name = "verColumn";
+            this.verColumn.ReadOnly = true;
             this.verColumn.Text = "Ver";
             this.verColumn.UseColumnTextForButtonValue = true;
             this.verColumn.Width = 60;
@@ -171,6 +181,7 @@
             // 
             this.bajaColumn.HeaderText = "";
             this.bajaColumn.Name = "bajaColumn";
+            this.bajaColumn.ReadOnly = true;
             this.bajaColumn.Text = "Baja";
             this.bajaColumn.UseColumnTextForButtonValue = true;
             this.bajaColumn.Width = 60;

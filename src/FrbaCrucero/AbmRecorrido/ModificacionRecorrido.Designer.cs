@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.codigoText = new System.Windows.Forms.TextBox();
             this.precioText = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tramosTable = new System.Windows.Forms.DataGridView();
+            this.agregarTramoButton = new System.Windows.Forms.Button();
+            this.cancelarButton = new System.Windows.Forms.Button();
+            this.guardarButton = new System.Windows.Forms.Button();
             this.origenColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.destinoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precioColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modificarColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.borrarColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.tramoId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.agregarTramoButton = new System.Windows.Forms.Button();
-            this.cancelarButton = new System.Windows.Forms.Button();
-            this.guardarButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tramosTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,56 +92,10 @@
             this.tramoId});
             this.tramosTable.Location = new System.Drawing.Point(19, 239);
             this.tramosTable.Name = "tramosTable";
+            this.tramosTable.ReadOnly = true;
             this.tramosTable.Size = new System.Drawing.Size(492, 150);
             this.tramosTable.TabIndex = 4;
             this.tramosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tramosTable_CellContentClick);
-            // 
-            // origenColumn
-            // 
-            this.origenColumn.DataPropertyName = "desde";
-            this.origenColumn.HeaderText = "Ciudad origen";
-            this.origenColumn.Name = "origenColumn";
-            this.origenColumn.ReadOnly = true;
-            // 
-            // destinoColumn
-            // 
-            this.destinoColumn.DataPropertyName = "hasta";
-            this.destinoColumn.HeaderText = "Ciudad destino";
-            this.destinoColumn.Name = "destinoColumn";
-            this.destinoColumn.ReadOnly = true;
-            // 
-            // precioColumn
-            // 
-            this.precioColumn.DataPropertyName = "precio";
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.precioColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.precioColumn.HeaderText = "Precio";
-            this.precioColumn.Name = "precioColumn";
-            this.precioColumn.ReadOnly = true;
-            // 
-            // modificarColumn
-            // 
-            this.modificarColumn.HeaderText = "";
-            this.modificarColumn.Name = "modificarColumn";
-            this.modificarColumn.Text = "Modificar";
-            this.modificarColumn.UseColumnTextForButtonValue = true;
-            this.modificarColumn.Width = 60;
-            // 
-            // borrarColumn
-            // 
-            this.borrarColumn.HeaderText = "";
-            this.borrarColumn.Name = "borrarColumn";
-            this.borrarColumn.Text = "Borrar";
-            this.borrarColumn.UseColumnTextForButtonValue = true;
-            this.borrarColumn.Width = 60;
-            // 
-            // tramoId
-            // 
-            this.tramoId.DataPropertyName = "tramoId";
-            this.tramoId.HeaderText = "Tramo ";
-            this.tramoId.Name = "tramoId";
-            this.tramoId.Visible = false;
             // 
             // agregarTramoButton
             // 
@@ -172,6 +126,60 @@
             this.guardarButton.Text = "Guardar";
             this.guardarButton.UseVisualStyleBackColor = true;
             this.guardarButton.Click += new System.EventHandler(this.guardarButton_Click);
+            // 
+            // origenColumn
+            // 
+            this.origenColumn.DataPropertyName = "desde";
+            this.origenColumn.HeaderText = "Ciudad origen";
+            this.origenColumn.Name = "origenColumn";
+            this.origenColumn.ReadOnly = true;
+            this.origenColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // destinoColumn
+            // 
+            this.destinoColumn.DataPropertyName = "hasta";
+            this.destinoColumn.HeaderText = "Ciudad destino";
+            this.destinoColumn.Name = "destinoColumn";
+            this.destinoColumn.ReadOnly = true;
+            this.destinoColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // precioColumn
+            // 
+            this.precioColumn.DataPropertyName = "precio";
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.precioColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.precioColumn.HeaderText = "Precio";
+            this.precioColumn.Name = "precioColumn";
+            this.precioColumn.ReadOnly = true;
+            this.precioColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // modificarColumn
+            // 
+            this.modificarColumn.HeaderText = "";
+            this.modificarColumn.Name = "modificarColumn";
+            this.modificarColumn.ReadOnly = true;
+            this.modificarColumn.Text = "Modificar";
+            this.modificarColumn.UseColumnTextForButtonValue = true;
+            this.modificarColumn.Width = 60;
+            // 
+            // borrarColumn
+            // 
+            this.borrarColumn.HeaderText = "";
+            this.borrarColumn.Name = "borrarColumn";
+            this.borrarColumn.ReadOnly = true;
+            this.borrarColumn.Text = "Borrar";
+            this.borrarColumn.UseColumnTextForButtonValue = true;
+            this.borrarColumn.Width = 60;
+            // 
+            // tramoId
+            // 
+            this.tramoId.DataPropertyName = "tramoId";
+            this.tramoId.HeaderText = "Tramo ";
+            this.tramoId.Name = "tramoId";
+            this.tramoId.ReadOnly = true;
+            this.tramoId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.tramoId.Visible = false;
             // 
             // ModificacionRecorrido
             // 

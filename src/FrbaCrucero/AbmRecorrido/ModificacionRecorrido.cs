@@ -49,7 +49,11 @@ namespace FrbaCrucero.AbmRecorrido
             }
             else if (e.ColumnIndex == tramosTable.Columns["borrarColumn"].Index) 
             {
-                tramosTable.Rows.RemoveAt(e.RowIndex);
+                if(tramosTable.Rows.Count -2 >0)
+                    tramosTable.Rows.RemoveAt(e.RowIndex);
+                else
+                    MessageBox.Show("Recorrido sin tramos", "ERROR",
+               MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -133,8 +137,10 @@ namespace FrbaCrucero.AbmRecorrido
                     }
 
                 }
-                recorridoDao.modificarRecorrido(Convert.ToDecimal(codigoText.Text), dt); 
-                
+                recorridoDao.modificarRecorrido(Convert.ToDecimal(codigoText.Text), dt);
+                MessageBox.Show("Recorrido modificado con éxito", "Operación exitosa",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
             }
             catch (Exception ex)
             {
