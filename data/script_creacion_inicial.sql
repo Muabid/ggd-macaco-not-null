@@ -1049,6 +1049,31 @@ END
 
 GO
 
+CREATE PROCEDURE MACACO_NOT_NULL.CabinasDisponiblesViaje
+@cantidad int,
+@categoria nvarchar(255),
+@viaje_id int
+AS
+BEGIN
+	DECLARE @tablaCabinasLibre TABLE(cabina_numero int,cabina_piso int)
+	INSERT INTO @tablaCabinasLibre(cabina_numero,cabina_piso)
+		SELECT TOP (@cantidad) cabi_nro, cabi_piso 	
+		FROM MACACO_NOT_NULL.CABINA 
+		INNER JOIN MACACO_NOT_NULL.TIPO_SERVICIO ON tipo_servicio_id = cabi_tipo_servicio_id
+		where tipo_servicio_descripcion = @categoria
+		and cabi_id NOT IN (SELECT pasa_cab_id from MACACO_NOT_NULL.PASAJE where pasa_viaje_id = @viaje_id)
+	IF((SELECT COUNT(cabina_numero) FROM @tablaCabinasLibre) < @cantidad)
+	BEGIN
+		RAISERROR('ERROR: Cantidad insuficientes de cabinas libres',16,1)	
+	END
+	ELSE
+	BEGIN
+		SELECT cabina_numero,cabina_piso FROM @tablaCabinasLibre
+	END
+END
+
+GO
+
 ----------- GENERACION RESERVA ------------
 CREATE PROCEDURE [MACACO_NOT_NULL].GenerarReserva
 @nombre_usuario  NVARCHAR(255),
