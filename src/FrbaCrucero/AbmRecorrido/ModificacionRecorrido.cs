@@ -18,6 +18,7 @@ namespace FrbaCrucero.AbmRecorrido
         private RecorridoDAO recorridoDao = new RecorridoDAO();
         private PuertoDAO puertoDao = new PuertoDAO();
         private ListadoModificacionRecorrido listadoRecorridos;
+
         public ModificacionRecorrido(ListadoModificacionRecorrido _listadoRecorridos)
         {
             InitializeComponent();
@@ -98,7 +99,8 @@ namespace FrbaCrucero.AbmRecorrido
 
         private void cancelarButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Decimal codigoRecorrido = Convert.ToDecimal(codigoText.Text);
+            tramosTable.DataSource = recorridoDao.getTramos(codigoRecorrido);
         }
 
         private void guardarButton_Click(object sender, EventArgs e)
