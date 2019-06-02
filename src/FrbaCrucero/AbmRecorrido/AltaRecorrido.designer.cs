@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tramosTable = new System.Windows.Forms.DataGridView();
             this.ciudadOrigen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ciudadDestino = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,7 +39,11 @@
             this.addTramoButton = new System.Windows.Forms.Button();
             this.clean = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
+            this.codigoError = new System.Windows.Forms.ErrorProvider(this.components);
+            this.tramosError = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tramosTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.codigoError)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tramosError)).BeginInit();
             this.SuspendLayout();
             // 
             // tramosTable
@@ -54,6 +59,7 @@
             this.tramosTable.Size = new System.Drawing.Size(348, 159);
             this.tramosTable.TabIndex = 0;
             this.tramosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.tramosTable.Validating += new System.ComponentModel.CancelEventHandler(this.tramosTable_Validating);
             // 
             // ciudadOrigen
             // 
@@ -74,9 +80,9 @@
             // precio
             // 
             this.precio.DataPropertyName = "precio";
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = "0";
-            this.precio.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = "0";
+            this.precio.DefaultCellStyle = dataGridViewCellStyle5;
             this.precio.HeaderText = "Precio";
             this.precio.Name = "precio";
             this.precio.ReadOnly = true;
@@ -88,6 +94,8 @@
             this.codigo.Name = "codigo";
             this.codigo.Size = new System.Drawing.Size(100, 20);
             this.codigo.TabIndex = 1;
+            this.codigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.codigo_KeyPress);
+            this.codigo.Validating += new System.ComponentModel.CancelEventHandler(this.codigo_Validating);
             // 
             // label1
             // 
@@ -129,10 +137,19 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
+            // codigoError
+            // 
+            this.codigoError.ContainerControl = this;
+            // 
+            // tramosError
+            // 
+            this.tramosError.ContainerControl = this;
+            // 
             // AltaRecorrido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.ClientSize = new System.Drawing.Size(521, 384);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.clean);
@@ -143,6 +160,8 @@
             this.Name = "AltaRecorrido";
             this.Text = "Alta recorrido";
             ((System.ComponentModel.ISupportInitialize)(this.tramosTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.codigoError)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tramosError)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,5 +178,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ciudadOrigen;
         private System.Windows.Forms.DataGridViewTextBoxColumn ciudadDestino;
         private System.Windows.Forms.DataGridViewTextBoxColumn precio;
+        private System.Windows.Forms.ErrorProvider codigoError;
+        private System.Windows.Forms.ErrorProvider tramosError;
     }
 }
