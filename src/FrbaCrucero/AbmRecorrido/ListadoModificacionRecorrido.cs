@@ -44,7 +44,6 @@ namespace FrbaCrucero.AbmRecorrido
             String codigo = codigoBox.Text;
             String origen = (String)origenCombo.SelectedItem;
             String destino = (String)destinoCombo.SelectedItem;
-            Console.WriteLine(destino);
 
             recorridosTable.DataSource = recorridoDao.getRecorridos(codigo, origen, destino);
             
@@ -64,6 +63,12 @@ namespace FrbaCrucero.AbmRecorrido
             {
                 new ModificacionRecorrido(this).show(codRecorrido, precio);
             }
+        }
+
+        public override void Refresh()
+        {
+            base.Refresh();
+            this.buscarButton_Click(null, null);
         }
     }
 }

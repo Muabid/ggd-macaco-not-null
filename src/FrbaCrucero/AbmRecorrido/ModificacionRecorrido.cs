@@ -140,6 +140,7 @@ namespace FrbaCrucero.AbmRecorrido
                 recorridoDao.modificarRecorrido(Convert.ToDecimal(codigoText.Text), dt);
                 MessageBox.Show("Recorrido modificado con éxito", "Operación exitosa",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+                listadoRecorridos.Refresh();
                 this.Close();
             }
             catch (Exception ex)
