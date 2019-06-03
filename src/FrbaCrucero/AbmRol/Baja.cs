@@ -91,11 +91,11 @@ namespace FrbaCrucero.AbmRol
             Boolean str = this.prueba();
             if (str)
             {
-                SqlCommand procedure1 = Utils.Database.createCommand("MACACO_NOT_NULL.AltaRol");
+               /* SqlCommand procedure1 = Utils.Database.createCommand("MACACO_NOT_NULL.AltaRol");
                 procedure1.Parameters.Add("@nombre_rol", SqlDbType.VarChar).Value = textBox1.Text;
                 procedure1.Parameters.Add("@activo", SqlDbType.Bit).Value = str;
-                Utils.Database.execute(procedure1);
-                MessageBox.Show("guardo true");
+                Utils.Database.executeProcedure(procedure1);   */
+                MessageBox.Show("No cambio nada");
 
                 
             }
@@ -108,7 +108,7 @@ namespace FrbaCrucero.AbmRol
                 MessageBox.Show(resultado.ToString());
                 SqlCommand procedure3 = Utils.Database.createCommand("MACACO_NOT_NULL.BajaRol");
                 procedure3.Parameters.Add("@rol_id", SqlDbType.Int).Value = resultado;
-                Utils.Database.execute(procedure3);
+                Utils.Database.executeProcedure(procedure3);
                 MessageBox.Show("guardo falso");
 
             } 
