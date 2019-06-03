@@ -105,11 +105,11 @@ namespace FrbaCrucero.AbmRol
 
                 SqlCommand procedure2 = Utils.Database.createCommand(query + "'" + textBox1.Text + "';");
                 int resultado = Utils.Database.executeScalar(procedure2);
-                MessageBox.Show(resultado.ToString());
+                
                 SqlCommand procedure3 = Utils.Database.createCommand("MACACO_NOT_NULL.BajaRol");
                 procedure3.Parameters.Add("@rol_id", SqlDbType.Int).Value = resultado;
                 Utils.Database.executeProcedure(procedure3);
-                MessageBox.Show("guardo falso");
+                MessageBox.Show("Baja realizada");
 
             } 
 

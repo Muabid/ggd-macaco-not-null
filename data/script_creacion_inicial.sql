@@ -670,7 +670,7 @@ CREATE PROCEDURE [MACACO_NOT_NULL].AltaRol
 @nombre_rol NVARCHAR(255),
 @activo BIT
 AS
-	BEGIN
+BEGIN
 	IF(NOT EXISTS(SELECT rol_nombre FROM [MACACO_NOT_NULL].ROL WHERE rol_nombre = @nombre_rol))
 		BEGIN
 				INSERT INTO [MACACO_NOT_NULL].ROL(rol_nombre,rol_activo)	
@@ -678,12 +678,44 @@ AS
 		END
 	ELSE
 		BEGIN
-			RAISERROR('ERROR: El rol ingresado ya existe',16,1)
+		DECLARE @rol_id int
+		SET @rol_id = (SELECT rol_id FROM [MACACO_NOT_NULL].ROL WHERE rol_nombre = @nombre_rol)
+			IF ( EXISTS(SELECT rol_activo FROM [MACACO_NOT_NULL].ROL WHERE rol_nombre = @nombre_rol) )
+				BEGIN
+				BEGIN TRANSACTION
+					UPDATE [MACACO_NOT_NULL].ROL SET rol_activo = 1	WHERE rol_id = @rol_id
+		
+					UPDATE [MACACO_NOT_NULL].USUARIO SET usua_rol_id = @rol_id	WHERE usua_rol_id = @rol_id
+				COMMIT TRANSACTION
+				END
+			ELSE
+			BEGIN
+				RAISERROR('ERROR: El rol ingresado ya existe',16,1)
+			END
 		END
 END
-GO
+GO;
 
 
+
+-----BuscarRol
+
+CREATE PROCEDURE [MACACO_NOT_NULL].AltaRol
+@nombre_rol NVARCHAR(255),
+@activo BIT,
+@nombre_funcionalidad NVARCHAR(255),
+AS
+BEGIN
+
+	
+	SELECT rol_id,rol_nombre,rol_activo FROM [MACACO_NOT_NULL].[ROL]
+    WHERE rol_nombre  IS NULL OR  rol_nombre LIKE CONCAT('%',@nombre_rol,'%') AND
+	rol_activo IS NULL OR rol_activo = @activo
+
+
+
+END
+GO;
 ---------------BAJA---------------
 CREATE PROCEDURE [MACACO_NOT_NULL].BajaRol
 @rol_id int

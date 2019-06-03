@@ -28,62 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.columnRol_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnRol_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnFunction = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.columnActive = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.columnSelection = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ModificacionTable = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Rol = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.Activo = new System.Windows.Forms.CheckBox();
+            this.Funcionalidad = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.columnRol_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnRol_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnSelection = new System.Windows.Forms.DataGridViewButtonColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.ModificacionTable)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // ModificacionTable
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ModificacionTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ModificacionTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnRol_Id,
             this.columnRol_Name,
-            this.columnFunction,
-            this.columnActive,
             this.columnSelection});
-            this.dataGridView1.Location = new System.Drawing.Point(37, 120);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(555, 176);
-            this.dataGridView1.TabIndex = 9;
-            // 
-            // columnRol_Id
-            // 
-            this.columnRol_Id.HeaderText = "Rol ID";
-            this.columnRol_Id.Name = "columnRol_Id";
-            this.columnRol_Id.ReadOnly = true;
-            // 
-            // columnRol_Name
-            // 
-            this.columnRol_Name.HeaderText = "Nombre del Rol";
-            this.columnRol_Name.Name = "columnRol_Name";
-            this.columnRol_Name.ReadOnly = true;
-            // 
-            // columnFunction
-            // 
-            this.columnFunction.HeaderText = "Funcionalidades";
-            this.columnFunction.Name = "columnFunction";
-            this.columnFunction.ReadOnly = true;
-            // 
-            // columnActive
-            // 
-            this.columnActive.HeaderText = "Esta Activo";
-            this.columnActive.Name = "columnActive";
-            this.columnActive.ReadOnly = true;
-            // 
-            // columnSelection
-            // 
-            this.columnSelection.HeaderText = "Seleccionar";
-            this.columnSelection.Name = "columnSelection";
-            this.columnSelection.ReadOnly = true;
+            this.ModificacionTable.Location = new System.Drawing.Point(37, 120);
+            this.ModificacionTable.Name = "ModificacionTable";
+            this.ModificacionTable.Size = new System.Drawing.Size(555, 176);
+            this.ModificacionTable.TabIndex = 9;
+            this.ModificacionTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // button2
             // 
@@ -104,12 +74,13 @@
             this.button1.Text = "Limpiar";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // Rol
             // 
-            this.textBox1.Location = new System.Drawing.Point(202, 39);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 6;
+            this.Rol.Location = new System.Drawing.Point(202, 39);
+            this.Rol.Name = "Rol";
+            this.Rol.Size = new System.Drawing.Size(100, 20);
+            this.Rol.TabIndex = 6;
+            this.Rol.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -121,19 +92,71 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Nombre del Rol:";
             // 
+            // Activo
+            // 
+            this.Activo.AutoSize = true;
+            this.Activo.Location = new System.Drawing.Point(350, 42);
+            this.Activo.Name = "Activo";
+            this.Activo.Size = new System.Drawing.Size(56, 17);
+            this.Activo.TabIndex = 10;
+            this.Activo.Text = "Activo";
+            this.Activo.UseVisualStyleBackColor = true;
+            this.Activo.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // Funcionalidad
+            // 
+            this.Funcionalidad.Location = new System.Drawing.Point(668, 44);
+            this.Funcionalidad.Name = "Funcionalidad";
+            this.Funcionalidad.Size = new System.Drawing.Size(100, 20);
+            this.Funcionalidad.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(422, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(240, 24);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Nombre del Funcionalidad:";
+            // 
+            // columnRol_Id
+            // 
+            this.columnRol_Id.DataPropertyName = "rol_id";
+            this.columnRol_Id.HeaderText = "Rol ID";
+            this.columnRol_Id.Name = "columnRol_Id";
+            this.columnRol_Id.ReadOnly = true;
+            // 
+            // columnRol_Name
+            // 
+            this.columnRol_Name.DataPropertyName = "rol_nombre";
+            this.columnRol_Name.HeaderText = "Nombre del Rol";
+            this.columnRol_Name.Name = "columnRol_Name";
+            this.columnRol_Name.ReadOnly = true;
+            // 
+            // columnSelection
+            // 
+            this.columnSelection.HeaderText = "Seleccionar";
+            this.columnSelection.Name = "columnSelection";
+            this.columnSelection.ReadOnly = true;
+            // 
             // Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(725, 338);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(786, 338);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.Funcionalidad);
+            this.Controls.Add(this.Activo);
+            this.Controls.Add(this.ModificacionTable);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.Rol);
             this.Controls.Add(this.label1);
             this.Name = "Modificacion";
             this.Text = "Modificacion";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.Modificacion_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.ModificacionTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -141,15 +164,16 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnRol_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnRol_Name;
-        private System.Windows.Forms.DataGridViewComboBoxColumn columnFunction;
-        private System.Windows.Forms.DataGridViewComboBoxColumn columnActive;
-        private System.Windows.Forms.DataGridViewButtonColumn columnSelection;
+        private System.Windows.Forms.DataGridView ModificacionTable;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox Rol;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox Activo;
+        private System.Windows.Forms.TextBox Funcionalidad;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnRol_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnRol_Name;
+        private System.Windows.Forms.DataGridViewButtonColumn columnSelection;
     }
 }

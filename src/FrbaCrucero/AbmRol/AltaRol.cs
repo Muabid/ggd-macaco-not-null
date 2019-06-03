@@ -46,7 +46,7 @@ namespace FrbaCrucero.AbmRol
             procedure2.Parameters.Add("@rol_id", SqlDbType.Int).Value = id;
             Utils.Database.executeProcedure(procedure2);
            // connection.Close();
-           
+            MessageBox.Show("Alta realizada");
             
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

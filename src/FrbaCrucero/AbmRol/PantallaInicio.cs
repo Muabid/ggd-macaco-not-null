@@ -48,7 +48,7 @@ namespace FrbaCrucero.AbmRol
 
         private void button3_Click(object sender, EventArgs e)
         {
-            FormularioModificacion frm2 = new FormularioModificacion();
+            Modificacion frm2 = new Modificacion();
 
             frm2.Show();
         }

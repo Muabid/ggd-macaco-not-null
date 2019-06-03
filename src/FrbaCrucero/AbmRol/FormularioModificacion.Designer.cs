@@ -34,11 +34,16 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Funcionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Borrar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.BotonAgregar = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(173, 165);
+            this.button2.Location = new System.Drawing.Point(218, 336);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 11;
@@ -47,12 +52,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(30, 165);
+            this.button1.Location = new System.Drawing.Point(43, 336);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // comboBox1
             // 
@@ -87,11 +93,51 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Nombre";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Funcionalidad,
+            this.Borrar});
+            this.dataGridView1.Location = new System.Drawing.Point(27, 106);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(414, 198);
+            this.dataGridView1.TabIndex = 12;
+            // 
+            // Funcionalidad
+            // 
+            this.Funcionalidad.DataPropertyName = "func_detalle";
+            this.Funcionalidad.HeaderText = "Funcionalidad";
+            this.Funcionalidad.Name = "Funcionalidad";
+            this.Funcionalidad.ReadOnly = true;
+            // 
+            // Borrar
+            // 
+            this.Borrar.HeaderText = "";
+            this.Borrar.Name = "Borrar";
+            this.Borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Borrar.Text = "Borrar";
+            this.Borrar.UseColumnTextForButtonValue = true;
+            // 
+            // BotonAgregar
+            // 
+            this.BotonAgregar.Location = new System.Drawing.Point(228, 65);
+            this.BotonAgregar.Name = "BotonAgregar";
+            this.BotonAgregar.Size = new System.Drawing.Size(75, 23);
+            this.BotonAgregar.TabIndex = 13;
+            this.BotonAgregar.Text = "Agregar";
+            this.BotonAgregar.UseVisualStyleBackColor = true;
+            this.BotonAgregar.Click += new System.EventHandler(this.button3_Click);
+            // 
             // FormularioModificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(372, 265);
+            this.ClientSize = new System.Drawing.Size(611, 386);
+            this.Controls.Add(this.BotonAgregar);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
@@ -100,6 +146,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FormularioModificacion";
             this.Text = "FormularioModificacion";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,5 +160,9 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Funcionalidad;
+        private System.Windows.Forms.DataGridViewButtonColumn Borrar;
+        private System.Windows.Forms.Button BotonAgregar;
     }
 }
