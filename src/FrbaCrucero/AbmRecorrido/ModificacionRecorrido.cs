@@ -58,18 +58,6 @@ namespace FrbaCrucero.AbmRecorrido
             }
         }
 
-        /*private DataTable getTramos(Decimal codigoRecorrido)
-        {
-           DataTable dt = recorridoDao.getTramos(codigoRecorrido);
-            foreach (DataGridViewRow row in tramosTable.Rows)
-            {
-                row.Cells[0].Value = puertoDao.getPuertoByName((String)row.Cells[0].Value);
-                row.Cells[1].Value = puertoDao.getPuertoByName((String)row.Cells[1].Value);
-                row.Cells["tramoId"].Value = row.Index;
-            }
-            return dt;
-        }*/
-
         public void updateTramos(Puerto p1, Puerto p2, decimal p3, int? tramoIndex)
         {
             if (tramoIndex != null)

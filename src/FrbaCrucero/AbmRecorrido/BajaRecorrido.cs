@@ -59,7 +59,7 @@ namespace FrbaCrucero.AbmRecorrido
             {
                
                 Decimal precio = Convert.ToDecimal(recorridosTable["precioColumn", e.RowIndex].Value);
-                new TramosLista(this).show(codRecorrido, precio);                  
+                new RecorridoForm().show(codRecorrido, precio);                  
             }
             else if (e.ColumnIndex == recorridosTable.Columns["bajaColumn"].Index)
             {

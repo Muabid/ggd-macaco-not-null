@@ -44,6 +44,7 @@
             this.tipoErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.anioErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.semestreErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.limpiarButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).BeginInit();
@@ -54,6 +55,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.limpiarButton);
             this.panel1.Controls.Add(this.buscarButton);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.semestre);
@@ -156,11 +158,13 @@
             // 
             // gridResultados
             // 
+            this.gridResultados.AllowUserToAddRows = false;
             this.gridResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridResultados.Location = new System.Drawing.Point(0, 19);
             this.gridResultados.Name = "gridResultados";
             this.gridResultados.Size = new System.Drawing.Size(508, 185);
             this.gridResultados.TabIndex = 0;
+            this.gridResultados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridResultados_CellContentClick);
             // 
             // volverButton
             // 
@@ -184,6 +188,16 @@
             // 
             this.semestreErrorProvider.ContainerControl = this;
             // 
+            // limpiarButton
+            // 
+            this.limpiarButton.Location = new System.Drawing.Point(48, 112);
+            this.limpiarButton.Name = "limpiarButton";
+            this.limpiarButton.Size = new System.Drawing.Size(75, 23);
+            this.limpiarButton.TabIndex = 8;
+            this.limpiarButton.Text = "Limpiar";
+            this.limpiarButton.UseVisualStyleBackColor = true;
+            this.limpiarButton.Click += new System.EventHandler(this.limpiarButton_Click);
+            // 
             // ListadoEstadisticoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,7 +208,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.Name = "ListadoEstadisticoForm";
-            this.Text = "Form1";
+            this.Text = "Listado estadístico";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -223,5 +237,6 @@
         private System.Windows.Forms.ErrorProvider tipoErrorProvider;
         private System.Windows.Forms.ErrorProvider anioErrorProvider;
         private System.Windows.Forms.ErrorProvider semestreErrorProvider;
+        private System.Windows.Forms.Button limpiarButton;
     }
 }

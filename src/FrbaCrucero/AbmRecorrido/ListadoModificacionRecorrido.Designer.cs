@@ -47,6 +47,8 @@
             // 
             // recorridosTable
             // 
+            this.recorridosTable.AllowUserToAddRows = false;
+            this.recorridosTable.AllowUserToDeleteRows = false;
             this.recorridosTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.recorridosTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codigoColumn,
