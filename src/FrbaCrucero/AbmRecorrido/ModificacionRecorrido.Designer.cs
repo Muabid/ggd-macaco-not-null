@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.codigoText = new System.Windows.Forms.TextBox();
             this.precioText = new System.Windows.Forms.TextBox();
@@ -82,6 +82,7 @@
             // 
             // tramosTable
             // 
+            this.tramosTable.AllowUserToAddRows = false;
             this.tramosTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tramosTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.origenColumn,
@@ -116,9 +117,9 @@
             // precioColumn
             // 
             this.precioColumn.DataPropertyName = "precio";
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.precioColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.precioColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.precioColumn.HeaderText = "Precio";
             this.precioColumn.Name = "precioColumn";
             this.precioColumn.ReadOnly = true;

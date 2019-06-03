@@ -37,7 +37,7 @@ namespace FrbaCrucero.AbmRecorrido
 
         private void tramosTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.RowIndex >= tramosTable.Rows.Count-1)
+            if (e.RowIndex < 0)
             {
                 return;
             }
@@ -50,7 +50,7 @@ namespace FrbaCrucero.AbmRecorrido
             }
             else if (e.ColumnIndex == tramosTable.Columns["borrarColumn"].Index) 
             {
-                if(tramosTable.Rows.Count -2 >0)
+                if(tramosTable.Rows.Count -1 >0)
                     tramosTable.Rows.RemoveAt(e.RowIndex);
                 else
                     MessageBox.Show("Recorrido sin tramos", "ERROR",
@@ -110,8 +110,7 @@ namespace FrbaCrucero.AbmRecorrido
 
                 foreach (DataGridViewRow row in tramosTable.Rows)
                 {
-                    if (row.Index < tramosTable.Rows.Count -1)
-                    {
+                   
                         Puerto origen = puertoDao.getPuertoByName((String)row.Cells["origenColumn"].Value);
                         Puerto destino = puertoDao.getPuertoByName((String)row.Cells["destinoColumn"].Value);
                         Decimal precio = decimal.Parse(row.Cells["precioColumn"].Value.ToString());
@@ -123,8 +122,6 @@ namespace FrbaCrucero.AbmRecorrido
                         dRow[3] = row.Index;
                         dRow[4] = row.Cells["tramoId"].Value;
                         dt.Rows.Add(dRow);
-
-                    }
 
                 }
                 recorridoDao.modificarRecorrido(Convert.ToDecimal(codigoText.Text), dt);
