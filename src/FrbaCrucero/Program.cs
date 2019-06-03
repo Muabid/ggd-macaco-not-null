@@ -21,7 +21,15 @@ namespace FrbaCrucero
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new BajaRecorrido());
            // Application.Run(new AltaRecorrido());
-            Application.Run(new ListadoEstadisticoForm());
+            Application.Run(new AbmCrucero.FormAlta());
+
+
+
+
+
+
+
+
 
         }
     }
