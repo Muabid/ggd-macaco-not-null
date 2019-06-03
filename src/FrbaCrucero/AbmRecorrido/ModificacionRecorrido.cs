@@ -141,7 +141,7 @@ namespace FrbaCrucero.AbmRecorrido
 
         private void validateTramos()
         {
-            for (int i = 0; i < tramosTable.Rows.Count - 2; i++)
+            for (int i = 0; i < tramosTable.Rows.Count - 1; i++)
             {
                 DataGridViewRow row1 = tramosTable.Rows[i];
                 DataGridViewRow row2 = tramosTable.Rows[i+1];

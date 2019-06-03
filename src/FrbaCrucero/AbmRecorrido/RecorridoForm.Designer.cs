@@ -42,6 +42,7 @@
             // 
             // tramosTable
             // 
+            this.tramosTable.AllowUserToAddRows = false;
             this.tramosTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tramosTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ciudadOrigen,
