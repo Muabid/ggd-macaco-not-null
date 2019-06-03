@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -36,6 +37,8 @@
             this.precioText = new System.Windows.Forms.TextBox();
             this.cancelarButton = new System.Windows.Forms.Button();
             this.guardarButton = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -67,19 +70,23 @@
             // 
             // destinoCombo
             // 
+            this.destinoCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.destinoCombo.FormattingEnabled = true;
             this.destinoCombo.Location = new System.Drawing.Point(151, 96);
             this.destinoCombo.Name = "destinoCombo";
             this.destinoCombo.Size = new System.Drawing.Size(121, 21);
             this.destinoCombo.TabIndex = 3;
+            this.destinoCombo.Validating += new System.ComponentModel.CancelEventHandler(this.destinoCombo_Validating);
             // 
             // origenCombo
             // 
+            this.origenCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.origenCombo.FormattingEnabled = true;
             this.origenCombo.Location = new System.Drawing.Point(151, 47);
             this.origenCombo.Name = "origenCombo";
             this.origenCombo.Size = new System.Drawing.Size(121, 21);
             this.origenCombo.TabIndex = 4;
+            this.origenCombo.Validating += new System.ComponentModel.CancelEventHandler(this.origenCombo_Validating);
             // 
             // precioText
             // 
@@ -88,6 +95,7 @@
             this.precioText.Size = new System.Drawing.Size(100, 20);
             this.precioText.TabIndex = 5;
             this.precioText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioText_KeyPress);
+            this.precioText.Validating += new System.ComponentModel.CancelEventHandler(this.precioText_Validating);
             // 
             // cancelarButton
             // 
@@ -108,10 +116,15 @@
             this.guardarButton.UseVisualStyleBackColor = true;
             this.guardarButton.Click += new System.EventHandler(this.guardarButton_Click);
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // ModificarTramo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.guardarButton);
             this.Controls.Add(this.cancelarButton);
@@ -123,6 +136,7 @@
             this.Controls.Add(this.label1);
             this.Name = "ModificarTramo";
             this.Text = "ModificarTramo";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,5 +152,6 @@
         private System.Windows.Forms.TextBox precioText;
         private System.Windows.Forms.Button cancelarButton;
         private System.Windows.Forms.Button guardarButton;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

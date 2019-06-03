@@ -46,9 +46,13 @@ namespace FrbaCrucero.AbmRecorrido
 
         private void guardarButton_Click(object sender, EventArgs e)
         {
-            modificarRecorrido.updateTramos((Puerto)origenCombo.SelectedItem,
-                (Puerto)destinoCombo.SelectedItem,Convert.ToDecimal(precioText.Text), rowIndex);
-            this.Close();
+            if (ValidateChildren())
+            {
+                modificarRecorrido.updateTramos((Puerto)origenCombo.SelectedItem,
+              (Puerto)destinoCombo.SelectedItem, Convert.ToDecimal(precioText.Text), rowIndex);
+                this.Close();
+            }
+          
         }
 
         private void precioText_KeyPress(object sender, KeyPressEventArgs e)
@@ -61,6 +65,48 @@ namespace FrbaCrucero.AbmRecorrido
             if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void precioText_Validating(object sender, CancelEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(precioText.Text))
+            {
+                e.Cancel = false;
+                errorProvider.SetError(this.precioText, String.Empty);
+            }
+            else
+            {
+                e.Cancel = true;
+                errorProvider.SetError(this.precioText, "Ingrese un precio");
+            }
+        }
+
+        private void origenCombo_Validating(object sender, CancelEventArgs e)
+        {
+            if (origenCombo.SelectedItem != null)
+            {
+                e.Cancel = false;
+                errorProvider.SetError(this.origenCombo, String.Empty);
+            }
+            else
+            {
+                e.Cancel = true;
+                errorProvider.SetError(this.origenCombo, "Ingrese un origen");
+            }
+        }
+
+        private void destinoCombo_Validating(object sender, CancelEventArgs e)
+        {
+            if (destinoCombo.SelectedItem != null)
+            {
+                e.Cancel = false;
+                errorProvider.SetError(this.destinoCombo, String.Empty);
+            }
+            else
+            {
+                e.Cancel = true;
+                errorProvider.SetError(this.destinoCombo, "Ingrese un destino");
             }
         }
 

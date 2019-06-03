@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.origenComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,12 +37,15 @@
             this.precioField = new System.Windows.Forms.TextBox();
             this.limpiarButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // origenComboBox
             // 
             this.origenComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.origenComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.origenComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.origenComboBox.FormattingEnabled = true;
             this.origenComboBox.Location = new System.Drawing.Point(128, 32);
             this.origenComboBox.Name = "origenComboBox";
@@ -49,6 +53,7 @@
             this.origenComboBox.TabIndex = 0;
             this.origenComboBox.SelectedIndexChanged += new System.EventHandler(this.fromComboBox_SelectedIndexChanged);
             this.origenComboBox.TextUpdate += new System.EventHandler(this.origen_TextUpdate);
+            this.origenComboBox.Validating += new System.ComponentModel.CancelEventHandler(this.origenComboBox_Validating);
             // 
             // label1
             // 
@@ -72,11 +77,13 @@
             // 
             this.destinoComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.destinoComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.destinoComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.destinoComboBox.FormattingEnabled = true;
             this.destinoComboBox.Location = new System.Drawing.Point(128, 72);
             this.destinoComboBox.Name = "destinoComboBox";
             this.destinoComboBox.Size = new System.Drawing.Size(121, 21);
             this.destinoComboBox.TabIndex = 3;
+            this.destinoComboBox.Validating += new System.ComponentModel.CancelEventHandler(this.destinoComboBox_Validating);
             // 
             // label3
             // 
@@ -95,6 +102,7 @@
             this.precioField.TabIndex = 5;
             this.precioField.TextChanged += new System.EventHandler(this.precioField_TextChanged);
             this.precioField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioField_KeyPress);
+            this.precioField.Validating += new System.ComponentModel.CancelEventHandler(this.precioField_Validating);
             // 
             // limpiarButton
             // 
@@ -116,10 +124,15 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.onGuardar);
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // AltaTramo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.ClientSize = new System.Drawing.Size(284, 211);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.limpiarButton);
@@ -132,6 +145,7 @@
             this.Name = "AltaTramo";
             this.Text = "Tramo";
             this.Load += new System.EventHandler(this.label1_Click);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -147,5 +161,6 @@
         private System.Windows.Forms.TextBox precioField;
         private System.Windows.Forms.Button limpiarButton;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

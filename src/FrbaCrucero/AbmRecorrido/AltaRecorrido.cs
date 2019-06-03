@@ -43,7 +43,7 @@ namespace FrbaCrucero.AbmRecorrido
 
         public Puerto getProximoOrigenPuerto()
         {
-            int index = tramosTable.Rows.Count-2;
+            int index = tramosTable.Rows.Count-1;
             if (index < 0)
                 return null;
             else
@@ -52,43 +52,49 @@ namespace FrbaCrucero.AbmRecorrido
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            
-            if(ValidateChildren(ValidationConstraints.Enabled))
+            try
             {
-                DataTable dt = new DataTable();
-                dt.Columns.Add("ciudadOrigen");
-                dt.Columns.Add("ciudadDestino");
-                DataColumn column;
-                column = new DataColumn();
-                column.DataType = System.Type.GetType("System.Decimal");
-                column.ColumnName = "precio";
-                dt.Columns.Add(column);
-                dt.Columns.Add("indice");
-                dt.Columns.Add("tramoId");
-                foreach (DataGridViewRow row in tramosTable.Rows)
+                if (ValidateChildren(ValidationConstraints.Enabled))
                 {
-                    Puerto origen = (Puerto)row.Cells[0].Value;
-                    Puerto destino = (Puerto)row.Cells[1].Value;
-                    DataRow dRow = dt.NewRow();
-                    if (origen != null && destino != null)
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("ciudadOrigen");
+                    dt.Columns.Add("ciudadDestino");
+                    DataColumn column;
+                    column = new DataColumn();
+                    column.DataType = System.Type.GetType("System.Decimal");
+                    column.ColumnName = "precio";
+                    dt.Columns.Add(column);
+                    dt.Columns.Add("indice");
+                    dt.Columns.Add("tramoId");
+                    foreach (DataGridViewRow row in tramosTable.Rows)
                     {
-                        Decimal precio = decimal.Parse(row.Cells[2].Value.ToString());
-                        dRow[0] = origen.id;
-                        dRow[1] = destino.id;
-                        dRow[2] = precio;
-                        dRow[3] = row.Index;
-                        dt.Rows.Add(dRow);
-                    
+                        Puerto origen = (Puerto)row.Cells[0].Value;
+                        Puerto destino = (Puerto)row.Cells[1].Value;
+                        DataRow dRow = dt.NewRow();
+                        if (origen != null && destino != null)
+                        {
+                            Decimal precio = decimal.Parse(row.Cells[2].Value.ToString());
+                            dRow[0] = origen.id;
+                            dRow[1] = destino.id;
+                            dRow[2] = precio;
+                            dRow[3] = row.Index;
+                            dt.Rows.Add(dRow);
+
+                        }
+
                     }
-                
-                }
-                recorridosDao.insertRecorrido(Convert.ToDecimal(codigo.Text), dt);
-
-                MessageBox.Show("Se dio de alta el recorrido: " + codigo.Text, "Operacion exitosa",
+                    recorridosDao.insertRecorrido(Convert.ToDecimal(codigo.Text), dt);
+                    MessageBox.Show("Recorrido: "+codigo.Text + " dado de alta.", "Operación exitosa",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    limpiar_Click(null, null);
                 }
-
-           
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "ERROR",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        
         }
 
         private void limpiar_Click(object sender, EventArgs e)
@@ -134,7 +140,7 @@ namespace FrbaCrucero.AbmRecorrido
 
         private bool validateTramos()
         {
-            return tramosTable.Rows.Count > 1;
+            return tramosTable.Rows.Count >= 1;
         }
 
         private void codigo_KeyPress(object sender, KeyPressEventArgs e)

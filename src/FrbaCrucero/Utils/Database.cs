@@ -35,12 +35,11 @@ namespace FrbaCrucero.Utils
             {
                 res = command.ExecuteNonQuery();
             }
-            catch (Exception exception)
+            finally
             {
-                MessageBox.Show(exception.Message, "ERROR",
-                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+                connection.Close();
             }
-            connection.Close();
+
             return res;
         }
 
@@ -112,8 +111,24 @@ namespace FrbaCrucero.Utils
             query.CommandType = CommandType.StoredProcedure;
             return getData(query);
         }
-        
 
+        public static decimal executeScalarDecimal(SqlCommand command)
+        {
+
+            connection.Open();
+            decimal res = 0;
+            try
+            {
+                res = (decimal)command.ExecuteScalar();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "ERROR",
+                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            connection.Close();
+            return res;
+        }
 
 
     }

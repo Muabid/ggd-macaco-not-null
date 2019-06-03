@@ -1,4 +1,5 @@
-﻿using FrbaCrucero.Utils;
+﻿using FrbaCrucero.AbmRecorrido;
+using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,13 +53,16 @@ namespace FrbaCrucero.ListadoEstadistico
 
         private void buscarButton_Click(object sender, EventArgs e)
         {
+
+            gridResultados.Columns.Clear();
             if (checkearFiltros())
             {
+                
                 //TODO separar en clases
                 switch (tipoListado.SelectedItem.ToString())
                 {
                     case "Recorridos con más pasajes comprados":
-                        gridResultados.DataSource = recorridosMasVendidos(anio.Text,semestre.SelectedItem.ToString());
+                        gridResultados.DataSource = recorridosMasVendidos(anio.Text,semestre.SelectedItem.ToString());                        
                         break;
                     case "Recorridos con más cabinas libres en sus viajes":
                         gridResultados.DataSource = recorridosConMasCabinasLibresEnSusViajes(anio.Text, semestre.SelectedItem.ToString());
@@ -67,6 +71,17 @@ namespace FrbaCrucero.ListadoEstadistico
                         gridResultados.DataSource = crucerosConMasReparaciones(anio.Text, semestre.SelectedItem.ToString());
                         break;
                 }
+
+                gridResultados.Columns.Add(new DataGridViewButtonColumn()
+                {
+                    Name ="Ver",
+                    Text = "Ver",
+                    UseColumnTextForButtonValue = true
+                });
+
+                if(gridResultados.Rows.Count == 0)
+                    MessageBox.Show("No se han encontrado datos.", "",
+                        System.Windows.Forms.MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -147,13 +162,6 @@ namespace FrbaCrucero.ListadoEstadistico
 
         private bool checkearFiltros()
         {
-            //if (semestre.SelectedItem == null)
-            //{
-            //    return true;
-            //}
-            //return (semestre.SelectedItem.ToString() != "1" && semestre.SelectedItem.ToString() != "2") || tipoListado.SelectedItem == null
-            //    || anio.Text == null || semestre.SelectedItem.ToString() == null ;
-            //    //throw new NotImplementedException();
            return this.ValidateChildren(ValidationConstraints.Enabled);
         }
 
@@ -202,6 +210,43 @@ namespace FrbaCrucero.ListadoEstadistico
                 e.Cancel = true;
                 tipoErrorProvider.SetError(this.tipoListado, "Debe ingresar la categoría");
             }
+        }
+
+        private void limpiarButton_Click(object sender, EventArgs e)
+        {
+            this.gridResultados.DataSource = new DataTable();
+            this.anio.Clear();
+            this.semestre.SelectedIndex = -1;
+            this.tipoListado.SelectedIndex = -1;
+        }
+
+        private void gridResultados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= gridResultados.Rows.Count -1)
+            {
+                return;
+            }
+           
+            if (e.ColumnIndex == gridResultados.Columns["Ver"].Index)
+            {
+
+                switch (tipoListado.SelectedItem.ToString())
+                {
+                    case "Recorridos con más pasajes comprados":
+                        Decimal codRecorrido = Convert.ToDecimal(gridResultados[1, e.RowIndex].Value);
+                        Decimal precio = new RecorridoDAO().precioRecorrido(codRecorrido);
+                        new RecorridoForm().show(codRecorrido, precio);
+                        break;
+                    case "Recorridos con más cabinas libres en sus viajes":
+                        gridResultados.DataSource = recorridosConMasCabinasLibresEnSusViajes(anio.Text, semestre.SelectedItem.ToString());
+                        break;
+                    case "Cruceros con mayor cantidad de días fuera de servicio":
+                        gridResultados.DataSource = crucerosConMasReparaciones(anio.Text, semestre.SelectedItem.ToString());
+                        break;
+                }
+               
+            }
+
         }
 
 

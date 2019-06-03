@@ -55,7 +55,7 @@ namespace FrbaCrucero.AbmRecorrido
 
         private void recorridosTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.RowIndex >= recorridosTable.Rows.Count-1)
+            if (e.RowIndex < 0)
             {
                 return;
             }
