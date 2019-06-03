@@ -1,6 +1,6 @@
 ﻿namespace FrbaCrucero.AbmRecorrido
 {
-    partial class TramosLista
+    partial class RecorridoForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,29 +29,65 @@
         private void InitializeComponent()
         {
             this.tramosTable = new System.Windows.Forms.DataGridView();
-            this.codigo = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.precioBox = new System.Windows.Forms.TextBox();
-            this.codigoBox = new System.Windows.Forms.TextBox();
             this.ciudadOrigen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ciudadDestino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tramoId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigo = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.precioBox = new System.Windows.Forms.TextBox();
+            this.codigoBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.tramosTable)).BeginInit();
             this.SuspendLayout();
             // 
             // tramosTable
             // 
+            this.tramosTable.AllowUserToAddRows = false;
             this.tramosTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tramosTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ciudadOrigen,
             this.ciudadDestino,
             this.precio,
             this.tramoId});
+            this.tramosTable.Cursor = System.Windows.Forms.Cursors.Default;
             this.tramosTable.Location = new System.Drawing.Point(54, 129);
             this.tramosTable.Name = "tramosTable";
+            this.tramosTable.ReadOnly = true;
             this.tramosTable.Size = new System.Drawing.Size(345, 134);
             this.tramosTable.TabIndex = 1;
+            // 
+            // ciudadOrigen
+            // 
+            this.ciudadOrigen.DataPropertyName = "desde";
+            this.ciudadOrigen.HeaderText = "Ciudad origen";
+            this.ciudadOrigen.Name = "ciudadOrigen";
+            this.ciudadOrigen.ReadOnly = true;
+            this.ciudadOrigen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ciudadDestino
+            // 
+            this.ciudadDestino.DataPropertyName = "hasta";
+            this.ciudadDestino.HeaderText = "Ciudad destino";
+            this.ciudadDestino.Name = "ciudadDestino";
+            this.ciudadDestino.ReadOnly = true;
+            this.ciudadDestino.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // precio
+            // 
+            this.precio.DataPropertyName = "precio";
+            this.precio.HeaderText = "Precio";
+            this.precio.Name = "precio";
+            this.precio.ReadOnly = true;
+            this.precio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // tramoId
+            // 
+            this.tramoId.DataPropertyName = "tramoId";
+            this.tramoId.HeaderText = "ID";
+            this.tramoId.Name = "tramoId";
+            this.tramoId.ReadOnly = true;
+            this.tramoId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.tramoId.Visible = false;
             // 
             // codigo
             // 
@@ -89,32 +125,7 @@
             this.codigoBox.Size = new System.Drawing.Size(100, 20);
             this.codigoBox.TabIndex = 6;
             // 
-            // ciudadOrigen
-            // 
-            this.ciudadOrigen.DataPropertyName = "desde";
-            this.ciudadOrigen.HeaderText = "Ciudad origen";
-            this.ciudadOrigen.Name = "ciudadOrigen";
-            // 
-            // ciudadDestino
-            // 
-            this.ciudadDestino.DataPropertyName = "hasta";
-            this.ciudadDestino.HeaderText = "Ciudad destino";
-            this.ciudadDestino.Name = "ciudadDestino";
-            // 
-            // precio
-            // 
-            this.precio.DataPropertyName = "precio";
-            this.precio.HeaderText = "Precio";
-            this.precio.Name = "precio";
-            // 
-            // tramoId
-            // 
-            this.tramoId.DataPropertyName = "tramoId";
-            this.tramoId.HeaderText = "ID";
-            this.tramoId.Name = "tramoId";
-            this.tramoId.Visible = false;
-            // 
-            // TramosLista
+            // RecorridoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -124,8 +135,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.codigo);
             this.Controls.Add(this.tramosTable);
-            this.Name = "TramosLista";
-            this.Text = "Tramos";
+            this.Name = "RecorridoForm";
+            this.Text = "Recorrido";
             this.Load += new System.EventHandler(this.TramosLista_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tramosTable)).EndInit();
             this.ResumeLayout(false);

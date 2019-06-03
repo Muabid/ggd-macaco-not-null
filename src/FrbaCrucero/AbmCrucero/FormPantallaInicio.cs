@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace FrbaCrucero.AbmCrucero
 {
-    public partial class Form1 : Form
+    public partial class FormPantallaInicio : Form
     {
-        public Form1()
+        public FormPantallaInicio()
         {
             InitializeComponent();
+        }
+
+        private void btn_alta_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -40,7 +40,7 @@ namespace FrbaCrucero.AbmRecorrido
             Console.WriteLine(destino);
             
             recorridosTable.DataSource = recorridoDao.getRecorridos(codigo,origen,destino);
-            Console.WriteLine(recorridosTable.Rows.Count);
+            
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -55,21 +55,17 @@ namespace FrbaCrucero.AbmRecorrido
                 return;
             }
             Decimal codRecorrido = Convert.ToDecimal(recorridosTable["codigoColumn", e.RowIndex].Value);
-            Decimal precio = Convert.ToDecimal(recorridosTable["precioColumn", e.RowIndex].Value);
             if (e.ColumnIndex == recorridosTable.Columns["verColumn"].Index)
             {
-                new TramosLista(this).show(codRecorrido, precio);                  
+               
+                Decimal precio = Convert.ToDecimal(recorridosTable["precioColumn", e.RowIndex].Value);
+                new RecorridoForm().show(codRecorrido, precio);                  
             }
             else if (e.ColumnIndex == recorridosTable.Columns["bajaColumn"].Index)
             {
                 recorridoDao.darDeBaja(codRecorrido);
-                
+                recorridosTable.Rows.RemoveAt(e.RowIndex);
             }
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
 
         }
 
@@ -77,7 +73,8 @@ namespace FrbaCrucero.AbmRecorrido
         {
 
             DataTable dt =(DataTable) this.recorridosTable.DataSource;
-            dt.Clear();
+            if(dt!=null)
+                dt.Clear();
             this.codigoBox.Clear();
             this.ciudadDestinoCombo.SelectedIndex = -1;
             this.ciudadOrigenCombo.SelectedIndex = -1;

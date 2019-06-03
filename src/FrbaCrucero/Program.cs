@@ -1,4 +1,5 @@
 ﻿using FrbaCrucero.AbmRecorrido;
+using FrbaCrucero.ListadoEstadistico;
 using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;

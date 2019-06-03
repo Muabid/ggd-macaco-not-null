@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaCrucero.ListadoEstadistico
+namespace FrbaCrucero.AbmCrucero
 {
-    public partial class Form1 : Form
+    public partial class FormBaja : Form
     {
-        public Form1()
+        public FormBaja()
         {
             InitializeComponent();
         }

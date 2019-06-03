@@ -35,7 +35,7 @@ CREATE FUNCTION MACACO_NOT_NULL.ciudad_destino (@reco_id INT)
 RETURNS nvarchar(255)
 AS
 BEGIN
-	DECLARE @destino nvarchar(255);
+	DECLARE @destino nvarchar(255)
 	SET @destino = (select puer_nombre from MACACO_NOT_NULL.PUERTO as p 
 		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_hasta)
 		where t.tram_recorrido_id = @reco_id
@@ -43,7 +43,7 @@ BEGIN
 		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_hasta)
 		where t.tram_recorrido_id = @reco_id))
 
-	RETURN(@destino);
+	RETURN(@destino)
 END
 GO;
 
@@ -70,15 +70,13 @@ BEGIN
 END
 GO;
 
-SELECT * from [MACACO_NOT_NULL].RECORRIDO;
-exec [MACACO_NOT_NULL].getRecorridos @reco_codigo = 43820888, @ciudad_origen = NULL, @ciudad_destino = NULL
-exec [MACACO_NOT_NULL].GetTramos @reco_codigo = 43820903
 
 CREATE TYPE [MACACO_NOT_NULL].TRAMOTYPE AS TABLE   
 ( ciudadOrigen INT 
 , ciudadDestino INT
-,precio DECIMAL(18,0)
-,indice INT );  
+,precio DECIMAL(18,2)
+,indice INT
+,tramoId INT )  
 GO; 
 
 
@@ -133,4 +131,45 @@ END
 GO;
 
 
+CREATE FUNCTION [MACACO_NOT_NULL].GetPuertoId (@puerto NVARCHAR(256))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @id INT
+	SET @id = (SELECT puer_id FROM [MACACO_NOT_NULL].PUERTO WHERE puer_nombre = @puerto)
+	RETURN (@id)
+END
+GO;
 
+CREATE PROCEDURE [MACACO_NOT_NULL].GetPuertoByName @name NVARCHAR(256)
+AS 
+	SELECT puer_id,puer_nombre FROM [MACACO_NOT_NULL].PUERTO WHERE puer_nombre = @name
+END
+
+CREATE PROCEDURE [MACACO_NOT_NULL].ModificarRecorrido @reco_codigo decimal(18,0),
+@tramos [MACACO_NOT_NULL].TRAMOTYPE READONLY 
+AS
+BEGIN
+	MERGE MACACO_NOT_NULL.TRAMO as t 
+		USING @tramos as t_n
+		on (t.tram_id = t_n.tramoId)
+	WHEN MATCHED THEN UPDATE
+	SET t.tram_puerto_desde = t_n.ciudadOrigen
+	, t.tram_puerto_hasta = t_n.ciudadDestino
+	, t.tram_precio_base = t_n.precio
+	WHEN NOT MATCHED BY TARGET
+	THEN INSERT (tram_recorrido_id,tram_puerto_desde,tram_puerto_hasta,tram_precio_base)
+	VALUES (MACACO_NOT_NULL.GetRecorridoIdByRecoCodigo(@reco_codigo),t_n.ciudadOrigen, t_n.ciudadDestino,t_n.precio)
+	WHEN NOT MATCHED  BY SOURCE AND t.tram_recorrido_id = MACACO_NOT_NULL.GetRecorridoIdByRecoCodigo(@reco_codigo)
+	THEN DELETE;
+END
+GO;
+
+CREATE FUNCTION [MACACO_NOT_NULL].GetRecorridoIdByRecoCodigo (@reco_codigo DECIMAL(18,0))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @reco_id INT
+	SET @reco_id = (SELECT reco_id FROM MACACO_NOT_NULL.RECORRIDO WHERE reco_codigo = @reco_codigo)
+	RETURN (@reco_id)
+END

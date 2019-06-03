@@ -81,5 +81,25 @@ namespace FrbaCrucero.Utils
             cmd.Parameters.Add("@reco_codigo", SqlDbType.Decimal).Value = codRecorrido;
             Database.executeProcedure(cmd);
         }
+
+
+        public void modificarRecorrido(Decimal codRecorrido, DataTable tramos)
+        {
+            SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].ModificarRecorrido");
+            cmd.Parameters.Add("@reco_codigo", SqlDbType.Decimal).Value = codRecorrido;
+            cmd.Parameters.AddWithValue("@tramos", tramos);
+            Database.executeProcedure(cmd);
+        }
+
+        public decimal precioRecorrido(Decimal codRec)
+        {
+            SqlCommand cmd = Database.createCommand("SELECT SUM(t.tram_precio_base) as precio "
+	                                                   + "FROM MACACO_NOT_NULL.RECORRIDO AS r "
+	                                                   + "LEFT JOIN MACACO_NOT_NULL.TRAMO t "
+	                                                   + "ON r.reco_id = t.tram_recorrido_id "
+                                                       + "WHERE reco_codigo = @reco_cod");
+            cmd.Parameters.Add("@reco_cod", SqlDbType.Decimal).Value = codRec;
+            return Database.executeScalarDecimal(cmd);
+        }
     }
 }

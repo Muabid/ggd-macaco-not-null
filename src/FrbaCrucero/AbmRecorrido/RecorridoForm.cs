@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace FrbaCrucero.AbmRecorrido
 {
-    public partial class TramosLista : Form
+    public partial class RecorridoForm : Form
     {
         private RecorridoDAO recorridoDao = new RecorridoDAO();
-        public TramosLista(BajaRecorrido form)
+        public RecorridoForm()
         {
             InitializeComponent();
         }

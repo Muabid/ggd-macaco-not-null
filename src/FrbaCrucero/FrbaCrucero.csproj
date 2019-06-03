@@ -45,12 +45,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbmCrucero\Form1.cs">
+    <Compile Include="AbmCrucero\FormAlta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmCrucero\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmCrucero\FormAlta.Designer.cs">
+      <DependentUpon>FormAlta.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmCrucero\FormBaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmCrucero\FormBaja.Designer.cs">
+      <DependentUpon>FormBaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmCrucero\FormListadoCruceros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmCrucero\FormListadoCruceros.Designer.cs">
+      <DependentUpon>FormListadoCruceros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmCrucero\FormModificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmCrucero\FormModificacion.Designer.cs">
+      <DependentUpon>FormModificacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmCrucero\FormPantallaInicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmCrucero\FormPantallaInicio.Designer.cs">
+      <DependentUpon>FormPantallaInicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmCrucero\SqlConecction.cs" />
     <Compile Include="AbmPuerto\AltaPuerto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,11 +100,29 @@
     <Compile Include="AbmRecorrido\AltaTramo.Designer.cs">
       <DependentUpon>AltaTramo.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRecorrido\TramosLista.cs">
+    <Compile Include="AbmRecorrido\ListadoModificacionRecorrido.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmRecorrido\TramosLista.Designer.cs">
-      <DependentUpon>TramosLista.cs</DependentUpon>
+    <Compile Include="AbmRecorrido\ListadoModificacionRecorrido.Designer.cs">
+      <DependentUpon>ListadoModificacionRecorrido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRecorrido\ModificacionRecorrido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRecorrido\ModificacionRecorrido.Designer.cs">
+      <DependentUpon>ModificacionRecorrido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRecorrido\ModificarTramo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRecorrido\ModificarTramo.Designer.cs">
+      <DependentUpon>ModificarTramo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRecorrido\RecorridoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRecorrido\RecorridoForm.Designer.cs">
+      <DependentUpon>RecorridoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\AltaRol.cs">
       <SubType>Form</SubType>
@@ -129,12 +172,18 @@
     <Compile Include="GeneracionViaje\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListadoEstadistico\Form1.cs">
+    <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ListadoEstadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.Designer.cs">
+      <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Cruceros\BajaCrucero.cs" />
+    <Compile Include="Model\Cruceros\Cabina.cs" />
+    <Compile Include="Model\Cruceros\Compania.cs" />
+    <Compile Include="Model\Cruceros\Crucero.cs" />
+    <Compile Include="Model\Cruceros\IFunciones.cs" />
+    <Compile Include="Model\Cruceros\TipoServicio.cs" />
     <Compile Include="Model\Recorridos\Puerto.cs" />
     <Compile Include="Model\Recorridos\Recorrido.cs" />
     <Compile Include="Model\Recorridos\Tramo.cs" />
@@ -149,8 +198,20 @@
     <Compile Include="Utils\RecorridoDAO.cs" />
     <Compile Include="Utils\PuertoDAO.cs" />
     <Compile Include="Utils\Database.cs" />
-    <EmbeddedResource Include="AbmCrucero\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="AbmCrucero\FormAlta.resx">
+      <DependentUpon>FormAlta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmCrucero\FormBaja.resx">
+      <DependentUpon>FormBaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmCrucero\FormListadoCruceros.resx">
+      <DependentUpon>FormListadoCruceros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmCrucero\FormModificacion.resx">
+      <DependentUpon>FormModificacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmCrucero\FormPantallaInicio.resx">
+      <DependentUpon>FormPantallaInicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmPuerto\AltaPuerto.resx">
       <DependentUpon>AltaPuerto.cs</DependentUpon>
@@ -164,8 +225,17 @@
     <EmbeddedResource Include="AbmRecorrido\AltaTramo.resx">
       <DependentUpon>AltaTramo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmRecorrido\TramosLista.resx">
-      <DependentUpon>TramosLista.cs</DependentUpon>
+    <EmbeddedResource Include="AbmRecorrido\ListadoModificacionRecorrido.resx">
+      <DependentUpon>ListadoModificacionRecorrido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRecorrido\ModificacionRecorrido.resx">
+      <DependentUpon>ModificacionRecorrido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRecorrido\ModificarTramo.resx">
+      <DependentUpon>ModificarTramo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRecorrido\RecorridoForm.resx">
+      <DependentUpon>RecorridoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\AltaRol.resx">
       <DependentUpon>AltaRol.cs</DependentUpon>
@@ -184,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoEstadistico\ListadoEstadisticoForm.resx">
+      <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
