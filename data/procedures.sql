@@ -173,3 +173,13 @@ BEGIN
 	SET @reco_id = (SELECT reco_id FROM MACACO_NOT_NULL.RECORRIDO WHERE reco_codigo = @reco_codigo)
 	RETURN (@reco_id)
 END
+
+
+CREATE PROCEDURE [MACACO_NOT_NULL].GenerarViaje @fecha_salida datetime2(3),
+ @fecha_llegada datetime2(3), @recorrido_id INT, @crucero_id INT
+AS
+	BEGIN
+		INSERT INTO [MACACO_NOT_NULL].VIAJE (viaj_fecha_llegada,viaj_fecha_salida,viaj_crucero_id,viaj_recorrido_id)
+		VALUES(@fecha_salida,@fecha_llegada,@crucero_id,@recorrido_id)
+	END
+GO

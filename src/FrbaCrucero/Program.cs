@@ -1,4 +1,5 @@
 ﻿using FrbaCrucero.AbmRecorrido;
+using FrbaCrucero.GeneracionViaje;
 using FrbaCrucero.ListadoEstadistico;
 using FrbaCrucero.Utils;
 using System;
@@ -20,7 +21,7 @@ namespace FrbaCrucero
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new BajaRecorrido());
-            Application.Run(new ListadoEstadisticoForm());
+            Application.Run(new GenerarViaje());
         }
     }
 }
