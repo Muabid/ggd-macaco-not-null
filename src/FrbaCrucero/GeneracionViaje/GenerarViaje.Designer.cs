@@ -40,13 +40,15 @@
             this.button2 = new System.Windows.Forms.Button();
             this.salidaText = new System.Windows.Forms.TextBox();
             this.llegadaText = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.btn_seleccionar_salida = new System.Windows.Forms.Button();
+            this.btn_seleccionar_llegada = new System.Windows.Forms.Button();
+            this.monthCalendar = new System.Windows.Forms.MonthCalendar();
+            this.panel_date = new System.Windows.Forms.Panel();
+            this.btn_cancelar = new System.Windows.Forms.Button();
+            this.btn_aceptar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.panel_date.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -109,16 +111,17 @@
             this.seleccionarRecorrido.TabIndex = 8;
             this.seleccionarRecorrido.Text = "Seleccionar";
             this.seleccionarRecorrido.UseVisualStyleBackColor = true;
+            this.seleccionarRecorrido.Click += new System.EventHandler(this.seleccionarRecorrido_Click);
             // 
             // seleccionarCrucero
             // 
-            this.seleccionarCrucero.Enabled = false;
             this.seleccionarCrucero.Location = new System.Drawing.Point(286, 172);
             this.seleccionarCrucero.Name = "seleccionarCrucero";
             this.seleccionarCrucero.Size = new System.Drawing.Size(75, 23);
             this.seleccionarCrucero.TabIndex = 9;
             this.seleccionarCrucero.Text = "Seleccionar";
             this.seleccionarCrucero.UseVisualStyleBackColor = true;
+            this.seleccionarCrucero.Click += new System.EventHandler(this.seleccionarCrucero_Click);
             // 
             // guardar
             // 
@@ -153,51 +156,63 @@
             this.llegadaText.Size = new System.Drawing.Size(100, 20);
             this.llegadaText.TabIndex = 13;
             // 
-            // button1
+            // btn_seleccionar_salida
             // 
-            this.button1.Location = new System.Drawing.Point(286, 33);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Seleccionar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_seleccionar_salida.Location = new System.Drawing.Point(286, 33);
+            this.btn_seleccionar_salida.Name = "btn_seleccionar_salida";
+            this.btn_seleccionar_salida.Size = new System.Drawing.Size(75, 23);
+            this.btn_seleccionar_salida.TabIndex = 14;
+            this.btn_seleccionar_salida.Text = "Seleccionar";
+            this.btn_seleccionar_salida.UseVisualStyleBackColor = true;
+            this.btn_seleccionar_salida.Click += new System.EventHandler(this.btn_seleccionar_salida_Click);
             // 
-            // button3
+            // btn_seleccionar_llegada
             // 
-            this.button3.Location = new System.Drawing.Point(286, 79);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 15;
-            this.button3.Text = "Seleccionar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_seleccionar_llegada.Location = new System.Drawing.Point(286, 79);
+            this.btn_seleccionar_llegada.Name = "btn_seleccionar_llegada";
+            this.btn_seleccionar_llegada.Size = new System.Drawing.Size(75, 23);
+            this.btn_seleccionar_llegada.TabIndex = 15;
+            this.btn_seleccionar_llegada.Text = "Seleccionar";
+            this.btn_seleccionar_llegada.UseVisualStyleBackColor = true;
+            this.btn_seleccionar_llegada.Click += new System.EventHandler(this.btn_seleccionar_llegada_Click);
             // 
-            // monthCalendar1
+            // monthCalendar
             // 
-            this.monthCalendar1.FirstDayOfWeek = System.Windows.Forms.Day.Sunday;
-            this.monthCalendar1.Location = new System.Drawing.Point(0, 0);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 16;
+            this.monthCalendar.FirstDayOfWeek = System.Windows.Forms.Day.Sunday;
+            this.monthCalendar.Location = new System.Drawing.Point(0, 0);
+            this.monthCalendar.Name = "monthCalendar";
+            this.monthCalendar.TabIndex = 16;
             // 
-            // panel1
+            // panel_date
             // 
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.dateTimePicker1);
-            this.panel1.Controls.Add(this.monthCalendar1);
-            this.panel1.Location = new System.Drawing.Point(385, 33);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(193, 238);
-            this.panel1.TabIndex = 17;
-            this.panel1.Visible = false;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.panel_date.Controls.Add(this.btn_cancelar);
+            this.panel_date.Controls.Add(this.btn_aceptar);
+            this.panel_date.Controls.Add(this.label5);
+            this.panel_date.Controls.Add(this.dateTimePicker1);
+            this.panel_date.Controls.Add(this.monthCalendar);
+            this.panel_date.Location = new System.Drawing.Point(385, 33);
+            this.panel_date.Name = "panel_date";
+            this.panel_date.Size = new System.Drawing.Size(193, 238);
+            this.panel_date.TabIndex = 17;
+            this.panel_date.Visible = false;
             // 
-            // dateTimePicker1
+            // btn_cancelar
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker1.Location = new System.Drawing.Point(74, 174);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.ShowUpDown = true;
-            this.dateTimePicker1.Size = new System.Drawing.Size(72, 20);
-            this.dateTimePicker1.TabIndex = 17;
+            this.btn_cancelar.Location = new System.Drawing.Point(3, 212);
+            this.btn_cancelar.Name = "btn_cancelar";
+            this.btn_cancelar.Size = new System.Drawing.Size(75, 23);
+            this.btn_cancelar.TabIndex = 20;
+            this.btn_cancelar.Text = "Cancelar";
+            this.btn_cancelar.UseVisualStyleBackColor = true;
+            // 
+            // btn_aceptar
+            // 
+            this.btn_aceptar.Location = new System.Drawing.Point(115, 212);
+            this.btn_aceptar.Name = "btn_aceptar";
+            this.btn_aceptar.Size = new System.Drawing.Size(75, 23);
+            this.btn_aceptar.TabIndex = 19;
+            this.btn_aceptar.Text = "Aceptar";
+            this.btn_aceptar.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -208,14 +223,24 @@
             this.label5.TabIndex = 18;
             this.label5.Text = "Hora";
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker1.Location = new System.Drawing.Point(74, 174);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(72, 20);
+            this.dateTimePicker1.TabIndex = 17;
+            this.dateTimePicker1.Value = new System.DateTime(2019, 6, 9, 18, 19, 0, 0);
+            // 
             // GenerarViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 344);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.panel_date);
+            this.Controls.Add(this.btn_seleccionar_llegada);
+            this.Controls.Add(this.btn_seleccionar_salida);
             this.Controls.Add(this.llegadaText);
             this.Controls.Add(this.salidaText);
             this.Controls.Add(this.button2);
@@ -230,8 +255,8 @@
             this.Controls.Add(this.label1);
             this.Name = "GenerarViaje";
             this.Text = "GenerarViaje";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panel_date.ResumeLayout(false);
+            this.panel_date.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,11 +276,13 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox salidaText;
         private System.Windows.Forms.TextBox llegadaText;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btn_seleccionar_salida;
+        private System.Windows.Forms.Button btn_seleccionar_llegada;
+        private System.Windows.Forms.MonthCalendar monthCalendar;
+        private System.Windows.Forms.Panel panel_date;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button btn_cancelar;
+        private System.Windows.Forms.Button btn_aceptar;
     }
 }
