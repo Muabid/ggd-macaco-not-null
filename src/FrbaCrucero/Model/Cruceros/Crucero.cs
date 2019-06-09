@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FrbaCrucero.Model.Cruceros
 {
-    class Crucero
+    public class Crucero
     {
         // ESTAS SON LAS PROPIEDADES DE LA CLASE
 
@@ -82,5 +82,6 @@ namespace FrbaCrucero.Model.Cruceros
         {
             this.cruc_id = _cruc_id;
         }
+
     }
 }
