@@ -37,7 +37,6 @@ namespace FrbaCrucero.AbmRecorrido
             String codigo = codigoBox.Text;
             String origen = (String)ciudadOrigenCombo.SelectedItem;
             String destino = (String)ciudadDestinoCombo.SelectedItem;
-            Console.WriteLine(destino);
             
             recorridosTable.DataSource = recorridoDao.getRecorridos(codigo,origen,destino);
             

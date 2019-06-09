@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             this.recorridosTable = new System.Windows.Forms.DataGridView();
-            this.codigoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ciudadOrigenColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ciudadDestinoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modificarColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.codigoBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.limpiarButton = new System.Windows.Forms.Button();
@@ -42,6 +37,12 @@
             this.origenCombo = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciudadOrigenColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciudadDestinoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modificarColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.recorridosTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,6 +52,7 @@
             this.recorridosTable.AllowUserToDeleteRows = false;
             this.recorridosTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.recorridosTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
             this.codigoColumn,
             this.ciudadOrigenColumn,
             this.ciudadDestinoColumn,
@@ -62,47 +64,6 @@
             this.recorridosTable.Size = new System.Drawing.Size(526, 174);
             this.recorridosTable.TabIndex = 0;
             this.recorridosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.recorridosTable_CellContentClick);
-            // 
-            // codigoColumn
-            // 
-            this.codigoColumn.DataPropertyName = "codigo";
-            this.codigoColumn.HeaderText = "Código";
-            this.codigoColumn.Name = "codigoColumn";
-            this.codigoColumn.ReadOnly = true;
-            this.codigoColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ciudadOrigenColumn
-            // 
-            this.ciudadOrigenColumn.DataPropertyName = "ciudadOrigen";
-            this.ciudadOrigenColumn.HeaderText = "Ciudad origen";
-            this.ciudadOrigenColumn.Name = "ciudadOrigenColumn";
-            this.ciudadOrigenColumn.ReadOnly = true;
-            this.ciudadOrigenColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ciudadDestinoColumn
-            // 
-            this.ciudadDestinoColumn.DataPropertyName = "ciudadDestino";
-            this.ciudadDestinoColumn.HeaderText = "Ciudad destino";
-            this.ciudadDestinoColumn.Name = "ciudadDestinoColumn";
-            this.ciudadDestinoColumn.ReadOnly = true;
-            this.ciudadDestinoColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // precioColumn
-            // 
-            this.precioColumn.DataPropertyName = "precio";
-            this.precioColumn.HeaderText = "Precio";
-            this.precioColumn.Name = "precioColumn";
-            this.precioColumn.ReadOnly = true;
-            this.precioColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // modificarColumn
-            // 
-            this.modificarColumn.HeaderText = "";
-            this.modificarColumn.Name = "modificarColumn";
-            this.modificarColumn.ReadOnly = true;
-            this.modificarColumn.Text = "Modificar";
-            this.modificarColumn.UseColumnTextForButtonValue = true;
-            this.modificarColumn.Width = 60;
             // 
             // codigoBox
             // 
@@ -174,6 +135,55 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Ciudad destino";
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // codigoColumn
+            // 
+            this.codigoColumn.DataPropertyName = "codigo";
+            this.codigoColumn.HeaderText = "Código";
+            this.codigoColumn.Name = "codigoColumn";
+            this.codigoColumn.ReadOnly = true;
+            this.codigoColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ciudadOrigenColumn
+            // 
+            this.ciudadOrigenColumn.DataPropertyName = "ciudadOrigen";
+            this.ciudadOrigenColumn.HeaderText = "Ciudad origen";
+            this.ciudadOrigenColumn.Name = "ciudadOrigenColumn";
+            this.ciudadOrigenColumn.ReadOnly = true;
+            this.ciudadOrigenColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ciudadDestinoColumn
+            // 
+            this.ciudadDestinoColumn.DataPropertyName = "ciudadDestino";
+            this.ciudadDestinoColumn.HeaderText = "Ciudad destino";
+            this.ciudadDestinoColumn.Name = "ciudadDestinoColumn";
+            this.ciudadDestinoColumn.ReadOnly = true;
+            this.ciudadDestinoColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // precioColumn
+            // 
+            this.precioColumn.DataPropertyName = "precio";
+            this.precioColumn.HeaderText = "Precio";
+            this.precioColumn.Name = "precioColumn";
+            this.precioColumn.ReadOnly = true;
+            this.precioColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // modificarColumn
+            // 
+            this.modificarColumn.HeaderText = "";
+            this.modificarColumn.Name = "modificarColumn";
+            this.modificarColumn.ReadOnly = true;
+            this.modificarColumn.Text = "Modificar";
+            this.modificarColumn.UseColumnTextForButtonValue = true;
+            this.modificarColumn.Width = 60;
+            // 
             // ListadoModificacionRecorrido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -207,6 +217,7 @@
         private System.Windows.Forms.ComboBox origenCombo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ciudadOrigenColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ciudadDestinoColumn;

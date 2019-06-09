@@ -43,6 +43,7 @@
             this.precioColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.verColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.bajaColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.recorridosTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -128,7 +129,8 @@
             this.ciudadDestinoColumn,
             this.precioColumn,
             this.verColumn,
-            this.bajaColumn});
+            this.bajaColumn,
+            this.id});
             this.recorridosTable.Location = new System.Drawing.Point(12, 237);
             this.recorridosTable.Name = "recorridosTable";
             this.recorridosTable.ReadOnly = true;
@@ -188,6 +190,14 @@
             this.bajaColumn.UseColumnTextForButtonValue = true;
             this.bajaColumn.Width = 60;
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
             // BajaRecorrido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -227,5 +237,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn precioColumn;
         private System.Windows.Forms.DataGridViewButtonColumn verColumn;
         private System.Windows.Forms.DataGridViewButtonColumn bajaColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
     }
 }
