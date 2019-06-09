@@ -17,15 +17,13 @@ namespace FrbaCrucero.Model.Cruceros
 
         DataTable Listar();
 
-        DataTable BuscarPorNombre();
+        DataTable BuscarPorNombre( string nombre);
 
-        DataTable BuscarPorModelo();
+        DataTable BuscarPorModelo( string modelo);
 
-        DataTable BuscarPorCompañia(int campania);
+        DataTable BuscarPorCompañia( int campania);
 
-        DataTable BuscarPorPisos(int piso);
-
-        DataTable BuscarPorFechaDeAlta(DateTime fecha);
+        DataTable BuscarPorFechaDeAlta( DateTime fecha);
 
 
     }
