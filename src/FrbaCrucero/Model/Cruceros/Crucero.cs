@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FrbaCrucero.Model.Cruceros
 {
-    public class Crucero
+
+    class Crucero:IFunciones
     {
+        SqlConnection cn = new SqlConnection(
+                ConfigurationManager.ConnectionStrings["FRBACrucero"].ConnectionString
+                );
+
         // ESTAS SON LAS PROPIEDADES DE LA CLASE
 
         public int cruc_id { get; set; }
@@ -81,6 +88,47 @@ namespace FrbaCrucero.Model.Cruceros
         public Crucero(int _cruc_id)
         {
             this.cruc_id = _cruc_id;
+        }
+
+
+        public int Registrar()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Actualizar()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Eliminar()
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.Data.DataTable Listar()
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.Data.DataTable BuscarPorNombre(string nombre)
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.Data.DataTable BuscarPorModelo(string modelo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.Data.DataTable BuscarPorCompañia(int campania)
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.Data.DataTable BuscarPorFechaDeAlta(DateTime fecha)
+        {
+            throw new NotImplementedException();
         }
 
     }
