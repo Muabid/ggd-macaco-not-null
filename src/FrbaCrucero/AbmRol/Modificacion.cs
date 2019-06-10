@@ -110,6 +110,26 @@ namespace FrbaCrucero.AbmRol
             return Utils.Database.getDataProcedure(cmd);
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (Control c in Controls)
+            {
+                if (c is TextBox)
+                {
+                    c.Text = "";
+                }
+            }
+            if (this.modificacionTable.Rows.Count > 0)
+            {
+
+                this.modificacionTable.Rows.Clear();
+                this.modificacionTable.Refresh();
+            }
+            this.comboBoxFuncionalidades.SelectedIndex = -1;
+            this.Activo.Checked = false;
+
+        }
+
       
 
 

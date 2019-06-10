@@ -30,7 +30,7 @@
         {
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxFuncionalidades = new System.Windows.Forms.ComboBox();
             this.NombreTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,13 +61,13 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // comboBox1
+            // comboBoxFuncionalidades
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(103, 67);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
-            this.comboBox1.TabIndex = 9;
+            this.comboBoxFuncionalidades.FormattingEnabled = true;
+            this.comboBoxFuncionalidades.Location = new System.Drawing.Point(103, 67);
+            this.comboBoxFuncionalidades.Name = "comboBoxFuncionalidades";
+            this.comboBoxFuncionalidades.Size = new System.Drawing.Size(100, 21);
+            this.comboBoxFuncionalidades.TabIndex = 9;
             // 
             // NombreTextBox
             // 
@@ -138,6 +138,7 @@
             this.btn_activar.TabIndex = 14;
             this.btn_activar.Text = "Activar";
             this.btn_activar.UseVisualStyleBackColor = true;
+            this.btn_activar.Click += new System.EventHandler(this.btn_activar_Click);
             // 
             // FormularioModificacion
             // 
@@ -149,7 +150,7 @@
             this.Controls.Add(this.table_funcionalidades);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxFuncionalidades);
             this.Controls.Add(this.NombreTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -165,7 +166,7 @@
 
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxFuncionalidades;
         private System.Windows.Forms.TextBox NombreTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
