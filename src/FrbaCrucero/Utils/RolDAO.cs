@@ -26,5 +26,12 @@ namespace FrbaCrucero.Utils
            return null;
        }
 
+       public DataTable getFuncionalidades(Rol rol)
+       {
+           SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].GetFuncionalidades");
+           cmd.Parameters.Add(rol.id);
+           return Database.getDataProcedure(cmd);
+       }
+
     }
 }

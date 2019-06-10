@@ -1,4 +1,5 @@
 ﻿using FrbaCrucero.Model.Roles;
+using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +15,14 @@ namespace FrbaCrucero.AbmRol
     public partial class FormularioModificacion : Form
     {
         Rol rol;
+        RolDAO rolDao = new RolDAO();
         public FormularioModificacion(Rol rol)
         {
             InitializeComponent();
             this.rol = rol;
             NombreTextBox.Text = rol.nombre;
+            btn_activar.Visible = !rol.activo;
+            table_funcionalidades.DataSource = rolDao.getFuncionalidades(rol);
         }
         
 
@@ -32,7 +36,7 @@ namespace FrbaCrucero.AbmRol
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void table_funcionalidades_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
