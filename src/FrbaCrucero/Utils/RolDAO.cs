@@ -22,7 +22,7 @@ namespace FrbaCrucero.Utils
            DataTable table = Utils.Database.getData(command);
 
            return table.Rows.Cast<DataRow>().
-               Select(row => new Funcionalidad(row["func_id"].ToString(), row["func_detalle"].ToString())).ToList<Funcionalidad>();
+               Select(row => new Funcionalidad(row["func_id"], row["func_detalle"].ToString())).ToList<Funcionalidad>();
        }
 
     }

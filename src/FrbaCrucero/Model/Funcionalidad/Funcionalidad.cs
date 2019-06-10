@@ -8,6 +8,13 @@ namespace FrbaCrucero.Model.Funcionalidad
 {
    public class Funcionalidad
     {
+       public Funcionalidad (int id, String nombre){
+           this.id = id;
+           this.nombre = nombre;
+
+   }
+
+
 
        public int id { get; set; }
        public String nombre { get; set; }
