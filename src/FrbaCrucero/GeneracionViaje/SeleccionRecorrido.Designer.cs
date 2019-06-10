@@ -1,6 +1,6 @@
-﻿namespace FrbaCrucero.AbmRecorrido
+﻿namespace FrbaCrucero.GeneracionViaje
 {
-    partial class ListadoModificacionRecorrido
+    partial class SeleccionRecorrido
     {
         /// <summary>
         /// Required designer variable.
@@ -29,20 +29,21 @@
         private void InitializeComponent()
         {
             this.recorridosTable = new System.Windows.Forms.DataGridView();
+            this.ciudadDestinoCombo = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.ciudadOrigenCombo = new System.Windows.Forms.ComboBox();
+            this.buscar = new System.Windows.Forms.Button();
+            this.limpiar = new System.Windows.Forms.Button();
             this.codigoBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.limpiarButton = new System.Windows.Forms.Button();
-            this.buscarButton = new System.Windows.Forms.Button();
-            this.destinoCombo = new System.Windows.Forms.ComboBox();
-            this.origenCombo = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codigoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ciudadOrigenColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ciudadDestinoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precioColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modificarColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.verColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.seleccionarColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.recorridosTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,83 +58,84 @@
             this.ciudadOrigenColumn,
             this.ciudadDestinoColumn,
             this.precioColumn,
-            this.modificarColumn});
-            this.recorridosTable.Location = new System.Drawing.Point(32, 236);
+            this.verColumn,
+            this.seleccionarColumn});
+            this.recorridosTable.Location = new System.Drawing.Point(59, 233);
             this.recorridosTable.Name = "recorridosTable";
             this.recorridosTable.ReadOnly = true;
-            this.recorridosTable.Size = new System.Drawing.Size(526, 174);
-            this.recorridosTable.TabIndex = 0;
-            this.recorridosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.recorridosTable_CellContentClick);
+            this.recorridosTable.Size = new System.Drawing.Size(654, 144);
+            this.recorridosTable.TabIndex = 18;
+            this.recorridosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.recorridosTable_CellContentClick_1);
             // 
-            // codigoBox
+            // ciudadDestinoCombo
             // 
-            this.codigoBox.Location = new System.Drawing.Point(143, 39);
-            this.codigoBox.Name = "codigoBox";
-            this.codigoBox.Size = new System.Drawing.Size(100, 20);
-            this.codigoBox.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Código";
-            // 
-            // limpiarButton
-            // 
-            this.limpiarButton.Location = new System.Drawing.Point(71, 188);
-            this.limpiarButton.Name = "limpiarButton";
-            this.limpiarButton.Size = new System.Drawing.Size(75, 23);
-            this.limpiarButton.TabIndex = 3;
-            this.limpiarButton.Text = "Limpiar";
-            this.limpiarButton.UseVisualStyleBackColor = true;
-            this.limpiarButton.Click += new System.EventHandler(this.limpiarButton_Click);
-            // 
-            // buscarButton
-            // 
-            this.buscarButton.Location = new System.Drawing.Point(424, 188);
-            this.buscarButton.Name = "buscarButton";
-            this.buscarButton.Size = new System.Drawing.Size(75, 23);
-            this.buscarButton.TabIndex = 5;
-            this.buscarButton.Text = "Buscar";
-            this.buscarButton.UseVisualStyleBackColor = true;
-            this.buscarButton.Click += new System.EventHandler(this.buscarButton_Click);
-            // 
-            // destinoCombo
-            // 
-            this.destinoCombo.FormattingEnabled = true;
-            this.destinoCombo.Location = new System.Drawing.Point(143, 106);
-            this.destinoCombo.Name = "destinoCombo";
-            this.destinoCombo.Size = new System.Drawing.Size(121, 21);
-            this.destinoCombo.TabIndex = 6;
-            // 
-            // origenCombo
-            // 
-            this.origenCombo.FormattingEnabled = true;
-            this.origenCombo.Location = new System.Drawing.Point(411, 35);
-            this.origenCombo.Name = "origenCombo";
-            this.origenCombo.Size = new System.Drawing.Size(121, 21);
-            this.origenCombo.TabIndex = 7;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(322, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Ciudad origen";
+            this.ciudadDestinoCombo.FormattingEnabled = true;
+            this.ciudadDestinoCombo.Location = new System.Drawing.Point(449, 26);
+            this.ciudadDestinoCombo.Name = "ciudadDestinoCombo";
+            this.ciudadDestinoCombo.Size = new System.Drawing.Size(121, 21);
+            this.ciudadDestinoCombo.TabIndex = 17;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(40, 109);
+            this.label3.Location = new System.Drawing.Point(358, 29);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Ciudad destino";
+            this.label3.Size = new System.Drawing.Size(79, 13);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Ciudad Destino";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(99, 29);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Ciudad Origen";
+            // 
+            // ciudadOrigenCombo
+            // 
+            this.ciudadOrigenCombo.FormattingEnabled = true;
+            this.ciudadOrigenCombo.Location = new System.Drawing.Point(181, 26);
+            this.ciudadOrigenCombo.Name = "ciudadOrigenCombo";
+            this.ciudadOrigenCombo.Size = new System.Drawing.Size(121, 21);
+            this.ciudadOrigenCombo.TabIndex = 14;
+            // 
+            // buscar
+            // 
+            this.buscar.Location = new System.Drawing.Point(468, 152);
+            this.buscar.Name = "buscar";
+            this.buscar.Size = new System.Drawing.Size(75, 23);
+            this.buscar.TabIndex = 13;
+            this.buscar.Text = "Buscar";
+            this.buscar.UseVisualStyleBackColor = true;
+            this.buscar.Click += new System.EventHandler(this.buscar_Click);
+            // 
+            // limpiar
+            // 
+            this.limpiar.Location = new System.Drawing.Point(163, 152);
+            this.limpiar.Name = "limpiar";
+            this.limpiar.Size = new System.Drawing.Size(75, 23);
+            this.limpiar.TabIndex = 12;
+            this.limpiar.Text = "Limpiar";
+            this.limpiar.UseVisualStyleBackColor = true;
+            this.limpiar.Click += new System.EventHandler(this.limpiar_Click_1);
+            // 
+            // codigoBox
+            // 
+            this.codigoBox.Location = new System.Drawing.Point(181, 77);
+            this.codigoBox.Name = "codigoBox";
+            this.codigoBox.Size = new System.Drawing.Size(100, 20);
+            this.codigoBox.TabIndex = 11;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(99, 80);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(40, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Código";
             // 
             // id
             // 
@@ -154,10 +156,11 @@
             // ciudadOrigenColumn
             // 
             this.ciudadOrigenColumn.DataPropertyName = "ciudadOrigen";
-            this.ciudadOrigenColumn.HeaderText = "Ciudad origen";
+            this.ciudadOrigenColumn.HeaderText = "Ciudad de origen";
             this.ciudadOrigenColumn.Name = "ciudadOrigenColumn";
             this.ciudadOrigenColumn.ReadOnly = true;
             this.ciudadOrigenColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ciudadOrigenColumn.Width = 120;
             // 
             // ciudadDestinoColumn
             // 
@@ -166,6 +169,7 @@
             this.ciudadDestinoColumn.Name = "ciudadDestinoColumn";
             this.ciudadDestinoColumn.ReadOnly = true;
             this.ciudadDestinoColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ciudadDestinoColumn.Width = 120;
             // 
             // precioColumn
             // 
@@ -175,31 +179,40 @@
             this.precioColumn.ReadOnly = true;
             this.precioColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // modificarColumn
+            // verColumn
             // 
-            this.modificarColumn.HeaderText = "";
-            this.modificarColumn.Name = "modificarColumn";
-            this.modificarColumn.ReadOnly = true;
-            this.modificarColumn.Text = "Modificar";
-            this.modificarColumn.UseColumnTextForButtonValue = true;
-            this.modificarColumn.Width = 60;
+            this.verColumn.HeaderText = "";
+            this.verColumn.Name = "verColumn";
+            this.verColumn.ReadOnly = true;
+            this.verColumn.Text = "Ver";
+            this.verColumn.UseColumnTextForButtonValue = true;
+            this.verColumn.Width = 60;
             // 
-            // ListadoModificacionRecorrido
+            // seleccionarColumn
+            // 
+            this.seleccionarColumn.HeaderText = "";
+            this.seleccionarColumn.Name = "seleccionarColumn";
+            this.seleccionarColumn.ReadOnly = true;
+            this.seleccionarColumn.Text = "Seleccionar";
+            this.seleccionarColumn.UseColumnTextForButtonValue = true;
+            this.seleccionarColumn.Width = 70;
+            // 
+            // SeleccionRecorrido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 422);
+            this.ClientSize = new System.Drawing.Size(737, 402);
+            this.Controls.Add(this.recorridosTable);
+            this.Controls.Add(this.ciudadDestinoCombo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.origenCombo);
-            this.Controls.Add(this.destinoCombo);
-            this.Controls.Add(this.buscarButton);
-            this.Controls.Add(this.limpiarButton);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.ciudadOrigenCombo);
+            this.Controls.Add(this.buscar);
+            this.Controls.Add(this.limpiar);
             this.Controls.Add(this.codigoBox);
-            this.Controls.Add(this.recorridosTable);
-            this.Name = "ListadoModificacionRecorrido";
-            this.Text = "Modificación recorrido";
+            this.Controls.Add(this.label1);
+            this.Name = "SeleccionRecorrido";
+            this.Text = "SeleccionRecorrido";
             ((System.ComponentModel.ISupportInitialize)(this.recorridosTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -209,19 +222,20 @@
         #endregion
 
         private System.Windows.Forms.DataGridView recorridosTable;
+        private System.Windows.Forms.ComboBox ciudadDestinoCombo;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox ciudadOrigenCombo;
+        private System.Windows.Forms.Button buscar;
+        private System.Windows.Forms.Button limpiar;
         private System.Windows.Forms.TextBox codigoBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button limpiarButton;
-        private System.Windows.Forms.Button buscarButton;
-        private System.Windows.Forms.ComboBox destinoCombo;
-        private System.Windows.Forms.ComboBox origenCombo;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ciudadOrigenColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ciudadDestinoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn precioColumn;
-        private System.Windows.Forms.DataGridViewButtonColumn modificarColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn verColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn seleccionarColumn;
     }
 }

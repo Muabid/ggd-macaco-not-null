@@ -16,5 +16,10 @@ namespace FrbaCrucero.AbmCrucero
         {
             InitializeComponent();
         }
+
+        private void FormListadoCruceros_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -48,11 +48,11 @@ END
 GO;
 
 
-CREATE PROCEDURE [MACACO_NOT_NULL].getRecorridos @reco_codigo DECIMAL(18,0),
+ALTER PROCEDURE [MACACO_NOT_NULL].getRecorridos @reco_codigo DECIMAL(18,0),
 	@ciudad_origen NVARCHAR(256), @ciudad_destino NVARCHAR(256)
 AS
 BEGIN
-	SELECT r.reco_codigo as codigo, MACACO_NOT_NULL.ciudad_origen(t.tram_recorrido_id) as
+	SELECT r.reco_id as id,r.reco_codigo as codigo, MACACO_NOT_NULL.ciudad_origen(t.tram_recorrido_id) as
 	 ciudadOrigen, MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) as
 	  ciudadDestino, SUM(t.tram_precio_base) as precio
 	FROM MACACO_NOT_NULL.RECORRIDO AS r
@@ -63,7 +63,7 @@ BEGIN
 	LEFT JOIN MACACO_NOT_NULL.PUERTO AS p_h
 	ON p_h.puer_id = tram_puerto_hasta
 	WHERE reco_activo = 1 
-	GROUP BY r.reco_codigo,t.tram_recorrido_id
+	GROUP BY  r.reco_id,r.reco_codigo,t.tram_recorrido_id
 	HAVING (@reco_codigo IS NULL OR (CONVERT(NVARCHAR(18),reco_codigo) LIKE CONCAT('%',@reco_codigo,'%')))
 	AND (@ciudad_origen IS NULL OR (MACACO_NOT_NULL.ciudad_origen(t.tram_recorrido_id) = @ciudad_origen))
 	AND (@ciudad_destino IS NULL OR (MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) = @ciudad_destino)) 

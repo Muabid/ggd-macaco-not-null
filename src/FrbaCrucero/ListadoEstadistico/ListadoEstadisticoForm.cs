@@ -232,16 +232,13 @@ namespace FrbaCrucero.ListadoEstadistico
 
                 switch (tipoListado.SelectedItem.ToString())
                 {
-                    case "Recorridos con más pasajes comprados":
+                    case "Cruceros con mayor cantidad de días fuera de servicio":
+                        break;
+                 
+                    default :
                         Decimal codRecorrido = Convert.ToDecimal(gridResultados[1, e.RowIndex].Value);
                         Decimal precio = new RecorridoDAO().precioRecorrido(codRecorrido);
                         new RecorridoForm().show(codRecorrido, precio);
-                        break;
-                    case "Recorridos con más cabinas libres en sus viajes":
-                        gridResultados.DataSource = recorridosConMasCabinasLibresEnSusViajes(anio.Text, semestre.SelectedItem.ToString());
-                        break;
-                    case "Cruceros con mayor cantidad de días fuera de servicio":
-                        gridResultados.DataSource = crucerosConMasReparaciones(anio.Text, semestre.SelectedItem.ToString());
                         break;
                 }
                
