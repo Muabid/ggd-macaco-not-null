@@ -700,19 +700,22 @@ GO;
 
 -----BuscarRol
 
-CREATE PROCEDURE [MACACO_NOT_NULL].AltaRol
+CREATE PROCEDURE [MACACO_NOT_NULL].BuscarRol
 @nombre_rol NVARCHAR(255),
 @activo BIT,
-@nombre_funcionalidad NVARCHAR(255),
+@nombre_funcionalidad NVARCHAR(255)
+
 AS
 BEGIN
-
+	
 	
 	SELECT rol_id,rol_nombre,rol_activo FROM [MACACO_NOT_NULL].[ROL]
     WHERE rol_nombre  IS NULL OR  rol_nombre LIKE CONCAT('%',@nombre_rol,'%') AND
-	rol_activo IS NULL OR rol_activo = @activo
-
-
+	rol_activo = @activo AND @nombre_funcionalidad IS NULL OR @nombre_funcionalidad 
+	 IN (select func_detalle from MACACO_NOT_NULL.ROL a join MACACO_NOT_NULL.ROL_FUNCIONALIDAD b on a.rol_id = b.rol_id
+	join MACACO_NOT_NULL.FUNCIONALIDAD c on c.func_id = b.func_id
+	where rol_nombre IS NULL OR  rol_nombre LIKE CONCAT('%',@nombre_rol,'%'))
+	
 
 END
 GO;

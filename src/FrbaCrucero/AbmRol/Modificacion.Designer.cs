@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ModificacionTable = new System.Windows.Forms.DataGridView();
+            this.modificacionTable = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.Rol = new System.Windows.Forms.TextBox();
@@ -39,21 +39,21 @@
             this.columnRol_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRol_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnSelection = new System.Windows.Forms.DataGridViewButtonColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.ModificacionTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modificacionTable)).BeginInit();
             this.SuspendLayout();
             // 
-            // ModificacionTable
+            // modificacionTable
             // 
-            this.ModificacionTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ModificacionTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.modificacionTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.modificacionTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnRol_Id,
             this.columnRol_Name,
             this.columnSelection});
-            this.ModificacionTable.Location = new System.Drawing.Point(37, 120);
-            this.ModificacionTable.Name = "ModificacionTable";
-            this.ModificacionTable.Size = new System.Drawing.Size(555, 176);
-            this.ModificacionTable.TabIndex = 9;
-            this.ModificacionTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.modificacionTable.Location = new System.Drawing.Point(37, 120);
+            this.modificacionTable.Name = "modificacionTable";
+            this.modificacionTable.Size = new System.Drawing.Size(555, 176);
+            this.modificacionTable.TabIndex = 9;
+            this.modificacionTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // button2
             // 
@@ -148,7 +148,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Funcionalidad);
             this.Controls.Add(this.Activo);
-            this.Controls.Add(this.ModificacionTable);
+            this.Controls.Add(this.modificacionTable);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Rol);
@@ -156,7 +156,7 @@
             this.Name = "Modificacion";
             this.Text = "Modificacion";
             this.Load += new System.EventHandler(this.Modificacion_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.ModificacionTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modificacionTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -164,7 +164,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView ModificacionTable;
+        private System.Windows.Forms.DataGridView modificacionTable;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox Rol;
