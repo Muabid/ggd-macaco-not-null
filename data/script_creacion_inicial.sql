@@ -700,7 +700,9 @@ GO;
 
 -----BuscarRol
 
-CREATE PROCEDURE [MACACO_NOT_NULL].BuscarRol
+
+
+ALTER PROCEDURE [MACACO_NOT_NULL].BuscarRol
 @nombre_rol NVARCHAR(255),
 @activo BIT,
 @nombre_funcionalidad NVARCHAR(255)
@@ -708,16 +710,25 @@ CREATE PROCEDURE [MACACO_NOT_NULL].BuscarRol
 AS
 BEGIN
 	
-	
-	SELECT rol_id,rol_nombre,rol_activo FROM [MACACO_NOT_NULL].[ROL]
-    WHERE rol_nombre  IS NULL OR  rol_nombre LIKE CONCAT('%',@nombre_rol,'%') AND
-	rol_activo = @activo AND @nombre_funcionalidad IS NULL OR @nombre_funcionalidad 
-	 IN (select func_detalle from MACACO_NOT_NULL.ROL a join MACACO_NOT_NULL.ROL_FUNCIONALIDAD b on a.rol_id = b.rol_id
-	join MACACO_NOT_NULL.FUNCIONALIDAD c on c.func_id = b.func_id
-	where rol_nombre IS NULL OR  rol_nombre LIKE CONCAT('%',@nombre_rol,'%'))
-	
+	DECLARE @roles TABLE (
+	rol_id INT,
+	rol_nombre NVARCHAR(255),
+	rol_activo BIT
+	)
 
+	INSERT INTO @roles
+	SELECT rol_id,rol_nombre,rol_activo FROM [MACACO_NOT_NULL].[ROL]
+    WHERE (rol_nombre IS NULL OR  rol_nombre LIKE CONCAT('%',@nombre_rol,'%'))AND
+	rol_activo = @activo 
+	
+	SELECT rol_id,rol_nombre,rol_activo FROM @roles as r
+	WHERE @nombre_funcionalidad IS NULL OR @nombre_funcionalidad 
+	 IN (select func_detalle from MACACO_NOT_NULL.ROL a join MACACO_NOT_NULL.ROL_FUNCIONALIDAD b on a.rol_id = b.rol_id
+	join MACACO_NOT_NULL.FUNCIONALIDAD c on c.func_id = b.func_id WHERE a.rol_id = r.rol_id)
+	
 END
+
+
 GO;
 ---------------BAJA---------------
 CREATE PROCEDURE [MACACO_NOT_NULL].BajaRol

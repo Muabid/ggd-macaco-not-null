@@ -21,15 +21,15 @@ namespace FrbaCrucero.Utils
                 ",[func_detalle] FROM [GD1C2019].[MACACO_NOT_NULL].[FUNCIONALIDAD] ORDER BY [func_detalle] ASC");
            DataTable table = Utils.Database.getData(command);
 
-          // return table.Rows.Cast<DataRow>().
-            //   Select(row => new Funcionalidad(int.Parse(row["func_id"]), row["func_detalle"].ToString())).ToList<Funcionalidad>();
-           return null;
+           return table.Rows.Cast<DataRow>().
+               Select(row => new Funcionalidad(int.Parse(row["func_id"].ToString()), row["func_detalle"].ToString())).ToList<Funcionalidad>();
+           
        }
 
        public DataTable getFuncionalidades(Rol rol)
        {
            SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].GetFuncionalidades");
-           cmd.Parameters.Add(rol.id);
+           cmd.Parameters.Add("@rol_id",SqlDbType.Int).Value = rol.id;
            return Database.getDataProcedure(cmd);
        }
 
