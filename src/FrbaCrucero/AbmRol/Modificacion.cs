@@ -34,13 +34,16 @@ namespace FrbaCrucero.AbmRol
 
 
             String rol = Rol.Text;
-            String funcionalidad = ((Funcionalidad)comboBoxFuncionalidades.SelectedItem).nombre;
+            Funcionalidad funcionalidad = (Funcionalidad)comboBoxFuncionalidades.SelectedItem;
+
+
+
+            String funcionalidadaStr = funcionalidad != null ? funcionalidad.nombre : null;
             String activo = (String)Activo.Checked.ToString();
             MessageBox.Show(activo);
-            MessageBox.Show(funcionalidad);
             MessageBox.Show(rol);
 
-            modificacionTable.DataSource = this.getRoles(rol, funcionalidad, activo);
+            modificacionTable.DataSource = this.getRoles(rol, funcionalidadaStr, activo);
 
 
 

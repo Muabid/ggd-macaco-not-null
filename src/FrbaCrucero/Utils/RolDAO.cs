@@ -23,13 +23,13 @@ namespace FrbaCrucero.Utils
 
            return table.Rows.Cast<DataRow>().
                Select(row => new Funcionalidad(int.Parse(row["func_id"].ToString()), row["func_detalle"].ToString())).ToList<Funcionalidad>();
-           return null;
+           
        }
 
        public DataTable getFuncionalidades(Rol rol)
        {
            SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].GetFuncionalidades");
-           cmd.Parameters.Add(rol.id);
+           cmd.Parameters.Add("@rol_id",SqlDbType.Int).Value = rol.id;
            return Database.getDataProcedure(cmd);
        }
 
