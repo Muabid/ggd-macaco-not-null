@@ -58,7 +58,7 @@ namespace FrbaCrucero.AbmRol
 
             if (e.RowIndex >= 0)
             {
-                if (e.ColumnIndex == 1)
+                if (e.ColumnIndex == table_funcionalidades.Columns["Eliminar"].Index)
                 {
                     table_funcionalidades.Rows.RemoveAt(e.RowIndex);
                 }
