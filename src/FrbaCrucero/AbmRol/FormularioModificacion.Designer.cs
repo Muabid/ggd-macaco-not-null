@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btn_limpiar = new System.Windows.Forms.Button();
             this.btn_guardar = new System.Windows.Forms.Button();
             this.comboBoxFuncionalidades = new System.Windows.Forms.ComboBox();
@@ -41,7 +42,9 @@
             this.idRolFuncionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Funcionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.table_funcionalidades)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_limpiar
@@ -66,6 +69,7 @@
             // 
             // comboBoxFuncionalidades
             // 
+            this.comboBoxFuncionalidades.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFuncionalidades.FormattingEnabled = true;
             this.comboBoxFuncionalidades.Location = new System.Drawing.Point(103, 67);
             this.comboBoxFuncionalidades.Name = "comboBoxFuncionalidades";
@@ -78,6 +82,7 @@
             this.NombreTextBox.Name = "NombreTextBox";
             this.NombreTextBox.Size = new System.Drawing.Size(100, 20);
             this.NombreTextBox.TabIndex = 8;
+            this.NombreTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.NombreTextBox_Validating);
             // 
             // label2
             // 
@@ -159,10 +164,15 @@
             this.Eliminar.Name = "Eliminar";
             this.Eliminar.ReadOnly = true;
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // FormularioModificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.ClientSize = new System.Drawing.Size(611, 386);
             this.Controls.Add(this.btn_activar);
             this.Controls.Add(this.BotonAgregar);
@@ -176,6 +186,7 @@
             this.Name = "FormularioModificacion";
             this.Text = "FormularioModificacion";
             ((System.ComponentModel.ISupportInitialize)(this.table_funcionalidades)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,5 +207,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn idRolFuncionalidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Funcionalidad;
         private System.Windows.Forms.DataGridViewButtonColumn Eliminar;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

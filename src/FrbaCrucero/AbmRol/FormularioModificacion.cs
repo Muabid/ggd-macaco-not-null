@@ -79,35 +79,55 @@ namespace FrbaCrucero.AbmRol
         {
 
             Funcionalidad funcionalidad = (Funcionalidad)comboBoxFuncionalidades.SelectedItem;
-            //foreach (DataGridViewRow row in table_funcionalidades.Rows)
-            //{
-            //    if (row.Cells["func_id"].Value.Equals(funcionalidad.id))
-            //        throw new Exception("El rol ya contiene la funcionalidad: " + funcionalidad.nombre);
-            //}
-            if (funcionalidad != null)
+            DataTable dt = table_funcionalidades.DataSource as DataTable;
+            if (dt.Select("func_id = " + funcionalidad.id).Count() > 0)
+               MessageBox.Show("Ya contiene esa funcionalidad");
+            else
             {
-                DataTable dt = table_funcionalidades.DataSource as DataTable;
-                DataRow row = dt.NewRow();
-                row["func_id"] = funcionalidad.id;
-                row["func_detalle"] = funcionalidad.nombre;
-                dt.Rows.Add(row);
+                if (funcionalidad != null)
+                {
+
+                    DataRow row = dt.NewRow();
+                    row["func_id"] = funcionalidad.id;
+                    row["func_detalle"] = funcionalidad.nombre;
+                    dt.Rows.Add(row);
+                }
             }
+           
         }
 
 
         private void btn_guardar_Click(object sender, EventArgs e)
         {
-            try
+            if (ValidateChildren())
             {
-                DataTable dt = table_funcionalidades.DataSource as DataTable;
-                DataTable funcionalidades = dt.Copy();
-                rolDao.updateRol(rol.id, NombreTextBox.Text, funcionalidades);
+                try
+                {
+
+                    DataTable dt = table_funcionalidades.DataSource as DataTable;
+                    DataTable funcionalidades = dt.Copy();
+                    rolDao.updateRol(rol.id, NombreTextBox.Text, funcionalidades);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+          
            
+        }
+
+        private void NombreTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(NombreTextBox.Text))
+            {
+                e.Cancel = false;
+            }
+            else
+            {
+                e.Cancel = true;
+                errorProvider.SetError(NombreTextBox, "Debe ingresar un nombre");
+            }
         }
     }
 }

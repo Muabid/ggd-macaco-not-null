@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.modificacionTable = new System.Windows.Forms.DataGridView();
+            this.columnRol_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnRol_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnSelection = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Rol_activo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.Rol = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Activo = new System.Windows.Forms.CheckBox();
-            this.columnRol_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnRol_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnSelection = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Rol_activo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxFuncionalidades = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.modificacionTable)).BeginInit();
@@ -58,6 +58,34 @@
             this.modificacionTable.Size = new System.Drawing.Size(555, 176);
             this.modificacionTable.TabIndex = 9;
             this.modificacionTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // columnRol_Id
+            // 
+            this.columnRol_Id.DataPropertyName = "rol_id";
+            this.columnRol_Id.HeaderText = "Rol ID";
+            this.columnRol_Id.Name = "columnRol_Id";
+            this.columnRol_Id.ReadOnly = true;
+            // 
+            // columnRol_Name
+            // 
+            this.columnRol_Name.DataPropertyName = "rol_nombre";
+            this.columnRol_Name.HeaderText = "Nombre del Rol";
+            this.columnRol_Name.Name = "columnRol_Name";
+            this.columnRol_Name.ReadOnly = true;
+            // 
+            // columnSelection
+            // 
+            this.columnSelection.HeaderText = "Seleccionar";
+            this.columnSelection.Name = "columnSelection";
+            this.columnSelection.ReadOnly = true;
+            // 
+            // Rol_activo
+            // 
+            this.Rol_activo.DataPropertyName = "rol_activo";
+            this.Rol_activo.HeaderText = "Rol_activo";
+            this.Rol_activo.Name = "Rol_activo";
+            this.Rol_activo.ReadOnly = true;
+            this.Rol_activo.Visible = false;
             // 
             // button2
             // 
@@ -108,34 +136,6 @@
             this.Activo.UseVisualStyleBackColor = true;
             this.Activo.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // columnRol_Id
-            // 
-            this.columnRol_Id.DataPropertyName = "rol_id";
-            this.columnRol_Id.HeaderText = "Rol ID";
-            this.columnRol_Id.Name = "columnRol_Id";
-            this.columnRol_Id.ReadOnly = true;
-            // 
-            // columnRol_Name
-            // 
-            this.columnRol_Name.DataPropertyName = "rol_nombre";
-            this.columnRol_Name.HeaderText = "Nombre del Rol";
-            this.columnRol_Name.Name = "columnRol_Name";
-            this.columnRol_Name.ReadOnly = true;
-            // 
-            // columnSelection
-            // 
-            this.columnSelection.HeaderText = "Seleccionar";
-            this.columnSelection.Name = "columnSelection";
-            this.columnSelection.ReadOnly = true;
-            // 
-            // Rol_activo
-            // 
-            this.Rol_activo.DataPropertyName = "rol_activo";
-            this.Rol_activo.HeaderText = "Rol_activo";
-            this.Rol_activo.Name = "Rol_activo";
-            this.Rol_activo.ReadOnly = true;
-            this.Rol_activo.Visible = false;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -148,6 +148,7 @@
             // 
             // comboBoxFuncionalidades
             // 
+            this.comboBoxFuncionalidades.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFuncionalidades.FormattingEnabled = true;
             this.comboBoxFuncionalidades.Location = new System.Drawing.Point(668, 42);
             this.comboBoxFuncionalidades.Name = "comboBoxFuncionalidades";
