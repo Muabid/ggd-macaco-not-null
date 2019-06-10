@@ -8,3 +8,8 @@ BEGIN
 	ON r_f.rol_id = r.rol_id
 	WHERE r.rol_id = @rol_id
 END
+
+
+CREATE
+
+CREATE PROCEDURE [MACACO_NOT_NULL].UpdateRol @funcionalidades TABLE(func_id INT)

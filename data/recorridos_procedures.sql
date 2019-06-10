@@ -161,7 +161,7 @@ BEGIN
 	THEN INSERT (tram_recorrido_id,tram_puerto_desde,tram_puerto_hasta,tram_precio_base)
 	VALUES (MACACO_NOT_NULL.GetRecorridoIdByRecoCodigo(@reco_codigo),t_n.ciudadOrigen, t_n.ciudadDestino,t_n.precio)
 	WHEN NOT MATCHED  BY SOURCE AND t.tram_recorrido_id = MACACO_NOT_NULL.GetRecorridoIdByRecoCodigo(@reco_codigo)
-	THEN DELETE;
+	 THEN DELETE;
 END
 GO;
 
