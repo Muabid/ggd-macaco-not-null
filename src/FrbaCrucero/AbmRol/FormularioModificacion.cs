@@ -39,6 +39,21 @@ namespace FrbaCrucero.AbmRol
         private void table_funcionalidades_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+            if (e.RowIndex >= 0)
+            {
+                if (e.ColumnIndex == 1)
+                {
+                    table_funcionalidades.Rows.RemoveAt(e.RowIndex);
+                }
+            }
+
+        }
+
+        private void btn_limpiar_Click(object sender, EventArgs e)
+        {
+            NombreTextBox.Text = rol.nombre;
+            table_funcionalidades.DataSource = rolDao.getFuncionalidades(rol);
+
         }
     }
 }
