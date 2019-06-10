@@ -20,8 +20,8 @@ namespace FrbaCrucero
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new BajaRecorrido());
-            Application.Run(new AbmCrucero.FormAlta());
+            Application.Run(new GenerarViaje());
+            
         }
     }
 }

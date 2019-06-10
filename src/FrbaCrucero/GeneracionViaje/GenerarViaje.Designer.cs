@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,8 +48,10 @@
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_aceptar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel_date.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -92,16 +95,18 @@
             this.recorridoText.Location = new System.Drawing.Point(148, 131);
             this.recorridoText.Name = "recorridoText";
             this.recorridoText.ReadOnly = true;
-            this.recorridoText.Size = new System.Drawing.Size(100, 20);
+            this.recorridoText.Size = new System.Drawing.Size(121, 20);
             this.recorridoText.TabIndex = 6;
+            this.recorridoText.Validating += new System.ComponentModel.CancelEventHandler(this.field_Validating);
             // 
             // cruceroText
             // 
             this.cruceroText.Location = new System.Drawing.Point(148, 174);
             this.cruceroText.Name = "cruceroText";
             this.cruceroText.ReadOnly = true;
-            this.cruceroText.Size = new System.Drawing.Size(100, 20);
+            this.cruceroText.Size = new System.Drawing.Size(121, 20);
             this.cruceroText.TabIndex = 7;
+            this.cruceroText.Validating += new System.ComponentModel.CancelEventHandler(this.field_Validating);
             // 
             // seleccionarRecorrido
             // 
@@ -146,15 +151,19 @@
             // 
             this.salidaText.Location = new System.Drawing.Point(148, 33);
             this.salidaText.Name = "salidaText";
-            this.salidaText.Size = new System.Drawing.Size(100, 20);
+            this.salidaText.ReadOnly = true;
+            this.salidaText.Size = new System.Drawing.Size(121, 20);
             this.salidaText.TabIndex = 12;
+            this.salidaText.Validating += new System.ComponentModel.CancelEventHandler(this.field_Validating);
             // 
             // llegadaText
             // 
             this.llegadaText.Location = new System.Drawing.Point(148, 81);
             this.llegadaText.Name = "llegadaText";
-            this.llegadaText.Size = new System.Drawing.Size(100, 20);
+            this.llegadaText.ReadOnly = true;
+            this.llegadaText.Size = new System.Drawing.Size(121, 20);
             this.llegadaText.TabIndex = 13;
+            this.llegadaText.Validating += new System.ComponentModel.CancelEventHandler(this.field_Validating);
             // 
             // btn_seleccionar_salida
             // 
@@ -180,7 +189,10 @@
             // 
             this.monthCalendar.FirstDayOfWeek = System.Windows.Forms.Day.Sunday;
             this.monthCalendar.Location = new System.Drawing.Point(0, 0);
+            this.monthCalendar.MaxSelectionCount = 1;
             this.monthCalendar.Name = "monthCalendar";
+            this.monthCalendar.ShowToday = false;
+            this.monthCalendar.ShowTodayCircle = false;
             this.monthCalendar.TabIndex = 16;
             // 
             // panel_date
@@ -188,7 +200,7 @@
             this.panel_date.Controls.Add(this.btn_cancelar);
             this.panel_date.Controls.Add(this.btn_aceptar);
             this.panel_date.Controls.Add(this.label5);
-            this.panel_date.Controls.Add(this.dateTimePicker1);
+            this.panel_date.Controls.Add(this.dateTimePicker);
             this.panel_date.Controls.Add(this.monthCalendar);
             this.panel_date.Location = new System.Drawing.Point(385, 33);
             this.panel_date.Name = "panel_date";
@@ -204,6 +216,7 @@
             this.btn_cancelar.TabIndex = 20;
             this.btn_cancelar.Text = "Cancelar";
             this.btn_cancelar.UseVisualStyleBackColor = true;
+            this.btn_cancelar.Click += new System.EventHandler(this.btn_cancelar_Click);
             // 
             // btn_aceptar
             // 
@@ -223,20 +236,25 @@
             this.label5.TabIndex = 18;
             this.label5.Text = "Hora";
             // 
-            // dateTimePicker1
+            // dateTimePicker
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker1.Location = new System.Drawing.Point(74, 174);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.ShowUpDown = true;
-            this.dateTimePicker1.Size = new System.Drawing.Size(72, 20);
-            this.dateTimePicker1.TabIndex = 17;
-            this.dateTimePicker1.Value = new System.DateTime(2019, 6, 9, 18, 19, 0, 0);
+            this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker.Location = new System.Drawing.Point(74, 174);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.ShowUpDown = true;
+            this.dateTimePicker.Size = new System.Drawing.Size(72, 20);
+            this.dateTimePicker.TabIndex = 17;
+            this.dateTimePicker.Value = new System.DateTime(2019, 6, 9, 0, 0, 0, 0);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // GenerarViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.ClientSize = new System.Drawing.Size(624, 344);
             this.Controls.Add(this.panel_date);
             this.Controls.Add(this.btn_seleccionar_llegada);
@@ -257,6 +275,7 @@
             this.Text = "GenerarViaje";
             this.panel_date.ResumeLayout(false);
             this.panel_date.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -281,8 +300,9 @@
         private System.Windows.Forms.MonthCalendar monthCalendar;
         private System.Windows.Forms.Panel panel_date;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.Button btn_cancelar;
         private System.Windows.Forms.Button btn_aceptar;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

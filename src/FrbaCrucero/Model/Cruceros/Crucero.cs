@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace FrbaCrucero.Model.Cruceros
 {
 
-    class Crucero:IFunciones
+   public class Crucero:IFunciones
     {
         SqlConnection cn = new SqlConnection(
                 ConfigurationManager.ConnectionStrings["FRBACrucero"].ConnectionString

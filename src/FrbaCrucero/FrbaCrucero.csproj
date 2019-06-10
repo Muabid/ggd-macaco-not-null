@@ -178,7 +178,7 @@
     <Compile Include="GeneracionViaje\SeleccionRecorrido.Designer.cs">
       <DependentUpon>SeleccionRecorrido.cs</DependentUpon>
     </Compile>
-    <Compile Include="ICrucero.cs" />
+    <Compile Include="Forms\ICruceroForm.cs" />
     <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,7 +191,6 @@
     <Compile Include="Model\Cruceros\Crucero.cs" />
     <Compile Include="Model\Cruceros\IFunciones.cs" />
     <Compile Include="Model\Cruceros\TipoServicio.cs" />
-    <Compile Include="Model\Cruceros\Ubigeo.cs" />
     <Compile Include="Model\Recorridos\Puerto.cs" />
     <Compile Include="Model\Recorridos\Recorrido.cs" />
     <Compile Include="Model\Recorridos\Tramo.cs" />

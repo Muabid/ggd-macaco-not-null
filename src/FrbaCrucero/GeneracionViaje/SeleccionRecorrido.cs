@@ -59,6 +59,7 @@ namespace FrbaCrucero.GeneracionViaje
                 int id = Convert.ToInt32(recorridosTable["id", e.RowIndex].Value);
                 Decimal codigo = Convert.ToDecimal(recorridosTable["codigoColumn", e.RowIndex].Value);
                 generarViaje.updateRecorrido(new Recorrido(id,codigo));
+                this.Close();
             }
         }
 

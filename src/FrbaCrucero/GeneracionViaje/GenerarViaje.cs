@@ -28,23 +28,38 @@ namespace FrbaCrucero.GeneracionViaje
 
         private void guardar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                validate();
+
+                SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].GenerarViaje");
+                cmd.Parameters.Add("@fecha_salida", SqlDbType.DateTime2).Value = salida;
+                cmd.Parameters.Add("@fecha_llegada", SqlDbType.DateTime2).Value = llegada;
+                cmd.Parameters.Add("@recorrido_id", SqlDbType.Int).Value = recorrido.id;
+                cmd.Parameters.Add("@crucero_id", SqlDbType.Int).Value = crucero.cruc_id;
+                Database.executeProcedure(cmd);
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR",
+               MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void validate()
         {
+            String error = "";
+            if (!this.ValidateChildren())
+                error = error + "Faltan completar campos \n";
+            
+            if(salida > llegada)
+               error = error + "Fecha de llegada anterior a la de salida";
 
-        }
-
-
-        private void generarViaje() 
-        {
-            SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].GenerarViaje");
-            cmd.Parameters.Add("@fecha_salida",SqlDbType.DateTime2).Value = salida;
-            cmd.Parameters.Add("@fecha_llegada", SqlDbType.DateTime2).Value = llegada;
-            cmd.Parameters.Add("@recorrido_id", SqlDbType.Int).Value = recorrido.id;
-            cmd.Parameters.Add("@crucero_id", SqlDbType.Int).Value = crucero.cruc_id;
-            Database.executeProcedure(cmd);
+            if (error.Length > 0)
+                throw new Exception(error);
         }
 
 
@@ -67,29 +82,66 @@ namespace FrbaCrucero.GeneracionViaje
 
         private void seleccionarCrucero_Click(object sender, EventArgs e)
         {
-            new FormListadoCruceros(this,DateTime.Now,DateTime.Now.AddMonths(1)).Show();
+            //new FormListadoCruceros(this,DateTime.Now,DateTime.Now.AddMonths(1)).Show();
         }
 
         private void btn_seleccionar_llegada_Click(object sender, EventArgs e)
         {
             panel_date.Visible = true;
+            btn_aceptar.Click -= btn_seleccionar_salida_Aceptar;
+            btn_aceptar.Click += btn_seleccionar_llegada_Aceptar;
         }
 
         private void btn_seleccionar_salida_Click(object sender, EventArgs e)
         {
             panel_date.Visible = true;
-            //btn_aceptar.
+            btn_aceptar.Click += btn_seleccionar_salida_Aceptar;
+            btn_aceptar.Click -= btn_seleccionar_llegada_Aceptar;
+            
         }
 
         private void btn_seleccionar_salida_Aceptar(object sender, EventArgs e)
         {
-            panel_date.Visible = true;
-            
+            salida = monthCalendar.SelectionStart.Add(dateTimePicker.Value.TimeOfDay);
+            salidaText.Text = salida.ToString();
+            resetPanel();
         }
+
+      
 
         private void btn_seleccionar_llegada_Aceptar(object sender, EventArgs e)
         {
-            //DateTime llegada = monthCalendar;
+            llegada = monthCalendar.SelectionStart.Add(dateTimePicker.Value.TimeOfDay);
+            llegadaText.Text = llegada.ToString();
+            resetPanel();
+        }
+
+        private void resetPanel()
+        {
+            monthCalendar.SelectionStart = DateTime.Today;
+            dateTimePicker.Value = DateTime.Today;
+            panel_date.Visible = false;
+        }
+
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            resetPanel();
+        }
+
+        private void field_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox txtBox = (TextBox)sender;
+            Console.WriteLine(txtBox.Text);
+            if (String.IsNullOrEmpty(txtBox.Text))
+            {
+                e.Cancel = true;
+                errorProvider.SetError(txtBox, "Campo requerido");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider.SetError(txtBox, String.Empty);
+            }
         }
 
 
