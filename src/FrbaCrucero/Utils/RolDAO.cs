@@ -33,5 +33,24 @@ namespace FrbaCrucero.Utils
            return Database.getDataProcedure(cmd);
        }
 
+
+       public DataTable getFuncionalidadesXRol(Rol rol)
+       {
+           SqlCommand cmd = Database.createCommand("SELECT rol_funcionalidad_id ,func_id, func_detalle "
+           + "FROM [MACACO_NOT_NULL].RolesXFuncionalidades WHERE rol_id = @rol_id");
+           cmd.Parameters.Add("@rol_id", SqlDbType.Int).Value = rol.id;
+           return Database.getData(cmd);
+       }
+
+       public void updateRol(int id, String nombre, DataTable funcionalidades)
+       {
+
+           SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].UpdateRol");
+           cmd.Parameters.Add("@rol_id", SqlDbType.Int).Value = id;
+           cmd.Parameters.Add("@nombre", SqlDbType.NVarChar).Value = nombre;
+           cmd.Parameters.Add("@funcionalidades",SqlDbType.Structured).Value = funcionalidades;
+           Database.executeProcedure(cmd);
+       }
+
     }
 }

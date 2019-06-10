@@ -23,31 +23,21 @@ namespace FrbaCrucero.AbmRol
             InitializeComponent();
             this.rol = rol;
             NombreTextBox.Text = rol.nombre;
-            btn_activar.Visible = !rol.activo;
-            table_funcionalidades.DataSource = rolDao.getFuncionalidades(rol);
+            btn_activar.Visible = rol.activo;
+            populateFuncionalidades(rol);
             var funcionalidades = rolDao.getFuncionalidades();
             foreach (Funcionalidad funcionalidad in funcionalidades)
             {
                 comboBoxFuncionalidades.Items.Add(funcionalidad);
             }
         }
-        
 
-        private void button3_Click(object sender, EventArgs e)
+        private void populateFuncionalidades(Rol rol)
         {
 
-            Funcionalidad funcionalidad = (Funcionalidad)comboBoxFuncionalidades.SelectedItem;
-            String funcionalidadaStr = funcionalidad != null ? funcionalidad.nombre : null;
-            if (funcionalidadaStr != null)
-            {
-                DataTable algo = table_funcionalidades.DataSource as DataTable;
-                DataRow row = algo.NewRow();
-                row["func_id"] = funcionalidad.id;
-                row["func_detalle"] = funcionalidad.nombre;
-                algo.Rows.Add(row);
-            }
+            table_funcionalidades.DataSource = rolDao.getFuncionalidadesXRol(rol);
         }
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -61,6 +51,7 @@ namespace FrbaCrucero.AbmRol
                 if (e.ColumnIndex == table_funcionalidades.Columns["Eliminar"].Index)
                 {
                     table_funcionalidades.Rows.RemoveAt(e.RowIndex);
+                    ((DataTable)table_funcionalidades.DataSource).Rows.RemoveAt(e.RowIndex); 
                 }
             }
 
@@ -70,7 +61,7 @@ namespace FrbaCrucero.AbmRol
         {
             NombreTextBox.Text = rol.nombre;
             table_funcionalidades.DataSource = rolDao.getFuncionalidades(rol);
-
+            
         }
 
         private void btn_activar_Click(object sender, EventArgs e)
@@ -82,6 +73,41 @@ namespace FrbaCrucero.AbmRol
 
            
             MessageBox.Show("Se activo el rol");
+        }
+
+        private void BotonAgregar_Click(object sender, EventArgs e)
+        {
+
+            Funcionalidad funcionalidad = (Funcionalidad)comboBoxFuncionalidades.SelectedItem;
+            //foreach (DataGridViewRow row in table_funcionalidades.Rows)
+            //{
+            //    if (row.Cells["func_id"].Value.Equals(funcionalidad.id))
+            //        throw new Exception("El rol ya contiene la funcionalidad: " + funcionalidad.nombre);
+            //}
+            if (funcionalidad != null)
+            {
+                DataTable dt = table_funcionalidades.DataSource as DataTable;
+                DataRow row = dt.NewRow();
+                row["func_id"] = funcionalidad.id;
+                row["func_detalle"] = funcionalidad.nombre;
+                dt.Rows.Add(row);
+            }
+        }
+
+
+        private void btn_guardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable dt = table_funcionalidades.DataSource as DataTable;
+                DataTable funcionalidades = dt.Copy();
+                rolDao.updateRol(rol.id, NombreTextBox.Text, funcionalidades);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
         }
     }
 }
