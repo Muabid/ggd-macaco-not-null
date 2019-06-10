@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using FrbaCrucero.Model.Roles;
 
 namespace FrbaCrucero.AbmRol
 {
@@ -92,8 +93,20 @@ namespace FrbaCrucero.AbmRol
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            FormularioModificacion fma = new FormularioModificacion();
-            fma.Show();
+
+            if (e.RowIndex > -1)
+            {
+                if (e.ColumnIndex == modificacionTable.Columns["columnSelection"].Index)
+                {
+                    int id = int.Parse(modificacionTable["columnRol_Id", e.RowIndex].Value.ToString());
+                    String nombre = modificacionTable["columnRol_Name", e.RowIndex].Value.ToString();
+                    bool activo = (bool)modificacionTable["Rol_activo", e.RowIndex].Value;
+                    Rol nuevoRol = new Rol(id,nombre);
+
+                    FormularioModificacion fma = new FormularioModificacion(nuevoRol);
+                    fma.Show();
+                }
+            }
         }
 
         public DataTable getRoles(String NombreRol, String Funcionalidad, String activo)

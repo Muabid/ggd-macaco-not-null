@@ -39,10 +39,7 @@ namespace FrbaCrucero.AbmRecorrido
         }
 
 
-        public void Show()
-        {
-            this.ShowDialog();
-        }
+        
 
         private void guardarButton_Click(object sender, EventArgs e)
         {

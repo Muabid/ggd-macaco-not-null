@@ -194,6 +194,7 @@
     <Compile Include="Model\Recorridos\Puerto.cs" />
     <Compile Include="Model\Recorridos\Recorrido.cs" />
     <Compile Include="Model\Recorridos\Tramo.cs" />
+    <Compile Include="Model\Roles\Rol.cs" />
     <Compile Include="PagoReserva\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

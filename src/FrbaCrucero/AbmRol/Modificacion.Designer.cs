@@ -39,16 +39,20 @@
             this.columnRol_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRol_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnSelection = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Rol_activo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.modificacionTable)).BeginInit();
             this.SuspendLayout();
             // 
             // modificacionTable
             // 
+            this.modificacionTable.AllowUserToAddRows = false;
+            this.modificacionTable.AllowUserToDeleteRows = false;
             this.modificacionTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.modificacionTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnRol_Id,
             this.columnRol_Name,
-            this.columnSelection});
+            this.columnSelection,
+            this.Rol_activo});
             this.modificacionTable.Location = new System.Drawing.Point(37, 120);
             this.modificacionTable.Name = "modificacionTable";
             this.modificacionTable.Size = new System.Drawing.Size(555, 176);
@@ -140,6 +144,14 @@
             this.columnSelection.Name = "columnSelection";
             this.columnSelection.ReadOnly = true;
             // 
+            // Rol_activo
+            // 
+            this.Rol_activo.DataPropertyName = "rol_activo";
+            this.Rol_activo.HeaderText = "Rol_activo";
+            this.Rol_activo.Name = "Rol_activo";
+            this.Rol_activo.ReadOnly = true;
+            this.Rol_activo.Visible = false;
+            // 
             // Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,5 +187,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRol_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRol_Name;
         private System.Windows.Forms.DataGridViewButtonColumn columnSelection;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Rol_activo;
     }
 }
