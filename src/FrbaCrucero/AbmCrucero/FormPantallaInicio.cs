@@ -21,5 +21,15 @@ namespace FrbaCrucero.AbmCrucero
         {
 
         }
+
+        private void btn_baja_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_modificacion_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

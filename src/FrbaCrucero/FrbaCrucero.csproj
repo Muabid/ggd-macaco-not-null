@@ -185,6 +185,18 @@
     <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.Designer.cs">
       <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\loginAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\loginAdmin.Designer.cs">
+      <DependentUpon>loginAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\pantallaInicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\pantallaInicio.Designer.cs">
+      <DependentUpon>pantallaInicio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Cruceros\BajaCrucero.cs" />
     <Compile Include="Model\Cruceros\Cabina.cs" />
     <Compile Include="Model\Cruceros\Compania.cs" />
@@ -274,6 +286,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ListadoEstadistico\ListadoEstadisticoForm.resx">
       <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\loginAdmin.resx">
+      <DependentUpon>loginAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\pantallaInicio.resx">
+      <DependentUpon>pantallaInicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

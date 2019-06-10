@@ -21,5 +21,12 @@ namespace FrbaCrucero.Login
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Login.loginAdmin  fm1 = new loginAdmin();
+            this.Hide();
+            fm1.Show();
+        }
     }
 }

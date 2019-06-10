@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,31 @@ namespace FrbaCrucero.Login
         public loginAdmin()
         {
             InitializeComponent();
+            passwordTextBox.PasswordChar = '*';
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            foreach (Control c in Controls)
+            {
+                if (c is TextBox)
+                {
+                    c.Text = "";
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SqlCommand procedure = Utils.Database.createCommand("MACACO_NOT_NULL.LogearUsuario ");
+            procedure.Parameters.Add("@username", SqlDbType.NVarChar).Value = usuarioTextBox.Text;
+            procedure.Parameters.Add("@password", SqlDbType.NVarChar).Value = passwordTextBox.Text;
+            Utils.Database.executeProcedure(procedure);
         }
     }
 }
