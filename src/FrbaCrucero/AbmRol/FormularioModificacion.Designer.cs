@@ -35,10 +35,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.table_funcionalidades = new System.Windows.Forms.DataGridView();
-            this.Funcionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.BotonAgregar = new System.Windows.Forms.Button();
             this.btn_activar = new System.Windows.Forms.Button();
+            this.Funcionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.idFunc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.table_funcionalidades)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,25 +101,13 @@
             this.table_funcionalidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.table_funcionalidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Funcionalidad,
-            this.Eliminar});
+            this.Eliminar,
+            this.idFunc});
             this.table_funcionalidades.Location = new System.Drawing.Point(27, 106);
             this.table_funcionalidades.Name = "table_funcionalidades";
             this.table_funcionalidades.Size = new System.Drawing.Size(414, 198);
             this.table_funcionalidades.TabIndex = 12;
             this.table_funcionalidades.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.table_funcionalidades_CellContentClick);
-            // 
-            // Funcionalidad
-            // 
-            this.Funcionalidad.DataPropertyName = "func_detalle";
-            this.Funcionalidad.HeaderText = "Funcionalidad";
-            this.Funcionalidad.Name = "Funcionalidad";
-            this.Funcionalidad.ReadOnly = true;
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "Eliminar";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.ReadOnly = true;
             // 
             // BotonAgregar
             // 
@@ -138,6 +127,26 @@
             this.btn_activar.TabIndex = 14;
             this.btn_activar.Text = "Activar";
             this.btn_activar.UseVisualStyleBackColor = true;
+            // 
+            // Funcionalidad
+            // 
+            this.Funcionalidad.DataPropertyName = "func_detalle";
+            this.Funcionalidad.HeaderText = "Funcionalidad";
+            this.Funcionalidad.Name = "Funcionalidad";
+            this.Funcionalidad.ReadOnly = true;
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.HeaderText = "Eliminar";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.ReadOnly = true;
+            // 
+            // idFunc
+            // 
+            this.idFunc.DataPropertyName = "func_id";
+            this.idFunc.HeaderText = "id";
+            this.idFunc.Name = "idFunc";
+            this.idFunc.Visible = false;
             // 
             // FormularioModificacion
             // 
@@ -171,8 +180,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView table_funcionalidades;
         private System.Windows.Forms.Button BotonAgregar;
+        private System.Windows.Forms.Button btn_activar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Funcionalidad;
         private System.Windows.Forms.DataGridViewButtonColumn Eliminar;
-        private System.Windows.Forms.Button btn_activar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idFunc;
     }
 }
