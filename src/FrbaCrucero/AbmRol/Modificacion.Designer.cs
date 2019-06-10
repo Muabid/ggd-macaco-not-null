@@ -34,12 +34,12 @@
             this.Rol = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Activo = new System.Windows.Forms.CheckBox();
-            this.Funcionalidad = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.columnRol_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnRol_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnSelection = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Rol_activo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxFuncionalidades = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.modificacionTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,23 +107,6 @@
             this.Activo.UseVisualStyleBackColor = true;
             this.Activo.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // Funcionalidad
-            // 
-            this.Funcionalidad.Location = new System.Drawing.Point(668, 44);
-            this.Funcionalidad.Name = "Funcionalidad";
-            this.Funcionalidad.Size = new System.Drawing.Size(100, 20);
-            this.Funcionalidad.TabIndex = 11;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(422, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(240, 24);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Nombre del Funcionalidad:";
-            // 
             // columnRol_Id
             // 
             this.columnRol_Id.DataPropertyName = "rol_id";
@@ -152,13 +135,31 @@
             this.Rol_activo.ReadOnly = true;
             this.Rol_activo.Visible = false;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(422, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(240, 24);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Nombre del Funcionalidad:";
+            // 
+            // comboBoxFuncionalidades
+            // 
+            this.comboBoxFuncionalidades.FormattingEnabled = true;
+            this.comboBoxFuncionalidades.Location = new System.Drawing.Point(668, 42);
+            this.comboBoxFuncionalidades.Name = "comboBoxFuncionalidades";
+            this.comboBoxFuncionalidades.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxFuncionalidades.TabIndex = 13;
+            // 
             // Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(786, 338);
+            this.ClientSize = new System.Drawing.Size(833, 338);
+            this.Controls.Add(this.comboBoxFuncionalidades);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.Funcionalidad);
             this.Controls.Add(this.Activo);
             this.Controls.Add(this.modificacionTable);
             this.Controls.Add(this.button2);
@@ -182,11 +183,11 @@
         private System.Windows.Forms.TextBox Rol;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox Activo;
-        private System.Windows.Forms.TextBox Funcionalidad;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRol_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRol_Name;
         private System.Windows.Forms.DataGridViewButtonColumn columnSelection;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Rol_activo;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBoxFuncionalidades;
     }
 }

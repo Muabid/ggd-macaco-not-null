@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using FrbaCrucero.Model.Roles;
+using FrbaCrucero.Model.Funcionalidad;
 
 namespace FrbaCrucero.AbmRol
 {
@@ -17,6 +18,13 @@ namespace FrbaCrucero.AbmRol
         public Modificacion()
         {
             InitializeComponent();
+
+            var funcionalidades = this.getFuncionalidades();
+            foreach (Funcionalidad funcionalidad in funcionalidades)
+            {
+                comboBoxFuncionalidades.Items.Add(funcionalidad);
+            }
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -24,7 +32,7 @@ namespace FrbaCrucero.AbmRol
 
 
             String rol = Rol.Text;
-            String funcionalidad = Funcionalidad.Text;
+            String funcionalidad = (String)comboBoxFuncionalidades.SelectedValue;
             String activo = (String)Activo.Checked.ToString();
             MessageBox.Show(activo);
             MessageBox.Show(funcionalidad);
@@ -34,46 +42,7 @@ namespace FrbaCrucero.AbmRol
 
 
 
-          //  try
-           // {
-
-               /* SqlCommand procedure = Utils.Database.createCommand("MACACO_NOT_NULL.BuscarRol");
-                procedure.Parameters.Add("@nombre_rol", SqlDbType.NVarChar).Value = NombreNuevoRol.Text;
-                procedure.Parameters.Add("@activo", SqlDbType.Bit).Value = 1;
-                
-
-                DataTable dt = new DataTable();
-                procedure.CommandType = CommandType.StoredProcedure;
-                SqlDataAdapter da = new SqlDataAdapter(procedure);
-                da.Fill(dt);
-                dataGridView1.DataSource = dt;
-                
-                dataGridView1.DataBind(dt);
-
-
-
-
-                SqlDataAdapter sqlDataAdap = new SqlDataAdapter(sql);
-                DataTable dtRecord = new DataTable();
-                sqlDataAdap.Fill(dtRecord);
-                dataGridView2.DataSource = dtRecord;
-                dataGridView2.ReadOnly = false;
-                dataGridView2.Columns[0].ReadOnly = true;
-                dataGridView2.Columns[1].ReadOnly = true;
-                Boolean str = this.prueba();
-                //Integer a = dataGridView2.Columns[0].DataGridView.Rows[0].ToString;
-                // str =(Boolean) dataGridView2.Rows[dataGridView2.SelectedRows[2].Index].Cells[2].Value;
-                //  Boolean a = this.dataGridView2_CellContentClick(dataGridView2);
-                connection.Close();
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("No se lleno el ComboBox: " + ex.ToString());
-            }
-                * 
-                */
+ 
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -135,6 +104,18 @@ namespace FrbaCrucero.AbmRol
 
             return Utils.Database.getDataProcedure(cmd);
         }
+
+        public List<Funcionalidad> getFuncionalidades()
+        {
+            SqlCommand command = FrbaCrucero.Utils.Database.createCommand("SELECT [func_id]"+
+                 ",[func_detalle] FROM [GD1C2019].[MACACO_NOT_NULL].[FUNCIONALIDAD] ORDER BY [func_detalle] ASC");
+            DataTable table = Utils.Database.getData(command);
+
+            return table.Rows.Cast<DataRow>().
+                Select(row => new Puerto(row["puer_id"].ToString(), row["puer_nombre"].ToString())).ToList<Puerto>();
+                    }
+
+
 
     }
 }
