@@ -38,7 +38,14 @@ namespace FrbaCrucero.AbmRol
 
             Funcionalidad funcionalidad = (Funcionalidad)comboBoxFuncionalidades.SelectedItem;
             String funcionalidadaStr = funcionalidad != null ? funcionalidad.nombre : null;
-            table_funcionalidades.Rows.Add(funcionalidadaStr);
+            if (funcionalidadaStr != null)
+            {
+                DataTable algo = table_funcionalidades.DataSource as DataTable;
+                DataRow row = algo.NewRow();
+                row["func_id"] = funcionalidad.id;
+                row["func_detalle"] = funcionalidad.nombre;
+                algo.Rows.Add(row);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
