@@ -134,6 +134,11 @@ namespace FrbaCrucero.AbmRecorrido
                 errorProvider.SetError(this.precioField, "Ingrese un precio");
             }
         }
+
+        private void destinoComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
         
     }
 }

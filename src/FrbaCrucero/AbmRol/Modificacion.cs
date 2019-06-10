@@ -19,12 +19,12 @@ namespace FrbaCrucero.AbmRol
         {
             InitializeComponent();
 
-            var funcionalidades = this.getFuncionalidades();
+          /*  var funcionalidades = null;
             foreach (Funcionalidad funcionalidad in funcionalidades)
             {
                 comboBoxFuncionalidades.Items.Add(funcionalidad);
             }
-
+            */
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -105,15 +105,7 @@ namespace FrbaCrucero.AbmRol
             return Utils.Database.getDataProcedure(cmd);
         }
 
-        public List<Funcionalidad> getFuncionalidades()
-        {
-            SqlCommand command = FrbaCrucero.Utils.Database.createCommand("SELECT [func_id]"+
-                 ",[func_detalle] FROM [GD1C2019].[MACACO_NOT_NULL].[FUNCIONALIDAD] ORDER BY [func_detalle] ASC");
-            DataTable table = Utils.Database.getData(command);
-
-            return table.Rows.Cast<DataRow>().
-                Select(row => new Puerto(row["puer_id"].ToString(), row["puer_nombre"].ToString())).ToList<Puerto>();
-                    }
+      
 
 
 

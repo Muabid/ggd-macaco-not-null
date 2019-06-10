@@ -191,6 +191,7 @@
     <Compile Include="Model\Cruceros\Crucero.cs" />
     <Compile Include="Model\Cruceros\IFunciones.cs" />
     <Compile Include="Model\Cruceros\TipoServicio.cs" />
+    <Compile Include="Model\Funcionalidad\Funcionalidad.cs" />
     <Compile Include="Model\Recorridos\Puerto.cs" />
     <Compile Include="Model\Recorridos\Recorrido.cs" />
     <Compile Include="Model\Recorridos\Tramo.cs" />
@@ -203,6 +204,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\RolDAO.cs" />
     <Compile Include="Utils\CruceroDAO.cs" />
     <Compile Include="Utils\RecorridoDAO.cs" />
     <Compile Include="Utils\PuertoDAO.cs" />

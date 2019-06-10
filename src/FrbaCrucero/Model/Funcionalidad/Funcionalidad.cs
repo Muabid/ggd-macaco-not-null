@@ -22,12 +22,11 @@ namespace FrbaCrucero.Model.Funcionalidad
 
 
 
-        
-        public String ToString(){
 
-            return this.nombre;
-
-        }
+       public override string ToString()
+       {
+           return nombre;
+       }
     }
 
 

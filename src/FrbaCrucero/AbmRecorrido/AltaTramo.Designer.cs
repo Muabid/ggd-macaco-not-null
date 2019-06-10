@@ -83,6 +83,7 @@
             this.destinoComboBox.Name = "destinoComboBox";
             this.destinoComboBox.Size = new System.Drawing.Size(121, 21);
             this.destinoComboBox.TabIndex = 3;
+            this.destinoComboBox.SelectedIndexChanged += new System.EventHandler(this.destinoComboBox_SelectedIndexChanged);
             this.destinoComboBox.Validating += new System.ComponentModel.CancelEventHandler(this.destinoComboBox_Validating);
             // 
             // label3
