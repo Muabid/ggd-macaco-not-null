@@ -10,21 +10,23 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using FrbaCrucero.Model.Roles;
 using FrbaCrucero.Model.Funcionalidad;
+using FrbaCrucero.Utils;
 
 namespace FrbaCrucero.AbmRol
 {
     public partial class Modificacion : Form
     {
+        private RolDAO rolDao = new RolDAO();
         public Modificacion()
         {
             InitializeComponent();
 
-          /*  var funcionalidades = null;
+           var funcionalidades =rolDao.getFuncionalidades() ;
             foreach (Funcionalidad funcionalidad in funcionalidades)
             {
                 comboBoxFuncionalidades.Items.Add(funcionalidad);
             }
-            */
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -32,7 +34,7 @@ namespace FrbaCrucero.AbmRol
 
 
             String rol = Rol.Text;
-            String funcionalidad = (String)comboBoxFuncionalidades.SelectedValue;
+            String funcionalidad = ((Funcionalidad)comboBoxFuncionalidades.SelectedItem).nombre;
             String activo = (String)Activo.Checked.ToString();
             MessageBox.Show(activo);
             MessageBox.Show(funcionalidad);
@@ -80,7 +82,7 @@ namespace FrbaCrucero.AbmRol
 
         public DataTable getRoles(String NombreRol, String Funcionalidad, String activo)
         {
-
+            MessageBox.Show(Funcionalidad);
             SqlCommand cmd = Utils.Database.createCommand("[MACACO_NOT_NULL].BuscarRol");
 
             SqlParameter a_rol = cmd.Parameters.Add("@nombre_rol", SqlDbType.NVarChar);
