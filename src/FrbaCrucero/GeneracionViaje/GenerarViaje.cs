@@ -30,13 +30,13 @@ namespace FrbaCrucero.GeneracionViaje
         {
             try
             {
-                validate();
+                //validate();
 
                 SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].GenerarViaje");
                 cmd.Parameters.Add("@fecha_salida", SqlDbType.DateTime2).Value = salida;
                 cmd.Parameters.Add("@fecha_llegada", SqlDbType.DateTime2).Value = llegada;
                 cmd.Parameters.Add("@recorrido_id", SqlDbType.Int).Value = recorrido.id;
-                cmd.Parameters.Add("@crucero_id", SqlDbType.Int).Value = crucero.cruc_id;
+                cmd.Parameters.Add("@crucero_id", SqlDbType.Int).Value = 1;
                 Database.executeProcedure(cmd);
 
             }

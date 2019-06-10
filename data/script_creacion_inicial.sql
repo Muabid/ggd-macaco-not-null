@@ -340,7 +340,6 @@ CREATE TABLE [MACACO_NOT_NULL].[RESERVA_CABINA] (
 END
 GO
 
-
 INSERT INTO [MACACO_NOT_NULL].[ROL] (rol_nombre,rol_activo)	
 	VALUES ('ADMINISTRADOR',1),('CLIENTE',1);
 
@@ -702,7 +701,7 @@ GO;
 
 
 
-ALTER PROCEDURE [MACACO_NOT_NULL].BuscarRol
+CREATE PROCEDURE [MACACO_NOT_NULL].BuscarRol
 @nombre_rol NVARCHAR(255),
 @activo BIT,
 @nombre_funcionalidad NVARCHAR(255)
@@ -727,9 +726,7 @@ BEGIN
 	join MACACO_NOT_NULL.FUNCIONALIDAD c on c.func_id = b.func_id WHERE a.rol_id = r.rol_id)
 	
 END
-
-
-GO;
+GO
 ---------------BAJA---------------
 CREATE PROCEDURE [MACACO_NOT_NULL].BajaRol
 @rol_id int

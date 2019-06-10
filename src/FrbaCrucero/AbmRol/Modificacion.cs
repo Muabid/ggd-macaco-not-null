@@ -20,8 +20,8 @@ namespace FrbaCrucero.AbmRol
         public Modificacion()
         {
             InitializeComponent();
-
-           var funcionalidades =rolDao.getFuncionalidades() ;
+            Activo.Checked = true;
+            var funcionalidades =rolDao.getFuncionalidades() ;
             foreach (Funcionalidad funcionalidad in funcionalidades)
             {
                 comboBoxFuncionalidades.Items.Add(funcionalidad);
@@ -36,18 +36,11 @@ namespace FrbaCrucero.AbmRol
             String rol = Rol.Text;
             Funcionalidad funcionalidad = (Funcionalidad)comboBoxFuncionalidades.SelectedItem;
 
-
-
             String funcionalidadaStr = funcionalidad != null ? funcionalidad.nombre : null;
             String activo = (String)Activo.Checked.ToString();
-            MessageBox.Show(activo);
-            MessageBox.Show(rol);
 
             modificacionTable.DataSource = this.getRoles(rol, funcionalidadaStr, activo);
 
-
-
- 
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
