@@ -28,5 +28,12 @@ namespace FrbaCrucero.Login
             this.Hide();
             fm1.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PantallaPrincipal otraPantalla = new PantallaPrincipal();
+            otraPantalla.Show();
+            this.Hide();
+        }
     }
 }

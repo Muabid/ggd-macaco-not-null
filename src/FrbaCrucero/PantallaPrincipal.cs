@@ -8,23 +8,34 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaCrucero.PagoReserva
+using System.Data.SqlClient;
+
+namespace FrbaCrucero
 {
-    public partial class Form1 : Form
+    public partial class PantallaPrincipal : Form
     {
-        public Form1()
+        public PantallaPrincipal()
         {
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
+            AbmRol.InicioRol fm1 = new AbmRol.InicioRol();
+            this.Hide();
+            fm1.Show();
+            
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+           
         }
     }
 }

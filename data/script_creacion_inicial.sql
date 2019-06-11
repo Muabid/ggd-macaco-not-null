@@ -1,6 +1,17 @@
 USE [GD1C2019]
 
 GO
+CREATE FUNCTION [MACACO_NOT_NULL].EncriptarPassword(@password NVARCHAR(255))
+RETURNS nvarchar(255)
+AS
+BEGIN
+	RETURN CONVERT(nvarchar(255),HASHBYTES('SHA2_256',@password),1)
+END
+
+GO
+
+
+GO
 
 IF NOT EXISTS (SELECT * FROM SYS.SCHEMAS WHERE name = 'MACACO_NOT_NULL')
 BEGIN
@@ -384,12 +395,12 @@ INSERT INTO [MACACO_NOT_NULL].[USUARIO] (
 		   ('Administrador','General',1,'Admin12345',45231111,'admin@gmail.com',CONVERT(datetime2(3),'1962-09-16 00:00:00.000',121),1,1);
 	
 INSERT INTO [MACACO_NOT_NULL].LOGIN (logi_username,logi_password,logi_usuario_id,logi_intento_fallido)	
-	VALUES ('rtesoro','w23e',(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 15948315 and usua_direccion = 'Avenida Callao 458'),0),
-		   ('mMozart','w23e',(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 37918442 and usua_direccion = 'Avenida Corrientes 6732'),0),
-	       ('aMontana','w23e',(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 61248982 and usua_direccion = 'Avenida Cordoba 8568'),0),
-	       ('jGonzalez','w23e',(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 40987234 and usua_direccion = 'Medrano 876'),0),
-		   ('jPerez','w23e',(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 40545987 and usua_direccion = 'Gestion123'),0),
-		   ('admin','w23e',(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 1 and usua_direccion = 'Admin12345'),0);
+	VALUES ('rtesoro',[MACACO_NOT_NULL].EncriptarPassword('w23e'),(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 15948315 and usua_direccion = 'Avenida Callao 458'),0),
+		   ('mMozart',[MACACO_NOT_NULL].EncriptarPassword('w23e'),(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 37918442 and usua_direccion = 'Avenida Corrientes 6732'),0),
+	       ('aMontana',[MACACO_NOT_NULL].EncriptarPassword('w23e'),(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 61248982 and usua_direccion = 'Avenida Cordoba 8568'),0),
+	       ('jGonzalez',[MACACO_NOT_NULL].EncriptarPassword('w23e'),(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 40987234 and usua_direccion = 'Medrano 876'),0),
+		   ('jPerez',[MACACO_NOT_NULL].EncriptarPassword('w23e'),(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 40545987 and usua_direccion = 'Gestion123'),0),
+		   ('admin',[MACACO_NOT_NULL].EncriptarPassword('w23e'),(select usua_id FROM [MACACO_NOT_NULL].[USUARIO] where usua_dni = 1 and usua_direccion = 'Admin12345'),0);
 		  
 INSERT INTO [MACACO_NOT_NULL].COMPANIA (comp_nombre)
 	select distinct CRU_FABRICANTE FROM [GD1C2019].[gd_esquema].[Maestra];
@@ -791,12 +802,6 @@ GO
 -------------------------- LOGIN Y SEGURIDAD ------------
 
 ---------------- FUNCION ENCRIPTACION PASSWORD ------------------------------------
-CREATE FUNCTION [MACACO_NOT_NULL].EncriptarPassword(@password NVARCHAR(255))
-RETURNS nvarchar(255)
-AS
-BEGIN
-	RETURN CONVERT(nvarchar(255),HASHBYTES('SHA2_256',@password),1)
-END
 
 GO
  
@@ -1204,7 +1209,7 @@ GO
 -------------- FUNCIONAMIENTO ----------------
 ---------- 1) AL INGRESAR EL CODIGO DE UNA RESERVA SE DEBE VERIFICAR QUE EXISTA ALGUNA CON ESE NUMERO. LLAMAR A FUNCION ComprobarExistenciaReserva
 ---------- 2) SE LLAMA A LA FUNCION detallesReserva(codigoReserva) QUE DEVUELVE TODA LA INFORMACION ASOCIADA A LA RESERVA
----------- 3) LUEGO DE INGRESAR TODOS LOS MEDIOS DE PAGO DESEADOS SE LLAMA 1 VEZ AL PROCEDURE AgregarPagoReserva_Y_PasajesAlCliente
+---------- 3) LUEGO DE INGRESAR TODO S LOS MEDIOS DE PAGO DESEADOS SE LLAMA 1 VEZ AL PROCEDURE AgregarPagoReserva_Y_PasajesAlCliente
 ---------- 4) LUEGO SE LLAMA AL PROCEDURE AgregarMedioDePago_Al_NuevoPago TANTAS VECES COMO MEDIO DE PAGO INGRESO EL USUARIO (PASANDO LOS PARAMETROS CORRECTOS EN CADA LLAMADA)
 ---------- 5) LUEGO SE LLAMA AL PROCEDURE EliminarReserva
 

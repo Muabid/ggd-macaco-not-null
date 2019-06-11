@@ -37,10 +37,24 @@ namespace FrbaCrucero.Login
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlCommand procedure = Utils.Database.createCommand("MACACO_NOT_NULL.LogearUsuario ");
-            procedure.Parameters.Add("@username", SqlDbType.NVarChar).Value = usuarioTextBox.Text;
-            procedure.Parameters.Add("@password", SqlDbType.NVarChar).Value = passwordTextBox.Text;
-            Utils.Database.executeProcedure(procedure);
+            try
+            {
+                SqlCommand procedure = Utils.Database.createCommand("MACACO_NOT_NULL.LogearUsuario ");
+                procedure.Parameters.Add("@username", SqlDbType.NVarChar).Value = usuarioTextBox.Text;
+                procedure.Parameters.Add("@password", SqlDbType.NVarChar).Value = passwordTextBox.Text;
+                Utils.Database.executeProcedure(procedure);
+                PantallaPrincipal pantalla = new PantallaPrincipal();
+                pantalla.Show();
+                this.Close();
+
+            }
+            catch (Exception exception) {
+
+                MessageBox.Show("Fallo");
+            
+            
+            }
+
         }
     }
 }
