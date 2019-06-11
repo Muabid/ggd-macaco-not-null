@@ -66,6 +66,11 @@ namespace FrbaCrucero.AbmCrucero
             //    cbo_modelo.ValueMember = "";
             //}
         }
+
+        private void btn_agregar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

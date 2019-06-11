@@ -87,12 +87,13 @@
             // 
             // botonBuscarReserva
             // 
-            this.botonBuscarReserva.Location = new System.Drawing.Point(520, 47);
+            this.botonBuscarReserva.Location = new System.Drawing.Point(519, 47);
             this.botonBuscarReserva.Name = "botonBuscarReserva";
             this.botonBuscarReserva.Size = new System.Drawing.Size(75, 23);
             this.botonBuscarReserva.TabIndex = 5;
             this.botonBuscarReserva.Text = "Buscar";
             this.botonBuscarReserva.UseVisualStyleBackColor = true;
+            this.botonBuscarReserva.Click += new System.EventHandler(this.botonBuscarReserva_Click);
             // 
             // PagoReserva
             // 
@@ -107,6 +108,7 @@
             this.Controls.Add(this.label1);
             this.Name = "PagoReserva";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.PagoReserva_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pagoReservaTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -78,7 +78,7 @@ namespace FrbaCrucero.AbmRol
 
         public DataTable getRoles(String NombreRol, String Funcionalidad, String activo)
         {
-            MessageBox.Show(Funcionalidad);
+            //MessageBox.Show(Funcionalidad);
             SqlCommand cmd = Utils.Database.createCommand("[MACACO_NOT_NULL].BuscarRol");
 
             SqlParameter a_rol = cmd.Parameters.Add("@nombre_rol", SqlDbType.NVarChar);
