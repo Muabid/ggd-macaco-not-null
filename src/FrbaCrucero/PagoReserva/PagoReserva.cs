@@ -53,13 +53,35 @@ namespace FrbaCrucero.PagoReserva
         private void botonBuscarReserva_Click(object sender, EventArgs e)
         {
 
-            SqlCommand function = Utils.Database.createCommand("MACACO_NOT_NULL.ComprobarExistenciaReserva");
-            function.Parameters.Add("@codigo_reserva", SqlDbType.Decimal).Value = int.Parse(codigoReservaBox.Text);
-            MessageBox.Show(codigoReservaBox.Text);
 
-            decimal resultado = Utils.Database.executeScalarDecimal(function);
+            //sqlparameter codigo = new sqlparameter("@codigo", sqldbtype.decimal);
+            //codigo.value = decimal.parse(codigoreservabox.text);
+
+            //sqlcommand function = utils.database.createcommand("select macaco_not_null.comprobarexistenciareserva(@codigo)");
+
+            // messagebox.show(codigoreservabox.text);
+
+            //decimal resultado = utils.database.executescalardecimal(function);
 
 
+
+
+
+
+
+
+
+            SqlCommand cmd = new SqlCommand("SELECT  MACACO_NOT_NULL.ComprobarExistenciaReserva(@codigo)");
+
+            SqlParameter value = new SqlParameter("@Value", SqlDbType.Decimal);
+
+            value.Value = Decimal.Parse(codigoReservaBox.Text);
+
+            cmd.Parameters.Add(value);
+
+            decimal resultado = Utils.Database.executeScalarDecimal(cmd);
+
+            
             if (resultado == 1)
             {
 
