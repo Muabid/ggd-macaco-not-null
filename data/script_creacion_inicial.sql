@@ -805,27 +805,33 @@ GO
 
 GO
  
-CREATE PROCEDURE [MACACO_NOT_NULL].LogearUsuario 
+ALTER PROCEDURE [MACACO_NOT_NULL].LogearUsuario 
 @username NVARCHAR(255),
 @password NVARCHAR(255)
 AS
 BEGIN
-	DECLARE @intentosFallidosActuales int
+	DECLARE @intentosFallidos INT
+	DECLARE @intentosRestantes INT
 	IF(NOT EXISTS(SELECT logi_usuario_id FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username))
 	BEGIN
 			RAISERROR ('ERROR: Loggin incorrecto, no existe ningun usuario con el username ingresado',16,1)
 	END
 	ELSE
-	BEGIN	
-		SET @intentosFallidosActuales = (SELECT logi_intento_fallido FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username)
-		IF(NOT EXISTS(SELECT logi_usuario_id FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username AND logi_password	= [MACACO_NOT_NULL].EncriptarPassword(@password)))
-		BEGIN						
-			BEGIN TRANSACTION
-				UPDATE [MACACO_NOT_NULL].LOGIN SET logi_intento_fallido = (@intentosFallidosActuales + 1) WHERE logi_username = @username
-			COMMIT TRANSACTION
-			RAISERROR ('ERROR: Loggin incorrecto para el usuario %s .',16,1,@username)
-		END
-		ELSE 
+	BEGIN
+		IF (EXISTS(SELECT 1 FROM [MACACO_NOT_NULL].LOGIN JOIN [MACACO_NOT_NULL].USUARIO ON (logi_usuario_id=usua_id)
+		 WHERE logi_username = @username AND usua_activo = 0))
+			RAISERROR ('ERROR: Usuario %s bloqueado.',16,1,@username)		
+		ELSE IF(NOT EXISTS(SELECT logi_usuario_id FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username AND logi_password	= @password))
+		BEGIN
+			SET @intentosFallidos = (SELECT logi_intento_fallido FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username) +1					
+			UPDATE [MACACO_NOT_NULL].LOGIN SET logi_intento_fallido = @intentosFallidos WHERE logi_username = @username
+			SET @intentosRestantes = 3-@intentosFallidos
+			IF(@intentosRestantes = 0)
+				RAISERROR('ERROR: Supero el límite de intentos. Usuario bloqueado',16,1);
+			ELSE
+				RAISERROR ('ERROR: Loggin incorrecto para el usuario %s. Intentos restantes: %i.',16,1,@username,@intentosRestantes)
+		END	
+		ELSE
 		BEGIN
 			BEGIN TRANSACTION
 				UPDATE [MACACO_NOT_NULL].LOGIN SET logi_intento_fallido = 0 WHERE logi_username = @username
@@ -841,11 +847,12 @@ GO
  
 -----------------------------TRIGGER-------------------------------------
 ----- SE EJECUTA POST LOGIN FALLIDO --------
-CREATE TRIGGER [MACACO_NOT_NULL].TRIGGER_BLOQUEAR_USUARIO_POR_LOGIN_FALLIDO ON [MACACO_NOT_NULL].LOGIN AFTER UPDATE
+ALTER TRIGGER [MACACO_NOT_NULL].TRIGGER_BLOQUEAR_USUARIO_POR_LOGIN_FALLIDO ON [MACACO_NOT_NULL].LOGIN AFTER UPDATE
 AS
 BEGIN
-	IF (select logi_intento_fallido from inserted)>=3
-		UPDATE [MACACO_NOT_NULL].USUARIO set usua_activo = 0 WHERE usua_id = (select logi_usuario_id from inserted)
+		SET NOCOUNT ON;
+		UPDATE [MACACO_NOT_NULL].USUARIO set usua_activo = 0 WHERE usua_id in 
+		(select logi_usuario_id from inserted where logi_intento_fallido >=3)
 END
 
 GO

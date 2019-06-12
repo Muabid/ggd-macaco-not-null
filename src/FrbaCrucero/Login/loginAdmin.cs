@@ -50,7 +50,7 @@ namespace FrbaCrucero.Login
             }
             catch (Exception exception) {
 
-                MessageBox.Show("Fallo");
+                MessageBox.Show(exception.Message);
             
             
             }
