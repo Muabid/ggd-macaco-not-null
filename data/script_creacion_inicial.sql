@@ -1243,7 +1243,7 @@ END
 
 GO
 
-ALTER PROCEDURE [MACACO_NOT_NULL].AgregarPagoReserva_Y_PasajesAlCliente
+CREATE PROCEDURE [MACACO_NOT_NULL].AgregarPagoReserva_Y_PasajesAlCliente
 @codigo_reserva DECIMAL(18,0)
 AS
 BEGIN 
@@ -1296,7 +1296,7 @@ GO
 
 -- Agregar a la consulta la logica para que devuelva el puerto origen y destino del recorrido -------  VER ------
 
-ALTER FUNCTION [MACACO_NOT_NULL].DetallesReserva(@codigo_reserva [decimal] (18,0))
+CREATE FUNCTION [MACACO_NOT_NULL].DetallesReserva(@codigo_reserva [decimal] (18,0))
     RETURNS @datosReserva TABLE (		
       rese_codigo [decimal](18,0),
       rese_fecha  [datetime2](3),
@@ -1363,7 +1363,7 @@ BEGIN
 	INNER JOIN [MACACO_NOT_NULL].TRAMO on tram_recorrido_id = reco_id
 	INNER JOIN [MACACO_NOT_NULL].PUERTO P1 on tram_puerto_desde = P1.puer_id
 	INNER JOIN [MACACO_NOT_NULL].PUERTO P2 on tram_puerto_hasta = P2.puer_id
-	WHERE rese_codigo = @codigo_reserva -- ver porque devuelve dos reservas  iguales XD 
+	WHERE rese_codigo = @codigo_reserva -- ver porque devuelve dos reservas  iguales XD (hay que sacar el top1)
 
     RETURN;
 END;
