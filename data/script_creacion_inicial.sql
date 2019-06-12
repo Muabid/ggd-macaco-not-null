@@ -1243,7 +1243,7 @@ END
 
 GO
 
-CREATE PROCEDURE [MACACO_NOT_NULL].AgregarPagoReserva_Y_PasajesAlCliente
+ALTER PROCEDURE [MACACO_NOT_NULL].AgregarPagoReserva_Y_PasajesAlCliente
 @codigo_reserva DECIMAL(18,0)
 AS
 BEGIN 
@@ -1296,7 +1296,7 @@ GO
 
 -- Agregar a la consulta la logica para que devuelva el puerto origen y destino del recorrido -------  VER ------
 
-CREATE FUNCTION [MACACO_NOT_NULL].DetallesReserva(@codigo_reserva [decimal] (18,0))
+ALTER FUNCTION [MACACO_NOT_NULL].DetallesReserva(@codigo_reserva [decimal] (18,0))
     RETURNS @datosReserva TABLE (		
       rese_codigo [decimal](18,0),
       rese_fecha  [datetime2](3),
@@ -1306,13 +1306,13 @@ CREATE FUNCTION [MACACO_NOT_NULL].DetallesReserva(@codigo_reserva [decimal] (18,
 	  usua_direccion [nvarchar](255),
 	  usua_telefono [int],
 	  usua_fecha_nac [datetime2](3),
-	  pasa_codigo decimal(18,0),
-	  pasa_precio decimal (18,2),
 	  viaj_fecha_salida datetime2(3), 
 	  viaj_fecha_llegada datetime2(3),
 	  viaj_fecha_llegada_estimada datetime2(2), 
 	  cabi_nro decimal (18,0),
 	  cabi_piso decimal (18,0),
+	  cabina_id int,
+	  rese_cabi_costo decimal (18,2),
 	  tipo_servicio_descripcion nvarchar(255),
 	  tipo_servicio_porc_recargo [decimal](18,2),
 	  cruc_nombre [nvarchar](255),
@@ -1326,7 +1326,7 @@ CREATE FUNCTION [MACACO_NOT_NULL].DetallesReserva(@codigo_reserva [decimal] (18,
 AS
 BEGIN
     INSERT INTO @datosReserva
-    SELECT 
+    SELECT top 1
       rese_codigo ,
       rese_fecha ,
 	  usua_nombre,
@@ -1335,13 +1335,13 @@ BEGIN
 	  usua_direccion,
 	  usua_telefono ,
 	  usua_fecha_nac ,
-	  pasa_codigo,
-	  pasa_precio,
 	  viaj_fecha_salida, 
 	  viaj_fecha_llegada,
 	  viaj_fecha_llegada_estimada, 
 	  cabi_nro,
 	  cabi_piso,
+	  cabina_id,
+	  rese_cabi_costo,
 	  tipo_servicio_descripcion,
 	  tipo_servicio_porc_recargo,
 	  cruc_nombre,
@@ -1349,11 +1349,10 @@ BEGIN
 	  comp_nombre,
 	  reco_codigo,
 	  P1.puer_nombre,
-	  P2.puer_id,
+	  P2.puer_nombre,
 	  tram_precio_base
     FROM [MACACO_NOT_NULL].[RESERVA]
 	INNER JOIN [MACACO_NOT_NULL].USUARIO ON usua_id = rese_usuario_id
-	INNER JOIN [MACACO_NOT_NULL].PASAJE on rese_id = pasa_reserva_id
 	INNER JOIN [MACACO_NOT_NULL].VIAJE on viaj_id = rese_viaje_id
 	INNER JOIN [MACACO_NOT_NULL].CRUCERO on viaj_crucero_id = cruc_id
 	INNER JOIN [MACACO_NOT_NULL].COMPANIA on comp_id = cruc_compañia_id
@@ -1364,8 +1363,8 @@ BEGIN
 	INNER JOIN [MACACO_NOT_NULL].TRAMO on tram_recorrido_id = reco_id
 	INNER JOIN [MACACO_NOT_NULL].PUERTO P1 on tram_puerto_desde = P1.puer_id
 	INNER JOIN [MACACO_NOT_NULL].PUERTO P2 on tram_puerto_hasta = P2.puer_id
-	WHERE rese_codigo = @codigo_reserva 
- 
+	WHERE rese_codigo = @codigo_reserva -- ver porque devuelve dos reservas  iguales XD 
+
     RETURN;
 END;
 
