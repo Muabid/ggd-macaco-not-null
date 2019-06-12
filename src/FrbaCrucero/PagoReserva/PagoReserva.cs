@@ -71,15 +71,15 @@ namespace FrbaCrucero.PagoReserva
 
 
 
-            SqlCommand cmd = new SqlCommand("SELECT  MACACO_NOT_NULL.ComprobarExistenciaReserva(@codigo)");
+            SqlCommand cmd = Utils.Database.createCommand("SELECT  MACACO_NOT_NULL.ComprobarExistenciaReserva(@codigo)");
 
-            SqlParameter value = new SqlParameter("@Value", SqlDbType.Decimal);
+            SqlParameter value = new SqlParameter("@codigo", SqlDbType.Decimal);
 
             value.Value = Decimal.Parse(codigoReservaBox.Text);
 
             cmd.Parameters.Add(value);
 
-            decimal resultado = Utils.Database.executeScalarDecimal(cmd);
+            int resultado = Utils.Database.executeScalar(cmd);
 
             
             if (resultado == 1)
@@ -87,10 +87,10 @@ namespace FrbaCrucero.PagoReserva
 
                 MessageBox.Show("Existe la reserva");
                 SqlCommand function2 = Utils.Database.createCommand("MACACO_NOT_NULL.DetallesReserva");
-                function2.Parameters.Add("@codigo_reserva", SqlDbType.Decimal).Value = int.Parse(codigoReservaBox.Text);
+                function2.Parameters.Add("@codigo_reserva", SqlDbType.Decimal).Value = Decimal.Parse(codigoReservaBox.Text);
                 SqlDataAdapter sqlDataAdap = new SqlDataAdapter(function2);
                 DataTable dtRecord = new DataTable();
-                pagoReservaTable.DataSource = this.getReservas(int.Parse(codigoReservaBox.Text));
+                pagoReservaTable.DataSource = this.getReservas(Decimal.Parse(codigoReservaBox.Text));
 
             }
             else
