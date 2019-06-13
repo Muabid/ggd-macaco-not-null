@@ -14,7 +14,6 @@ namespace FrbaCrucero.Utils
     {
 
 
-
        public List<Funcionalidad> getFuncionalidades()
        {
            SqlCommand command = FrbaCrucero.Utils.Database.createCommand("SELECT [func_id]" +

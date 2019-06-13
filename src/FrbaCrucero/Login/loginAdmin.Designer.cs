@@ -1,6 +1,6 @@
 ﻿namespace FrbaCrucero.Login
 {
-    partial class loginAdmin
+    partial class LoginAdmin
     {
         /// <summary>
         /// Required designer variable.
@@ -79,7 +79,7 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "Ingresar";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.ingresar_Click);
             // 
             // button2
             // 

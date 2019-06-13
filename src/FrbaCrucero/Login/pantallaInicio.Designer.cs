@@ -1,6 +1,6 @@
 ﻿namespace FrbaCrucero.Login
 {
-    partial class pantallaInicio
+    partial class PantallaInicio
     {
         /// <summary>
         /// Required designer variable.

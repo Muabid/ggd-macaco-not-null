@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrbaCrucero.Model.Roles;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,11 +11,16 @@ using System.Windows.Forms;
 
 namespace FrbaCrucero.Login
 {
-    public partial class pantallaInicio : Form
+    public partial class PantallaInicio : Form
     {
-        public pantallaInicio()
+
+        LoginAdmin loginAdmin;
+        PantallaPrincipal pantallaPrincipal; 
+        public PantallaInicio()
         {
             InitializeComponent();
+            loginAdmin = new LoginAdmin();
+            pantallaPrincipal = new PantallaPrincipal("CLIENTE");
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -24,15 +30,13 @@ namespace FrbaCrucero.Login
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Login.loginAdmin  fm1 = new loginAdmin();
             this.Hide();
-            fm1.Show();
+            loginAdmin.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            PantallaPrincipal otraPantalla = new PantallaPrincipal();
-            otraPantalla.Show();
+        {        
+            pantallaPrincipal.Show();
             this.Hide();
         }
     }
