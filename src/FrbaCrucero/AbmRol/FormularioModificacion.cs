@@ -129,5 +129,10 @@ namespace FrbaCrucero.AbmRol
                 errorProvider.SetError(NombreTextBox, "Debe ingresar un nombre");
             }
         }
+
+        private void FormularioModificacion_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
