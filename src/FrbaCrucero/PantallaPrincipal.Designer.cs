@@ -35,7 +35,7 @@
             this.btnGenerarViaje = new System.Windows.Forms.Button();
             this.btnListadoEstadistico = new System.Windows.Forms.Button();
             this.btnPagoReserva = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCerrar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnRol
@@ -65,6 +65,7 @@
             this.btnRecorrido.TabIndex = 2;
             this.btnRecorrido.Text = "ABM RECORRIDO";
             this.btnRecorrido.UseVisualStyleBackColor = true;
+            this.btnRecorrido.Click += new System.EventHandler(this.btnRecorrido_Click);
             // 
             // btnPasaje
             // 
@@ -83,6 +84,7 @@
             this.btnGenerarViaje.TabIndex = 4;
             this.btnGenerarViaje.Text = "GENERAR VIAJE";
             this.btnGenerarViaje.UseVisualStyleBackColor = true;
+            this.btnGenerarViaje.Click += new System.EventHandler(this.btnGenerarViaje_Click);
             // 
             // btnListadoEstadistico
             // 
@@ -92,6 +94,7 @@
             this.btnListadoEstadistico.TabIndex = 5;
             this.btnListadoEstadistico.Text = "LISTADO ESTADISTICO";
             this.btnListadoEstadistico.UseVisualStyleBackColor = true;
+            this.btnListadoEstadistico.Click += new System.EventHandler(this.btnListadoEstadistico_Click);
             // 
             // btnPagoReserva
             // 
@@ -102,21 +105,22 @@
             this.btnPagoReserva.Text = "PAGO RESERVA";
             this.btnPagoReserva.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnCerrar
             // 
-            this.button1.Location = new System.Drawing.Point(32, 335);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 40);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Cerrar sesión";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnCerrar.Location = new System.Drawing.Point(32, 335);
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Size = new System.Drawing.Size(75, 40);
+            this.btnCerrar.TabIndex = 7;
+            this.btnCerrar.Text = "Cerrar sesión";
+            this.btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // PantallaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(283, 387);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.btnPagoReserva);
             this.Controls.Add(this.btnListadoEstadistico);
             this.Controls.Add(this.btnGenerarViaje);
@@ -140,7 +144,7 @@
         private System.Windows.Forms.Button btnGenerarViaje;
         private System.Windows.Forms.Button btnListadoEstadistico;
         private System.Windows.Forms.Button btnPagoReserva;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCerrar;
     }
 }
 

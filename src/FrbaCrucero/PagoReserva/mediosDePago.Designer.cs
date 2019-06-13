@@ -1,6 +1,6 @@
 ﻿namespace FrbaCrucero.PagoReserva
 {
-    partial class mediosDePago
+    partial class MediosDePago
     {
         /// <summary>
         /// Required designer variable.

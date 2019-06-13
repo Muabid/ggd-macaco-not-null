@@ -12,6 +12,10 @@ using System.Data.SqlClient;
 using FrbaCrucero.Model.Roles;
 using FrbaCrucero.Utils;
 using FrbaCrucero.Login;
+using FrbaCrucero.AbmRol;
+using FrbaCrucero.AbmRecorrido;
+using FrbaCrucero.GeneracionViaje;
+using FrbaCrucero.ListadoEstadistico;
 
 namespace FrbaCrucero
 {
@@ -58,8 +62,32 @@ namespace FrbaCrucero
 
         private void btnRol_Click(object sender, EventArgs e)
         {
-
+            new RolAbm().Show(this);
         }
+
+        private void btnRecorrido_Click(object sender, EventArgs e)
+        {
+            new RecorridoAbm().Show(this);
+        }
+
+        private void btnGenerarViaje_Click(object sender, EventArgs e)
+        {
+            new GenerarViaje().Show(this);
+        }
+
+        private void btnListadoEstadistico_Click(object sender, EventArgs e)
+        {
+            new ListadoEstadisticoForm().Show(this);
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            
+            Owner.Show();    
+            this.Close();
+                  
+        }
+
 
      
     }

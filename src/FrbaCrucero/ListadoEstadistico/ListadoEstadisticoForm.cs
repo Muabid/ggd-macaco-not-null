@@ -16,8 +16,8 @@ namespace FrbaCrucero.ListadoEstadistico
 {
     public partial class ListadoEstadisticoForm : Form
     {
-        PantallaPrincipal pantallaPrincipal;
-        public ListadoEstadisticoForm(PantallaPrincipal pantallaPrincipal)
+
+        public ListadoEstadisticoForm()
         {
             InitializeComponent();
             semestre.Items.Add("1");
@@ -25,7 +25,7 @@ namespace FrbaCrucero.ListadoEstadistico
             tipoListado.Items.Add("Recorridos con más pasajes comprados");
             tipoListado.Items.Add("Recorridos con más cabinas libres en sus viajes");
             tipoListado.Items.Add("Cruceros con mayor cantidad de días fuera de servicio");
-            this.pantallaPrincipal = pantallaPrincipal;
+            
 
         }
 

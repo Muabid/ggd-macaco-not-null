@@ -26,9 +26,9 @@ namespace FrbaCrucero.PagoReserva
               procedure.Parameters.Add("@activo", SqlDbType.Bit).Value = 1;
               Utils.Database.executeProcedure(procedure); */
 
-            mediosDePago nuevo = new mediosDePago((codigoReservaBox.Text);
+            //mediosDePago nuevo = new mediosDePago(codigoReservaBox.Text);
 
-            nuevo.Show();
+            //nuevo.Show();
 
 
         }

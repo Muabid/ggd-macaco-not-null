@@ -1,6 +1,6 @@
-﻿namespace FrbaCrucero.AbmRecorrido
+﻿namespace FrbaCrucero.AbmRol
 {
-    partial class AbmRecorrido
+    partial class RolAbm
     {
         /// <summary>
         /// Required designer variable.
@@ -35,9 +35,9 @@
             // 
             // btnAlta
             // 
-            this.btnAlta.Location = new System.Drawing.Point(90, 34);
+            this.btnAlta.Location = new System.Drawing.Point(98, 36);
             this.btnAlta.Name = "btnAlta";
-            this.btnAlta.Size = new System.Drawing.Size(96, 23);
+            this.btnAlta.Size = new System.Drawing.Size(100, 23);
             this.btnAlta.TabIndex = 0;
             this.btnAlta.Text = "ALTA";
             this.btnAlta.UseVisualStyleBackColor = true;
@@ -45,9 +45,9 @@
             // 
             // btnBaja
             // 
-            this.btnBaja.Location = new System.Drawing.Point(90, 93);
+            this.btnBaja.Location = new System.Drawing.Point(98, 89);
             this.btnBaja.Name = "btnBaja";
-            this.btnBaja.Size = new System.Drawing.Size(96, 23);
+            this.btnBaja.Size = new System.Drawing.Size(100, 23);
             this.btnBaja.TabIndex = 1;
             this.btnBaja.Text = "BAJA";
             this.btnBaja.UseVisualStyleBackColor = true;
@@ -55,15 +55,15 @@
             // 
             // btnModificacion
             // 
-            this.btnModificacion.Location = new System.Drawing.Point(90, 148);
+            this.btnModificacion.Location = new System.Drawing.Point(98, 143);
             this.btnModificacion.Name = "btnModificacion";
-            this.btnModificacion.Size = new System.Drawing.Size(96, 23);
+            this.btnModificacion.Size = new System.Drawing.Size(100, 23);
             this.btnModificacion.TabIndex = 2;
             this.btnModificacion.Text = "MODIFICACIÓN";
             this.btnModificacion.UseVisualStyleBackColor = true;
             this.btnModificacion.Click += new System.EventHandler(this.btnModificacion_Click);
             // 
-            // AbmRecorrido
+            // RolAbm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -71,8 +71,8 @@
             this.Controls.Add(this.btnModificacion);
             this.Controls.Add(this.btnBaja);
             this.Controls.Add(this.btnAlta);
-            this.Name = "AbmRecorrido";
-            this.Text = "AbmRecorrido";
+            this.Name = "RolAbm";
+            this.Text = "RolAbm";
             this.ResumeLayout(false);
 
         }
