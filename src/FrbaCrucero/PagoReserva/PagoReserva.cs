@@ -28,7 +28,7 @@ namespace FrbaCrucero.PagoReserva
 
             mediosDePago nuevo = new mediosDePago(codigoReservaBox.Text);
 
-            nuevo.Show();
+            //nuevo.Show();
 
             this.Hide();
         }

@@ -13,12 +13,12 @@ namespace FrbaCrucero.Login
 {
     public partial class LoginAdmin : Form
     {
-        PantallaPrincipal pantallaPrincipal;
+      
         public LoginAdmin()
         {
             InitializeComponent();
             passwordTextBox.PasswordChar = '*';
-            pantallaPrincipal = new PantallaPrincipal("ADMINISTRADOR");
+          
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -46,8 +46,10 @@ namespace FrbaCrucero.Login
                 procedure.Parameters.Add("@password", SqlDbType.NVarChar).Value = passwordTextBox.Text;
                 Utils.Database.executeProcedure(procedure);
 
-                pantallaPrincipal.Show();
                 this.Close();
+                new PantallaPrincipal("ADMINISTRADOR").ShowDialog();
+                
+
 
             }
             catch (Exception exception) {

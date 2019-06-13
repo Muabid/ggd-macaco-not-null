@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace FrbaCrucero.PagoReserva
 {
-    public partial class mediosDePago : Form
+    public partial class MediosDePago : Form
     {
         public String codigo;
 

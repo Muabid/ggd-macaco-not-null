@@ -46,7 +46,7 @@ namespace FrbaCrucero.AbmRecorrido
                 String origen = (String)tramosTable["origenColumn", e.RowIndex].Value;
                 String destino = (String)tramosTable["destinoColumn", e.RowIndex].Value;
                 Decimal precio = (Decimal)tramosTable["precioColumn", e.RowIndex].Value;
-                new ModificarTramo(this).Show(origen, destino, precio, e.RowIndex);
+                new ModificacionTramo(this).Show(origen, destino, precio, e.RowIndex);
             }
             else if (e.ColumnIndex == tramosTable.Columns["borrarColumn"].Index) 
             {
@@ -153,7 +153,7 @@ namespace FrbaCrucero.AbmRecorrido
 
         private void agregarTramoButton_Click(object sender, EventArgs e)
         {
-            new ModificarTramo(this).Show();
+            new ModificacionTramo(this).Show();
         }
 
        

@@ -41,7 +41,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Usuario";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.usuario_Click);
             // 
             // button2
             // 
@@ -51,7 +51,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "Administrador";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.admin_Click);
             // 
             // label1
             // 
@@ -63,7 +63,7 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Elija su modo de ingreso";
             // 
-            // pantallaInicio
+            // PantallaInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -71,8 +71,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "pantallaInicio";
-            this.Text = "Form1";
+            this.Name = "PantallaInicio";
+            this.Text = "FRBA CRUCEROS";
             this.ResumeLayout(false);
             this.PerformLayout();
 

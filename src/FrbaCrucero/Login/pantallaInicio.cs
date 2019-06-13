@@ -14,13 +14,11 @@ namespace FrbaCrucero.Login
     public partial class PantallaInicio : Form
     {
 
-        LoginAdmin loginAdmin;
-        PantallaPrincipal pantallaPrincipal; 
+
         public PantallaInicio()
         {
             InitializeComponent();
-            loginAdmin = new LoginAdmin();
-            pantallaPrincipal = new PantallaPrincipal("CLIENTE");
+           
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -28,16 +26,14 @@ namespace FrbaCrucero.Login
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void admin_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            loginAdmin.Show();
+            new LoginAdmin().Show(this);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {        
-            pantallaPrincipal.Show();
-            this.Hide();
+        private void usuario_Click(object sender, EventArgs e)
+        {
+            new PantallaPrincipal("CLIENTE").ShowDialog(this);
         }
     }
 }

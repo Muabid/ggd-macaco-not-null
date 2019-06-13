@@ -76,6 +76,12 @@
       <DependentUpon>FormPantallaInicio.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmCrucero\SqlConecction.cs" />
+    <Compile Include="AbmRecorrido\RecorridoAbm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRecorrido\RecorridoAbm.Designer.cs">
+      <DependentUpon>RecorridoAbm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmRecorrido\AltaRecorrido.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,11 +112,11 @@
     <Compile Include="AbmRecorrido\ModificacionRecorrido.Designer.cs">
       <DependentUpon>ModificacionRecorrido.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRecorrido\ModificarTramo.cs">
+    <Compile Include="AbmRecorrido\ModificacionTramo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmRecorrido\ModificarTramo.Designer.cs">
-      <DependentUpon>ModificarTramo.cs</DependentUpon>
+    <Compile Include="AbmRecorrido\ModificacionTramo.Designer.cs">
+      <DependentUpon>ModificacionTramo.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRecorrido\RecorridoForm.cs">
       <SubType>Form</SubType>
@@ -142,29 +148,35 @@
     <Compile Include="AbmRol\Modificacion.Designer.cs">
       <DependentUpon>Modificacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmRol\RolAbm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\RolAbm.Designer.cs">
+      <DependentUpon>RolAbm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CompraReservaPasaje\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CompraReservaPasaje\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="PagoReserva\mediosDePago.cs">
+    <Compile Include="GeneracionViaje\GenerarViaje.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PagoReserva\mediosDePago.Designer.cs">
-      <DependentUpon>mediosDePago.cs</DependentUpon>
+    <Compile Include="GeneracionViaje\GenerarViaje.Designer.cs">
+      <DependentUpon>GenerarViaje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PagoReserva\MediosDePago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PagoReserva\MediosDePago.Designer.cs">
+      <DependentUpon>MediosDePago.cs</DependentUpon>
     </Compile>
     <Compile Include="PantallaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PantallaPrincipal.Designer.cs">
       <DependentUpon>PantallaPrincipal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GeneracionViaje\GenerarViaje.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GeneracionViaje\GenerarViaje.Designer.cs">
-      <DependentUpon>GenerarViaje.cs</DependentUpon>
     </Compile>
     <Compile Include="GeneracionViaje\SeleccionRecorrido.cs">
       <SubType>Form</SubType>
@@ -230,6 +242,9 @@
     <EmbeddedResource Include="AbmCrucero\FormPantallaInicio.resx">
       <DependentUpon>FormPantallaInicio.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AbmRecorrido\RecorridoAbm.resx">
+      <DependentUpon>RecorridoAbm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmRecorrido\AltaRecorrido.resx">
       <DependentUpon>AltaRecorrido.cs</DependentUpon>
     </EmbeddedResource>
@@ -245,8 +260,8 @@
     <EmbeddedResource Include="AbmRecorrido\ModificacionRecorrido.resx">
       <DependentUpon>ModificacionRecorrido.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmRecorrido\ModificarTramo.resx">
-      <DependentUpon>ModificarTramo.cs</DependentUpon>
+    <EmbeddedResource Include="AbmRecorrido\ModificacionTramo.resx">
+      <DependentUpon>ModificacionTramo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRecorrido\RecorridoForm.resx">
       <DependentUpon>RecorridoForm.cs</DependentUpon>
@@ -263,17 +278,17 @@
     <EmbeddedResource Include="AbmRol\Modificacion.resx">
       <DependentUpon>Modificacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmRol\PantallaInicio.resx">
-      <DependentUpon>PantallaInicio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PagoReserva\mediosDePago.resx">
-      <DependentUpon>mediosDePago.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PantallaPrincipal.resx">
-      <DependentUpon>PantallaPrincipal.cs</DependentUpon>
+    <EmbeddedResource Include="AbmRol\RolAbm.resx">
+      <DependentUpon>RolAbm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GeneracionViaje\GenerarViaje.resx">
       <DependentUpon>GenerarViaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PagoReserva\MediosDePago.resx">
+      <DependentUpon>MediosDePago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PantallaPrincipal.resx">
+      <DependentUpon>PantallaPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GeneracionViaje\SeleccionRecorrido.resx">
       <DependentUpon>SeleccionRecorrido.cs</DependentUpon>
