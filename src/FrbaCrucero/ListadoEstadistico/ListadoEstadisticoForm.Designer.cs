@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.limpiarButton = new System.Windows.Forms.Button();
             this.buscarButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.semestre = new System.Windows.Forms.ComboBox();
@@ -44,7 +45,6 @@
             this.tipoErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.anioErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.semestreErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.limpiarButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).BeginInit();
@@ -69,6 +69,16 @@
             this.panel1.Size = new System.Drawing.Size(514, 149);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // limpiarButton
+            // 
+            this.limpiarButton.Location = new System.Drawing.Point(48, 112);
+            this.limpiarButton.Name = "limpiarButton";
+            this.limpiarButton.Size = new System.Drawing.Size(75, 23);
+            this.limpiarButton.TabIndex = 8;
+            this.limpiarButton.Text = "Limpiar";
+            this.limpiarButton.UseVisualStyleBackColor = true;
+            this.limpiarButton.Click += new System.EventHandler(this.limpiarButton_Click);
             // 
             // buscarButton
             // 
@@ -173,8 +183,9 @@
             this.volverButton.Name = "volverButton";
             this.volverButton.Size = new System.Drawing.Size(89, 23);
             this.volverButton.TabIndex = 8;
-            this.volverButton.Text = "Volver";
+            this.volverButton.Text = "Atrás";
             this.volverButton.UseVisualStyleBackColor = false;
+            this.volverButton.Click += new System.EventHandler(this.volverButton_Click);
             // 
             // tipoErrorProvider
             // 
@@ -187,16 +198,6 @@
             // semestreErrorProvider
             // 
             this.semestreErrorProvider.ContainerControl = this;
-            // 
-            // limpiarButton
-            // 
-            this.limpiarButton.Location = new System.Drawing.Point(48, 112);
-            this.limpiarButton.Name = "limpiarButton";
-            this.limpiarButton.Size = new System.Drawing.Size(75, 23);
-            this.limpiarButton.TabIndex = 8;
-            this.limpiarButton.Text = "Limpiar";
-            this.limpiarButton.UseVisualStyleBackColor = true;
-            this.limpiarButton.Click += new System.EventHandler(this.limpiarButton_Click);
             // 
             // ListadoEstadisticoForm
             // 

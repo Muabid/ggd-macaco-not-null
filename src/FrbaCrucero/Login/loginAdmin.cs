@@ -11,12 +11,14 @@ using System.Windows.Forms;
 
 namespace FrbaCrucero.Login
 {
-    public partial class loginAdmin : Form
+    public partial class LoginAdmin : Form
     {
-        public loginAdmin()
+        PantallaPrincipal pantallaPrincipal;
+        public LoginAdmin()
         {
             InitializeComponent();
             passwordTextBox.PasswordChar = '*';
+            pantallaPrincipal = new PantallaPrincipal("ADMINISTRADOR");
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -35,7 +37,7 @@ namespace FrbaCrucero.Login
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ingresar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -43,8 +45,8 @@ namespace FrbaCrucero.Login
                 procedure.Parameters.Add("@username", SqlDbType.NVarChar).Value = usuarioTextBox.Text;
                 procedure.Parameters.Add("@password", SqlDbType.NVarChar).Value = passwordTextBox.Text;
                 Utils.Database.executeProcedure(procedure);
-                PantallaPrincipal pantalla = new PantallaPrincipal();
-                pantalla.Show();
+
+                pantallaPrincipal.Show();
                 this.Close();
 
             }
