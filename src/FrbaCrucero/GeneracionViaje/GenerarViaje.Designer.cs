@@ -38,7 +38,7 @@
             this.seleccionarRecorrido = new System.Windows.Forms.Button();
             this.seleccionarCrucero = new System.Windows.Forms.Button();
             this.guardar = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.salidaText = new System.Windows.Forms.TextBox();
             this.llegadaText = new System.Windows.Forms.TextBox();
             this.btn_seleccionar_salida = new System.Windows.Forms.Button();
@@ -138,14 +138,15 @@
             this.guardar.UseVisualStyleBackColor = true;
             this.guardar.Click += new System.EventHandler(this.guardar_Click);
             // 
-            // button2
+            // btnLimpiar
             // 
-            this.button2.Location = new System.Drawing.Point(69, 290);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Limpiar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Location = new System.Drawing.Point(69, 290);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 11;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // salidaText
             // 
@@ -261,7 +262,7 @@
             this.Controls.Add(this.btn_seleccionar_salida);
             this.Controls.Add(this.llegadaText);
             this.Controls.Add(this.salidaText);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.guardar);
             this.Controls.Add(this.seleccionarCrucero);
             this.Controls.Add(this.seleccionarRecorrido);
@@ -292,7 +293,7 @@
         private System.Windows.Forms.Button seleccionarRecorrido;
         private System.Windows.Forms.Button seleccionarCrucero;
         private System.Windows.Forms.Button guardar;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.TextBox salidaText;
         private System.Windows.Forms.TextBox llegadaText;
         private System.Windows.Forms.Button btn_seleccionar_salida;

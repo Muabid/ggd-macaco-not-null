@@ -20,4 +20,4 @@ cruc_id not in ( select viaj_crucero_id
 											baja_cruc_fecha_fuera_servicio between @fecha_salida and @fecha_salida
 											or baja_cruc_fecha_reinicio_servicio between @fecha_salida and @fecha_salida)
 
-exec MACACO_NOT_NULL.GetCruceros null, NULL,NULL,NULL,NULL,NULL									
+					
