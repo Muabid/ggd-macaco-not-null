@@ -12,14 +12,26 @@ namespace FrbaCrucero.PagoReserva
 {
     public partial class MediosDePago : Form
     {
-        public MediosDePago()
+        public String codigo;
+
+        public mediosDePago(String Codigo)
         {
             InitializeComponent();
+            this.codigo = Codigo;
+            reserva.Text = codigo;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            tablaMediosDePago.Rows.Add();
+        }
+
+        private void mediosDePago_Load(object sender, EventArgs e)
+        {
 
         }
+
+     
     }
 }
