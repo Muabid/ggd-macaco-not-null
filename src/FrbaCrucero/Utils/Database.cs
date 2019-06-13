@@ -131,5 +131,22 @@ namespace FrbaCrucero.Utils
         }
 
 
+        public static object orDbNull(object o)
+        {
+            return o != null ? o : DBNull.Value;
+        }
+
+        public static object orDbNull(String str)
+        {
+            return !String.IsNullOrEmpty(str) ? (object)str : DBNull.Value;
+        }
+
+
+        public static List<object> toList(DataTable table)
+        {
+            return table.Rows.Cast<DataRow>().Select(r => r[0]).ToList();
+        }
+
+
     }
 }

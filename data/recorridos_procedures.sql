@@ -28,7 +28,7 @@ BEGIN
 
 	RETURN(@origen);
 END
-GO;
+GO
 
 
 CREATE FUNCTION MACACO_NOT_NULL.ciudad_destino (@reco_id INT)  
@@ -45,10 +45,10 @@ BEGIN
 
 	RETURN(@destino)
 END
-GO;
+GO
 
 
-ALTER PROCEDURE [MACACO_NOT_NULL].getRecorridos @reco_codigo DECIMAL(18,0),
+CREATE PROCEDURE [MACACO_NOT_NULL].getRecorridos @reco_codigo DECIMAL(18,0),
 	@ciudad_origen NVARCHAR(256), @ciudad_destino NVARCHAR(256)
 AS
 BEGIN
@@ -68,7 +68,7 @@ BEGIN
 	AND (@ciudad_origen IS NULL OR (MACACO_NOT_NULL.ciudad_origen(t.tram_recorrido_id) = @ciudad_origen))
 	AND (@ciudad_destino IS NULL OR (MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) = @ciudad_destino)) 
 END
-GO;
+GO
 
 
 CREATE TYPE [MACACO_NOT_NULL].TRAMOTYPE AS TABLE   
@@ -77,7 +77,7 @@ CREATE TYPE [MACACO_NOT_NULL].TRAMOTYPE AS TABLE
 ,precio DECIMAL(18,2)
 ,indice INT
 ,tramoId INT )  
-GO; 
+GO
 
 
 CREATE PROCEDURE [MACACO_NOT_NULL].InsertRecorrido @reco_codigo decimal(18,0),
@@ -110,7 +110,7 @@ BEGIN
 		THROW;
 	END CATCH
 END 
-GO;
+GO
 
 CREATE PROCEDURE [MACACO_NOT_NULL].BajaRecorrido @reco_codigo decimal(18,0)
 AS
@@ -128,7 +128,7 @@ IF EXISTS (SELECT pasa_id FROM [MACACO_NOT_NULL].RECORRIDO AS r
 		SET reco_activo = 0
 		WHERE reco_codigo = @reco_codigo
 END
-GO;
+GO
 
 
 CREATE FUNCTION [MACACO_NOT_NULL].GetPuertoId (@puerto NVARCHAR(256))
@@ -139,10 +139,11 @@ BEGIN
 	SET @id = (SELECT puer_id FROM [MACACO_NOT_NULL].PUERTO WHERE puer_nombre = @puerto)
 	RETURN (@id)
 END
-GO;
+GO
 
 CREATE PROCEDURE [MACACO_NOT_NULL].GetPuertoByName @name NVARCHAR(256)
-AS 
+AS
+BEGIN 
 	SELECT puer_id,puer_nombre FROM [MACACO_NOT_NULL].PUERTO WHERE puer_nombre = @name
 END
 
@@ -163,7 +164,7 @@ BEGIN
 	WHEN NOT MATCHED  BY SOURCE AND t.tram_recorrido_id = MACACO_NOT_NULL.GetRecorridoIdByRecoCodigo(@reco_codigo)
 	 THEN DELETE;
 END
-GO;
+GO
 
 CREATE FUNCTION [MACACO_NOT_NULL].GetRecorridoIdByRecoCodigo (@reco_codigo DECIMAL(18,0))
 RETURNS INT
@@ -173,3 +174,4 @@ BEGIN
 	SET @reco_id = (SELECT reco_id FROM MACACO_NOT_NULL.RECORRIDO WHERE reco_codigo = @reco_codigo)
 	RETURN (@reco_id)
 END
+GO

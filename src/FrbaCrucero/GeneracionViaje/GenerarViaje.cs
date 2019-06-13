@@ -30,7 +30,7 @@ namespace FrbaCrucero.GeneracionViaje
         {
             try
             {
-                //validate();
+                validate();
 
                 SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].GenerarViaje");
                 cmd.Parameters.Add("@fecha_salida", SqlDbType.DateTime2).Value = salida;
@@ -38,6 +38,10 @@ namespace FrbaCrucero.GeneracionViaje
                 cmd.Parameters.Add("@recorrido_id", SqlDbType.Int).Value = recorrido.id;
                 cmd.Parameters.Add("@crucero_id", SqlDbType.Int).Value = 1;
                 Database.executeProcedure(cmd);
+                MessageBox.Show("Viaje generado con éxito","",
+             MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                this.Close();
+
 
             }
             catch(Exception ex)
@@ -82,7 +86,7 @@ namespace FrbaCrucero.GeneracionViaje
 
         private void seleccionarCrucero_Click(object sender, EventArgs e)
         {
-            //new FormListadoCruceros(this,DateTime.Now,DateTime.Now.AddMonths(1)).Show();
+            new SeleccionCruceros(salida,llegada).ShowDialog(this);
         }
 
         private void btn_seleccionar_llegada_Click(object sender, EventArgs e)
@@ -103,6 +107,7 @@ namespace FrbaCrucero.GeneracionViaje
         private void btn_seleccionar_salida_Aceptar(object sender, EventArgs e)
         {
             salida = monthCalendar.SelectionStart.Add(dateTimePicker.Value.TimeOfDay);
+            salidaText.Clear();
             salidaText.Text = salida.ToString();
             resetPanel();
         }
@@ -112,13 +117,13 @@ namespace FrbaCrucero.GeneracionViaje
         private void btn_seleccionar_llegada_Aceptar(object sender, EventArgs e)
         {
             llegada = monthCalendar.SelectionStart.Add(dateTimePicker.Value.TimeOfDay);
+            llegadaText.Clear();
             llegadaText.Text = llegada.ToString();
             resetPanel();
         }
 
         private void resetPanel()
         {
-            monthCalendar.SelectionStart = DateTime.Today;
             dateTimePicker.Value = DateTime.Today;
             panel_date.Visible = false;
         }
@@ -126,12 +131,12 @@ namespace FrbaCrucero.GeneracionViaje
         private void btn_cancelar_Click(object sender, EventArgs e)
         {
             resetPanel();
+
         }
 
         private void field_Validating(object sender, CancelEventArgs e)
         {
             TextBox txtBox = (TextBox)sender;
-            Console.WriteLine(txtBox.Text);
             if (String.IsNullOrEmpty(txtBox.Text))
             {
                 e.Cancel = true;
@@ -142,6 +147,20 @@ namespace FrbaCrucero.GeneracionViaje
                 e.Cancel = false;
                 errorProvider.SetError(txtBox, String.Empty);
             }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            salidaText.Text = null;
+            llegadaText.Clear();
+            cruceroText.Clear();
+            recorridoText.Text = null;
+            //salida = DateTime.Now;
+            //llegada = DateTime.Now;
+            //crucero = null;
+            //recorrido = null;
+            //btn_aceptar.Click -= btn_seleccionar_llegada_Aceptar;
+            //btn_cancelar.Click -= btn_seleccionar_salida_Aceptar;
         }
 
 

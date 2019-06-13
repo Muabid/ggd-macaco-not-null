@@ -5,5 +5,5 @@ AS
 		INSERT INTO [MACACO_NOT_NULL].VIAJE (viaj_fecha_salida,viaj_fecha_llegada_estimada,viaj_crucero_id,viaj_recorrido_id)
 		VALUES(@fecha_salida,@fecha_llegada,@crucero_id,@recorrido_id)
 	END
-GO;
+GO
 
