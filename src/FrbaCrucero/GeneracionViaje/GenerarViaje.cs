@@ -82,7 +82,7 @@ namespace FrbaCrucero.GeneracionViaje
 
         private void seleccionarCrucero_Click(object sender, EventArgs e)
         {
-            //new FormListadoCruceros(this,DateTime.Now,DateTime.Now.AddMonths(1)).Show();
+            new SeleccionCruceros(salida,llegada).ShowDialog(this);
         }
 
         private void btn_seleccionar_llegada_Click(object sender, EventArgs e)
