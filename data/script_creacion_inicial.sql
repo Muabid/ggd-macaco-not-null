@@ -605,7 +605,7 @@ INSERT INTO [MACACO_NOT_NULL].RESERVA_CABINA(
 			 SELECT SUM(tram_precio_base) * 
 			 (
 				select tipo_servicio_porc_recargo
-				from [MACACO_NOT_NULL].CABINA 
+				from [MACACO_NOT_NULL].CABINA inner join MACACO_NOT_NULL.TIPO_SERVICIO on cabi_tipo_servicio_id = tipo_servicio_id
 				where cabi_nro = CABINA_NRO
 				and cabi_piso = CABINA_PISO
                 and cabi_tipo_servicio_id = (select tipo_servicio_id from [MACACO_NOT_NULL].TIPO_SERVICIO where tipo_servicio_descripcion = CABINA_TIPO) 
@@ -726,7 +726,7 @@ BEGIN
 			END
 		END
 END
-GO;
+GO
 
 
 
@@ -984,12 +984,17 @@ BEGIN
 		FROM [MACACO_NOT_NULL].PAGO Pago 
 		INNER JOIN [MACACO_NOT_NULL].PASAJE Pasaje ON Pago.pago_id = Pasaje.pasa_pago_id 
 		WHERE pasa_baja_id = (SELECT MAX(baja_id) from [MACACO_NOT_NULL].BAJA_CRUCERO)
+	DELETE Reserva_Cabina
+		FROM [MACACO_NOT_NULL].RESERVA_CABINA Reserva_Cabina
+		INNER JOIN [MACACO_NOT_NULL].RESERVA Reserva ON Reserva.rese_id = Reserva_Cabina.reserva_id
+		INNER JOIN [MACACO_NOT_NULL].VIAJE Viaje ON Reserva.rese_viaje_id = Viaje.viaj_id
+		WHERE Viaje.viaj_crucero_id = @idCrucero
 	DELETE Reserva
 		FROM [MACACO_NOT_NULL].RESERVA Reserva 
-		INNER JOIN [MACACO_NOT_NULL].PASAJE Pasaje ON Reserva.rese_id = Pasaje.pasa_reserva_id
-		WHERE pasa_baja_id = (SELECT MAX(baja_id) from [MACACO_NOT_NULL].BAJA_CRUCERO)
+		INNER JOIN [MACACO_NOT_NULL].VIAJE Viaje ON Reserva.rese_viaje_id = Viaje.viaj_id
+		WHERE Viaje.viaj_crucero_id = @idCrucero
+	
 END
-
 GO
  
  -------------------------------- REEMPLAZAR CRUCERO POR OTRO ---------------------------
@@ -1110,7 +1115,7 @@ BEGIN
 	SET @fecha_reserva = (SELECT rese_fecha from [MACACO_NOT_NULL].[RESERVA] WHERE rese_codigo = @codigo_reserva)
 	IF (@fecha_reserva IS NULL)
 	BEGIN
-		RAISERROR ('ERROR: No existe ninguna reserva cuyo codigo sea: %d .',16,1,@codigo_reserva)
+		RAISERROR ('ERROR: No existe ninguna reserva para el codigo ingresado.',16,1)
 	END
 	ELSE
 	BEGIN
@@ -1161,16 +1166,14 @@ CREATE PROCEDURE [MACACO_NOT_NULL].GenerarReserva
 --agregar fechaNac telefono y mail y generar el rese_codigo para q no se repita
 AS
 BEGIN
-	INSERT INTO [MACACO_NOT_NULL].RESERVA (rese_usuario_id,rese_codigo,rese_fecha,rese_viaje_id)
-	VALUES (
-		(SELECT usua_id,(SELECT MAX(rese_id) from [MACACO_NOT_NULL].RESERVA) + 1 ,CONVERT(datetime2(3), GETDATE(),121),@idViaje
+	DECLARE @reseProxId INT 
+	SET @reseProxId = (SELECT MAX(rese_id) from [MACACO_NOT_NULL].RESERVA) + 1
+	INSERT INTO [MACACO_NOT_NULL].RESERVA (rese_usuario_id,rese_codigo,rese_fecha,rese_viaje_id)	
+		SELECT usua_id,@reseProxId,CONVERT(datetime2(3), GETDATE(),121),@idViaje
 		FROM [MACACO_NOT_NULL].USUARIO
 		WHERE usua_apellido = @apellido_usuario and usua_nombre = @nombre_usuario and usua_dni = @dni_usuario
-		and @direccion_usuario = usua_direccion)
-	)
-
+		and @direccion_usuario = usua_direccion
 END
-
 GO
 
 --------- PROCEDURE QUE AGREGA 1 CABINA A 1 RESERVA -----------
@@ -1320,8 +1323,6 @@ CREATE FUNCTION [MACACO_NOT_NULL].DetallesReserva(@codigo_reserva [decimal] (18,
 	  usua_direccion [nvarchar](255),
 	  usua_telefono [int],
 	  usua_fecha_nac [datetime2](3),
-	  pasa_codigo decimal(18,0),
-	  pasa_precio decimal (18,2),
 	  viaj_fecha_salida datetime2(3), 
 	  viaj_fecha_llegada datetime2(3),
 	  viaj_fecha_llegada_estimada datetime2(2), 
@@ -1329,6 +1330,7 @@ CREATE FUNCTION [MACACO_NOT_NULL].DetallesReserva(@codigo_reserva [decimal] (18,
 	  cabi_piso decimal (18,0),
 	  tipo_servicio_descripcion nvarchar(255),
 	  tipo_servicio_porc_recargo [decimal](18,2),
+	  rese_cabi_costo decimal (18,2),
 	  cruc_nombre [nvarchar](255),
 	  cruc_modelo [nvarchar](255),
 	  comp_nombre [nvarchar](255),
@@ -1349,8 +1351,6 @@ BEGIN
 	  usua_direccion,
 	  usua_telefono ,
 	  usua_fecha_nac ,
-	  pasa_codigo,
-	  pasa_precio,
 	  viaj_fecha_salida, 
 	  viaj_fecha_llegada,
 	  viaj_fecha_llegada_estimada, 
@@ -1358,6 +1358,7 @@ BEGIN
 	  cabi_piso,
 	  tipo_servicio_descripcion,
 	  tipo_servicio_porc_recargo,
+	  rese_cabi_costo,
 	  cruc_nombre,
 	  cruc_modelo,
 	  comp_nombre,
@@ -1367,7 +1368,6 @@ BEGIN
 	  tram_precio_base
     FROM [MACACO_NOT_NULL].[RESERVA]
 	INNER JOIN [MACACO_NOT_NULL].USUARIO ON usua_id = rese_usuario_id
-	INNER JOIN [MACACO_NOT_NULL].PASAJE on rese_id = pasa_reserva_id
 	INNER JOIN [MACACO_NOT_NULL].VIAJE on viaj_id = rese_viaje_id
 	INNER JOIN [MACACO_NOT_NULL].CRUCERO on viaj_crucero_id = cruc_id
 	INNER JOIN [MACACO_NOT_NULL].COMPANIA on comp_id = cruc_compañia_id
@@ -1635,4 +1635,4 @@ ELSE
 PRINT '------- ALL - DONE -------'    
 END
 
---exec dbo.CleanUpSchema 'MACACO_NOT_NULL'  EJEMPLO PARA BORRAR TODO
+exec dbo.CleanUpSchema 'MACACO_NOT_NULL'  EJEMPLO PARA BORRAR TODO
