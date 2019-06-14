@@ -18,6 +18,7 @@ namespace FrbaCrucero.GeneracionViaje
 
         private DateTime salida;
         private DateTime llegada;
+        private CruceroDAO dao;
         public SeleccionCruceros(DateTime salida, DateTime llegada)
         {
             InitializeComponent();
@@ -29,14 +30,11 @@ namespace FrbaCrucero.GeneracionViaje
 
         private void FormListadoCruceros_Load(object sender, EventArgs e)
         {
-            SqlCommand cmd = Database.createCommand("SELECT [comp_nombre] FROM [MACACO_NOT_NULL].COMPANIA");
-            DataTable companias = Database.getData(cmd);
-            cbo_compania.Items.AddRange(Database.toList(companias).ToArray());
+            var companias = dao.getCompanias().ToArray();
+            cbo_compania.Items.AddRange(companias);
 
-            SqlCommand cmd2 = Database.createCommand("SELECT DISTINCT [cruc_modelo] FROM [MACACO_NOT_NULL].CRUCERO");
-            DataTable modelos = Database.getData(cmd2);
-            cbo_modelo.Items.AddRange(Database.toList(modelos).ToArray());
-
+            var modelos = dao.getModelos().ToArray();
+            cbo_modelo.Items.AddRange(modelos);
 
         }
 

@@ -204,12 +204,14 @@ CREATE TABLE [MACACO_NOT_NULL].[CRUCERO] (
 	cruc_compañia_id  int FOREIGN KEY REFERENCES [MACACO_NOT_NULL].[COMPANIA] (comp_id), 
 	cruc_nombre [nvarchar](255),
 	cruc_modelo [nvarchar](50),
-	cruc_activo [bit],
+	cruc_activo [bit] DEFAULT 1,
 	cruc_fecha_alta [datetime2](3),
 	cruc_cantidad_cabinas [int]
 );
 END
 GO
+
+ALTER TABLE  [MACACO_NOT_NULL].[CRUCERO] ADD DEFAULT 1 FOR cruc_activo
 
 IF NOT EXISTS (
 	SELECT 1
@@ -1493,7 +1495,6 @@ DROP TABLE [MACACO_NOT_NULL].[ROL]
 DROP SEQUENCE [MACACO_NOT_NULL].CountBy1 
 
 DROP SCHEMA MACACO_NOT_NULL */
-
 
 
 /********************************************************

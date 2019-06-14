@@ -1,6 +1,8 @@
-﻿using System;
+﻿using FrbaCrucero.Model.Cruceros;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,40 @@ namespace FrbaCrucero.Utils
             DateTime fechaAlta, DateTime disponibilidadInicio, DateTime disponibilidadFin)
         {
             return null;
+        }
+
+        public List<Compania> getCompaniasObj()
+        {
+            SqlCommand cmd = Database.createCommand("SELECT [comp_id],[comp_nombre] FROM [MACACO_NOT_NULL].COMPANIA");
+            DataTable companias = Database.getData(cmd);
+            return companias.Rows.Cast<DataRow>().Select(row =>
+            {
+                int id = int.Parse(row[0].ToString());
+                string desc = row[1].ToString();
+                return new Compania(id, desc);
+            }).ToList<Compania>();
+        }
+
+        public List<object> getCompanias()
+        {
+            SqlCommand cmd = Database.createCommand("SELECT [comp_nombre] FROM [MACACO_NOT_NULL].COMPANIA");
+            DataTable companias = Database.getData(cmd);
+            return Database.toList(companias);
+        }
+
+        public List<object> getModelos()
+        {
+            SqlCommand cmd2 = Database.createCommand("SELECT DISTINCT [cruc_modelo] FROM [MACACO_NOT_NULL].CRUCERO");
+            DataTable modelos = Database.getData(cmd2);
+            return Database.toList(modelos);
+
+        }
+
+        public List<object> getTipoServicios()
+        {
+            SqlCommand cmd2 = Database.createCommand("SELECT  [tipo_servicio_descripcion] FROM [MACACO_NOT_NULL].TIPO_SERVICIO");
+            DataTable tiposServicios = Database.getData(cmd2);
+            return Database.toList(tiposServicios);
         }
     }
 }

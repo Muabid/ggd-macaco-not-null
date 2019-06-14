@@ -153,12 +153,6 @@
     <Compile Include="AbmRol\RolAbm.Designer.cs">
       <DependentUpon>RolAbm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CompraReservaPasaje\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CompraReservaPasaje\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="GeneracionViaje\SeleccionCruceros.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -337,6 +331,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AbmPuerto\" />
+    <Folder Include="CompraReservaPasaje\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

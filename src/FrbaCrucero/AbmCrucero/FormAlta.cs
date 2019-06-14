@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FrbaCrucero.Model.Cruceros;
+using FrbaCrucero.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -14,6 +16,9 @@ namespace FrbaCrucero.AbmCrucero
 {
     public partial class FormAlta : Form
     {
+
+        Crucero crucero = new Crucero();
+        CruceroDAO cruceroDao = new CruceroDAO();
         public FormAlta()
         {
             InitializeComponent();
@@ -31,6 +36,34 @@ namespace FrbaCrucero.AbmCrucero
 
         private void btn_guardar_Click(object sender, EventArgs e)
         {
+
+            DataTable dt = new DataTable();
+
+            //Adding the Columns.
+            foreach (DataGridViewColumn column in dgv_cabinas.Columns)
+            {
+                if(column.Index != 3)
+                    dt.Columns.Add(column.DataPropertyName);
+            }
+
+            //Adding the Rows.
+            foreach (DataGridViewRow row in dgv_cabinas.Rows)
+            {
+                DataRow drow = dt.NewRow();
+                drow["cabinas"] = int.Parse(row.Cells["cabinas"].Value.ToString());
+                drow["piso"] = int.Parse(row.Cells["piso"].Value.ToString());
+                drow["servicio"] = row.Cells["servicio"].ToString();
+                dt.Rows.Add(drow);
+            }
+            SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].CreateOrUpdateCrucero");
+            cmd.Parameters.Add("@nombre", SqlDbType.NVarChar).Value = crucero.cruc_nombre;
+            cmd.Parameters.Add("@modelo", SqlDbType.NVarChar).Value = crucero.cruc_modelo;
+            cmd.Parameters.Add("@compania", SqlDbType.Int).Value = crucero.cruc_compañia_id;
+            cmd.Parameters.Add("@cant_cabinas", SqlDbType.Int).Value = crucero.cruc_cantidad_cabinas;
+            cmd.Parameters.Add("@fecha_alta", SqlDbType.DateTime2).Value = crucero.cruc_fecha_alta;
+            cmd.Parameters.Add("@cabinas", SqlDbType.Structured).Value = dt;
+            Database.executeProcedure(cmd);
+            this.Close();
            /* copié la logica del boton guardar recorrido y ahora
             * tengo que ir cambiando las variables para el ALTA CRUCERO
             try
@@ -81,33 +114,28 @@ namespace FrbaCrucero.AbmCrucero
 
         private void FormAlta_Load(object sender, EventArgs e)
         {
-          /* ASI FUNCIONABA ANTES
-           * TENGO QUE VER COMO LO REEMPLAZO PARA USAR LA CLASE UTILS.DATABASE
-           * 
-            /// INSTANCIAR LA CLASE UBIGEO
-            var ubigeo = new Model.Cruceros.Ubigeo();
-            var tabla = ubigeo.ListarModelos();
-            var tabla1 = ubigeo.ListarCompanias();
+            var companias = cruceroDao.getCompaniasObj().ToArray();
+            cbo_compania.Items.AddRange(companias);
 
-            if (tabla.Rows.Count > 0)
-            {
-                cbo_modelo.DataSource = tabla;
-                cbo_modelo.DisplayMember = "cruc_modelo";
-                cbo_modelo.ValueMember = "";
-            }
+            var modelos = cruceroDao.getModelos().ToArray();
+            cbo_modelo.Items.AddRange(modelos);
 
-            if (tabla1.Rows.Count > 0)
-            {
-                cbo_compania.DataSource = tabla1;
-                cbo_compania.DisplayMember = "comp_nombre";
-                cbo_modelo.ValueMember = "";
-            }
-           */
+            var tipoServicios = cruceroDao.getTipoServicios().ToArray();
+            cbo_tipo_servicio.Items.AddRange(tipoServicios);
         }
 
         private void btn_agregar_Click(object sender, EventArgs e)
         {
+            String tipoCabina = cbo_tipo_servicio.Text;
+            String cantidad = txt_cantidad.Text;
+            String piso = txt_piso.Text;
+            dgv_cabinas.Rows.Add(tipoCabina,cantidad,piso);
 
+            crucero.cruc_cantidad_cabinas += int.Parse(cantidad);
+            txt_cabinas.Text = crucero.cruc_cantidad_cabinas.ToString();
+            cbo_tipo_servicio.SelectedIndex = -1;
+            txt_cantidad.Text = null;
+            txt_piso.Text = null;
         }
 
         private void btn_limpiar_Click(object sender, EventArgs e)
@@ -119,6 +147,61 @@ namespace FrbaCrucero.AbmCrucero
                     c.Text = "";
                 }
             }
+        }
+
+        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            crucero.cruc_fecha_alta = monthCalendar1.SelectionRange.Start;
+            txt_fecha_alta.Text = crucero.cruc_fecha_alta.ToShortDateString();
+            monthCalendar1.Visible = false;
+        }
+
+        private void btn_seleccionar_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+        }
+
+        private void txt_cantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+        }
+
+        private void txt_piso_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void txt_piso_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cbo_compania_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            crucero.cruc_compañia_id = ((Compania)cbo_compania.SelectedItem).comp_id;
+        }
+
+        private void cbo_modelo_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            crucero.cruc_modelo = cbo_modelo.Text;
+
+        }
+
+        private void txt_nombre_TextChanged(object sender, EventArgs e)
+        {
+            crucero.cruc_nombre = txt_nombre.Text;
+        }
+
+        private void txt_cabinas_TextChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }

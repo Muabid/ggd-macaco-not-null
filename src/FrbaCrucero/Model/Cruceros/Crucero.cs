@@ -11,9 +11,6 @@ namespace FrbaCrucero.Model.Cruceros
 
    public class Crucero:IFunciones
     {
-        SqlConnection cn = new SqlConnection(
-                ConfigurationManager.ConnectionStrings["FRBACrucero"].ConnectionString
-                );
 
         // ESTAS SON LAS PROPIEDADES DE LA CLASE
 
@@ -23,7 +20,7 @@ namespace FrbaCrucero.Model.Cruceros
 
         public string cruc_nombre { get; set; }
 
-        public int cruc_modelo { get; set; }
+        public string cruc_modelo { get; set; }
 
         public bool cruc_activo { get; set; }
 
@@ -41,7 +38,7 @@ namespace FrbaCrucero.Model.Cruceros
         // ESTO ES UN CONSTRUCTOR CON PARAMETROS
         // CONSTRUCTOR ES PARA REGISTRAR
 
-        public Crucero(int _cruc_compañia_id, string _cruc_nombre, int _cruc_modelo, bool _cruc_activo,
+        public Crucero(int _cruc_compañia_id, string _cruc_nombre, string _cruc_modelo, bool _cruc_activo,
                 DateTime _cruc_fecha_alta, int _cruc_cantidad_cabinas
                )
         {
@@ -62,7 +59,7 @@ namespace FrbaCrucero.Model.Cruceros
         // ESTO ES UN CONSTRUCTOR CON PARAMETROS
         // CONSTRUCTOR ES PARA ACTUALIZAR
 
-        public Crucero(int _cruc_compañia_id, string _cruc_nombre, int _cruc_modelo, bool _cruc_activo,
+        public Crucero(int _cruc_compañia_id, string _cruc_nombre, string _cruc_modelo, bool _cruc_activo,
                 DateTime _cruc_fecha_alta, int _cruc_cantidad_cabinas, int _cruc_id
                )
         {

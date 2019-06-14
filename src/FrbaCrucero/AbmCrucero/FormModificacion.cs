@@ -12,6 +12,8 @@ namespace FrbaCrucero.AbmCrucero
 {
     public partial class FormModificacion : Form
     {
+
+        private DateTime fechaAlta; 
         public FormModificacion()
         {
             InitializeComponent();
@@ -31,6 +33,19 @@ namespace FrbaCrucero.AbmCrucero
                     c.Text = "";
                 }
             }
+        }
+
+        private void btn_seleccionar_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+
+        }
+
+        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            fechaAlta = monthCalendar1.SelectionRange.Start;
+            txt_fecha_alta.Text = fechaAlta.ToShortDateString();
+            monthCalendar1.Visible = false;
         }
     }
 }
