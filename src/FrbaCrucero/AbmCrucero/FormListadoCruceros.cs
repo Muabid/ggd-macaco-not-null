@@ -12,7 +12,7 @@ namespace FrbaCrucero.AbmCrucero
 {
     public partial class FormListadoCruceros : Form
     {
-        private Utils.CruceroDAO cruceroDao = new Utils.CruceroDAO;
+        private Utils.CruceroDAO cruceroDao = new Utils.CruceroDAO();
 
         public FormListadoCruceros()
         {
