@@ -26,9 +26,9 @@ namespace FrbaCrucero.PagoReserva
               procedure.Parameters.Add("@activo", SqlDbType.Bit).Value = 1;
               Utils.Database.executeProcedure(procedure); */
 
-            mediosDePago nuevo = new mediosDePago(codigoReservaBox.Text);
+            MediosDePago nuevo = new MediosDePago(codigoReservaBox.Text);
 
-            //nuevo.Show();
+            nuevo.Show();
 
             this.Hide();
         }
@@ -42,11 +42,11 @@ namespace FrbaCrucero.PagoReserva
                     c.Text = "";
                 }
             }
+            DataTable table = this.pagoReservaTable.DataSource as DataTable;
 
-            if (this.pagoReservaTable.Rows.Count > 0)
+            if (table != null)
             {
-
-                this.pagoReservaTable.Rows.Clear();//arreglar error 
+               table.Clear();//arreglar error 
                 this.pagoReservaTable.Refresh();
             }
 
