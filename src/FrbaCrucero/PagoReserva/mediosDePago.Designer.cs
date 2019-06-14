@@ -32,15 +32,16 @@
             this.tablaMediosDePago = new System.Windows.Forms.DataGridView();
             this.methodOfPayment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cuotas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnButtonDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.botonAgregar = new System.Windows.Forms.Button();
             this.reserva = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.botonPagar = new System.Windows.Forms.Button();
-            this.columnButtonDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.descripcion = new System.Windows.Forms.TextBox();
             this.cantCuotas = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.buttonAtras = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tablaMediosDePago)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,6 +82,12 @@
             this.cuotas.HeaderText = "CantidadDeCuotas";
             this.cuotas.Name = "cuotas";
             // 
+            // columnButtonDelete
+            // 
+            this.columnButtonDelete.HeaderText = "Eliminar";
+            this.columnButtonDelete.Name = "columnButtonDelete";
+            this.columnButtonDelete.ReadOnly = true;
+            // 
             // botonAgregar
             // 
             this.botonAgregar.Location = new System.Drawing.Point(49, 355);
@@ -119,12 +126,6 @@
             this.botonPagar.UseVisualStyleBackColor = true;
             this.botonPagar.Click += new System.EventHandler(this.botonPagar_Click);
             // 
-            // columnButtonDelete
-            // 
-            this.columnButtonDelete.HeaderText = "Eliminar";
-            this.columnButtonDelete.Name = "columnButtonDelete";
-            this.columnButtonDelete.ReadOnly = true;
-            // 
             // descripcion
             // 
             this.descripcion.Location = new System.Drawing.Point(49, 97);
@@ -160,11 +161,22 @@
             this.label4.Text = "Cantidad de Cuotas:";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
+            // buttonAtras
+            // 
+            this.buttonAtras.Location = new System.Drawing.Point(211, 355);
+            this.buttonAtras.Name = "buttonAtras";
+            this.buttonAtras.Size = new System.Drawing.Size(75, 23);
+            this.buttonAtras.TabIndex = 13;
+            this.buttonAtras.Text = "Atras";
+            this.buttonAtras.UseVisualStyleBackColor = true;
+            this.buttonAtras.Click += new System.EventHandler(this.buttonAtras_Click);
+            // 
             // MediosDePago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(785, 399);
+            this.Controls.Add(this.buttonAtras);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cantCuotas);
@@ -199,5 +211,6 @@
         private System.Windows.Forms.TextBox cantCuotas;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button buttonAtras;
     }
 }
