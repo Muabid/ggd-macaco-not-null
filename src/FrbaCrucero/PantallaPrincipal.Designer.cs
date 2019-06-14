@@ -40,9 +40,10 @@
             // 
             // btnRol
             // 
-            this.btnRol.Location = new System.Drawing.Point(32, 32);
+            this.btnRol.Location = new System.Drawing.Point(43, 39);
+            this.btnRol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRol.Name = "btnRol";
-            this.btnRol.Size = new System.Drawing.Size(75, 23);
+            this.btnRol.Size = new System.Drawing.Size(100, 28);
             this.btnRol.TabIndex = 0;
             this.btnRol.Text = "ABM ROL";
             this.btnRol.UseVisualStyleBackColor = true;
@@ -50,18 +51,21 @@
             // 
             // btnCrucero
             // 
-            this.btnCrucero.Location = new System.Drawing.Point(32, 90);
+            this.btnCrucero.Location = new System.Drawing.Point(43, 111);
+            this.btnCrucero.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCrucero.Name = "btnCrucero";
-            this.btnCrucero.Size = new System.Drawing.Size(75, 40);
+            this.btnCrucero.Size = new System.Drawing.Size(100, 49);
             this.btnCrucero.TabIndex = 1;
             this.btnCrucero.Text = "ABM CRUCERO";
             this.btnCrucero.UseVisualStyleBackColor = true;
+            this.btnCrucero.Click += new System.EventHandler(this.btnCrucero_Click);
             // 
             // btnRecorrido
             // 
-            this.btnRecorrido.Location = new System.Drawing.Point(163, 25);
+            this.btnRecorrido.Location = new System.Drawing.Point(217, 31);
+            this.btnRecorrido.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRecorrido.Name = "btnRecorrido";
-            this.btnRecorrido.Size = new System.Drawing.Size(84, 36);
+            this.btnRecorrido.Size = new System.Drawing.Size(112, 44);
             this.btnRecorrido.TabIndex = 2;
             this.btnRecorrido.Text = "ABM RECORRIDO";
             this.btnRecorrido.UseVisualStyleBackColor = true;
@@ -69,18 +73,20 @@
             // 
             // btnPasaje
             // 
-            this.btnPasaje.Location = new System.Drawing.Point(163, 99);
+            this.btnPasaje.Location = new System.Drawing.Point(217, 122);
+            this.btnPasaje.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPasaje.Name = "btnPasaje";
-            this.btnPasaje.Size = new System.Drawing.Size(75, 23);
+            this.btnPasaje.Size = new System.Drawing.Size(100, 28);
             this.btnPasaje.TabIndex = 3;
             this.btnPasaje.Text = "PASAJE";
             this.btnPasaje.UseVisualStyleBackColor = true;
             // 
             // btnGenerarViaje
             // 
-            this.btnGenerarViaje.Location = new System.Drawing.Point(32, 163);
+            this.btnGenerarViaje.Location = new System.Drawing.Point(43, 201);
+            this.btnGenerarViaje.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnGenerarViaje.Name = "btnGenerarViaje";
-            this.btnGenerarViaje.Size = new System.Drawing.Size(75, 37);
+            this.btnGenerarViaje.Size = new System.Drawing.Size(100, 46);
             this.btnGenerarViaje.TabIndex = 4;
             this.btnGenerarViaje.Text = "GENERAR VIAJE";
             this.btnGenerarViaje.UseVisualStyleBackColor = true;
@@ -88,9 +94,10 @@
             // 
             // btnListadoEstadistico
             // 
-            this.btnListadoEstadistico.Location = new System.Drawing.Point(160, 163);
+            this.btnListadoEstadistico.Location = new System.Drawing.Point(213, 201);
+            this.btnListadoEstadistico.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnListadoEstadistico.Name = "btnListadoEstadistico";
-            this.btnListadoEstadistico.Size = new System.Drawing.Size(87, 37);
+            this.btnListadoEstadistico.Size = new System.Drawing.Size(116, 46);
             this.btnListadoEstadistico.TabIndex = 5;
             this.btnListadoEstadistico.Text = "LISTADO ESTADISTICO";
             this.btnListadoEstadistico.UseVisualStyleBackColor = true;
@@ -98,18 +105,20 @@
             // 
             // btnPagoReserva
             // 
-            this.btnPagoReserva.Location = new System.Drawing.Point(32, 234);
+            this.btnPagoReserva.Location = new System.Drawing.Point(43, 288);
+            this.btnPagoReserva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPagoReserva.Name = "btnPagoReserva";
-            this.btnPagoReserva.Size = new System.Drawing.Size(75, 36);
+            this.btnPagoReserva.Size = new System.Drawing.Size(100, 44);
             this.btnPagoReserva.TabIndex = 6;
             this.btnPagoReserva.Text = "PAGO RESERVA";
             this.btnPagoReserva.UseVisualStyleBackColor = true;
             // 
             // btnCerrar
             // 
-            this.btnCerrar.Location = new System.Drawing.Point(32, 335);
+            this.btnCerrar.Location = new System.Drawing.Point(43, 412);
+            this.btnCerrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(75, 40);
+            this.btnCerrar.Size = new System.Drawing.Size(100, 49);
             this.btnCerrar.TabIndex = 7;
             this.btnCerrar.Text = "Cerrar sesión";
             this.btnCerrar.UseVisualStyleBackColor = true;
@@ -117,9 +126,9 @@
             // 
             // PantallaPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 387);
+            this.ClientSize = new System.Drawing.Size(377, 476);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.btnPagoReserva);
             this.Controls.Add(this.btnListadoEstadistico);
@@ -128,6 +137,7 @@
             this.Controls.Add(this.btnRecorrido);
             this.Controls.Add(this.btnCrucero);
             this.Controls.Add(this.btnRol);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "PantallaPrincipal";
             this.Text = "PantallaPrincipal";
             this.Load += new System.EventHandler(this.Form1_Load);

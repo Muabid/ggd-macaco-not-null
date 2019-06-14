@@ -140,13 +140,7 @@ namespace FrbaCrucero.AbmCrucero
 
         private void btn_limpiar_Click(object sender, EventArgs e)
         {
-            foreach (Control c in Controls)
-            {
-                if (c is TextBox)
-                {
-                    c.Text = "";
-                }
-            }
+          //LIMPIAR PANTALLA
         }
 
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)

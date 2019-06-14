@@ -16,6 +16,7 @@ using FrbaCrucero.AbmRol;
 using FrbaCrucero.AbmRecorrido;
 using FrbaCrucero.GeneracionViaje;
 using FrbaCrucero.ListadoEstadistico;
+using FrbaCrucero.AbmCrucero;
 
 namespace FrbaCrucero
 {
@@ -86,6 +87,11 @@ namespace FrbaCrucero
             Owner.Show();    
             this.Close();
                   
+        }
+
+        private void btnCrucero_Click(object sender, EventArgs e)
+        {
+            new FormPantallaInicio().Show(this);
         }
 
 
