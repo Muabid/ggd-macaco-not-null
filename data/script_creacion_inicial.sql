@@ -584,7 +584,8 @@ INSERT INTO [MACACO_NOT_NULL].RESERVA(
 
 INSERT INTO [MACACO_NOT_NULL].RESERVA_CABINA(
 											reserva_id,
-											cabina_id
+											cabina_id,
+											rese_cabi_costo
 									 )
 	select distinct 
 	(	
@@ -599,7 +600,22 @@ INSERT INTO [MACACO_NOT_NULL].RESERVA_CABINA(
 				and cabi_piso = CABINA_PISO
                 and cabi_tipo_servicio_id = (select tipo_servicio_id from [MACACO_NOT_NULL].TIPO_SERVICIO where tipo_servicio_descripcion = CABINA_TIPO) 
                 and cabi_crucero_id = (select cruc_id from [MACACO_NOT_NULL].CRUCERO where cruc_nombre = CRUCERO_IDENTIFICADOR) 
-	)	
+	),
+	(					 	
+			 SELECT SUM(tram_precio_base) * 
+			 (
+				select tipo_servicio_porc_recargo
+				from [MACACO_NOT_NULL].CABINA 
+				where cabi_nro = CABINA_NRO
+				and cabi_piso = CABINA_PISO
+                and cabi_tipo_servicio_id = (select tipo_servicio_id from [MACACO_NOT_NULL].TIPO_SERVICIO where tipo_servicio_descripcion = CABINA_TIPO) 
+                and cabi_crucero_id = (select cruc_id from [MACACO_NOT_NULL].CRUCERO where cruc_nombre = CRUCERO_IDENTIFICADOR) 
+			 )		
+			 FROM [MACACO_NOT_NULL].TRAMO 
+			 INNER JOIN [MACACO_NOT_NULL].RECORRIDO ON reco_id = tram_recorrido_id
+			 INNER JOIN [MACACO_NOT_NULL].VIAJE ON reco_id = viaj_recorrido_id
+			 WHERE viaj_id = (SELECT rese_viaje_id FROM [MACACO_NOT_NULL].RESERVA WHERE rese_codigo = RESERVA_CODIGO) 			
+	)
    FROM [GD1C2019].[gd_esquema].[Maestra]
    where RESERVA_CODIGO is not null 
 	and RESERVA_FECHA is not null;
