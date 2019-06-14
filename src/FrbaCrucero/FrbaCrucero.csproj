@@ -75,7 +75,6 @@
     <Compile Include="AbmCrucero\FormPantallaInicio.Designer.cs">
       <DependentUpon>FormPantallaInicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmCrucero\SqlConecction.cs" />
     <Compile Include="AbmRecorrido\RecorridoAbm.cs">
       <SubType>Form</SubType>
     </Compile>

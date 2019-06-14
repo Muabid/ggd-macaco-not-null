@@ -19,17 +19,17 @@ namespace FrbaCrucero.AbmCrucero
 
         private void btn_alta_Click(object sender, EventArgs e)
         {
-
+            Application.Run(new AbmCrucero.FormAlta());
         }
 
         private void btn_baja_Click(object sender, EventArgs e)
         {
-
+            Application.Run(new AbmCrucero.FormBaja());
         }
 
         private void btn_modificacion_Click(object sender, EventArgs e)
         {
-
+            Application.Run(new AbmCrucero.FormModificacion());
         }
     }
 }
