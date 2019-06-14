@@ -280,6 +280,9 @@
     <EmbeddedResource Include="AbmRol\RolAbm.resx">
       <DependentUpon>RolAbm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CompraReservaPasaje\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GeneracionViaje\SeleccionCruceros.resx">
       <DependentUpon>SeleccionCruceros.cs</DependentUpon>
     </EmbeddedResource>

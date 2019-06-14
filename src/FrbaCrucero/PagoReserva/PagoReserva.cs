@@ -89,7 +89,7 @@ namespace FrbaCrucero.PagoReserva
 
         public DataTable getReservas(Decimal codigoReserva)
         {
-            SqlCommand cmd = Utils.Database.createCommand("SELECT * FROM  MACACO_NOT_NULL.DetallesReserva(@codigo_reserva)");
+            SqlCommand cmd = Utils.Database.createCommand("SELECT TOP 1 * FROM  MACACO_NOT_NULL.DetallesReserva(@codigo_reserva)");
 
             SqlParameter a_cod_reserva = cmd.Parameters.Add("@codigo_reserva", SqlDbType.Decimal);
 

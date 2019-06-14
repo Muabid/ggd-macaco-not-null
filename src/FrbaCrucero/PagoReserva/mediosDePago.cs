@@ -112,8 +112,19 @@ namespace FrbaCrucero.PagoReserva
              SqlCommand procedure3 = Utils.Database.createCommand("MACACO_NOT_NULL.EliminarReserva");
              procedure3.Parameters.Add("@codigo_reserva", SqlDbType.Decimal).Value = cod_reserva;
              Utils.Database.executeProcedure(procedure3);
-            
+             MessageBox.Show("Se ha pagado la reserva ");
+             this.Hide();
+             PagoReserva pago = new PagoReserva();
+             pago.Show();
         }
+
+        private void buttonAtras_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            PagoReserva pago = new PagoReserva();
+            pago.Show();
+        }
+
      
     }
 }
