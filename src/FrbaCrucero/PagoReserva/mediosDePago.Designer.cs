@@ -30,13 +30,17 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.tablaMediosDePago = new System.Windows.Forms.DataGridView();
-            this.botonAgregar = new System.Windows.Forms.Button();
-            this.botonRemover = new System.Windows.Forms.Button();
             this.methodOfPayment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cuotas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.botonAgregar = new System.Windows.Forms.Button();
             this.reserva = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.botonPagar = new System.Windows.Forms.Button();
+            this.columnButtonDelete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.descripcion = new System.Windows.Forms.TextBox();
+            this.cantCuotas = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tablaMediosDePago)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,33 +56,20 @@
             // 
             // tablaMediosDePago
             // 
+            this.tablaMediosDePago.AllowUserToAddRows = false;
+            this.tablaMediosDePago.AllowUserToDeleteRows = false;
+            this.tablaMediosDePago.AllowUserToOrderColumns = true;
             this.tablaMediosDePago.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tablaMediosDePago.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.methodOfPayment,
-            this.cuotas});
-            this.tablaMediosDePago.Location = new System.Drawing.Point(49, 78);
+            this.cuotas,
+            this.columnButtonDelete});
+            this.tablaMediosDePago.Location = new System.Drawing.Point(49, 149);
             this.tablaMediosDePago.Name = "tablaMediosDePago";
-            this.tablaMediosDePago.Size = new System.Drawing.Size(371, 200);
+            this.tablaMediosDePago.ShowCellErrors = false;
+            this.tablaMediosDePago.Size = new System.Drawing.Size(497, 200);
             this.tablaMediosDePago.TabIndex = 2;
-            // 
-            // botonAgregar
-            // 
-            this.botonAgregar.Location = new System.Drawing.Point(49, 300);
-            this.botonAgregar.Name = "botonAgregar";
-            this.botonAgregar.Size = new System.Drawing.Size(75, 23);
-            this.botonAgregar.TabIndex = 4;
-            this.botonAgregar.Text = "Agregar";
-            this.botonAgregar.UseVisualStyleBackColor = true;
-            this.botonAgregar.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // botonRemover
-            // 
-            this.botonRemover.Location = new System.Drawing.Point(179, 300);
-            this.botonRemover.Name = "botonRemover";
-            this.botonRemover.Size = new System.Drawing.Size(75, 23);
-            this.botonRemover.TabIndex = 5;
-            this.botonRemover.Text = "Remover";
-            this.botonRemover.UseVisualStyleBackColor = true;
+            this.tablaMediosDePago.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaMediosDePago_CellContentClick);
             // 
             // methodOfPayment
             // 
@@ -89,6 +80,16 @@
             // 
             this.cuotas.HeaderText = "CantidadDeCuotas";
             this.cuotas.Name = "cuotas";
+            // 
+            // botonAgregar
+            // 
+            this.botonAgregar.Location = new System.Drawing.Point(49, 355);
+            this.botonAgregar.Name = "botonAgregar";
+            this.botonAgregar.Size = new System.Drawing.Size(75, 23);
+            this.botonAgregar.TabIndex = 4;
+            this.botonAgregar.Text = "Agregar";
+            this.botonAgregar.UseVisualStyleBackColor = true;
+            this.botonAgregar.Click += new System.EventHandler(this.button1_Click);
             // 
             // reserva
             // 
@@ -110,26 +111,71 @@
             // 
             // botonPagar
             // 
-            this.botonPagar.Location = new System.Drawing.Point(556, 300);
+            this.botonPagar.Location = new System.Drawing.Point(345, 355);
             this.botonPagar.Name = "botonPagar";
             this.botonPagar.Size = new System.Drawing.Size(75, 23);
             this.botonPagar.TabIndex = 8;
             this.botonPagar.Text = "Pagar";
             this.botonPagar.UseVisualStyleBackColor = true;
+            this.botonPagar.Click += new System.EventHandler(this.botonPagar_Click);
             // 
-            // mediosDePago
+            // columnButtonDelete
+            // 
+            this.columnButtonDelete.HeaderText = "Eliminar";
+            this.columnButtonDelete.Name = "columnButtonDelete";
+            this.columnButtonDelete.ReadOnly = true;
+            // 
+            // descripcion
+            // 
+            this.descripcion.Location = new System.Drawing.Point(49, 97);
+            this.descripcion.Name = "descripcion";
+            this.descripcion.Size = new System.Drawing.Size(166, 20);
+            this.descripcion.TabIndex = 9;
+            // 
+            // cantCuotas
+            // 
+            this.cantCuotas.Location = new System.Drawing.Point(263, 97);
+            this.cantCuotas.Name = "cantCuotas";
+            this.cantCuotas.Size = new System.Drawing.Size(157, 20);
+            this.cantCuotas.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label3.Location = new System.Drawing.Point(45, 74);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(104, 20);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Descripcion:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label4.Location = new System.Drawing.Point(259, 74);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(161, 20);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Cantidad de Cuotas:";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // MediosDePago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 360);
+            this.ClientSize = new System.Drawing.Size(785, 399);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.cantCuotas);
+            this.Controls.Add(this.descripcion);
             this.Controls.Add(this.botonPagar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.reserva);
-            this.Controls.Add(this.botonRemover);
             this.Controls.Add(this.botonAgregar);
             this.Controls.Add(this.tablaMediosDePago);
             this.Controls.Add(this.label1);
-            this.Name = "mediosDePago";
+            this.Name = "MediosDePago";
             this.Text = "mediosDePago";
             this.Load += new System.EventHandler(this.mediosDePago_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tablaMediosDePago)).EndInit();
@@ -143,11 +189,15 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView tablaMediosDePago;
         private System.Windows.Forms.Button botonAgregar;
-        private System.Windows.Forms.Button botonRemover;
         private System.Windows.Forms.DataGridViewTextBoxColumn methodOfPayment;
         private System.Windows.Forms.DataGridViewTextBoxColumn cuotas;
         private System.Windows.Forms.TextBox reserva;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button botonPagar;
+        private System.Windows.Forms.DataGridViewButtonColumn columnButtonDelete;
+        private System.Windows.Forms.TextBox descripcion;
+        private System.Windows.Forms.TextBox cantCuotas;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }

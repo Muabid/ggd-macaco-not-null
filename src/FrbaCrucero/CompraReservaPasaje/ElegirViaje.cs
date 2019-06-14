@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace FrbaCrucero.CompraPasaje
 {
-    public partial class Form1 : Form
+    public partial class ElegirViaje : Form
     {
-        public Form1()
+        public ElegirViaje()
         {
             InitializeComponent();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
