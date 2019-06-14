@@ -59,7 +59,7 @@ namespace FrbaCrucero.GeneracionViaje
             if (!this.ValidateChildren())
                 error = error + "Faltan completar campos \n";
             
-            if(salida > llegada)
+            if(salida >= llegada)
                error = error + "Fecha de llegada anterior a la de salida";
 
             if (error.Length > 0)
