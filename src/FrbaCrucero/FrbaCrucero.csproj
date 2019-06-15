@@ -153,6 +153,18 @@
     <Compile Include="AbmRol\RolAbm.Designer.cs">
       <DependentUpon>RolAbm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CompraReservaPasaje\Cliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompraReservaPasaje\Cliente.Designer.cs">
+      <DependentUpon>Cliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompraReservaPasaje\ComprarOReservarPasaje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompraReservaPasaje\ComprarOReservarPasaje.Designer.cs">
+      <DependentUpon>ComprarOReservarPasaje.cs</DependentUpon>
+    </Compile>
     <Compile Include="GeneracionViaje\SeleccionCruceros.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -280,6 +292,12 @@
     <EmbeddedResource Include="AbmRol\RolAbm.resx">
       <DependentUpon>RolAbm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CompraReservaPasaje\Cliente.resx">
+      <DependentUpon>Cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompraReservaPasaje\ComprarOReservarPasaje.resx">
+      <DependentUpon>ComprarOReservarPasaje.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CompraReservaPasaje\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -334,7 +352,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AbmPuerto\" />
-    <Folder Include="CompraReservaPasaje\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
