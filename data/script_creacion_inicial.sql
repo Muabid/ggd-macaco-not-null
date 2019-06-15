@@ -1,17 +1,5 @@
 USE [GD1C2019]
 
-
-GO
-CREATE FUNCTION [MACACO_NOT_NULL].EncriptarPassword(@password NVARCHAR(255))
-RETURNS nvarchar(255)
-AS
-BEGIN
-	RETURN CONVERT(nvarchar(255),HASHBYTES('SHA2_256',@password),1)
-END
-
-GO
-
-
 GO
 
 IF NOT EXISTS (SELECT * FROM SYS.SCHEMAS WHERE name = 'MACACO_NOT_NULL')
@@ -384,6 +372,16 @@ INSERT INTO [MACACO_NOT_NULL].[ROL_FUNCIONALIDAD] (rol_id,func_id)
 	select distinct CLI_NOMBRE,CLI_APELLIDO,CLI_DNI,CLI_DIRECCION,CLI_TELEFONO,CLI_MAIL,CLI_FECHA_NAC,2,1
 		FROM [GD1C2019].[gd_esquema].[Maestra];
 
+GO
+CREATE FUNCTION [MACACO_NOT_NULL].EncriptarPassword(@password NVARCHAR(255))
+RETURNS nvarchar(255)
+AS
+BEGIN
+	RETURN CONVERT(nvarchar(255),HASHBYTES('SHA2_256',@password),1)
+END
+
+GO		
+		
 INSERT INTO [MACACO_NOT_NULL].[USUARIO] (
 											usua_nombre,
 											usua_apellido,

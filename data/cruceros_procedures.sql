@@ -1,3 +1,5 @@
+GO
+
 CREATE PROCEDURE [MACACO_NOT_NULL].GetCruceros @nombre NVARCHAR(256), @modelo NVARCHAR(256), @compania NVARCHAR(256), @cabinas INT, @fecha_salida DATETIME2, @fecha_llegada DATETIME2
 AS
 select cr.cruc_id,cruc_nombre, cruc_modelo, comp_nombre, cruc_cantidad_cabinas  
@@ -20,12 +22,14 @@ cruc_id not in ( select viaj_crucero_id
 											baja_cruc_fecha_fuera_servicio between @fecha_salida and @fecha_salida
 											or baja_cruc_fecha_reinicio_servicio between @fecha_salida and @fecha_salida)
 
-
+GO
 
 CREATE TYPE [MACACO_NOT_NULL].CABINA_PISO AS TABLE (
 cabinas INT,
 piso INT,
 servicio NVARCHAR(256) )
+
+GO
 
 CREATE PROCEDURE [MACACO_NOT_NULL].CreateOrUpdateCrucero @nombre NVARCHAR(256), @modelo NVARCHAR(256),
 	@compania INT,@fecha_alta DATETIME2(3),@cant_cabinas INT, @cabinas [MACACO_NOT_NULL].CABINA_PISO readonly  
@@ -65,6 +69,6 @@ BEGIN TRANSACTION
 COMMIT TRANSACTION;
 GO
 
-
+GO
 
 					

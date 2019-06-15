@@ -147,6 +147,8 @@ BEGIN
 	SELECT puer_id,puer_nombre FROM [MACACO_NOT_NULL].PUERTO WHERE puer_nombre = @name
 END
 
+GO
+
 CREATE PROCEDURE [MACACO_NOT_NULL].ModificarRecorrido @reco_codigo decimal(18,0),
 @tramos [MACACO_NOT_NULL].TRAMOTYPE READONLY 
 AS

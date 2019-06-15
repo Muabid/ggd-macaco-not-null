@@ -1,3 +1,5 @@
+GO
+
 CREATE PROCEDURE [MACACO_NOT_NULL].GenerarViaje @fecha_salida datetime2(3),
  @fecha_llegada datetime2(3), @recorrido_id INT, @crucero_id INT
 AS

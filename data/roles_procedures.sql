@@ -1,3 +1,5 @@
+GO
+
 CREATE PROCEDURE [MACACO_NOT_NULL].GetFuncionalidades @rol_id INT
 AS
 BEGIN
