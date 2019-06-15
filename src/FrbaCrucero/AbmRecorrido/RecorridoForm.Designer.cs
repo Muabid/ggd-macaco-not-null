@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.precioBox = new System.Windows.Forms.TextBox();
             this.codigoBox = new System.Windows.Forms.TextBox();
+            this.btn_atras = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tramosTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,10 +51,11 @@
             this.precio,
             this.tramoId});
             this.tramosTable.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tramosTable.Location = new System.Drawing.Point(54, 129);
+            this.tramosTable.Location = new System.Drawing.Point(71, 118);
+            this.tramosTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tramosTable.Name = "tramosTable";
             this.tramosTable.ReadOnly = true;
-            this.tramosTable.Size = new System.Drawing.Size(345, 134);
+            this.tramosTable.Size = new System.Drawing.Size(460, 165);
             this.tramosTable.TabIndex = 1;
             // 
             // ciudadOrigen
@@ -92,49 +94,66 @@
             // codigo
             // 
             this.codigo.AutoSize = true;
-            this.codigo.Location = new System.Drawing.Point(51, 51);
+            this.codigo.Location = new System.Drawing.Point(68, 63);
+            this.codigo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.codigo.Name = "codigo";
-            this.codigo.Size = new System.Drawing.Size(40, 13);
+            this.codigo.Size = new System.Drawing.Size(52, 17);
             this.codigo.TabIndex = 2;
             this.codigo.Text = "Código";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(216, 51);
+            this.label1.Location = new System.Drawing.Point(288, 63);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
+            this.label1.Size = new System.Drawing.Size(48, 17);
             this.label1.TabIndex = 4;
             this.label1.Text = "Precio";
             // 
             // precioBox
             // 
             this.precioBox.Enabled = false;
-            this.precioBox.Location = new System.Drawing.Point(272, 48);
+            this.precioBox.Location = new System.Drawing.Point(363, 59);
+            this.precioBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.precioBox.Name = "precioBox";
             this.precioBox.ReadOnly = true;
-            this.precioBox.Size = new System.Drawing.Size(100, 20);
+            this.precioBox.Size = new System.Drawing.Size(132, 22);
             this.precioBox.TabIndex = 5;
             // 
             // codigoBox
             // 
             this.codigoBox.Enabled = false;
-            this.codigoBox.Location = new System.Drawing.Point(97, 48);
+            this.codigoBox.Location = new System.Drawing.Point(129, 59);
+            this.codigoBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.codigoBox.Name = "codigoBox";
             this.codigoBox.ReadOnly = true;
-            this.codigoBox.Size = new System.Drawing.Size(100, 20);
+            this.codigoBox.Size = new System.Drawing.Size(132, 22);
             this.codigoBox.TabIndex = 6;
+            // 
+            // btn_atras
+            // 
+            this.btn_atras.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_atras.Location = new System.Drawing.Point(71, 339);
+            this.btn_atras.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_atras.Name = "btn_atras";
+            this.btn_atras.Size = new System.Drawing.Size(97, 31);
+            this.btn_atras.TabIndex = 22;
+            this.btn_atras.Text = "Atrás";
+            this.btn_atras.UseVisualStyleBackColor = true;
             // 
             // RecorridoForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(457, 319);
+            this.ClientSize = new System.Drawing.Size(609, 393);
+            this.Controls.Add(this.btn_atras);
             this.Controls.Add(this.codigoBox);
             this.Controls.Add(this.precioBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.codigo);
             this.Controls.Add(this.tramosTable);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "RecorridoForm";
             this.Text = "Recorrido";
             this.Load += new System.EventHandler(this.TramosLista_Load);
@@ -155,6 +174,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ciudadDestino;
         private System.Windows.Forms.DataGridViewTextBoxColumn precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn tramoId;
+        private System.Windows.Forms.Button btn_atras;
 
     }
 }

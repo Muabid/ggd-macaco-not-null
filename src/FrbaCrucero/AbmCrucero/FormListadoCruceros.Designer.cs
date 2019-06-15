@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_limpiar = new System.Windows.Forms.Button();
-            this.btn_buscar = new System.Windows.Forms.Button();
             this.dgv_cruceros = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,30 +48,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btn_atras = new System.Windows.Forms.Button();
+            this.btn_limpiar = new System.Windows.Forms.Button();
+            this.btn_buscar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cruceros)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btn_limpiar
-            // 
-            this.btn_limpiar.Location = new System.Drawing.Point(12, 254);
-            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_limpiar.Name = "btn_limpiar";
-            this.btn_limpiar.Size = new System.Drawing.Size(97, 22);
-            this.btn_limpiar.TabIndex = 8;
-            this.btn_limpiar.Text = "Limpiar";
-            this.btn_limpiar.UseVisualStyleBackColor = true;
-            this.btn_limpiar.Click += new System.EventHandler(this.btn_limpiar_Click);
-            // 
-            // btn_buscar
-            // 
-            this.btn_buscar.Location = new System.Drawing.Point(597, 254);
-            this.btn_buscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_buscar.Name = "btn_buscar";
-            this.btn_buscar.Size = new System.Drawing.Size(97, 22);
-            this.btn_buscar.TabIndex = 9;
-            this.btn_buscar.Text = "Buscar";
-            this.btn_buscar.UseVisualStyleBackColor = true;
             // 
             // dgv_cruceros
             // 
@@ -87,7 +67,7 @@
             this.Column4,
             this.Column5,
             this.Column6});
-            this.dgv_cruceros.Location = new System.Drawing.Point(12, 303);
+            this.dgv_cruceros.Location = new System.Drawing.Point(12, 324);
             this.dgv_cruceros.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgv_cruceros.Name = "dgv_cruceros";
             this.dgv_cruceros.ReadOnly = true;
@@ -151,7 +131,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(683, 235);
+            this.groupBox1.Size = new System.Drawing.Size(743, 235);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Crucero";
@@ -176,7 +156,7 @@
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(412, 22);
+            this.monthCalendar1.Location = new System.Drawing.Point(436, 20);
             this.monthCalendar1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 7;
@@ -262,15 +242,49 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre (*)";
             // 
+            // btn_atras
+            // 
+            this.btn_atras.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_atras.Location = new System.Drawing.Point(12, 550);
+            this.btn_atras.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_atras.Name = "btn_atras";
+            this.btn_atras.Size = new System.Drawing.Size(97, 31);
+            this.btn_atras.TabIndex = 21;
+            this.btn_atras.Text = "Atrás";
+            this.btn_atras.UseVisualStyleBackColor = true;
+            // 
+            // btn_limpiar
+            // 
+            this.btn_limpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_limpiar.Location = new System.Drawing.Point(12, 271);
+            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_limpiar.Name = "btn_limpiar";
+            this.btn_limpiar.Size = new System.Drawing.Size(97, 31);
+            this.btn_limpiar.TabIndex = 22;
+            this.btn_limpiar.Text = "Limpiar";
+            this.btn_limpiar.UseVisualStyleBackColor = true;
+            // 
+            // btn_buscar
+            // 
+            this.btn_buscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_buscar.Location = new System.Drawing.Point(658, 271);
+            this.btn_buscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_buscar.Name = "btn_buscar";
+            this.btn_buscar.Size = new System.Drawing.Size(97, 31);
+            this.btn_buscar.TabIndex = 23;
+            this.btn_buscar.Text = "Buscar";
+            this.btn_buscar.UseVisualStyleBackColor = true;
+            // 
             // FormListadoCruceros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(788, 529);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dgv_cruceros);
+            this.ClientSize = new System.Drawing.Size(802, 592);
             this.Controls.Add(this.btn_buscar);
             this.Controls.Add(this.btn_limpiar);
+            this.Controls.Add(this.btn_atras);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.dgv_cruceros);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormListadoCruceros";
             this.Text = "Listado Cruceros";
@@ -284,8 +298,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btn_limpiar;
-        private System.Windows.Forms.Button btn_buscar;
         private System.Windows.Forms.DataGridView dgv_cruceros;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
@@ -306,6 +318,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_atras;
+        private System.Windows.Forms.Button btn_limpiar;
+        private System.Windows.Forms.Button btn_buscar;
 
     }
 }

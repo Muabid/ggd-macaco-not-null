@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.recorridosTable = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciudadOrigenColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciudadDestinoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modificarColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.codigoBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.limpiarButton = new System.Windows.Forms.Button();
@@ -37,12 +43,7 @@
             this.origenCombo = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codigoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ciudadOrigenColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ciudadDestinoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modificarColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btn_atras = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.recorridosTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,82 +59,13 @@
             this.ciudadDestinoColumn,
             this.precioColumn,
             this.modificarColumn});
-            this.recorridosTable.Location = new System.Drawing.Point(32, 236);
+            this.recorridosTable.Location = new System.Drawing.Point(46, 241);
+            this.recorridosTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.recorridosTable.Name = "recorridosTable";
             this.recorridosTable.ReadOnly = true;
-            this.recorridosTable.Size = new System.Drawing.Size(526, 174);
+            this.recorridosTable.Size = new System.Drawing.Size(662, 214);
             this.recorridosTable.TabIndex = 0;
             this.recorridosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.recorridosTable_CellContentClick);
-            // 
-            // codigoBox
-            // 
-            this.codigoBox.Location = new System.Drawing.Point(143, 39);
-            this.codigoBox.Name = "codigoBox";
-            this.codigoBox.Size = new System.Drawing.Size(100, 20);
-            this.codigoBox.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Código";
-            // 
-            // limpiarButton
-            // 
-            this.limpiarButton.Location = new System.Drawing.Point(71, 188);
-            this.limpiarButton.Name = "limpiarButton";
-            this.limpiarButton.Size = new System.Drawing.Size(75, 23);
-            this.limpiarButton.TabIndex = 3;
-            this.limpiarButton.Text = "Limpiar";
-            this.limpiarButton.UseVisualStyleBackColor = true;
-            this.limpiarButton.Click += new System.EventHandler(this.limpiarButton_Click);
-            // 
-            // buscarButton
-            // 
-            this.buscarButton.Location = new System.Drawing.Point(424, 188);
-            this.buscarButton.Name = "buscarButton";
-            this.buscarButton.Size = new System.Drawing.Size(75, 23);
-            this.buscarButton.TabIndex = 5;
-            this.buscarButton.Text = "Buscar";
-            this.buscarButton.UseVisualStyleBackColor = true;
-            this.buscarButton.Click += new System.EventHandler(this.buscarButton_Click);
-            // 
-            // destinoCombo
-            // 
-            this.destinoCombo.FormattingEnabled = true;
-            this.destinoCombo.Location = new System.Drawing.Point(143, 106);
-            this.destinoCombo.Name = "destinoCombo";
-            this.destinoCombo.Size = new System.Drawing.Size(121, 21);
-            this.destinoCombo.TabIndex = 6;
-            // 
-            // origenCombo
-            // 
-            this.origenCombo.FormattingEnabled = true;
-            this.origenCombo.Location = new System.Drawing.Point(411, 35);
-            this.origenCombo.Name = "origenCombo";
-            this.origenCombo.Size = new System.Drawing.Size(121, 21);
-            this.origenCombo.TabIndex = 7;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(322, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Ciudad origen";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(40, 109);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Ciudad destino";
             // 
             // id
             // 
@@ -184,11 +116,101 @@
             this.modificarColumn.UseColumnTextForButtonValue = true;
             this.modificarColumn.Width = 60;
             // 
+            // codigoBox
+            // 
+            this.codigoBox.Location = new System.Drawing.Point(191, 48);
+            this.codigoBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.codigoBox.Name = "codigoBox";
+            this.codigoBox.Size = new System.Drawing.Size(132, 22);
+            this.codigoBox.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(53, 47);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Código";
+            // 
+            // limpiarButton
+            // 
+            this.limpiarButton.Location = new System.Drawing.Point(55, 192);
+            this.limpiarButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.limpiarButton.Name = "limpiarButton";
+            this.limpiarButton.Size = new System.Drawing.Size(100, 28);
+            this.limpiarButton.TabIndex = 3;
+            this.limpiarButton.Text = "Limpiar";
+            this.limpiarButton.UseVisualStyleBackColor = true;
+            this.limpiarButton.Click += new System.EventHandler(this.limpiarButton_Click);
+            // 
+            // buscarButton
+            // 
+            this.buscarButton.Location = new System.Drawing.Point(608, 192);
+            this.buscarButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buscarButton.Name = "buscarButton";
+            this.buscarButton.Size = new System.Drawing.Size(100, 28);
+            this.buscarButton.TabIndex = 5;
+            this.buscarButton.Text = "Buscar";
+            this.buscarButton.UseVisualStyleBackColor = true;
+            this.buscarButton.Click += new System.EventHandler(this.buscarButton_Click);
+            // 
+            // destinoCombo
+            // 
+            this.destinoCombo.FormattingEnabled = true;
+            this.destinoCombo.Location = new System.Drawing.Point(191, 130);
+            this.destinoCombo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.destinoCombo.Name = "destinoCombo";
+            this.destinoCombo.Size = new System.Drawing.Size(160, 24);
+            this.destinoCombo.TabIndex = 6;
+            // 
+            // origenCombo
+            // 
+            this.origenCombo.FormattingEnabled = true;
+            this.origenCombo.Location = new System.Drawing.Point(548, 44);
+            this.origenCombo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.origenCombo.Name = "origenCombo";
+            this.origenCombo.Size = new System.Drawing.Size(160, 24);
+            this.origenCombo.TabIndex = 7;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(429, 49);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(96, 17);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Ciudad origen";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(53, 134);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(102, 17);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Ciudad destino";
+            // 
+            // btn_atras
+            // 
+            this.btn_atras.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_atras.Location = new System.Drawing.Point(46, 477);
+            this.btn_atras.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_atras.Name = "btn_atras";
+            this.btn_atras.Size = new System.Drawing.Size(97, 31);
+            this.btn_atras.TabIndex = 22;
+            this.btn_atras.Text = "Atrás";
+            this.btn_atras.UseVisualStyleBackColor = true;
+            // 
             // ListadoModificacionRecorrido
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 422);
+            this.ClientSize = new System.Drawing.Size(760, 519);
+            this.Controls.Add(this.btn_atras);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.origenCombo);
@@ -198,6 +220,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.codigoBox);
             this.Controls.Add(this.recorridosTable);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ListadoModificacionRecorrido";
             this.Text = "Modificación recorrido";
             ((System.ComponentModel.ISupportInitialize)(this.recorridosTable)).EndInit();
@@ -223,5 +246,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ciudadDestinoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn precioColumn;
         private System.Windows.Forms.DataGridViewButtonColumn modificarColumn;
+        private System.Windows.Forms.Button btn_atras;
     }
 }

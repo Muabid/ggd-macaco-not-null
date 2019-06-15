@@ -44,30 +44,34 @@
             this.verColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.bajaColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_atras = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.recorridosTable)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(43, 85);
+            this.label1.Location = new System.Drawing.Point(57, 105);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
+            this.label1.Size = new System.Drawing.Size(52, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Código";
             // 
             // codigoBox
             // 
-            this.codigoBox.Location = new System.Drawing.Point(125, 82);
+            this.codigoBox.Location = new System.Drawing.Point(167, 101);
+            this.codigoBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.codigoBox.Name = "codigoBox";
-            this.codigoBox.Size = new System.Drawing.Size(100, 20);
+            this.codigoBox.Size = new System.Drawing.Size(132, 22);
             this.codigoBox.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(107, 157);
+            this.button1.Location = new System.Drawing.Point(60, 167);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 3;
             this.button1.Text = "Limpiar";
             this.button1.UseVisualStyleBackColor = true;
@@ -75,9 +79,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(412, 157);
+            this.button2.Location = new System.Drawing.Point(572, 167);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(100, 28);
             this.button2.TabIndex = 4;
             this.button2.Text = "Buscar";
             this.button2.UseVisualStyleBackColor = true;
@@ -86,17 +91,19 @@
             // ciudadOrigenCombo
             // 
             this.ciudadOrigenCombo.FormattingEnabled = true;
-            this.ciudadOrigenCombo.Location = new System.Drawing.Point(125, 31);
+            this.ciudadOrigenCombo.Location = new System.Drawing.Point(167, 38);
+            this.ciudadOrigenCombo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ciudadOrigenCombo.Name = "ciudadOrigenCombo";
-            this.ciudadOrigenCombo.Size = new System.Drawing.Size(121, 21);
+            this.ciudadOrigenCombo.Size = new System.Drawing.Size(160, 24);
             this.ciudadOrigenCombo.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(43, 34);
+            this.label2.Location = new System.Drawing.Point(57, 42);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 13);
+            this.label2.Size = new System.Drawing.Size(99, 17);
             this.label2.TabIndex = 6;
             this.label2.Text = "Ciudad Origen";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -104,18 +111,20 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(302, 34);
+            this.label3.Location = new System.Drawing.Point(392, 45);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 13);
+            this.label3.Size = new System.Drawing.Size(104, 17);
             this.label3.TabIndex = 7;
             this.label3.Text = "Ciudad Destino";
             // 
             // ciudadDestinoCombo
             // 
             this.ciudadDestinoCombo.FormattingEnabled = true;
-            this.ciudadDestinoCombo.Location = new System.Drawing.Point(393, 31);
+            this.ciudadDestinoCombo.Location = new System.Drawing.Point(513, 41);
+            this.ciudadDestinoCombo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ciudadDestinoCombo.Name = "ciudadDestinoCombo";
-            this.ciudadDestinoCombo.Size = new System.Drawing.Size(121, 21);
+            this.ciudadDestinoCombo.Size = new System.Drawing.Size(160, 24);
             this.ciudadDestinoCombo.TabIndex = 8;
             // 
             // recorridosTable
@@ -131,10 +140,11 @@
             this.verColumn,
             this.bajaColumn,
             this.id});
-            this.recorridosTable.Location = new System.Drawing.Point(12, 237);
+            this.recorridosTable.Location = new System.Drawing.Point(60, 237);
+            this.recorridosTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.recorridosTable.Name = "recorridosTable";
             this.recorridosTable.ReadOnly = true;
-            this.recorridosTable.Size = new System.Drawing.Size(625, 144);
+            this.recorridosTable.Size = new System.Drawing.Size(612, 177);
             this.recorridosTable.TabIndex = 9;
             this.recorridosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.recorridosTable_CellContentClick);
             // 
@@ -198,11 +208,23 @@
             this.id.ReadOnly = true;
             this.id.Visible = false;
             // 
+            // btn_atras
+            // 
+            this.btn_atras.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_atras.Location = new System.Drawing.Point(60, 467);
+            this.btn_atras.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_atras.Name = "btn_atras";
+            this.btn_atras.Size = new System.Drawing.Size(97, 31);
+            this.btn_atras.TabIndex = 22;
+            this.btn_atras.Text = "Atrás";
+            this.btn_atras.UseVisualStyleBackColor = true;
+            // 
             // BajaRecorrido
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 442);
+            this.ClientSize = new System.Drawing.Size(865, 544);
+            this.Controls.Add(this.btn_atras);
             this.Controls.Add(this.recorridosTable);
             this.Controls.Add(this.ciudadDestinoCombo);
             this.Controls.Add(this.label3);
@@ -212,6 +234,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.codigoBox);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "BajaRecorrido";
             this.Text = "Baja";
             ((System.ComponentModel.ISupportInitialize)(this.recorridosTable)).EndInit();
@@ -238,5 +261,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn verColumn;
         private System.Windows.Forms.DataGridViewButtonColumn bajaColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.Button btn_atras;
     }
 }

@@ -30,5 +30,10 @@ namespace FrbaCrucero.AbmCrucero
         {
             //LIMPIAR PANTALLA
         }
+
+        private void btn_buscar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

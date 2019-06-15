@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace FrbaCrucero.Model.Cruceros
 {
+    //ELIMINAR SI NO SE UTILIZA
     interface IFunciones
     {
         int Registrar();

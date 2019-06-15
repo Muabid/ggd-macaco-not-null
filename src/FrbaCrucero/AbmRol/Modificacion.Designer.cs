@@ -40,6 +40,7 @@
             this.Activo = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxFuncionalidades = new System.Windows.Forms.ComboBox();
+            this.btn_atras = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.modificacionTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,9 +54,10 @@
             this.columnRol_Name,
             this.columnSelection,
             this.Rol_activo});
-            this.modificacionTable.Location = new System.Drawing.Point(37, 120);
+            this.modificacionTable.Location = new System.Drawing.Point(49, 148);
+            this.modificacionTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.modificacionTable.Name = "modificacionTable";
-            this.modificacionTable.Size = new System.Drawing.Size(555, 176);
+            this.modificacionTable.Size = new System.Drawing.Size(980, 217);
             this.modificacionTable.TabIndex = 9;
             this.modificacionTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -89,9 +91,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(202, 81);
+            this.button2.Location = new System.Drawing.Point(929, 112);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(100, 28);
             this.button2.TabIndex = 8;
             this.button2.Text = "Buscar";
             this.button2.UseVisualStyleBackColor = true;
@@ -99,9 +102,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(38, 81);
+            this.button1.Location = new System.Drawing.Point(546, 112);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 7;
             this.button1.Text = "Limpiar";
             this.button1.UseVisualStyleBackColor = true;
@@ -109,9 +113,10 @@
             // 
             // Rol
             // 
-            this.Rol.Location = new System.Drawing.Point(202, 39);
+            this.Rol.Location = new System.Drawing.Point(269, 48);
+            this.Rol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Rol.Name = "Rol";
-            this.Rol.Size = new System.Drawing.Size(100, 20);
+            this.Rol.Size = new System.Drawing.Size(132, 22);
             this.Rol.TabIndex = 6;
             this.Rol.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -119,18 +124,20 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(34, 34);
+            this.label1.Location = new System.Drawing.Point(45, 42);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 24);
+            this.label1.Size = new System.Drawing.Size(190, 29);
             this.label1.TabIndex = 5;
             this.label1.Text = "Nombre del Rol:";
             // 
             // Activo
             // 
             this.Activo.AutoSize = true;
-            this.Activo.Location = new System.Drawing.Point(350, 42);
+            this.Activo.Location = new System.Drawing.Point(442, 48);
+            this.Activo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Activo.Name = "Activo";
-            this.Activo.Size = new System.Drawing.Size(56, 17);
+            this.Activo.Size = new System.Drawing.Size(68, 21);
             this.Activo.TabIndex = 10;
             this.Activo.Text = "Activo";
             this.Activo.UseVisualStyleBackColor = true;
@@ -140,9 +147,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(422, 39);
+            this.label2.Location = new System.Drawing.Point(541, 40);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(240, 24);
+            this.label2.Size = new System.Drawing.Size(305, 29);
             this.label2.TabIndex = 12;
             this.label2.Text = "Nombre del Funcionalidad:";
             // 
@@ -150,16 +158,29 @@
             // 
             this.comboBoxFuncionalidades.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFuncionalidades.FormattingEnabled = true;
-            this.comboBoxFuncionalidades.Location = new System.Drawing.Point(668, 42);
+            this.comboBoxFuncionalidades.Location = new System.Drawing.Point(869, 44);
+            this.comboBoxFuncionalidades.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBoxFuncionalidades.Name = "comboBoxFuncionalidades";
-            this.comboBoxFuncionalidades.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxFuncionalidades.Size = new System.Drawing.Size(160, 24);
             this.comboBoxFuncionalidades.TabIndex = 13;
+            // 
+            // btn_atras
+            // 
+            this.btn_atras.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_atras.Location = new System.Drawing.Point(49, 421);
+            this.btn_atras.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_atras.Name = "btn_atras";
+            this.btn_atras.Size = new System.Drawing.Size(97, 31);
+            this.btn_atras.TabIndex = 22;
+            this.btn_atras.Text = "Atrás";
+            this.btn_atras.UseVisualStyleBackColor = true;
             // 
             // Modificacion
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(833, 338);
+            this.ClientSize = new System.Drawing.Size(1111, 475);
+            this.Controls.Add(this.btn_atras);
             this.Controls.Add(this.comboBoxFuncionalidades);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Activo);
@@ -168,6 +189,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Rol);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Modificacion";
             this.Text = "Modificacion";
             this.Load += new System.EventHandler(this.Modificacion_Load);
@@ -191,5 +213,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn Rol_activo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBoxFuncionalidades;
+        private System.Windows.Forms.Button btn_atras;
     }
 }

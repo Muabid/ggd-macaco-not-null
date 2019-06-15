@@ -49,9 +49,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.label1.Location = new System.Drawing.Point(44, 29);
+            this.label1.Location = new System.Drawing.Point(59, 36);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(171, 25);
+            this.label1.Size = new System.Drawing.Size(202, 30);
             this.label1.TabIndex = 1;
             this.label1.Text = "Medios De Pago";
             // 
@@ -65,10 +66,11 @@
             this.methodOfPayment,
             this.cuotas,
             this.columnButtonDelete});
-            this.tablaMediosDePago.Location = new System.Drawing.Point(49, 149);
+            this.tablaMediosDePago.Location = new System.Drawing.Point(65, 183);
+            this.tablaMediosDePago.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tablaMediosDePago.Name = "tablaMediosDePago";
             this.tablaMediosDePago.ShowCellErrors = false;
-            this.tablaMediosDePago.Size = new System.Drawing.Size(497, 200);
+            this.tablaMediosDePago.Size = new System.Drawing.Size(740, 246);
             this.tablaMediosDePago.TabIndex = 2;
             this.tablaMediosDePago.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablaMediosDePago_CellContentClick);
             // 
@@ -90,9 +92,10 @@
             // 
             // botonAgregar
             // 
-            this.botonAgregar.Location = new System.Drawing.Point(49, 355);
+            this.botonAgregar.Location = new System.Drawing.Point(705, 147);
+            this.botonAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.botonAgregar.Name = "botonAgregar";
-            this.botonAgregar.Size = new System.Drawing.Size(75, 23);
+            this.botonAgregar.Size = new System.Drawing.Size(100, 28);
             this.botonAgregar.TabIndex = 4;
             this.botonAgregar.Text = "Agregar";
             this.botonAgregar.UseVisualStyleBackColor = true;
@@ -100,27 +103,30 @@
             // 
             // reserva
             // 
-            this.reserva.Location = new System.Drawing.Point(556, 35);
+            this.reserva.Location = new System.Drawing.Point(673, 43);
+            this.reserva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.reserva.Name = "reserva";
             this.reserva.ReadOnly = true;
-            this.reserva.Size = new System.Drawing.Size(100, 20);
+            this.reserva.Size = new System.Drawing.Size(132, 22);
             this.reserva.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.label2.Location = new System.Drawing.Point(310, 29);
+            this.label2.Location = new System.Drawing.Point(345, 36);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(208, 25);
+            this.label2.Size = new System.Drawing.Size(246, 30);
             this.label2.TabIndex = 7;
             this.label2.Text = "Codigo de Reserva :";
             // 
             // botonPagar
             // 
-            this.botonPagar.Location = new System.Drawing.Point(345, 355);
+            this.botonPagar.Location = new System.Drawing.Point(705, 437);
+            this.botonPagar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.botonPagar.Name = "botonPagar";
-            this.botonPagar.Size = new System.Drawing.Size(75, 23);
+            this.botonPagar.Size = new System.Drawing.Size(100, 28);
             this.botonPagar.TabIndex = 8;
             this.botonPagar.Text = "Pagar";
             this.botonPagar.UseVisualStyleBackColor = true;
@@ -128,25 +134,28 @@
             // 
             // descripcion
             // 
-            this.descripcion.Location = new System.Drawing.Point(49, 97);
+            this.descripcion.Location = new System.Drawing.Point(65, 119);
+            this.descripcion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.descripcion.Name = "descripcion";
-            this.descripcion.Size = new System.Drawing.Size(166, 20);
+            this.descripcion.Size = new System.Drawing.Size(220, 22);
             this.descripcion.TabIndex = 9;
             // 
             // cantCuotas
             // 
-            this.cantCuotas.Location = new System.Drawing.Point(263, 97);
+            this.cantCuotas.Location = new System.Drawing.Point(351, 119);
+            this.cantCuotas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cantCuotas.Name = "cantCuotas";
-            this.cantCuotas.Size = new System.Drawing.Size(157, 20);
+            this.cantCuotas.Size = new System.Drawing.Size(208, 22);
             this.cantCuotas.TabIndex = 10;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label3.Location = new System.Drawing.Point(45, 74);
+            this.label3.Location = new System.Drawing.Point(60, 91);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 20);
+            this.label3.Size = new System.Drawing.Size(131, 25);
             this.label3.TabIndex = 11;
             this.label3.Text = "Descripcion:";
             // 
@@ -154,18 +163,20 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label4.Location = new System.Drawing.Point(259, 74);
+            this.label4.Location = new System.Drawing.Point(345, 91);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(161, 20);
+            this.label4.Size = new System.Drawing.Size(208, 25);
             this.label4.TabIndex = 12;
             this.label4.Text = "Cantidad de Cuotas:";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // buttonAtras
             // 
-            this.buttonAtras.Location = new System.Drawing.Point(211, 355);
+            this.buttonAtras.Location = new System.Drawing.Point(64, 437);
+            this.buttonAtras.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonAtras.Name = "buttonAtras";
-            this.buttonAtras.Size = new System.Drawing.Size(75, 23);
+            this.buttonAtras.Size = new System.Drawing.Size(100, 28);
             this.buttonAtras.TabIndex = 13;
             this.buttonAtras.Text = "Atras";
             this.buttonAtras.UseVisualStyleBackColor = true;
@@ -173,9 +184,9 @@
             // 
             // MediosDePago
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(785, 399);
+            this.ClientSize = new System.Drawing.Size(1047, 491);
             this.Controls.Add(this.buttonAtras);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -187,6 +198,7 @@
             this.Controls.Add(this.botonAgregar);
             this.Controls.Add(this.tablaMediosDePago);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MediosDePago";
             this.Text = "mediosDePago";
             this.Load += new System.EventHandler(this.mediosDePago_Load);

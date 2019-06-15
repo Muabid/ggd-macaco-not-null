@@ -41,6 +41,7 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.codigoError = new System.Windows.Forms.ErrorProvider(this.components);
             this.tramosError = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btn_atras = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tramosTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.codigoError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tramosError)).BeginInit();
@@ -55,10 +56,11 @@
             this.ciudadOrigen,
             this.ciudadDestino,
             this.precio});
-            this.tramosTable.Location = new System.Drawing.Point(80, 115);
+            this.tramosTable.Location = new System.Drawing.Point(107, 142);
+            this.tramosTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tramosTable.Name = "tramosTable";
             this.tramosTable.ReadOnly = true;
-            this.tramosTable.Size = new System.Drawing.Size(348, 159);
+            this.tramosTable.Size = new System.Drawing.Size(464, 196);
             this.tramosTable.TabIndex = 0;
             this.tramosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.tramosTable.Validating += new System.ComponentModel.CancelEventHandler(this.tramosTable_Validating);
@@ -92,9 +94,10 @@
             // 
             // codigo
             // 
-            this.codigo.Location = new System.Drawing.Point(121, 28);
+            this.codigo.Location = new System.Drawing.Point(161, 34);
+            this.codigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.codigo.Name = "codigo";
-            this.codigo.Size = new System.Drawing.Size(100, 20);
+            this.codigo.Size = new System.Drawing.Size(132, 22);
             this.codigo.TabIndex = 1;
             this.codigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.codigo_KeyPress);
             this.codigo.Validating += new System.ComponentModel.CancelEventHandler(this.codigo_Validating);
@@ -102,18 +105,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(56, 31);
+            this.label1.Location = new System.Drawing.Point(75, 38);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
+            this.label1.Size = new System.Drawing.Size(52, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "Código";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // addTramoButton
             // 
-            this.addTramoButton.Location = new System.Drawing.Point(330, 28);
+            this.addTramoButton.Location = new System.Drawing.Point(440, 34);
+            this.addTramoButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.addTramoButton.Name = "addTramoButton";
-            this.addTramoButton.Size = new System.Drawing.Size(98, 22);
+            this.addTramoButton.Size = new System.Drawing.Size(131, 27);
             this.addTramoButton.TabIndex = 3;
             this.addTramoButton.Text = "Agregar Tramo";
             this.addTramoButton.UseVisualStyleBackColor = true;
@@ -121,9 +126,10 @@
             // 
             // clean
             // 
-            this.clean.Location = new System.Drawing.Point(80, 294);
+            this.clean.Location = new System.Drawing.Point(342, 362);
+            this.clean.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.clean.Name = "clean";
-            this.clean.Size = new System.Drawing.Size(75, 23);
+            this.clean.Size = new System.Drawing.Size(100, 28);
             this.clean.TabIndex = 4;
             this.clean.Text = "Limpiar";
             this.clean.UseVisualStyleBackColor = true;
@@ -131,9 +137,10 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(353, 294);
+            this.saveButton.Location = new System.Drawing.Point(471, 362);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.Size = new System.Drawing.Size(100, 28);
             this.saveButton.TabIndex = 5;
             this.saveButton.Text = "Guardar";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -147,18 +154,31 @@
             // 
             this.tramosError.ContainerControl = this;
             // 
+            // btn_atras
+            // 
+            this.btn_atras.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_atras.Location = new System.Drawing.Point(107, 359);
+            this.btn_atras.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_atras.Name = "btn_atras";
+            this.btn_atras.Size = new System.Drawing.Size(97, 31);
+            this.btn_atras.TabIndex = 22;
+            this.btn_atras.Text = "Atrás";
+            this.btn_atras.UseVisualStyleBackColor = true;
+            // 
             // AltaRecorrido
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.ClientSize = new System.Drawing.Size(521, 384);
+            this.ClientSize = new System.Drawing.Size(695, 473);
+            this.Controls.Add(this.btn_atras);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.clean);
             this.Controls.Add(this.addTramoButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.codigo);
             this.Controls.Add(this.tramosTable);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AltaRecorrido";
             this.Text = "Alta recorrido";
             ((System.ComponentModel.ISupportInitialize)(this.tramosTable)).EndInit();
@@ -182,5 +202,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn precio;
         private System.Windows.Forms.ErrorProvider codigoError;
         private System.Windows.Forms.ErrorProvider tramosError;
+        private System.Windows.Forms.Button btn_atras;
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace FrbaCrucero
 {
+    //ELIMINAR SI NO SE USA
     public interface ICrucero
     {
         void updateCrucero(Crucero crucero);

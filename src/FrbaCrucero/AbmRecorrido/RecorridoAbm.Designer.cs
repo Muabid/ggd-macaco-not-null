@@ -31,13 +31,15 @@
             this.btnAlta = new System.Windows.Forms.Button();
             this.btnBaja = new System.Windows.Forms.Button();
             this.btnModificacion = new System.Windows.Forms.Button();
+            this.btn_atras = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAlta
             // 
-            this.btnAlta.Location = new System.Drawing.Point(90, 34);
+            this.btnAlta.Location = new System.Drawing.Point(120, 42);
+            this.btnAlta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAlta.Name = "btnAlta";
-            this.btnAlta.Size = new System.Drawing.Size(96, 23);
+            this.btnAlta.Size = new System.Drawing.Size(128, 28);
             this.btnAlta.TabIndex = 0;
             this.btnAlta.Text = "ALTA";
             this.btnAlta.UseVisualStyleBackColor = true;
@@ -45,9 +47,10 @@
             // 
             // btnBaja
             // 
-            this.btnBaja.Location = new System.Drawing.Point(90, 93);
+            this.btnBaja.Location = new System.Drawing.Point(120, 114);
+            this.btnBaja.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBaja.Name = "btnBaja";
-            this.btnBaja.Size = new System.Drawing.Size(96, 23);
+            this.btnBaja.Size = new System.Drawing.Size(128, 28);
             this.btnBaja.TabIndex = 1;
             this.btnBaja.Text = "BAJA";
             this.btnBaja.UseVisualStyleBackColor = true;
@@ -55,23 +58,37 @@
             // 
             // btnModificacion
             // 
-            this.btnModificacion.Location = new System.Drawing.Point(90, 148);
+            this.btnModificacion.Location = new System.Drawing.Point(120, 182);
+            this.btnModificacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnModificacion.Name = "btnModificacion";
-            this.btnModificacion.Size = new System.Drawing.Size(96, 23);
+            this.btnModificacion.Size = new System.Drawing.Size(128, 28);
             this.btnModificacion.TabIndex = 2;
             this.btnModificacion.Text = "MODIFICACIÓN";
             this.btnModificacion.UseVisualStyleBackColor = true;
             this.btnModificacion.Click += new System.EventHandler(this.btnModificacion_Click);
             // 
-            // AbmRecorrido
+            // btn_atras
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.btn_atras.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_atras.Location = new System.Drawing.Point(12, 279);
+            this.btn_atras.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_atras.Name = "btn_atras";
+            this.btn_atras.Size = new System.Drawing.Size(97, 31);
+            this.btn_atras.TabIndex = 22;
+            this.btn_atras.Text = "Atrás";
+            this.btn_atras.UseVisualStyleBackColor = true;
+            // 
+            // RecorridoAbm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(379, 321);
+            this.Controls.Add(this.btn_atras);
             this.Controls.Add(this.btnModificacion);
             this.Controls.Add(this.btnBaja);
             this.Controls.Add(this.btnAlta);
-            this.Name = "AbmRecorrido";
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Name = "RecorridoAbm";
             this.Text = "AbmRecorrido";
             this.ResumeLayout(false);
 
@@ -82,5 +99,6 @@
         private System.Windows.Forms.Button btnAlta;
         private System.Windows.Forms.Button btnBaja;
         private System.Windows.Forms.Button btnModificacion;
+        private System.Windows.Forms.Button btn_atras;
     }
 }
