@@ -42,7 +42,7 @@ namespace FrbaCrucero.AbmCrucero
             //Adding the Columns.
             foreach (DataGridViewColumn column in dgv_cabinas.Columns)
             {
-                if(column.Index != 3)
+                if (column.Index != 3)
                     dt.Columns.Add(column.DataPropertyName);
             }
 
@@ -64,52 +64,52 @@ namespace FrbaCrucero.AbmCrucero
             cmd.Parameters.Add("@cabinas", SqlDbType.Structured).Value = dt;
             Database.executeProcedure(cmd);
             this.Close();
-           /* copié la logica del boton guardar recorrido y ahora
-            * tengo que ir cambiando las variables para el ALTA CRUCERO
-            try
-            {
-                if (ValidateChildren(ValidationConstraints.Enabled))
-                {
-                    DataTable dt = new DataTable();
-                    dt.Columns.Add("ciudadOrigen");
-                    dt.Columns.Add("ciudadDestino");
-                    DataColumn column;
-                    column = new DataColumn();
-                    column.DataType = System.Type.GetType("System.Decimal");
-                    column.ColumnName = "precio";
-                    dt.Columns.Add(column);
-                    dt.Columns.Add("indice");
-                    dt.Columns.Add("tramoId");
-                    foreach (DataGridViewRow row in tramosTable.Rows)
-                    {
-                        Puerto origen = (Puerto)row.Cells[0].Value;
-                        Puerto destino = (Puerto)row.Cells[1].Value;
-                        DataRow dRow = dt.NewRow();
-                        if (origen != null && destino != null)
-                        {
-                            Decimal precio = decimal.Parse(row.Cells[2].Value.ToString());
-                            dRow[0] = origen.id;
-                            dRow[1] = destino.id;
-                            dRow[2] = precio;
-                            dRow[3] = row.Index;
-                            dt.Rows.Add(dRow);
+            /* copié la logica del boton guardar recorrido y ahora
+             * tengo que ir cambiando las variables para el ALTA CRUCERO
+             try
+             {
+                 if (ValidateChildren(ValidationConstraints.Enabled))
+                 {
+                     DataTable dt = new DataTable();
+                     dt.Columns.Add("ciudadOrigen");
+                     dt.Columns.Add("ciudadDestino");
+                     DataColumn column;
+                     column = new DataColumn();
+                     column.DataType = System.Type.GetType("System.Decimal");
+                     column.ColumnName = "precio";
+                     dt.Columns.Add(column);
+                     dt.Columns.Add("indice");
+                     dt.Columns.Add("tramoId");
+                     foreach (DataGridViewRow row in tramosTable.Rows)
+                     {
+                         Puerto origen = (Puerto)row.Cells[0].Value;
+                         Puerto destino = (Puerto)row.Cells[1].Value;
+                         DataRow dRow = dt.NewRow();
+                         if (origen != null && destino != null)
+                         {
+                             Decimal precio = decimal.Parse(row.Cells[2].Value.ToString());
+                             dRow[0] = origen.id;
+                             dRow[1] = destino.id;
+                             dRow[2] = precio;
+                             dRow[3] = row.Index;
+                             dt.Rows.Add(dRow);
 
-                        }
+                         }
 
-                    }
-                    recorridosDao.insertRecorrido(Convert.ToDecimal(codigo.Text), dt);
-                    MessageBox.Show("Recorrido: "+codigo.Text + " dado de alta.", "Operación exitosa",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    limpiar_Click(null, null);
-                }
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message, "ERROR",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                     }
+                     recorridosDao.insertRecorrido(Convert.ToDecimal(codigo.Text), dt);
+                     MessageBox.Show("Recorrido: "+codigo.Text + " dado de alta.", "Operación exitosa",
+                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                     limpiar_Click(null, null);
+                 }
+             }
+             catch (Exception exception)
+             {
+                 MessageBox.Show(exception.Message, "ERROR",
+                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+             }
 
-            */ 
+             */
         }
 
         private void FormAlta_Load(object sender, EventArgs e)
@@ -129,7 +129,7 @@ namespace FrbaCrucero.AbmCrucero
             String tipoCabina = cbo_tipo_servicio.Text;
             String cantidad = txt_cantidad.Text;
             String piso = txt_piso.Text;
-            dgv_cabinas.Rows.Add(tipoCabina,cantidad,piso);
+            dgv_cabinas.Rows.Add(tipoCabina, cantidad, piso);
 
             crucero.cruc_cantidad_cabinas += int.Parse(cantidad);
             txt_cabinas.Text = crucero.cruc_cantidad_cabinas.ToString();
@@ -140,7 +140,15 @@ namespace FrbaCrucero.AbmCrucero
 
         private void btn_limpiar_Click(object sender, EventArgs e)
         {
-          //LIMPIAR PANTALLA
+            txt_nombre.Clear();
+            cbo_modelo.SelectedIndex = -1;
+            cbo_compania.SelectedIndex = -1;
+            txt_cabinas.Clear();
+            txt_fecha_alta.Clear();
+            cbo_tipo_servicio.SelectedIndex = -1;
+            txt_cantidad.Clear();
+            txt_piso.Clear();
+            dgv_cabinas.Rows.Clear();
         }
 
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
@@ -195,9 +203,17 @@ namespace FrbaCrucero.AbmCrucero
 
         private void txt_cabinas_TextChanged(object sender, EventArgs e)
         {
-           
+
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+
+        }
+
+        private void txt_fecha_alta_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
-
-
