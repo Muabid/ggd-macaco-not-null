@@ -67,6 +67,18 @@ namespace FrbaCrucero.AbmCrucero
 
             var tipoServicios = cruceroDao.getTipoServicios().ToArray();
             cbo_tipo_servicio.Items.AddRange(tipoServicios);
+
+            var controls = group_box_crucero.Controls.Cast<Control>().Where(c => c is TextBox || c is ComboBox).ToList();
+            
+            controls.ForEach(c => {
+                c.TextChanged += (sender2, e2) =>
+                {
+                    btn_guardar.Enabled = controls.All(c2 => !String.IsNullOrEmpty(c2.Text));
+                };
+            } );
+           
+
+
         }
 
         private void btn_agregar_Click(object sender, EventArgs e)
@@ -85,7 +97,27 @@ namespace FrbaCrucero.AbmCrucero
 
         private void btn_limpiar_Click(object sender, EventArgs e)
         {
-          //LIMPIAR PANTALLA
+
+            this.Controls.Cast<Control>().ToList()
+                .Where(c => c is GroupBox)
+                .SelectMany(c => c.Controls.Cast<Control>().ToList())
+                .ToList().ForEach(c =>
+                {
+                    if (c is ComboBox)
+                     ((ComboBox)c).SelectedIndex = -1;
+                    if (c is TextBox)
+                      c.Text = null;
+                });
+
+            //foreach (Control c in this.Controls)
+            //{
+                
+            //    if (c is ComboBox)
+            //        ((ComboBox)c).SelectedIndex = -1;
+            //    if (c is TextBox)
+            //        c.Text = null;
+            //}
+            dgv_cabinas.Rows.Clear();
         }
 
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
@@ -134,12 +166,27 @@ namespace FrbaCrucero.AbmCrucero
 
         private void txt_cabinas_TextChanged(object sender, EventArgs e)
         {
-           
+            
         }
 
         private void cbo_modelo_TextChanged(object sender, EventArgs e)
         {
             crucero.cruc_modelo = cbo_modelo.Text;
+        }
+
+        private void cbo_tipo_servicio_TextChanged(object sender, EventArgs e)
+        {
+            btn_agregar.Enabled = new List<String>(new []{cbo_tipo_servicio.Text, txt_cantidad.Text, txt_piso.Text}).All(t => !String.IsNullOrEmpty(t));
+        }
+
+        private void txt_cantidad_TextChanged(object sender, EventArgs e)
+        {
+            btn_agregar.Enabled = new List<String>(new[] { cbo_tipo_servicio.Text, txt_cantidad.Text, txt_piso.Text }).All(t => !String.IsNullOrEmpty(t));
+        }
+
+        private void txt_piso_TextChanged(object sender, EventArgs e)
+        {
+            btn_agregar.Enabled = new List<String>(new[] { cbo_tipo_servicio.Text, txt_cantidad.Text, txt_piso.Text }).All(t => !String.IsNullOrEmpty(t));
         }
     }
 }
