@@ -10,9 +10,6 @@ namespace FrbaCrucero.Model.Cruceros
 {
     class BajaCrucero
     {
-        SqlConnection cn = new SqlConnection(
-                ConfigurationManager.ConnectionStrings["FRBACrucero"].ConnectionString
-                );
 
         // ESTAS SON LAS PROPIEDADES DE LA CLASE
 
@@ -23,6 +20,8 @@ namespace FrbaCrucero.Model.Cruceros
         public DateTime baja_cruc_fecha_fuera_servicio { get; set; }
 
         public DateTime baja_cruc_fecha_reinicio_servicio { get; set; }
+
+        public DateTime baja_cruc_fecha_definitiva { get; set; }
 
         public string baja_cruc_motivo { get; set; }
 

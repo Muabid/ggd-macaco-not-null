@@ -281,6 +281,7 @@
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 7;
             this.monthCalendar1.Visible = false;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
             // 
             // btn_seleccionar
@@ -324,6 +325,7 @@
             this.txt_fecha_alta.ReadOnly = true;
             this.txt_fecha_alta.Size = new System.Drawing.Size(123, 20);
             this.txt_fecha_alta.TabIndex = 5;
+            this.txt_fecha_alta.TextChanged += new System.EventHandler(this.txt_fecha_alta_TextChanged);
             // 
             // label5
             // 

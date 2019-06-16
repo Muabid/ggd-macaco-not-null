@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_seleccionar_fecha_baja_definitiva = new System.Windows.Forms.Button();
+            this.txt_fecha_baja_definitiva = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.chb_vida_util = new System.Windows.Forms.CheckBox();
+            this.chb_fuera_de_servicio = new System.Windows.Forms.CheckBox();
             this.txt_motivo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.btn_seleccionar_fecha_reinicio_servicio = new System.Windows.Forms.Button();
             this.txt_fecha_reinicio_servicio = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.btn_seleccionar_fecha_fuera_servicio = new System.Windows.Forms.Button();
             this.txt_fecha_fuera_servicio = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btn_guardar = new System.Windows.Forms.Button();
             this.btn_limpiar = new System.Windows.Forms.Button();
             this.btn_atras = new System.Windows.Forms.Button();
-            this.chb_fuera_de_servicio = new System.Windows.Forms.CheckBox();
-            this.chb_vida_util = new System.Windows.Forms.CheckBox();
-            this.btn_seleccionar_fecha_baja_definitiva = new System.Windows.Forms.Button();
-            this.txt_fecha_baja_definitiva = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,6 +72,55 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Baja Crucero";
             // 
+            // btn_seleccionar_fecha_baja_definitiva
+            // 
+            this.btn_seleccionar_fecha_baja_definitiva.Location = new System.Drawing.Point(653, 117);
+            this.btn_seleccionar_fecha_baja_definitiva.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_seleccionar_fecha_baja_definitiva.Name = "btn_seleccionar_fecha_baja_definitiva";
+            this.btn_seleccionar_fecha_baja_definitiva.Size = new System.Drawing.Size(97, 26);
+            this.btn_seleccionar_fecha_baja_definitiva.TabIndex = 22;
+            this.btn_seleccionar_fecha_baja_definitiva.Text = "Seleccionar";
+            this.btn_seleccionar_fecha_baja_definitiva.UseVisualStyleBackColor = true;
+            this.btn_seleccionar_fecha_baja_definitiva.Click += new System.EventHandler(this.btn_seleccionar_fecha_baja_definitiva_Click);
+            // 
+            // txt_fecha_baja_definitiva
+            // 
+            this.txt_fecha_baja_definitiva.Location = new System.Drawing.Point(484, 119);
+            this.txt_fecha_baja_definitiva.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txt_fecha_baja_definitiva.Name = "txt_fecha_baja_definitiva";
+            this.txt_fecha_baja_definitiva.ReadOnly = true;
+            this.txt_fecha_baja_definitiva.Size = new System.Drawing.Size(163, 22);
+            this.txt_fecha_baja_definitiva.TabIndex = 21;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(481, 91);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(156, 17);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "Fecha Baja DEFINITIVA";
+            // 
+            // chb_vida_util
+            // 
+            this.chb_vida_util.AutoSize = true;
+            this.chb_vida_util.Location = new System.Drawing.Point(484, 47);
+            this.chb_vida_util.Name = "chb_vida_util";
+            this.chb_vida_util.Size = new System.Drawing.Size(226, 21);
+            this.chb_vida_util.TabIndex = 20;
+            this.chb_vida_util.Text = "Baja por Vida Útil (DEFINITIVA)";
+            this.chb_vida_util.UseVisualStyleBackColor = true;
+            // 
+            // chb_fuera_de_servicio
+            // 
+            this.chb_fuera_de_servicio.AutoSize = true;
+            this.chb_fuera_de_servicio.Location = new System.Drawing.Point(34, 47);
+            this.chb_fuera_de_servicio.Name = "chb_fuera_de_servicio";
+            this.chb_fuera_de_servicio.Size = new System.Drawing.Size(198, 21);
+            this.chb_fuera_de_servicio.TabIndex = 19;
+            this.chb_fuera_de_servicio.Text = "Baja por Fuera de Servicio";
+            this.chb_fuera_de_servicio.UseVisualStyleBackColor = true;
+            // 
             // txt_motivo
             // 
             this.txt_motivo.Location = new System.Drawing.Point(34, 244);
@@ -89,6 +138,16 @@
             this.label2.TabIndex = 16;
             this.label2.Text = "Motivo";
             // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(484, 189);
+            this.monthCalendar1.MaxSelectionCount = 1;
+            this.monthCalendar1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 11;
+            this.monthCalendar1.Visible = false;
+            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
+            // 
             // btn_seleccionar_fecha_reinicio_servicio
             // 
             this.btn_seleccionar_fecha_reinicio_servicio.Location = new System.Drawing.Point(203, 189);
@@ -98,6 +157,7 @@
             this.btn_seleccionar_fecha_reinicio_servicio.TabIndex = 14;
             this.btn_seleccionar_fecha_reinicio_servicio.Text = "Seleccionar";
             this.btn_seleccionar_fecha_reinicio_servicio.UseVisualStyleBackColor = true;
+            this.btn_seleccionar_fecha_reinicio_servicio.Click += new System.EventHandler(this.btn_seleccionar_fecha_reinicio_servicio_Click);
             // 
             // txt_fecha_reinicio_servicio
             // 
@@ -117,15 +177,6 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "Fecha Reinicio de Servicio";
             // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.Location = new System.Drawing.Point(484, 189);
-            this.monthCalendar1.MaxSelectionCount = 1;
-            this.monthCalendar1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 11;
-            this.monthCalendar1.Visible = false;
-            // 
             // btn_seleccionar_fecha_fuera_servicio
             // 
             this.btn_seleccionar_fecha_fuera_servicio.Location = new System.Drawing.Point(203, 117);
@@ -135,6 +186,7 @@
             this.btn_seleccionar_fecha_fuera_servicio.TabIndex = 10;
             this.btn_seleccionar_fecha_fuera_servicio.Text = "Seleccionar";
             this.btn_seleccionar_fecha_fuera_servicio.UseVisualStyleBackColor = true;
+            this.btn_seleccionar_fecha_fuera_servicio.Click += new System.EventHandler(this.btn_seleccionar_fecha_fuera_servicio_Click);
             // 
             // txt_fecha_fuera_servicio
             // 
@@ -175,6 +227,7 @@
             this.btn_limpiar.TabIndex = 18;
             this.btn_limpiar.Text = "Limpiar";
             this.btn_limpiar.UseVisualStyleBackColor = true;
+            this.btn_limpiar.Click += new System.EventHandler(this.btn_limpiar_Click);
             // 
             // btn_atras
             // 
@@ -186,54 +239,6 @@
             this.btn_atras.TabIndex = 20;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
-            // 
-            // chb_fuera_de_servicio
-            // 
-            this.chb_fuera_de_servicio.AutoSize = true;
-            this.chb_fuera_de_servicio.Location = new System.Drawing.Point(34, 47);
-            this.chb_fuera_de_servicio.Name = "chb_fuera_de_servicio";
-            this.chb_fuera_de_servicio.Size = new System.Drawing.Size(198, 21);
-            this.chb_fuera_de_servicio.TabIndex = 19;
-            this.chb_fuera_de_servicio.Text = "Baja por Fuera de Servicio";
-            this.chb_fuera_de_servicio.UseVisualStyleBackColor = true;
-            // 
-            // chb_vida_util
-            // 
-            this.chb_vida_util.AutoSize = true;
-            this.chb_vida_util.Location = new System.Drawing.Point(484, 47);
-            this.chb_vida_util.Name = "chb_vida_util";
-            this.chb_vida_util.Size = new System.Drawing.Size(226, 21);
-            this.chb_vida_util.TabIndex = 20;
-            this.chb_vida_util.Text = "Baja por Vida Útil (DEFINITIVA)";
-            this.chb_vida_util.UseVisualStyleBackColor = true;
-            // 
-            // btn_seleccionar_fecha_baja_definitiva
-            // 
-            this.btn_seleccionar_fecha_baja_definitiva.Location = new System.Drawing.Point(653, 117);
-            this.btn_seleccionar_fecha_baja_definitiva.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_seleccionar_fecha_baja_definitiva.Name = "btn_seleccionar_fecha_baja_definitiva";
-            this.btn_seleccionar_fecha_baja_definitiva.Size = new System.Drawing.Size(97, 26);
-            this.btn_seleccionar_fecha_baja_definitiva.TabIndex = 22;
-            this.btn_seleccionar_fecha_baja_definitiva.Text = "Seleccionar";
-            this.btn_seleccionar_fecha_baja_definitiva.UseVisualStyleBackColor = true;
-            // 
-            // txt_fecha_baja_definitiva
-            // 
-            this.txt_fecha_baja_definitiva.Location = new System.Drawing.Point(484, 119);
-            this.txt_fecha_baja_definitiva.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txt_fecha_baja_definitiva.Name = "txt_fecha_baja_definitiva";
-            this.txt_fecha_baja_definitiva.ReadOnly = true;
-            this.txt_fecha_baja_definitiva.Size = new System.Drawing.Size(163, 22);
-            this.txt_fecha_baja_definitiva.TabIndex = 21;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(481, 91);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(156, 17);
-            this.label3.TabIndex = 23;
-            this.label3.Text = "Fecha Baja DEFINITIVA";
             // 
             // FormBaja
             // 

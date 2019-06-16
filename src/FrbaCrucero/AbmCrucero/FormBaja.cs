@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrbaCrucero.Model.Cruceros;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,69 @@ namespace FrbaCrucero.AbmCrucero
 {
     public partial class FormBaja : Form
     {
+        BajaCrucero bajaCrucero = new BajaCrucero();
         public FormBaja()
         {
             InitializeComponent();
+        }
+        int btn;
+        private void btn_limpiar_Click(object sender, EventArgs e)
+        {
+            txt_fecha_fuera_servicio.Clear();
+            txt_fecha_reinicio_servicio.Clear();
+            txt_fecha_baja_definitiva.Clear();
+            chb_fuera_de_servicio.Checked = false;
+            chb_vida_util.Checked = false;
+            txt_motivo.Clear();
+
+        }
+
+        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            if (btn == 1)
+            {
+                bajaCrucero.baja_cruc_fecha_fuera_servicio = monthCalendar1.SelectionRange.Start;
+                txt_fecha_fuera_servicio.Text = bajaCrucero.baja_cruc_fecha_fuera_servicio.ToShortDateString();
+                monthCalendar1.Visible = false;
+                btn = 0;
+            }
+            else
+            {
+                if (btn == 2)
+                {
+                    bajaCrucero.baja_cruc_fecha_reinicio_servicio = monthCalendar1.SelectionRange.Start;
+                    txt_fecha_reinicio_servicio.Text = bajaCrucero.baja_cruc_fecha_reinicio_servicio.ToShortDateString();
+                    monthCalendar1.Visible = false;
+                    btn = 0;
+                }
+                else
+                {
+                    bajaCrucero.baja_cruc_fecha_definitiva = monthCalendar1.SelectionRange.Start;
+                    txt_fecha_baja_definitiva.Text = bajaCrucero.baja_cruc_fecha_definitiva.ToShortDateString();
+                    monthCalendar1.Visible = false;
+                    btn = 0;
+                }
+            }
+           
+
+        }
+        
+        private void btn_seleccionar_fecha_fuera_servicio_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+            btn = 1;
+        }
+
+        private void btn_seleccionar_fecha_reinicio_servicio_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+            btn = 2;
+        }
+
+        private void btn_seleccionar_fecha_baja_definitiva_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+            btn = 3;
         }
     }
 }

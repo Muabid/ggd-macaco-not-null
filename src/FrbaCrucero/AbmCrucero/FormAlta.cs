@@ -33,7 +33,6 @@ namespace FrbaCrucero.AbmCrucero
         {
 
             DataTable dt = new DataTable();
-
             dt.Columns.Add("cabinas", System.Type.GetType("System.Int32"));
             dt.Columns.Add("piso", System.Type.GetType("System.Int32"));
             dt.Columns.Add("servicio", System.Type.GetType("System.String"));
@@ -86,7 +85,7 @@ namespace FrbaCrucero.AbmCrucero
             String tipoCabina = cbo_tipo_servicio.Text;
             String cantidad = txt_cantidad.Text;
             String piso = txt_piso.Text;
-            dgv_cabinas.Rows.Add(tipoCabina,cantidad,piso);
+            dgv_cabinas.Rows.Add(tipoCabina, cantidad, piso);
 
             crucero.cruc_cantidad_cabinas += int.Parse(cantidad);
             txt_cabinas.Text = crucero.cruc_cantidad_cabinas.ToString();
@@ -98,25 +97,26 @@ namespace FrbaCrucero.AbmCrucero
         private void btn_limpiar_Click(object sender, EventArgs e)
         {
 
-            this.Controls.Cast<Control>().ToList()
-                .Where(c => c is GroupBox)
-                .SelectMany(c => c.Controls.Cast<Control>().ToList())
-                .ToList().ForEach(c =>
-                {
-                    if (c is ComboBox)
-                     ((ComboBox)c).SelectedIndex = -1;
-                    if (c is TextBox)
-                      c.Text = null;
-                });
 
-            //foreach (Control c in this.Controls)
-            //{
-                
-            //    if (c is ComboBox)
-            //        ((ComboBox)c).SelectedIndex = -1;
-            //    if (c is TextBox)
-            //        c.Text = null;
-            //}
+            //this.Controls.Cast<Control>().ToList()
+            //    .Where(c => c is GroupBox)
+            //    .SelectMany(c => c.Controls.Cast<Control>().ToList())
+            //    .ToList().ForEach(c =>
+            //    {
+            //        if (c is ComboBox)
+            //         ((ComboBox)c).SelectedIndex = -1;
+            //        if (c is TextBox)
+            //          c.Text = null;
+            //    });
+
+            txt_nombre.Clear();
+            cbo_modelo.SelectedIndex = -1;
+            cbo_compania.SelectedIndex = -1;
+            txt_cabinas.Clear();
+            txt_fecha_alta.Clear();
+            cbo_tipo_servicio.SelectedIndex = -1;
+            txt_cantidad.Clear();
+            txt_piso.Clear();
             dgv_cabinas.Rows.Clear();
         }
 
@@ -166,7 +166,7 @@ namespace FrbaCrucero.AbmCrucero
 
         private void txt_cabinas_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void cbo_modelo_TextChanged(object sender, EventArgs e)
@@ -191,4 +191,14 @@ namespace FrbaCrucero.AbmCrucero
     }
 }
 
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
 
+        }
+
+        private void txt_fecha_alta_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
