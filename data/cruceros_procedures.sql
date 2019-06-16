@@ -28,13 +28,13 @@ CREATE TYPE [MACACO_NOT_NULL].CABINA_PISO AS TABLE (
 cabinas INT,
 piso INT,
 servicio NVARCHAR(256) )
-
 GO
 
 CREATE PROCEDURE [MACACO_NOT_NULL].CreateOrUpdateCrucero @nombre NVARCHAR(256), @modelo NVARCHAR(256),
 	@compania INT,@fecha_alta DATETIME2(3),@cant_cabinas INT, @cabinas [MACACO_NOT_NULL].CABINA_PISO readonly  
 AS
-BEGIN TRANSACTION 
+BEGIN TRANSACTION
+BEGIN TRY
 	INSERT INTO MACACO_NOT_NULL.CRUCERO (cruc_compañia_id, cruc_nombre, cruc_modelo, cruc_fecha_alta,cruc_cantidad_cabinas)
 	VALUES (@compania,@nombre,@modelo,@fecha_alta,@cant_cabinas)
 	DECLARE @cruc_id INT
@@ -42,7 +42,7 @@ BEGIN TRANSACTION
 	DECLARE @piso INT
 	DECLARE @cabinas_piso INT
 	DECLARE @servicio nvarchar(256)
-	DECLARE pisos CURSOR FOR SELECT piso FROM @cabinas
+	DECLARE pisos CURSOR FOR SELECT DISTINCT piso FROM @cabinas
 	OPEN pisos
 	FETCH NEXT FROM pisos INTO @piso
 	WHILE  @@FETCH_STATUS = 0
@@ -64,9 +64,17 @@ BEGIN TRANSACTION
 			FETCH NEXT FROM servicios INTO @servicio			
 		END
 		CLOSE servicios;
+		DEALLOCATE servicios;
 		FETCH NEXT FROM pisos INTO @piso
 	 END
+	 CLOSE pisos;
+	 DEALLOCATE pisos;
 COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+	ROLLBACK TRANSACTION;
+	THROW;
+END CATCH
 GO
 
 GO

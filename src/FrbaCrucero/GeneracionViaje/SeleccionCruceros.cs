@@ -18,7 +18,7 @@ namespace FrbaCrucero.GeneracionViaje
 
         private DateTime salida;
         private DateTime llegada;
-        private CruceroDAO dao;
+        private CruceroDAO dao = new CruceroDAO();
         public SeleccionCruceros(DateTime salida, DateTime llegada)
         {
             InitializeComponent();
@@ -55,11 +55,6 @@ namespace FrbaCrucero.GeneracionViaje
 
         }
 
-        private void cbo_modelo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void cbo_compania_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -86,8 +81,6 @@ namespace FrbaCrucero.GeneracionViaje
 
             }
         }
-
-
         
     }
 }

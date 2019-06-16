@@ -24,11 +24,6 @@ namespace FrbaCrucero.AbmCrucero
             InitializeComponent();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void label6_Click(object sender, EventArgs e)
         {
 
@@ -38,21 +33,16 @@ namespace FrbaCrucero.AbmCrucero
         {
 
             DataTable dt = new DataTable();
+            dt.Columns.Add("cabinas", System.Type.GetType("System.Int32"));
+            dt.Columns.Add("piso", System.Type.GetType("System.Int32"));
+            dt.Columns.Add("servicio", System.Type.GetType("System.String"));
 
-            //Adding the Columns.
-            foreach (DataGridViewColumn column in dgv_cabinas.Columns)
-            {
-                if (column.Index != 3)
-                    dt.Columns.Add(column.DataPropertyName);
-            }
-
-            //Adding the Rows.
             foreach (DataGridViewRow row in dgv_cabinas.Rows)
             {
                 DataRow drow = dt.NewRow();
                 drow["cabinas"] = int.Parse(row.Cells["cabinas"].Value.ToString());
                 drow["piso"] = int.Parse(row.Cells["piso"].Value.ToString());
-                drow["servicio"] = row.Cells["servicio"].ToString();
+                drow["servicio"] = row.Cells["servicio"].Value.ToString();
                 dt.Rows.Add(drow);
             }
             SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].CreateOrUpdateCrucero");
@@ -64,52 +54,6 @@ namespace FrbaCrucero.AbmCrucero
             cmd.Parameters.Add("@cabinas", SqlDbType.Structured).Value = dt;
             Database.executeProcedure(cmd);
             this.Close();
-            /* copié la logica del boton guardar recorrido y ahora
-             * tengo que ir cambiando las variables para el ALTA CRUCERO
-             try
-             {
-                 if (ValidateChildren(ValidationConstraints.Enabled))
-                 {
-                     DataTable dt = new DataTable();
-                     dt.Columns.Add("ciudadOrigen");
-                     dt.Columns.Add("ciudadDestino");
-                     DataColumn column;
-                     column = new DataColumn();
-                     column.DataType = System.Type.GetType("System.Decimal");
-                     column.ColumnName = "precio";
-                     dt.Columns.Add(column);
-                     dt.Columns.Add("indice");
-                     dt.Columns.Add("tramoId");
-                     foreach (DataGridViewRow row in tramosTable.Rows)
-                     {
-                         Puerto origen = (Puerto)row.Cells[0].Value;
-                         Puerto destino = (Puerto)row.Cells[1].Value;
-                         DataRow dRow = dt.NewRow();
-                         if (origen != null && destino != null)
-                         {
-                             Decimal precio = decimal.Parse(row.Cells[2].Value.ToString());
-                             dRow[0] = origen.id;
-                             dRow[1] = destino.id;
-                             dRow[2] = precio;
-                             dRow[3] = row.Index;
-                             dt.Rows.Add(dRow);
-
-                         }
-
-                     }
-                     recorridosDao.insertRecorrido(Convert.ToDecimal(codigo.Text), dt);
-                     MessageBox.Show("Recorrido: "+codigo.Text + " dado de alta.", "Operación exitosa",
-                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                     limpiar_Click(null, null);
-                 }
-             }
-             catch (Exception exception)
-             {
-                 MessageBox.Show(exception.Message, "ERROR",
-                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-             }
-
-             */
         }
 
         private void FormAlta_Load(object sender, EventArgs e)
@@ -190,12 +134,6 @@ namespace FrbaCrucero.AbmCrucero
             crucero.cruc_compañia_id = ((Compania)cbo_compania.SelectedItem).comp_id;
         }
 
-        private void cbo_modelo_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            crucero.cruc_modelo = cbo_modelo.Text;
-
-        }
-
         private void txt_nombre_TextChanged(object sender, EventArgs e)
         {
             crucero.cruc_nombre = txt_nombre.Text;
@@ -205,6 +143,13 @@ namespace FrbaCrucero.AbmCrucero
         {
 
         }
+
+        private void cbo_modelo_TextChanged(object sender, EventArgs e)
+        {
+            crucero.cruc_modelo = cbo_modelo.Text;
+        }
+    }
+}
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
