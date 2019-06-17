@@ -24,7 +24,7 @@ namespace FrbaCrucero.Model.Cruceros
 
         public bool cruc_activo { get; set; }
 
-        public DateTime cruc_fecha_alta { get; set; }
+        public DateTime? cruc_fecha_alta { get; set; }
 
         public int cruc_cantidad_cabinas { get; set; }
 

@@ -24,12 +24,12 @@ namespace FrbaCrucero.AbmCrucero
 
         private void btn_baja_Click(object sender, EventArgs e)
         {
-            new FormListadoCruceros().ShowDialog(this);
+            new FormListadoCruceros().ShowBaja(this);
         }
 
         private void btn_modificacion_Click(object sender, EventArgs e)
         {
-            new FormListadoCruceros().ShowDialog(this);
+            new FormListadoCruceros().ShowModificar(this);
         }
     }
 }

@@ -51,5 +51,27 @@ namespace FrbaCrucero.Utils
             DataTable tiposServicios = Database.getData(cmd2);
             return Database.toList(tiposServicios);
         }
+
+        public DataTable getCabinas(Crucero crucero)
+        {
+            SqlCommand cmd2 = Database.createCommand("[MACACO_NOT_NULL].GetCabinasXPisoYServicio");
+            cmd2.Parameters.Add("@crucero_id", SqlDbType.Int).Value = crucero.cruc_id;
+            return Database.getDataProcedure(cmd2);
+                 
+        }
+
+        public void updateCrucero(int cruc_id, String nombre, String modelo, int compania_id)
+        {
+            SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].UpdateCrucero");
+            cmd.Parameters.Add("@crucero_id", SqlDbType.Int).Value = cruc_id;
+            cmd.Parameters.Add("@nombre", SqlDbType.NChar).Value = nombre;
+            cmd.Parameters.Add("@modelo",SqlDbType.NChar).Value = modelo;
+            cmd.Parameters.Add("@compania", SqlDbType.Int).Value = compania_id;
+            Database.executeProcedure(cmd);           
+        }
+
+
+     
+
     }
 }

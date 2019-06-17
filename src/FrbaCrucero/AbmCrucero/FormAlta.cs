@@ -141,7 +141,7 @@ namespace FrbaCrucero.AbmCrucero
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
             crucero.cruc_fecha_alta = monthCalendar1.SelectionRange.Start;
-            txt_fecha_alta.Text = crucero.cruc_fecha_alta.ToShortDateString();
+            txt_fecha_alta.Text = crucero.cruc_fecha_alta.Value.ToShortDateString();
             monthCalendar1.Visible = false;
         }
 

@@ -2,7 +2,7 @@ GO
 
 CREATE PROCEDURE [MACACO_NOT_NULL].GetCruceros @nombre NVARCHAR(256), @modelo NVARCHAR(256), @compania NVARCHAR(256), @cabinas INT, @fecha_salida DATETIME2, @fecha_llegada DATETIME2
 AS
-select cr.cruc_id,cruc_nombre, cruc_modelo, comp_nombre, cruc_cantidad_cabinas  
+select cr.cruc_id,cruc_nombre, cruc_modelo, cruc_compañia_id,comp_nombre, cruc_cantidad_cabinas,cruc_fecha_alta  
 from MACACO_NOT_NULL.CRUCERO cr
 join MACACO_NOT_NULL.COMPANIA co
 on cr.cruc_compañia_id = co.comp_id
@@ -86,6 +86,36 @@ BEGIN CATCH
 END CATCH
 GO
 
+select * 
+from MACACO_NOT_NULL.CRUCERO
+
+CREATE PROCEDURE [MACACO_NOT_NULL].UpdateCrucero @crucero_id INT, @nombre NVARCHAR(256), @modelo NVARCHAR(256), @compania INT
+AS
+BEGIN TRANSACTION
+UPDATE [MACACO_NOT_NULL].CRUCERO
+SET cruc_nombre = @nombre, cruc_modelo = @modelo, cruc_compañia_id = @compania
+WHERE cruc_id = @crucero_id
+
+IF((SELECT COUNT(1) FROM [MACACO_NOT_NULL].CRUCERO WHERE cruc_nombre = @nombre) > 1)
+BEGIN
+	ROLLBACK TRANSACTION;
+	THROW 51000, 'Nombre ya utilizado', 1;
+END
+COMMIT TRANSACTION; 
+
+CREATE PROCEDURE [MACACO_NOT_NULL].GetCabinasXPisoYServicio @crucero_id INT
+AS
+BEGIN
+SELECT cabi_piso as piso,COUNT(cabi_id) as cabinas,tipo_servicio_descripcion as servicio
+FROM [MACACO_NOT_NULL].CABINA	
+JOIN [MACACO_NOT_NULL].TIPO_SERVICIO
+ON cabi_tipo_servicio_id = tipo_servicio_id
+WHERE cabi_crucero_id = @crucero_id
+GROUP BY cabi_piso,tipo_servicio_descripcion
+ORDER BY cabi_piso, tipo_servicio_descripcion
+END
 GO
 
-					
+GO
+
+
