@@ -30,11 +30,19 @@ piso INT,
 servicio NVARCHAR(256) )
 GO
 
-CREATE PROCEDURE [MACACO_NOT_NULL].CreateOrUpdateCrucero @nombre NVARCHAR(256), @modelo NVARCHAR(256),
+
+CREATE SEQUENCE [MACACO_NOT_NULL].cabi_nro
+AS INT
+START WITH 1
+INCREMENT BY 1;
+
+CREATE PROCEDURE [MACACO_NOT_NULL].CreateCrucero @nombre NVARCHAR(256), @modelo NVARCHAR(256),
 	@compania INT,@fecha_alta DATETIME2(3),@cant_cabinas INT, @cabinas [MACACO_NOT_NULL].CABINA_PISO readonly  
 AS
 BEGIN TRANSACTION
 BEGIN TRY
+	IF(EXISTS(SELECT cruc_id from MACACO_NOT_NULL.CRUCERO WHERE cruc_nombre = @nombre))
+		THROW 51000, 'Nombre ya utilizado', 1;
 	INSERT INTO MACACO_NOT_NULL.CRUCERO (cruc_compañia_id, cruc_nombre, cruc_modelo, cruc_fecha_alta,cruc_cantidad_cabinas)
 	VALUES (@compania,@nombre,@modelo,@fecha_alta,@cant_cabinas)
 	DECLARE @cruc_id INT
@@ -58,11 +66,12 @@ BEGIN TRY
 				WHILE @i <= @cabinas_piso
 				BEGIN 
 					INSERT INTO MACACO_NOT_NULL.CABINA (cabi_piso,cabi_nro,cabi_tipo_servicio_id,cabi_crucero_id)
-					VALUES (@piso,@i,(select tipo_servicio_id from MACACO_NOT_NULL.TIPO_SERVICIO where tipo_servicio_descripcion = @servicio),@cruc_id)
+					VALUES (@piso,(NEXT VALUE FOR [MACACO_NOT_NULL].cabi_nro),(select tipo_servicio_id from MACACO_NOT_NULL.TIPO_SERVICIO where tipo_servicio_descripcion = @servicio),@cruc_id)
 					SET @i = @i + 1;
 				END
 			FETCH NEXT FROM servicios INTO @servicio			
 		END
+		ALTER SEQUENCE [MACACO_NOT_NULL].cabi_nro RESTART
 		CLOSE servicios;
 		DEALLOCATE servicios;
 		FETCH NEXT FROM pisos INTO @piso

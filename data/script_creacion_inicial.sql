@@ -190,7 +190,7 @@ BEGIN
 CREATE TABLE [MACACO_NOT_NULL].[CRUCERO] (
 	cruc_id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	cruc_compañia_id  int FOREIGN KEY REFERENCES [MACACO_NOT_NULL].[COMPANIA] (comp_id), 
-	cruc_nombre [nvarchar](255),
+	cruc_nombre [nvarchar](255) UNIQUE,
 	cruc_modelo [nvarchar](50),
 	cruc_activo [bit] DEFAULT 1,
 	cruc_fecha_alta [datetime2](3),

@@ -34,10 +34,6 @@
             this.txt_piso = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.dgv_cabinas = new System.Windows.Forms.DataGridView();
-            this.servicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cabinas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.txt_cantidad = new System.Windows.Forms.TextBox();
             this.btn_agregar = new System.Windows.Forms.Button();
             this.cbo_tipo_servicio = new System.Windows.Forms.ComboBox();
@@ -56,6 +52,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.servicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cabinas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cabinas)).BeginInit();
             this.group_box_crucero.SuspendLayout();
@@ -135,7 +135,7 @@
             this.servicio,
             this.cabinas,
             this.piso,
-            this.Column4});
+            this.eliminar});
             this.dgv_cabinas.Location = new System.Drawing.Point(7, 76);
             this.dgv_cabinas.Margin = new System.Windows.Forms.Padding(2);
             this.dgv_cabinas.Name = "dgv_cabinas";
@@ -143,37 +143,7 @@
             this.dgv_cabinas.RowTemplate.Height = 24;
             this.dgv_cabinas.Size = new System.Drawing.Size(559, 181);
             this.dgv_cabinas.TabIndex = 14;
-            // 
-            // servicio
-            // 
-            this.servicio.DataPropertyName = "servicio";
-            this.servicio.HeaderText = "Tipo Servicio";
-            this.servicio.Name = "servicio";
-            this.servicio.ReadOnly = true;
-            this.servicio.Width = 200;
-            // 
-            // cabinas
-            // 
-            this.cabinas.DataPropertyName = "cabinas";
-            this.cabinas.HeaderText = "Cantidad";
-            this.cabinas.Name = "cabinas";
-            this.cabinas.ReadOnly = true;
-            // 
-            // piso
-            // 
-            this.piso.DataPropertyName = "piso";
-            this.piso.HeaderText = "Piso";
-            this.piso.Name = "piso";
-            this.piso.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Eliminar";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column4.Width = 50;
+            this.dgv_cabinas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_cabinas_CellContentClick);
             // 
             // txt_cantidad
             // 
@@ -281,7 +251,6 @@
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 7;
             this.monthCalendar1.Visible = false;
-            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
             // 
             // btn_seleccionar
@@ -325,7 +294,6 @@
             this.txt_fecha_alta.ReadOnly = true;
             this.txt_fecha_alta.Size = new System.Drawing.Size(123, 20);
             this.txt_fecha_alta.TabIndex = 5;
-            this.txt_fecha_alta.TextChanged += new System.EventHandler(this.txt_fecha_alta_TextChanged);
             // 
             // label5
             // 
@@ -375,6 +343,37 @@
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre (*)";
+            // 
+            // servicio
+            // 
+            this.servicio.DataPropertyName = "servicio";
+            this.servicio.HeaderText = "Tipo Servicio";
+            this.servicio.Name = "servicio";
+            this.servicio.ReadOnly = true;
+            this.servicio.Width = 200;
+            // 
+            // cabinas
+            // 
+            this.cabinas.DataPropertyName = "cabinas";
+            this.cabinas.HeaderText = "Cantidad";
+            this.cabinas.Name = "cabinas";
+            this.cabinas.ReadOnly = true;
+            // 
+            // piso
+            // 
+            this.piso.DataPropertyName = "piso";
+            this.piso.HeaderText = "Piso";
+            this.piso.Name = "piso";
+            this.piso.ReadOnly = true;
+            // 
+            // eliminar
+            // 
+            this.eliminar.HeaderText = "Eliminar";
+            this.eliminar.Name = "eliminar";
+            this.eliminar.ReadOnly = true;
+            this.eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.eliminar.Width = 50;
             // 
             // FormAlta
             // 
@@ -427,6 +426,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn servicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn cabinas;
         private System.Windows.Forms.DataGridViewTextBoxColumn piso;
-        private System.Windows.Forms.DataGridViewButtonColumn Column4;
+        private System.Windows.Forms.DataGridViewButtonColumn eliminar;
     }
 }

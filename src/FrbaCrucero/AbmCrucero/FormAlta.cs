@@ -45,15 +45,24 @@ namespace FrbaCrucero.AbmCrucero
                 drow["servicio"] = row.Cells["servicio"].Value.ToString();
                 dt.Rows.Add(drow);
             }
-            SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].CreateOrUpdateCrucero");
-            cmd.Parameters.Add("@nombre", SqlDbType.NVarChar).Value = crucero.cruc_nombre;
-            cmd.Parameters.Add("@modelo", SqlDbType.NVarChar).Value = crucero.cruc_modelo;
-            cmd.Parameters.Add("@compania", SqlDbType.Int).Value = crucero.cruc_compañia_id;
-            cmd.Parameters.Add("@cant_cabinas", SqlDbType.Int).Value = crucero.cruc_cantidad_cabinas;
-            cmd.Parameters.Add("@fecha_alta", SqlDbType.DateTime2).Value = crucero.cruc_fecha_alta;
-            cmd.Parameters.Add("@cabinas", SqlDbType.Structured).Value = dt;
-            Database.executeProcedure(cmd);
-            this.Close();
+            try
+            {
+                SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].CreateCrucero");
+                cmd.Parameters.Add("@nombre", SqlDbType.NVarChar).Value = crucero.cruc_nombre;
+                cmd.Parameters.Add("@modelo", SqlDbType.NVarChar).Value = crucero.cruc_modelo;
+                cmd.Parameters.Add("@compania", SqlDbType.Int).Value = crucero.cruc_compañia_id;
+                cmd.Parameters.Add("@cant_cabinas", SqlDbType.Int).Value = crucero.cruc_cantidad_cabinas;
+                cmd.Parameters.Add("@fecha_alta", SqlDbType.DateTime2).Value = crucero.cruc_fecha_alta;
+                cmd.Parameters.Add("@cabinas", SqlDbType.Structured).Value = dt;
+                Database.executeProcedure(cmd);
+                this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
         }
 
         private void FormAlta_Load(object sender, EventArgs e)
@@ -82,16 +91,25 @@ namespace FrbaCrucero.AbmCrucero
 
         private void btn_agregar_Click(object sender, EventArgs e)
         {
-            String tipoCabina = cbo_tipo_servicio.Text;
+            String servicio = cbo_tipo_servicio.Text;
             String cantidad = txt_cantidad.Text;
             String piso = txt_piso.Text;
-            dgv_cabinas.Rows.Add(tipoCabina, cantidad, piso);
 
-            crucero.cruc_cantidad_cabinas += int.Parse(cantidad);
-            txt_cabinas.Text = crucero.cruc_cantidad_cabinas.ToString();
-            cbo_tipo_servicio.SelectedIndex = -1;
-            txt_cantidad.Text = null;
-            txt_piso.Text = null;
+            var rows = dgv_cabinas.Rows.Cast<DataGridViewRow>().ToList();
+            if (rows.Any(r => r.Cells["piso"].Value.Equals(piso) && r.Cells["servicio"].Value.Equals(servicio)))
+                MessageBox.Show("Ya ingresó cabinas en el piso '" + piso +"' con el servicio '"+servicio+"'", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+            {
+                dgv_cabinas.Rows.Add(servicio, cantidad, piso);
+
+                crucero.cruc_cantidad_cabinas += int.Parse(cantidad);
+                txt_cabinas.Text = crucero.cruc_cantidad_cabinas.ToString();
+                cbo_tipo_servicio.SelectedIndex = -1;
+                txt_cantidad.Text = null;
+                txt_piso.Text = null;
+            }
+
+           
         }
 
         private void btn_limpiar_Click(object sender, EventArgs e)
@@ -188,17 +206,17 @@ namespace FrbaCrucero.AbmCrucero
         {
             btn_agregar.Enabled = new List<String>(new[] { cbo_tipo_servicio.Text, txt_cantidad.Text, txt_piso.Text }).All(t => !String.IsNullOrEmpty(t));
         }
-    }
-}
 
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        private void dgv_cabinas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
-        }
-
-        private void txt_fecha_alta_TextChanged(object sender, EventArgs e)
-        {
-
+            if (e.ColumnIndex == dgv_cabinas.Columns["eliminar"].Index)
+            {
+                int cantidad = Convert.ToInt32(dgv_cabinas["cabinas", e.RowIndex].Value);
+                crucero.cruc_cantidad_cabinas -= cantidad;
+                txt_cabinas.Text = crucero.cruc_cantidad_cabinas != 0 ? crucero.cruc_cantidad_cabinas.ToString() : null;
+                dgv_cabinas.Rows.RemoveAt(e.RowIndex);
+            }
+                
         }
     }
 }
