@@ -23,7 +23,9 @@ namespace FrbaCrucero
             //Application.Run(new PantallaPrincipal());
             //Application.Run(new Login.pantallaInicio());
             Application.Run(new AbmCrucero.FormPantallaInicio());
-           // Application.Run(new Login.pantallaInicio());
+            //Application.Run(new Login.pantallaInicio());
+            //Application.Run(new CompraReservaPasaje.Cliente());
+            //Application.Run(new CompraReservaPasaje.ComprarOReservarPasaje());
         }
     }
 }

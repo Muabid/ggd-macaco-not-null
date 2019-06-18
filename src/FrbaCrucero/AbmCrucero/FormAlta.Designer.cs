@@ -105,6 +105,7 @@
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cabinas";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // txt_piso
             // 
@@ -207,6 +208,7 @@
             this.cbo_tipo_servicio.Name = "cbo_tipo_servicio";
             this.cbo_tipo_servicio.Size = new System.Drawing.Size(271, 24);
             this.cbo_tipo_servicio.TabIndex = 8;
+            this.cbo_tipo_servicio.SelectedIndexChanged += new System.EventHandler(this.cbo_tipo_servicio_SelectedIndexChanged);
             this.cbo_tipo_servicio.TextChanged += new System.EventHandler(this.cbo_tipo_servicio_TextChanged);
             // 
             // label7

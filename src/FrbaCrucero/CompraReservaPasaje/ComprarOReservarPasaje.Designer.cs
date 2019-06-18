@@ -52,8 +52,6 @@
             this.cabinas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txt_piso = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,6 +64,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btn_pagar = new System.Windows.Forms.Button();
             this.btn_reservar = new System.Windows.Forms.Button();
+            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cruceros)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cabinas)).BeginInit();
@@ -84,13 +83,14 @@
             this.groupBox1.Controls.Add(this.salidaText);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(9, 10);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(766, 212);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Compra / Reserva Pasaje";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // destinoComboBox
             // 
@@ -131,6 +131,7 @@
             this.origenComboBox.Name = "origenComboBox";
             this.origenComboBox.Size = new System.Drawing.Size(121, 21);
             this.origenComboBox.TabIndex = 19;
+            this.origenComboBox.SelectedIndexChanged += new System.EventHandler(this.origenComboBox_SelectedIndexChanged);
             // 
             // monthCalendar
             // 
@@ -150,6 +151,7 @@
             this.btn_seleccionar_salida.TabIndex = 17;
             this.btn_seleccionar_salida.Text = "Seleccionar";
             this.btn_seleccionar_salida.UseVisualStyleBackColor = true;
+            this.btn_seleccionar_salida.Click += new System.EventHandler(this.btn_seleccionar_salida_Click);
             // 
             // salidaText
             // 
@@ -172,7 +174,7 @@
             // 
             this.btn_cancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_cancelar.Location = new System.Drawing.Point(598, 704);
-            this.btn_cancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_cancelar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_cancelar.Name = "btn_cancelar";
             this.btn_cancelar.Size = new System.Drawing.Size(148, 25);
             this.btn_cancelar.TabIndex = 26;
@@ -192,7 +194,7 @@
             this.seleccionar,
             this.cruc_id});
             this.dgv_cruceros.Location = new System.Drawing.Point(9, 278);
-            this.dgv_cruceros.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgv_cruceros.Margin = new System.Windows.Forms.Padding(2);
             this.dgv_cruceros.Name = "dgv_cruceros";
             this.dgv_cruceros.ReadOnly = true;
             this.dgv_cruceros.RowTemplate.Height = 24;
@@ -248,22 +250,24 @@
             // btn_buscar
             // 
             this.btn_buscar.Location = new System.Drawing.Point(358, 226);
-            this.btn_buscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_buscar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_buscar.Name = "btn_buscar";
             this.btn_buscar.Size = new System.Drawing.Size(73, 24);
             this.btn_buscar.TabIndex = 24;
             this.btn_buscar.Text = "Buscar";
             this.btn_buscar.UseVisualStyleBackColor = true;
+            this.btn_buscar.Click += new System.EventHandler(this.btn_buscar_Click);
             // 
             // btn_limpiar
             // 
             this.btn_limpiar.Location = new System.Drawing.Point(9, 226);
-            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_limpiar.Name = "btn_limpiar";
             this.btn_limpiar.Size = new System.Drawing.Size(73, 24);
             this.btn_limpiar.TabIndex = 23;
             this.btn_limpiar.Text = "Limpiar";
             this.btn_limpiar.UseVisualStyleBackColor = true;
+            this.btn_limpiar.Click += new System.EventHandler(this.btn_limpiar_Click);
             // 
             // dgv_cabinas
             // 
@@ -275,7 +279,7 @@
             this.cabinas,
             this.piso});
             this.dgv_cabinas.Location = new System.Drawing.Point(436, 278);
-            this.dgv_cabinas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgv_cabinas.Margin = new System.Windows.Forms.Padding(2);
             this.dgv_cabinas.Name = "dgv_cabinas";
             this.dgv_cabinas.ReadOnly = true;
             this.dgv_cabinas.RowTemplate.Height = 24;
@@ -306,8 +310,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.txt_piso);
-            this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Controls.Add(this.txt_cantidad);
             this.groupBox2.Controls.Add(this.btn_agregar);
@@ -315,31 +317,13 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Location = new System.Drawing.Point(9, 462);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(570, 268);
             this.groupBox2.TabIndex = 28;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Agregar Cantidad de Pasajes";
-            // 
-            // txt_piso
-            // 
-            this.txt_piso.Location = new System.Drawing.Point(325, 52);
-            this.txt_piso.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txt_piso.Name = "txt_piso";
-            this.txt_piso.Size = new System.Drawing.Size(102, 20);
-            this.txt_piso.TabIndex = 10;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(322, 37);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(27, 13);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "Piso";
             // 
             // dataGridView1
             // 
@@ -352,7 +336,7 @@
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewButtonColumn1});
             this.dataGridView1.Location = new System.Drawing.Point(7, 76);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
@@ -393,7 +377,7 @@
             // txt_cantidad
             // 
             this.txt_cantidad.Location = new System.Drawing.Point(214, 54);
-            this.txt_cantidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_cantidad.Margin = new System.Windows.Forms.Padding(2);
             this.txt_cantidad.Name = "txt_cantidad";
             this.txt_cantidad.Size = new System.Drawing.Size(108, 20);
             this.txt_cantidad.TabIndex = 9;
@@ -401,7 +385,7 @@
             // btn_agregar
             // 
             this.btn_agregar.Location = new System.Drawing.Point(493, 43);
-            this.btn_agregar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_agregar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_agregar.Name = "btn_agregar";
             this.btn_agregar.Size = new System.Drawing.Size(73, 27);
             this.btn_agregar.TabIndex = 11;
@@ -412,10 +396,11 @@
             // 
             this.cbo_tipo_servicio.FormattingEnabled = true;
             this.cbo_tipo_servicio.Location = new System.Drawing.Point(7, 52);
-            this.cbo_tipo_servicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbo_tipo_servicio.Margin = new System.Windows.Forms.Padding(2);
             this.cbo_tipo_servicio.Name = "cbo_tipo_servicio";
             this.cbo_tipo_servicio.Size = new System.Drawing.Size(204, 21);
             this.cbo_tipo_servicio.TabIndex = 8;
+            this.cbo_tipo_servicio.SelectedIndexChanged += new System.EventHandler(this.cbo_tipo_servicio_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -441,29 +426,38 @@
             // 
             this.btn_pagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_pagar.Location = new System.Drawing.Point(628, 549);
-            this.btn_pagar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_pagar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_pagar.Name = "btn_pagar";
             this.btn_pagar.Size = new System.Drawing.Size(98, 25);
             this.btn_pagar.TabIndex = 29;
-            this.btn_pagar.Text = "Pagar y Reservar";
+            this.btn_pagar.Text = "Pagar ";
             this.btn_pagar.UseVisualStyleBackColor = true;
             // 
             // btn_reservar
             // 
             this.btn_reservar.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_reservar.Location = new System.Drawing.Point(628, 603);
-            this.btn_reservar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_reservar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_reservar.Name = "btn_reservar";
             this.btn_reservar.Size = new System.Drawing.Size(98, 25);
             this.btn_reservar.TabIndex = 30;
-            this.btn_reservar.Text = "Solo Reservar";
+            this.btn_reservar.Text = "Reservar";
             this.btn_reservar.UseVisualStyleBackColor = true;
+            // 
+            // vScrollBar1
+            // 
+            this.vScrollBar1.Location = new System.Drawing.Point(800, 34);
+            this.vScrollBar1.Name = "vScrollBar1";
+            this.vScrollBar1.Size = new System.Drawing.Size(17, 706);
+            this.vScrollBar1.TabIndex = 31;
             // 
             // ComprarOReservarPasaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(788, 628);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(829, 749);
+            this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.btn_reservar);
             this.Controls.Add(this.btn_pagar);
             this.Controls.Add(this.groupBox2);
@@ -473,9 +467,10 @@
             this.Controls.Add(this.btn_cancelar);
             this.Controls.Add(this.btn_limpiar);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ComprarOReservarPasaje";
             this.Text = "ComprarPasaje";
+            this.Load += new System.EventHandler(this.ComprarOReservarPasaje_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cruceros)).EndInit();
@@ -513,8 +508,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cabinas;
         private System.Windows.Forms.DataGridViewTextBoxColumn piso;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox txt_piso;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -527,5 +520,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btn_pagar;
         private System.Windows.Forms.Button btn_reservar;
+        private System.Windows.Forms.VScrollBar vScrollBar1;
     }
 }

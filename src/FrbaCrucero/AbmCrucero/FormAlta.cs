@@ -224,6 +224,15 @@ namespace FrbaCrucero.AbmCrucero
         private void btn_atras_Click(object sender, EventArgs e)
         {
             this.Close();
+
+        private void cbo_tipo_servicio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
