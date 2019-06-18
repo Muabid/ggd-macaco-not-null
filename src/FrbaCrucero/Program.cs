@@ -22,7 +22,7 @@ namespace FrbaCrucero
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new PantallaPrincipal());
             //Application.Run(new Login.pantallaInicio());
-            Application.Run(new AbmCrucero.FormBaja());
+            Application.Run(new AbmCrucero.FormPantallaInicio());
            // Application.Run(new Login.pantallaInicio());
         }
     }

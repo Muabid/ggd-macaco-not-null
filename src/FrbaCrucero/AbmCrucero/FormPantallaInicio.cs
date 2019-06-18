@@ -31,5 +31,10 @@ namespace FrbaCrucero.AbmCrucero
         {
             new FormListadoCruceros().ShowModificar(this);
         }
+
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

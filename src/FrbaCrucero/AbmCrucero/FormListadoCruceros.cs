@@ -33,11 +33,6 @@ namespace FrbaCrucero.AbmCrucero
             cbo_modelo.Items.AddRange(modelos);
         }
 
-        private void btn_limpiar_Click(object sender, EventArgs e)
-        {
-            //LIMPIAR PANTALLA
-        }
-
         public void ShowModificar(Form form)
         {
             dgv_cruceros.Columns["Editar"].Visible = true;
@@ -85,6 +80,39 @@ namespace FrbaCrucero.AbmCrucero
         public void reloadCruceros()
         {
             this.btn_buscar_Click_1(null, null);
+        }
+
+        private void btn_seleccionar_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+        }
+
+        private void btn_limpiar_Click_1(object sender, EventArgs e)
+        {
+            this.Controls.Cast<Control>().ToList()
+               .Where(c => c is GroupBox)
+               .SelectMany(c => c.Controls.Cast<Control>().ToList())
+               .ToList().ForEach(c =>
+               {
+                   if (c is ComboBox)
+                       ((ComboBox)c).SelectedIndex = -1;
+                   if (c is TextBox)
+                       c.Text = null;
+                   if (c is DataGridView)
+                       ((DataGridView)c).Rows.Clear();
+               });
+        }
+
+        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            crucero.cruc_fecha_alta = monthCalendar1.SelectionRange.Start;
+            txt_fecha_alta.Text = crucero.cruc_fecha_alta.Value.ToShortDateString();
+            monthCalendar1.Visible = false;
+        }
+
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

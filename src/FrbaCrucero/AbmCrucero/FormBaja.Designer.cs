@@ -239,6 +239,7 @@
             this.btn_atras.TabIndex = 20;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
+            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
             // 
             // FormBaja
             // 

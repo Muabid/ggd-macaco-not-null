@@ -22,7 +22,6 @@ namespace FrbaCrucero.AbmCrucero
         {
             InitializeComponent();
             this.crucero = crucero;
-            
 
         }
 
@@ -33,7 +32,18 @@ namespace FrbaCrucero.AbmCrucero
 
         private void btn_limpiar_Click(object sender, EventArgs e)
         {
-            //LIMPIAR PANTALLA
+            this.Controls.Cast<Control>().ToList()
+                 .Where(c => c is GroupBox)
+                 .SelectMany(c => c.Controls.Cast<Control>().ToList())
+                 .ToList().ForEach(c =>
+                 {
+                     if (c is ComboBox)
+                         ((ComboBox)c).SelectedIndex = -1;
+                     if (c is TextBox)
+                         c.Text = null;
+                     if (c is DataGridView)
+                         ((DataGridView)c).Rows.Clear();
+                 });
         }
 
         private void btn_seleccionar_Click(object sender, EventArgs e)
@@ -44,7 +54,9 @@ namespace FrbaCrucero.AbmCrucero
 
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
-
+            crucero.cruc_fecha_alta = monthCalendar1.SelectionRange.Start;
+            txt_fecha_alta.Text = crucero.cruc_fecha_alta.Value.ToShortDateString();
+            monthCalendar1.Visible = false;
         }
 
         private void FormModificacion_Load(object sender, EventArgs e)
@@ -88,5 +100,11 @@ namespace FrbaCrucero.AbmCrucero
         {
             ((FormListadoCruceros)this.Owner).reloadCruceros();
         }
+
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }
