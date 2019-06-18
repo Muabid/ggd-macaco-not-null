@@ -22,13 +22,8 @@ namespace FrbaCrucero
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new PantallaPrincipal());
             //Application.Run(new Login.pantallaInicio());
-<<<<<<< Updated upstream
-            Application.Run(new AbmCrucero.FormBaja());
-=======
-            Application.Run(new FrbaCrucero.CompraReservaPasaje.ComprarOReservarPasaje());
->>>>>>> Stashed changes
-           // Application.Run(new Login.pantallaInicio());
-           // Application.Run(new FrbaCrucero.CompraReservaPasaje.Cliente());
+
+            Application.Run(new CompraReservaPasaje.Cliente());
 
         }
     }

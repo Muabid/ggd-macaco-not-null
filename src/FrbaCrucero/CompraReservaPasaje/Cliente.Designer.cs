@@ -44,14 +44,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_atras = new System.Windows.Forms.Button();
-            this.buttonUsuarios = new System.Windows.Forms.Button();
             this.btn_limpiar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.buttonUsuarios);
             this.groupBox1.Controls.Add(this.monthCalendar1);
             this.groupBox1.Controls.Add(this.btn_seleccionar);
             this.groupBox1.Controls.Add(this.txt_fecha_alta);
@@ -74,16 +72,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Comprador";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(347, 32);
+            this.monthCalendar1.Location = new System.Drawing.Point(302, 22);
             this.monthCalendar1.Margin = new System.Windows.Forms.Padding(7);
             this.monthCalendar1.MaxSelectionCount = 1;
             this.monthCalendar1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 13;
-            this.monthCalendar1.Visible = false;
             // 
             // btn_seleccionar
             // 
@@ -94,6 +92,7 @@
             this.btn_seleccionar.TabIndex = 12;
             this.btn_seleccionar.Text = "Seleccionar";
             this.btn_seleccionar.UseVisualStyleBackColor = true;
+            this.btn_seleccionar.Click += new System.EventHandler(this.btn_seleccionar_Click);
             // 
             // txt_fecha_alta
             // 
@@ -103,6 +102,7 @@
             this.txt_fecha_alta.ReadOnly = true;
             this.txt_fecha_alta.Size = new System.Drawing.Size(79, 20);
             this.txt_fecha_alta.TabIndex = 11;
+            this.txt_fecha_alta.TextChanged += new System.EventHandler(this.txt_fecha_alta_TextChanged);
             // 
             // label6
             // 
@@ -145,6 +145,7 @@
             this.txt_dni.Name = "txt_dni";
             this.txt_dni.Size = new System.Drawing.Size(76, 20);
             this.txt_dni.TabIndex = 7;
+            this.txt_dni.TextChanged += new System.EventHandler(this.txt_dni_TextChanged);
             // 
             // txt_nombre_apellido
             // 
@@ -214,17 +215,6 @@
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
             // 
-            // buttonUsuarios
-            // 
-            this.buttonUsuarios.Location = new System.Drawing.Point(214, 28);
-            this.buttonUsuarios.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonUsuarios.Name = "buttonUsuarios";
-            this.buttonUsuarios.Size = new System.Drawing.Size(73, 21);
-            this.buttonUsuarios.TabIndex = 15;
-            this.buttonUsuarios.Text = "Seleccionar";
-            this.buttonUsuarios.UseVisualStyleBackColor = true;
-            this.buttonUsuarios.Click += new System.EventHandler(this.buttonUsuarios_Click);
-            // 
             // btn_limpiar
             // 
             this.btn_limpiar.Location = new System.Drawing.Point(9, 255);
@@ -234,6 +224,7 @@
             this.btn_limpiar.TabIndex = 1;
             this.btn_limpiar.Text = "Limpiar";
             this.btn_limpiar.UseVisualStyleBackColor = true;
+            this.btn_limpiar.Click += new System.EventHandler(this.btn_limpiar_Click);
             // 
             // Cliente
             // 
@@ -270,7 +261,6 @@
         private System.Windows.Forms.TextBox txt_fecha_alta;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btn_atras;
-        private System.Windows.Forms.Button buttonUsuarios;
         private System.Windows.Forms.Button btn_limpiar;
     }
 }
