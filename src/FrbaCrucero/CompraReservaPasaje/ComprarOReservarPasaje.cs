@@ -15,7 +15,7 @@ namespace FrbaCrucero.CompraReservaPasaje
 {
     public partial class ComprarOReservarPasaje : Form
     {
-
+        CruceroDAO cruce = new CruceroDAO();
         VScrollBar vScroller = new VScrollBar();  
 
         private PuertoDAO puertoDao = new PuertoDAO();
@@ -30,6 +30,13 @@ namespace FrbaCrucero.CompraReservaPasaje
                 origenComboBox.Items.Add(puerto);
                 destinoComboBox.Items.Add(puerto);
             }
+
+
+          
+            vScrollBar1.Dock = DockStyle.Right; vScrollBar1.Scroll += (sender, e) => { this.VerticalScroll.Value = vScrollBar1.Value; }; 
+            this.Controls.Add(vScrollBar1);
+
+
         }
 
 
@@ -76,6 +83,18 @@ namespace FrbaCrucero.CompraReservaPasaje
         }
 
         private void ComprarOReservarPasaje_Load(object sender, EventArgs e)
+        {
+
+            var tipoServicios = cruce.getTipoServicios().ToArray();
+            cbo_tipo_servicio.Items.AddRange(tipoServicios);
+        }
+
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
+
+        private void cbo_tipo_servicio_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

@@ -34,6 +34,10 @@
             this.txt_piso = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.dgv_cabinas = new System.Windows.Forms.DataGridView();
+            this.servicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cabinas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.txt_cantidad = new System.Windows.Forms.TextBox();
             this.btn_agregar = new System.Windows.Forms.Button();
             this.cbo_tipo_servicio = new System.Windows.Forms.ComboBox();
@@ -52,10 +56,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.servicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cabinas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cabinas)).BeginInit();
             this.group_box_crucero.SuspendLayout();
@@ -104,6 +104,7 @@
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cabinas";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // txt_piso
             // 
@@ -145,6 +146,37 @@
             this.dgv_cabinas.TabIndex = 14;
             this.dgv_cabinas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_cabinas_CellContentClick);
             // 
+            // servicio
+            // 
+            this.servicio.DataPropertyName = "servicio";
+            this.servicio.HeaderText = "Tipo Servicio";
+            this.servicio.Name = "servicio";
+            this.servicio.ReadOnly = true;
+            this.servicio.Width = 200;
+            // 
+            // cabinas
+            // 
+            this.cabinas.DataPropertyName = "cabinas";
+            this.cabinas.HeaderText = "Cantidad";
+            this.cabinas.Name = "cabinas";
+            this.cabinas.ReadOnly = true;
+            // 
+            // piso
+            // 
+            this.piso.DataPropertyName = "piso";
+            this.piso.HeaderText = "Piso";
+            this.piso.Name = "piso";
+            this.piso.ReadOnly = true;
+            // 
+            // eliminar
+            // 
+            this.eliminar.HeaderText = "Eliminar";
+            this.eliminar.Name = "eliminar";
+            this.eliminar.ReadOnly = true;
+            this.eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.eliminar.Width = 50;
+            // 
             // txt_cantidad
             // 
             this.txt_cantidad.Location = new System.Drawing.Point(225, 53);
@@ -176,6 +208,7 @@
             this.cbo_tipo_servicio.Name = "cbo_tipo_servicio";
             this.cbo_tipo_servicio.Size = new System.Drawing.Size(204, 21);
             this.cbo_tipo_servicio.TabIndex = 8;
+            this.cbo_tipo_servicio.SelectedIndexChanged += new System.EventHandler(this.cbo_tipo_servicio_SelectedIndexChanged);
             this.cbo_tipo_servicio.TextChanged += new System.EventHandler(this.cbo_tipo_servicio_TextChanged);
             // 
             // label7
@@ -343,37 +376,6 @@
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre (*)";
-            // 
-            // servicio
-            // 
-            this.servicio.DataPropertyName = "servicio";
-            this.servicio.HeaderText = "Tipo Servicio";
-            this.servicio.Name = "servicio";
-            this.servicio.ReadOnly = true;
-            this.servicio.Width = 200;
-            // 
-            // cabinas
-            // 
-            this.cabinas.DataPropertyName = "cabinas";
-            this.cabinas.HeaderText = "Cantidad";
-            this.cabinas.Name = "cabinas";
-            this.cabinas.ReadOnly = true;
-            // 
-            // piso
-            // 
-            this.piso.DataPropertyName = "piso";
-            this.piso.HeaderText = "Piso";
-            this.piso.Name = "piso";
-            this.piso.ReadOnly = true;
-            // 
-            // eliminar
-            // 
-            this.eliminar.HeaderText = "Eliminar";
-            this.eliminar.Name = "eliminar";
-            this.eliminar.ReadOnly = true;
-            this.eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.eliminar.Width = 50;
             // 
             // FormAlta
             // 

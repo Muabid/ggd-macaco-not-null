@@ -400,6 +400,7 @@
             this.cbo_tipo_servicio.Name = "cbo_tipo_servicio";
             this.cbo_tipo_servicio.Size = new System.Drawing.Size(204, 21);
             this.cbo_tipo_servicio.TabIndex = 8;
+            this.cbo_tipo_servicio.SelectedIndexChanged += new System.EventHandler(this.cbo_tipo_servicio_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -445,16 +446,16 @@
             // 
             // vScrollBar1
             // 
-            this.vScrollBar1.AllowDrop = true;
-            this.vScrollBar1.Location = new System.Drawing.Point(781, 23);
+            this.vScrollBar1.Location = new System.Drawing.Point(800, 34);
             this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(22, 717);
+            this.vScrollBar1.Size = new System.Drawing.Size(17, 706);
             this.vScrollBar1.TabIndex = 31;
             // 
             // ComprarOReservarPasaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(829, 749);
             this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.btn_reservar);
