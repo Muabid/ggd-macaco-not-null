@@ -1485,6 +1485,31 @@ BEGIN
  
 GO 
   
+  --DEVUELVE TODOS LOS VIAJES QUE 'PASEN' POR EL PUERTO ORIGEN O EL DESTINO----------
+CREATE PROCEDURE [MACACO_NOT_NULL].GetViaje @viaj_fecha_salida [datetime2](3), @puertoOrigen NVARCHAR(256), @puertoDestino NVARCHAR(256)
+AS
+BEGIN
+DECLARE @IDpuertoOrigen int
+SET @IDpuertoOrigen = (SELECT puer_id from [MACACO_NOT_NULL].[PUERTO] where puer_nombre = @puertoOrigen)
+DECLARE @IDpuertoDestino int
+SET @IDpuertoDestino = (SELECT puer_id from [MACACO_NOT_NULL].[PUERTO] where puer_nombre = @puertoDestino)
+select viaj_id ,
+	viaj_fecha_salida,
+	viaj_fecha_llegada,
+	viaj_fecha_llegada_estimada,
+	viaj_crucero_id,
+	viaj_recorrido_id
+	from [MACACO_NOT_NULL].[VIAJE]
+	INNER JOIN [MACACO_NOT_NULL].RECORRIDO ON viaj_recorrido_id = reco_id
+	INNER JOIN [MACACO_NOT_NULL].TRAMO ON reco_id = tram_recorrido_id
+	inner join [MACACO_NOT_NULL].PUERTO origen ON tram_puerto_desde = origen.puer_id
+	inner join [MACACO_NOT_NULL].PUERTO destino ON tram_puerto_hasta = destino.puer_id
+	where (@viaj_fecha_salida = NULL OR @viaj_fecha_salida = viaj_fecha_salida)
+		or (@IDpuertoOrigen = NULL OR @IDpuertoOrigen =  origen.puer_id)
+		or (@IDpuertoDestino = NULL OR @IDpuertoDestino =  destino.puer_id)
+END
+
+GO
  
 /*
 DROP TABLE [MACACO_NOT_NULL].[TRAMO]
