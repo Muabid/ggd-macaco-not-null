@@ -99,6 +99,18 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Pago form = new Pago();
+            form.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Reserva form2 = new Reserva();
+            form2.Show();
+        }
+
       ///  this.textBox1.AutoCompleteSource = AutoCompleteSource.CustomSource; 
      //
     }

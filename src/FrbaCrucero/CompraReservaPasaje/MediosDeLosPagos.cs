@@ -16,5 +16,10 @@ namespace FrbaCrucero.CompraReservaPasaje
         {
             InitializeComponent();
         }
+
+        private void botonPagar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

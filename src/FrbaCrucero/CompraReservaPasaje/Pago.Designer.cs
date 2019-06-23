@@ -75,6 +75,7 @@
             this.button1.TabIndex = 26;
             this.button1.Text = "Pagar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pagoReservaTable
             // 
@@ -104,7 +105,7 @@
             this.label1.TabIndex = 23;
             this.label1.Text = "Detalles de la compra";
             // 
-            // PagoDeLaReserva
+            // Pago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -116,7 +117,7 @@
             this.Controls.Add(this.pagoReservaTable);
             this.Controls.Add(this.codigoReservaBox);
             this.Controls.Add(this.label1);
-            this.Name = "PagoDeLaReserva";
+            this.Name = "Pago";
             this.Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)(this.pagoReservaTable)).EndInit();
             this.ResumeLayout(false);
