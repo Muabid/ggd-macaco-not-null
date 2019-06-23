@@ -1,4 +1,5 @@
-﻿using FrbaCrucero.Model.Recorridos;
+﻿using FrbaCrucero.AbmRecorrido;
+using FrbaCrucero.Model.Recorridos;
 using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
@@ -33,9 +34,7 @@ namespace FrbaCrucero.CompraReservaPasaje
 
 
           
-            vScrollBar1.Dock = DockStyle.Right; vScrollBar1.Scroll += (sender, e) => { this.VerticalScroll.Value = vScrollBar1.Value; }; 
-            this.Controls.Add(vScrollBar1);
-
+            
 
         }
 
@@ -117,6 +116,15 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void dataGridViewViajes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.ColumnIndex == dataGridViewViajes.Columns["ButtonSelection"].Index)
+            {
+
+            }
+            else if (e.ColumnIndex == dataGridViewViajes.Columns["verRecorridoButton"].Index)
+            {
+                var codigo = Convert.ToDecimal(dataGridViewViajes["recorridoColumn",e.RowIndex].Value);
+                new RecorridoForm().Show(this, codigo);
+            }
 
         }
 

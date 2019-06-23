@@ -32,5 +32,15 @@ namespace FrbaCrucero.AbmRecorrido
            this.ShowDialog();
           
         }
+
+        public void Show(Form form, Decimal codigoRecorrido)
+        {
+            tramosTable.DataSource = recorridoDao.getTramos(codigoRecorrido);
+            codigoBox.Text = codigoRecorrido.ToString();
+            precioBox.Text = recorridoDao.precioRecorrido(codigoRecorrido).ToString();
+            this.ShowDialog(form);
+            
+        }
+
     }
 }

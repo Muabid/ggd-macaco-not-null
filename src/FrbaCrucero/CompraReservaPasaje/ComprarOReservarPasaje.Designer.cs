@@ -40,14 +40,16 @@
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_buscar = new System.Windows.Forms.Button();
             this.btn_limpiar = new System.Windows.Forms.Button();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.dataGridViewViajes = new System.Windows.Forms.DataGridView();
+            this.viaj_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.viaj_fecha_salida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.viaj_fecha_llegada = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.viaj_fecha_llegada_estimada = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.viaj_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.viaj_crucero_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cruceroColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.viaj_recorrido_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.recorridoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.verRecorridoButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ButtonSelection = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewViajes)).BeginInit();
@@ -187,34 +189,37 @@
             this.btn_limpiar.UseVisualStyleBackColor = true;
             this.btn_limpiar.Click += new System.EventHandler(this.btn_limpiar_Click);
             // 
-            // vScrollBar1
-            // 
-            this.vScrollBar1.Location = new System.Drawing.Point(800, 34);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 706);
-            this.vScrollBar1.TabIndex = 31;
-            // 
             // dataGridViewViajes
             // 
             this.dataGridViewViajes.AllowUserToAddRows = false;
             this.dataGridViewViajes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewViajes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.viaj_id,
             this.viaj_fecha_salida,
             this.viaj_fecha_llegada,
             this.viaj_fecha_llegada_estimada,
-            this.viaj_id,
             this.viaj_crucero_id,
+            this.cruceroColumn,
             this.viaj_recorrido_id,
+            this.recorridoColumn,
+            this.verRecorridoButton,
             this.ButtonSelection});
             this.dataGridViewViajes.Location = new System.Drawing.Point(26, 274);
             this.dataGridViewViajes.Name = "dataGridViewViajes";
-            this.dataGridViewViajes.Size = new System.Drawing.Size(771, 284);
+            this.dataGridViewViajes.Size = new System.Drawing.Size(749, 284);
             this.dataGridViewViajes.TabIndex = 32;
             this.dataGridViewViajes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewViajes_CellContentClick);
             // 
+            // viaj_id
+            // 
+            this.viaj_id.DataPropertyName = "viaj_id";
+            this.viaj_id.HeaderText = "Viaje_id";
+            this.viaj_id.Name = "viaj_id";
+            this.viaj_id.ReadOnly = true;
+            this.viaj_id.Visible = false;
+            // 
             // viaj_fecha_salida
             // 
-            this.viaj_fecha_salida.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.viaj_fecha_salida.DataPropertyName = "viaj_fecha_salida";
             this.viaj_fecha_salida.FillWeight = 200F;
             this.viaj_fecha_salida.HeaderText = "Viaje_Fecha_Salida";
@@ -225,7 +230,7 @@
             // 
             this.viaj_fecha_llegada.DataPropertyName = "viaj_fecha_llegada";
             this.viaj_fecha_llegada.FillWeight = 200F;
-            this.viaj_fecha_llegada.HeaderText = "Viaje_fecha_llegada";
+            this.viaj_fecha_llegada.HeaderText = "Viaje fecha llegada";
             this.viaj_fecha_llegada.Name = "viaj_fecha_llegada";
             this.viaj_fecha_llegada.ReadOnly = true;
             this.viaj_fecha_llegada.Width = 200;
@@ -234,18 +239,10 @@
             // 
             this.viaj_fecha_llegada_estimada.DataPropertyName = "viaj_fecha_llegada_estimada";
             this.viaj_fecha_llegada_estimada.FillWeight = 200F;
-            this.viaj_fecha_llegada_estimada.HeaderText = "Viaje_fecha_llegada_estimada";
+            this.viaj_fecha_llegada_estimada.HeaderText = "Fecha llegada estimada";
             this.viaj_fecha_llegada_estimada.Name = "viaj_fecha_llegada_estimada";
             this.viaj_fecha_llegada_estimada.ReadOnly = true;
             this.viaj_fecha_llegada_estimada.Width = 200;
-            // 
-            // viaj_id
-            // 
-            this.viaj_id.DataPropertyName = "viaj_id";
-            this.viaj_id.HeaderText = "Viaje_id";
-            this.viaj_id.Name = "viaj_id";
-            this.viaj_id.ReadOnly = true;
-            this.viaj_id.Visible = false;
             // 
             // viaj_crucero_id
             // 
@@ -254,12 +251,29 @@
             this.viaj_crucero_id.Name = "viaj_crucero_id";
             this.viaj_crucero_id.ReadOnly = true;
             // 
+            // cruceroColumn
+            // 
+            this.cruceroColumn.DataPropertyName = "cruc_modelo";
+            this.cruceroColumn.HeaderText = "Crucero";
+            this.cruceroColumn.Name = "cruceroColumn";
+            // 
             // viaj_recorrido_id
             // 
             this.viaj_recorrido_id.DataPropertyName = "viaj_recorrido_id";
             this.viaj_recorrido_id.HeaderText = "Viaje_recorrido_id";
             this.viaj_recorrido_id.Name = "viaj_recorrido_id";
             this.viaj_recorrido_id.ReadOnly = true;
+            // 
+            // recorridoColumn
+            // 
+            this.recorridoColumn.DataPropertyName = "reco_codigo";
+            this.recorridoColumn.HeaderText = "Recorrido";
+            this.recorridoColumn.Name = "recorridoColumn";
+            // 
+            // verRecorridoButton
+            // 
+            this.verRecorridoButton.HeaderText = "Ver Recorrido";
+            this.verRecorridoButton.Name = "verRecorridoButton";
             // 
             // ButtonSelection
             // 
@@ -272,9 +286,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(829, 393);
+            this.ClientSize = new System.Drawing.Size(849, 393);
             this.Controls.Add(this.dataGridViewViajes);
-            this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.btn_buscar);
             this.Controls.Add(this.btn_cancelar);
             this.Controls.Add(this.btn_limpiar);
@@ -304,14 +317,16 @@
         private System.Windows.Forms.Button btn_cancelar;
         private System.Windows.Forms.Button btn_buscar;
         private System.Windows.Forms.Button btn_limpiar;
-        private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.DataGridView dataGridViewViajes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn viaj_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn viaj_fecha_salida;
         private System.Windows.Forms.DataGridViewTextBoxColumn viaj_fecha_llegada;
         private System.Windows.Forms.DataGridViewTextBoxColumn viaj_fecha_llegada_estimada;
-        private System.Windows.Forms.DataGridViewTextBoxColumn viaj_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn viaj_crucero_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cruceroColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn viaj_recorrido_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn recorridoColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn verRecorridoButton;
         private System.Windows.Forms.DataGridViewButtonColumn ButtonSelection;
     }
 }
