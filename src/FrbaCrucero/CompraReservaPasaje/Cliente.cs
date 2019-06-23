@@ -13,10 +13,13 @@ using System.Windows.Forms;
 namespace FrbaCrucero.CompraReservaPasaje
 {
     public partial class Cliente : Form
-    {
-        public Cliente()
+    {   private  List<int> cabinasId;
+        int crucero;
+        public Cliente(List<int> cabinasId, int crucero)
         {
             InitializeComponent();
+            this.cabinasId = cabinasId;
+            this.crucero = crucero;
         }
 
         private void txt_dni_LostFocus(object sender, System.EventArgs e)
