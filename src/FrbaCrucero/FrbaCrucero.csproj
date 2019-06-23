@@ -171,11 +171,21 @@
     <Compile Include="CompraReservaPasaje\ElegirCabinas.Designer.cs">
       <DependentUpon>ElegirCabinas.cs</DependentUpon>
     </Compile>
-    <Compile Include="CompraReservaPasaje\Form2.cs">
-      <SubType>Form</SubType>
+    <Compile Include="CompraReservaPasaje\ElegirViaje.cs" />
+    <Compile Include="CompraReservaPasaje\ElegirViaje.Designer.cs">
+      <DependentUpon>ElegirViaje.cs</DependentUpon>
     </Compile>
-    <Compile Include="CompraReservaPasaje\Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="CompraReservaPasaje\MediosDeLosPagos.cs" />
+    <Compile Include="CompraReservaPasaje\MediosDeLosPagos.Designer.cs">
+      <DependentUpon>MediosDeLosPagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompraReservaPasaje\Pago.cs" />
+    <Compile Include="CompraReservaPasaje\Pago.Designer.cs">
+      <DependentUpon>Pago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompraReservaPasaje\Reserva.cs" />
+    <Compile Include="CompraReservaPasaje\Reserva.Designer.cs">
+      <DependentUpon>Reserva.cs</DependentUpon>
     </Compile>
     <Compile Include="GeneracionViaje\SeleccionCruceros.cs">
       <SubType>Form</SubType>
@@ -314,6 +324,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CompraReservaPasaje\ElegirCabinas.resx">
       <DependentUpon>ElegirCabinas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompraReservaPasaje\ElegirViaje.resx">
+      <DependentUpon>ElegirViaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompraReservaPasaje\MediosDeLosPagos.resx">
+      <DependentUpon>MediosDeLosPagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompraReservaPasaje\Pago.resx">
+      <DependentUpon>Pago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompraReservaPasaje\Reserva.resx">
+      <DependentUpon>Reserva.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GeneracionViaje\SeleccionCruceros.resx">
       <DependentUpon>SeleccionCruceros.cs</DependentUpon>
