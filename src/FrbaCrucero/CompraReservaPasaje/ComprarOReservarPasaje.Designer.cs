@@ -121,6 +121,7 @@
             this.monthCalendar.FirstDayOfWeek = System.Windows.Forms.Day.Sunday;
             this.monthCalendar.Location = new System.Drawing.Point(412, 24);
             this.monthCalendar.MaxSelectionCount = 1;
+            this.monthCalendar.MinDate = new System.DateTime(1900, 6, 23, 0, 0, 0, 0);
             this.monthCalendar.Name = "monthCalendar";
             this.monthCalendar.ShowToday = false;
             this.monthCalendar.ShowTodayCircle = false;

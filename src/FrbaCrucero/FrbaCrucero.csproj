@@ -171,19 +171,27 @@
     <Compile Include="CompraReservaPasaje\ElegirCabinas.Designer.cs">
       <DependentUpon>ElegirCabinas.cs</DependentUpon>
     </Compile>
-    <Compile Include="CompraReservaPasaje\ElegirViaje.cs" />
+    <Compile Include="CompraReservaPasaje\ElegirViaje.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CompraReservaPasaje\ElegirViaje.Designer.cs">
       <DependentUpon>ElegirViaje.cs</DependentUpon>
     </Compile>
-    <Compile Include="CompraReservaPasaje\MediosDeLosPagos.cs" />
+    <Compile Include="CompraReservaPasaje\MediosDeLosPagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CompraReservaPasaje\MediosDeLosPagos.Designer.cs">
       <DependentUpon>MediosDeLosPagos.cs</DependentUpon>
     </Compile>
-    <Compile Include="CompraReservaPasaje\Pago.cs" />
+    <Compile Include="CompraReservaPasaje\Pago.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CompraReservaPasaje\Pago.Designer.cs">
       <DependentUpon>Pago.cs</DependentUpon>
     </Compile>
-    <Compile Include="CompraReservaPasaje\Reserva.cs" />
+    <Compile Include="CompraReservaPasaje\Reserva.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CompraReservaPasaje\Reserva.Designer.cs">
       <DependentUpon>Reserva.cs</DependentUpon>
     </Compile>
