@@ -199,8 +199,6 @@ CREATE TABLE [MACACO_NOT_NULL].[CRUCERO] (
 END
 GO
 
-ALTER TABLE  [MACACO_NOT_NULL].[CRUCERO] ADD DEFAULT 1 FOR cruc_activo
-
 IF NOT EXISTS (
 	SELECT 1
 	FROM INFORMATION_SCHEMA.TABLES 
@@ -1494,12 +1492,15 @@ select viaj_id ,
 	viaj_fecha_llegada,
 	viaj_fecha_llegada_estimada,
 	viaj_crucero_id,
-	viaj_recorrido_id
+	crucero.cruc_modelo,
+	viaj_recorrido_id,
+	reco_codigo	
 	from [MACACO_NOT_NULL].[VIAJE]
 	INNER JOIN [MACACO_NOT_NULL].RECORRIDO ON viaj_recorrido_id = reco_id
 	INNER JOIN [MACACO_NOT_NULL].TRAMO ON reco_id = tram_recorrido_id
 	inner join [MACACO_NOT_NULL].PUERTO origen ON tram_puerto_desde = origen.puer_id
 	inner join [MACACO_NOT_NULL].PUERTO destino ON tram_puerto_hasta = destino.puer_id
+	inner join [MACACO_NOT_NULL].CRUCERO crucero ON crucero.cruc_id = viaj_crucero_id
 	where (@viaj_fecha_salida IS NULL OR CAST(@viaj_fecha_salida as DATE) = CAST(viaj_fecha_salida as DATE))
 		and (@puertoOrigen IS NULL OR @puertoOrigen =  origen.puer_nombre)
 		and (@puertoDestino IS NULL OR @puertoDestino =  destino.puer_nombre)
@@ -1587,28 +1588,12 @@ DROP SCHEMA MACACO_NOT_NULL */
 /********************************************************
  COPYRIGHTS http://www.ranjithk.com
 *********************************************************/  
-CREATE PROCEDURE CleanUpSchema
+CREATE PROCEDURE MACACO_NOT_NULL.CleanUpSchema
 (
   @SchemaName varchar(100)
  ,@WorkTest char(1) = 'w'  -- use 'w' to work and 't' to print
 )
 AS
-/*-----------------------------------------------------------------------------------------
-  
-  Author : Ranjith Kumar S
-  Date:    31/01/10
-  
-  Description: It drop all the objects in a schema and then the schema itself
-  
-  Limitations:
-   
-    1. If a table has a PK with XML or a Spatial Index then it wont work 
-       (workaround: drop that table manually and re run it)
-    2. If the schema is referred by a XML Schema collection then it wont work
-
-If it is helpful, Please send your comments ranjith_842@hotmail.com or visit http://www.ranjithk.com
- 
--------------------------------------------------------------------------------------------*/
 BEGIN    
 
 declare @SQL varchar(4000)
@@ -1707,4 +1692,4 @@ ELSE
 PRINT '------- ALL - DONE -------'    
 END
 
-exec dbo.CleanUpSchema 'MACACO_NOT_NULL'  EJEMPLO PARA BORRAR TODO
+exec MACACO_NOT_NULL.CleanUpSchema 'MACACO_NOT_NULL'  EJEMPLO PARA BORRAR TODO
