@@ -20,6 +20,7 @@ namespace FrbaCrucero.CompraReservaPasaje
         public ElegirCabinas()
         {
             InitializeComponent();
+            this.crucero_id = crucero_id;
             var tiposServicio = tipoServicioDao.getTiposServicios();
             foreach (TipoServicio tipoServicio in tiposServicio)
             {
@@ -89,6 +90,17 @@ namespace FrbaCrucero.CompraReservaPasaje
             {               
                 dataGridViewCabinasReservadas.Rows.RemoveAt(e.RowIndex);
             }
+        }
+
+        private void ElegirCabinas_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Cliente form = new Cliente();
+            form.Show();
         }
     }
 }
