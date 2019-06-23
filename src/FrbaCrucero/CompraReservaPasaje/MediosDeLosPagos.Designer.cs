@@ -35,7 +35,6 @@
             this.descripcion = new System.Windows.Forms.TextBox();
             this.botonPagar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.reserva = new System.Windows.Forms.TextBox();
             this.botonAgregar = new System.Windows.Forms.Button();
             this.tablaMediosDePago = new System.Windows.Forms.DataGridView();
             this.methodOfPayment = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -108,14 +107,6 @@
             this.label2.TabIndex = 18;
             this.label2.Text = "Codigo de Compra :";
             // 
-            // reserva
-            // 
-            this.reserva.Location = new System.Drawing.Point(508, 31);
-            this.reserva.Name = "reserva";
-            this.reserva.ReadOnly = true;
-            this.reserva.Size = new System.Drawing.Size(100, 20);
-            this.reserva.TabIndex = 17;
-            // 
             // botonAgregar
             // 
             this.botonAgregar.Location = new System.Drawing.Point(532, 115);
@@ -124,6 +115,7 @@
             this.botonAgregar.TabIndex = 16;
             this.botonAgregar.Text = "Agregar";
             this.botonAgregar.UseVisualStyleBackColor = true;
+            this.botonAgregar.Click += new System.EventHandler(this.botonAgregar_Click);
             // 
             // tablaMediosDePago
             // 
@@ -179,12 +171,12 @@
             this.Controls.Add(this.descripcion);
             this.Controls.Add(this.botonPagar);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.reserva);
             this.Controls.Add(this.botonAgregar);
             this.Controls.Add(this.tablaMediosDePago);
             this.Controls.Add(this.label1);
             this.Name = "MediosDeLosPagos";
             this.Text = "Form2";
+            this.Load += new System.EventHandler(this.MediosDeLosPagos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tablaMediosDePago)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -200,7 +192,6 @@
         private System.Windows.Forms.TextBox descripcion;
         private System.Windows.Forms.Button botonPagar;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox reserva;
         private System.Windows.Forms.Button botonAgregar;
         private System.Windows.Forms.DataGridView tablaMediosDePago;
         private System.Windows.Forms.DataGridViewTextBoxColumn methodOfPayment;
