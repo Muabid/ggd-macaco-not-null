@@ -116,6 +116,9 @@
             this.monthCalendar.ShowToday = false;
             this.monthCalendar.ShowTodayCircle = false;
             this.monthCalendar.TabIndex = 18;
+            this.monthCalendar.Visible = false;
+            this.monthCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_DateChanged);
+            this.monthCalendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_DateSelected);
             // 
             // btn_seleccionar_salida
             // 

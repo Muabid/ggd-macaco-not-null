@@ -16,8 +16,8 @@ namespace FrbaCrucero.CompraReservaPasaje
     public partial class ComprarOReservarPasaje : Form
     {
         CruceroDAO cruce = new CruceroDAO();
-        VScrollBar vScroller = new VScrollBar();  
-
+        VScrollBar vScroller = new VScrollBar();
+        DateTime? salida;
         private PuertoDAO puertoDao = new PuertoDAO();
 
 
@@ -54,32 +54,14 @@ namespace FrbaCrucero.CompraReservaPasaje
         private void btn_buscar_Click(object sender, EventArgs e)
         {           
             DataTable dataTable = new DataTable();
-            using (SqlCommand command = new SqlCommand("[MACACO_NOT_NULL].GetViaje", Database.getConnection()))
+            using (SqlCommand command = new SqlCommand("[MACACO_NOT_NULL].GetViajes", Database.getConnection()))
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("@viaj_fecha_salida", SqlDbType.DateTime2));
-                command.Parameters.Add(new SqlParameter("@puertoOrigen", SqlDbType.NVarChar));
-                command.Parameters.Add(new SqlParameter("@puertoDestino", SqlDbType.NVarChar));
-                command.Parameters["@viaj_fecha_salida"].Value = this.monthCalendar.SelectionRange.Start;
-                if (origenComboBox.SelectedItem == null)
-                {
-                    command.Parameters["@puertoOrigen"].Value = "";
-                }
-                else
-                {
-                    command.Parameters["@puertoOrigen"].Value = origenComboBox.SelectedItem.ToString();
-                }
-                if (destinoComboBox.SelectedItem == null)
-                {
-                    command.Parameters["@puertoDestino"].Value = "";
-                }
-                else
-                {
-                    command.Parameters["@puertoDestino"].Value = destinoComboBox.SelectedItem.ToString();
-                }
-                // command.Parameters["@viaj_fecha_salida"].Value = null;
-               // command.Parameters["@puertoDestino"].Value = null;
+                command.Parameters.Add("@viaj_fecha_salida", SqlDbType.DateTime2).Value = Database.orDbNull(salida);
+                command.Parameters.Add("@puertoOrigen", SqlDbType.NVarChar).Value = Database.orDbNull(origenComboBox.Text);
+                command.Parameters.Add("@puertoDestino", SqlDbType.NVarChar).Value = Database.orDbNull(destinoComboBox.Text);
+                //Database.orDbNull(this.monthCalendar.SelectionRange.Start);
                 try
                 {
                     dataAdapter.Fill(dataTable);
@@ -95,7 +77,7 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void btn_seleccionar_salida_Click(object sender, EventArgs e)
         {
-            salidaText.Text = this.monthCalendar.SelectionRange.Start.ToString();
+            monthCalendar.Visible = true;
         }
 
         private void btn_limpiar_Click(object sender, EventArgs e)
@@ -112,6 +94,7 @@ namespace FrbaCrucero.CompraReservaPasaje
             this.destinoComboBox.SelectedIndex = -1;
             this.origenComboBox.SelectedIndex = -1;
             salidaText.Text = String.Empty;
+            salida = null;
 
         }
 
@@ -135,6 +118,18 @@ namespace FrbaCrucero.CompraReservaPasaje
         private void dataGridViewViajes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            
+        }
+
+        private void monthCalendar_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            salida = monthCalendar.SelectionStart;
+            salidaText.Text = salida.Value.ToShortDateString();
+            monthCalendar.Visible = false;
         }
     }
 }
