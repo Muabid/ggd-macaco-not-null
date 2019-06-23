@@ -1510,7 +1510,59 @@ select viaj_id ,
 END
 
 GO
- 
+
+
+CREATE FUNCTION [MACACO_NOT_NULL].ObtenerCabinas(@cruceroID int ,@piso [decimal] (18,0),@tipo_servicio [nvarchar](255) )
+    RETURNS @datosReserva TABLE (		
+	cabi_id [int],      
+	cabi_nro [decimal](18,0),
+ 	cabi_piso [decimal](18,0),     
+	cabi_tipo_servicio [int]
+    )
+AS
+BEGIN
+    INSERT INTO @datosReserva
+    SELECT 
+  	cabi_id ,      
+	cabi_nro ,
+ 	cabi_piso ,     
+	tipo_servicio_descripcion 
+    FROM [MACACO_NOT_NULL].[CABINA]
+	INNER JOIN [MACACO_NOT_NULL].TIPO_SERVICIO  ON tipo_servicio_id= cabi_tipo_servicio_id 
+	WHERE cabi_piso = @piso and tipo_servicio_descripcion = @tipo_servicio
+		and @cruceroID = cabi_crucero_id
+    RETURN;
+END;
+
+GO
+
+CREATE PROCEDURE [MACACO_NOT_NULL].GetTipoServicioByDescription @descripcion NVARCHAR(255)
+AS
+BEGIN 
+	SELECT [tipo_servicio_id]
+      ,[tipo_servicio_descripcion]
+      ,[tipo_servicio_porc_recargo]
+  FROM [GD1C2019].[MACACO_NOT_NULL].[TIPO_SERVICIO] where [tipo_servicio_descripcion] = @descripcion
+END
+
+GO
+
+create procedure [MACACO_NOT_NULL].ObtenerCabinasDelCrucero @cruceroID int ,@piso [decimal] (18,0),@tipo_servicio [nvarchar](255) 
+As
+BEGIN    
+    SELECT 
+  	cabi_id ,      
+	cabi_nro ,
+ 	cabi_piso ,     
+	tipo_servicio_descripcion 
+    FROM [MACACO_NOT_NULL].[CABINA]
+	INNER JOIN [MACACO_NOT_NULL].TIPO_SERVICIO  ON tipo_servicio_id= cabi_tipo_servicio_id 
+	WHERE cabi_piso = @piso and tipo_servicio_descripcion = @tipo_servicio
+		and @cruceroID = cabi_crucero_id
+END
+
+GO
+
 /*
 DROP TABLE [MACACO_NOT_NULL].[TRAMO]
 DROP TABLE [MACACO_NOT_NULL].[RESERVA_CABINA]

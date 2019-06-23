@@ -52,11 +52,44 @@ namespace FrbaCrucero.CompraReservaPasaje
         }
 
         private void btn_buscar_Click(object sender, EventArgs e)
-        {
-            //SqlCommand procedure = Utils.Database.createCommand("MACACO_NOT_NULL.AltaRol");
-            //procedure.Parameters.Add("@nombre_rol", SqlDbType.NVarChar).Value = NombreNuevoRol.Text;
-            //procedure.Parameters.Add("@activo", SqlDbType.Bit).Value = 1;
-            //Utils.Database.executeProcedure(procedure);
+        {           
+            DataTable dataTable = new DataTable();
+            using (SqlCommand command = new SqlCommand("[MACACO_NOT_NULL].GetViaje", Database.getConnection()))
+            using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter("@viaj_fecha_salida", SqlDbType.DateTime2));
+                command.Parameters.Add(new SqlParameter("@puertoOrigen", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@puertoDestino", SqlDbType.NVarChar));
+                command.Parameters["@viaj_fecha_salida"].Value = this.monthCalendar.SelectionRange.Start;
+                if (origenComboBox.SelectedItem == null)
+                {
+                    command.Parameters["@puertoOrigen"].Value = "";
+                }
+                else
+                {
+                    command.Parameters["@puertoOrigen"].Value = origenComboBox.SelectedItem.ToString();
+                }
+                if (destinoComboBox.SelectedItem == null)
+                {
+                    command.Parameters["@puertoDestino"].Value = "";
+                }
+                else
+                {
+                    command.Parameters["@puertoDestino"].Value = destinoComboBox.SelectedItem.ToString();
+                }
+                // command.Parameters["@viaj_fecha_salida"].Value = null;
+               // command.Parameters["@puertoDestino"].Value = null;
+                try
+                {
+                    dataAdapter.Fill(dataTable);
+                }
+                catch (SqlException error)
+                {
+                    throw new Exception(error.Message, error);
+                }
+            }
+            dataGridViewViajes.DataSource = dataTable;
 
         }
 
@@ -86,7 +119,7 @@ namespace FrbaCrucero.CompraReservaPasaje
         {
 
             var tipoServicios = cruce.getTipoServicios().ToArray();
-            cbo_tipo_servicio.Items.AddRange(tipoServicios);
+          //  cbo_tipo_servicio.Items.AddRange(tipoServicios);
         }
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
@@ -95,6 +128,11 @@ namespace FrbaCrucero.CompraReservaPasaje
         }
 
         private void cbo_tipo_servicio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewViajes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
