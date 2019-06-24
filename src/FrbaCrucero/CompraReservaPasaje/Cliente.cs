@@ -13,10 +13,13 @@ using System.Windows.Forms;
 namespace FrbaCrucero.CompraReservaPasaje
 {
     public partial class Cliente : Form
-    {
-        public Cliente()
+    {   private  List<int> cabinasId;
+        int crucero;
+        public Cliente(List<int> cabinasId, int crucero)
         {
             InitializeComponent();
+            this.cabinasId = cabinasId;
+            this.crucero = crucero;
         }
 
         private void txt_dni_LostFocus(object sender, System.EventArgs e)
@@ -57,7 +60,7 @@ namespace FrbaCrucero.CompraReservaPasaje
             if (!String.IsNullOrEmpty(txt_dni.Text))
             {
 
-                SqlCommand command = Database.createCommand(" select concat(usua_nombre ,' ' ,usua_apellido) as usua_nombre,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac from MACACO_NOT_NULL.USUARIO where usua_dni = " + txt_dni.Text + ";");
+                SqlCommand command = Database.createCommand(" select concat(usua_nombre ,' ' ,usua_apellido) as usua_nombre,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac from MACACO_NOT_NULL.USUARIO where usua_dni = '" + txt_dni.Text + "';");
                 DataTable data = Database.getData(command);
                 if (data.Rows.Count > 0)
                 {

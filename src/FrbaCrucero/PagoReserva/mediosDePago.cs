@@ -27,15 +27,6 @@ namespace FrbaCrucero.PagoReserva
         {
             String cuotas = cantCuotas.Text;
             String variable = descripcion.Text;
-            //DataTable dt = tablaMediosDePago.DataSource as DataTable;
-            //    if (cuotas != null && variable != null && dt != null)
-            //    {
-
-            //        DataRow row = dt.NewRow();
-            //        row["methodOfPayment"] = variable;
-            //        row["cuotas"] = cuotas;
-            //        dt.Rows.Add(row);
-            //   }
 
 
 
@@ -123,6 +114,36 @@ namespace FrbaCrucero.PagoReserva
             this.Hide();
             PagoReserva pago = new PagoReserva();
             pago.Show();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cantCuotas_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void descripcion_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void reserva_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
 
      
