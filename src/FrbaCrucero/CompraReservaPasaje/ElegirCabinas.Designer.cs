@@ -96,7 +96,7 @@
             this.dataGridViewCabinasDisponibles.Name = "dataGridViewCabinasDisponibles";
             this.dataGridViewCabinasDisponibles.ReadOnly = true;
             this.dataGridViewCabinasDisponibles.RowTemplate.Height = 24;
-            this.dataGridViewCabinasDisponibles.Size = new System.Drawing.Size(408, 112);
+            this.dataGridViewCabinasDisponibles.Size = new System.Drawing.Size(414, 303);
             this.dataGridViewCabinasDisponibles.TabIndex = 14;
             this.dataGridViewCabinasDisponibles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCabinasDisponibles_CellContentClick);
             // 
@@ -259,10 +259,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 749);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Name = "ElegirCabinas";
             this.Text = "Seleccion de cabinas";
+            this.Load += new System.EventHandler(this.ElegirCabinas_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCabinasDisponibles)).EndInit();
@@ -293,5 +296,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cabi_piso;
         private System.Windows.Forms.DataGridViewTextBoxColumn servicio1;
         private System.Windows.Forms.DataGridViewButtonColumn agregar;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
