@@ -1554,8 +1554,9 @@ BEGIN
 	tipo_servicio_descripcion 
     FROM [MACACO_NOT_NULL].[CABINA]
 	INNER JOIN [MACACO_NOT_NULL].TIPO_SERVICIO  ON tipo_servicio_id= cabi_tipo_servicio_id 
-	WHERE cabi_piso = @piso and tipo_servicio_descripcion = @tipo_servicio
+	WHERE (@piso is null or cabi_piso = @piso) and (@tipo_servicio is null or tipo_servicio_descripcion = @tipo_servicio)
 		and @cruceroID = cabi_crucero_id
+		order by  cabi_piso, tipo_servicio_descripcion, cabi_nro
 END
 
 GO
