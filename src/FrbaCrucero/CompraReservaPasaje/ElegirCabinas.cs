@@ -101,5 +101,11 @@ namespace FrbaCrucero.CompraReservaPasaje
             Cliente form = new Cliente();
             form.Show();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Cliente form = new Cliente();
+            form.Show();
+        }
     }
 }
