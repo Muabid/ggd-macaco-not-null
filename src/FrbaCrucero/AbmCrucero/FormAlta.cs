@@ -125,6 +125,8 @@ namespace FrbaCrucero.AbmCrucero
                       c.Text = null;
                     if (c is DataGridView)
                         ((DataGridView)c).Rows.Clear();
+                    if (c is MonthCalendar)
+                        ((MonthCalendar)c).Visible = false;
                 });
 
            /* 
@@ -232,6 +234,11 @@ namespace FrbaCrucero.AbmCrucero
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }

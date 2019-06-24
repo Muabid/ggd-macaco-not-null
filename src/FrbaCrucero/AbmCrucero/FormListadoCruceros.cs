@@ -100,6 +100,8 @@ namespace FrbaCrucero.AbmCrucero
                        c.Text = null;
                    if (c is DataGridView)
                        ((DataGridView)c).Rows.Clear();
+                   if (c is MonthCalendar)
+                       ((MonthCalendar)c).Visible = false;
                });
         }
 
