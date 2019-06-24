@@ -20,7 +20,6 @@ namespace FrbaCrucero.CompraReservaPasaje
         public ElegirCabinas()
         {
             InitializeComponent();
-            this.crucero_id = crucero_id;
             var tiposServicio = tipoServicioDao.getTiposServicios();
             foreach (TipoServicio tipoServicio in tiposServicio)
             {
