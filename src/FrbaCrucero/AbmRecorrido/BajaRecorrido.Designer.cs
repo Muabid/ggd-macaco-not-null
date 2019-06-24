@@ -61,7 +61,7 @@
             // codigoBox
             // 
             this.codigoBox.Location = new System.Drawing.Point(167, 101);
-            this.codigoBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.codigoBox.Margin = new System.Windows.Forms.Padding(4);
             this.codigoBox.Name = "codigoBox";
             this.codigoBox.Size = new System.Drawing.Size(132, 22);
             this.codigoBox.TabIndex = 1;
@@ -69,7 +69,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(60, 167);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 3;
@@ -80,7 +80,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(572, 167);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 28);
             this.button2.TabIndex = 4;
@@ -90,9 +90,10 @@
             // 
             // ciudadOrigenCombo
             // 
+            this.ciudadOrigenCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ciudadOrigenCombo.FormattingEnabled = true;
             this.ciudadOrigenCombo.Location = new System.Drawing.Point(167, 38);
-            this.ciudadOrigenCombo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ciudadOrigenCombo.Margin = new System.Windows.Forms.Padding(4);
             this.ciudadOrigenCombo.Name = "ciudadOrigenCombo";
             this.ciudadOrigenCombo.Size = new System.Drawing.Size(160, 24);
             this.ciudadOrigenCombo.TabIndex = 5;
@@ -120,9 +121,10 @@
             // 
             // ciudadDestinoCombo
             // 
+            this.ciudadDestinoCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ciudadDestinoCombo.FormattingEnabled = true;
             this.ciudadDestinoCombo.Location = new System.Drawing.Point(513, 41);
-            this.ciudadDestinoCombo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ciudadDestinoCombo.Margin = new System.Windows.Forms.Padding(4);
             this.ciudadDestinoCombo.Name = "ciudadDestinoCombo";
             this.ciudadDestinoCombo.Size = new System.Drawing.Size(160, 24);
             this.ciudadDestinoCombo.TabIndex = 8;
@@ -140,11 +142,11 @@
             this.verColumn,
             this.bajaColumn,
             this.id});
-            this.recorridosTable.Location = new System.Drawing.Point(60, 237);
-            this.recorridosTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.recorridosTable.Location = new System.Drawing.Point(13, 237);
+            this.recorridosTable.Margin = new System.Windows.Forms.Padding(4);
             this.recorridosTable.Name = "recorridosTable";
             this.recorridosTable.ReadOnly = true;
-            this.recorridosTable.Size = new System.Drawing.Size(612, 177);
+            this.recorridosTable.Size = new System.Drawing.Size(839, 177);
             this.recorridosTable.TabIndex = 9;
             this.recorridosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.recorridosTable_CellContentClick);
             // 
@@ -218,6 +220,7 @@
             this.btn_atras.TabIndex = 22;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
+            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
             // 
             // BajaRecorrido
             // 
@@ -234,7 +237,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.codigoBox);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BajaRecorrido";
             this.Text = "Baja";
             ((System.ComponentModel.ISupportInitialize)(this.recorridosTable)).EndInit();

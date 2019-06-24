@@ -55,7 +55,7 @@
             this.columnSelection,
             this.Rol_activo});
             this.modificacionTable.Location = new System.Drawing.Point(49, 148);
-            this.modificacionTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.modificacionTable.Margin = new System.Windows.Forms.Padding(4);
             this.modificacionTable.Name = "modificacionTable";
             this.modificacionTable.Size = new System.Drawing.Size(980, 217);
             this.modificacionTable.TabIndex = 9;
@@ -92,7 +92,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(929, 112);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 28);
             this.button2.TabIndex = 8;
@@ -103,7 +103,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(546, 112);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 7;
@@ -114,7 +114,7 @@
             // Rol
             // 
             this.Rol.Location = new System.Drawing.Point(269, 48);
-            this.Rol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Rol.Margin = new System.Windows.Forms.Padding(4);
             this.Rol.Name = "Rol";
             this.Rol.Size = new System.Drawing.Size(132, 22);
             this.Rol.TabIndex = 6;
@@ -135,7 +135,7 @@
             // 
             this.Activo.AutoSize = true;
             this.Activo.Location = new System.Drawing.Point(442, 48);
-            this.Activo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Activo.Margin = new System.Windows.Forms.Padding(4);
             this.Activo.Name = "Activo";
             this.Activo.Size = new System.Drawing.Size(68, 21);
             this.Activo.TabIndex = 10;
@@ -159,7 +159,7 @@
             this.comboBoxFuncionalidades.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFuncionalidades.FormattingEnabled = true;
             this.comboBoxFuncionalidades.Location = new System.Drawing.Point(869, 44);
-            this.comboBoxFuncionalidades.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxFuncionalidades.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxFuncionalidades.Name = "comboBoxFuncionalidades";
             this.comboBoxFuncionalidades.Size = new System.Drawing.Size(160, 24);
             this.comboBoxFuncionalidades.TabIndex = 13;
@@ -174,6 +174,7 @@
             this.btn_atras.TabIndex = 22;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
+            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
             // 
             // Modificacion
             // 
@@ -189,7 +190,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Rol);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Modificacion";
             this.Text = "Modificacion";
             this.Load += new System.EventHandler(this.Modificacion_Load);

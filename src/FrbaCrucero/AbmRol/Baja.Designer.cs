@@ -53,7 +53,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(255, 60);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(132, 22);
             this.textBox1.TabIndex = 1;
@@ -62,7 +62,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(36, 112);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 2;
@@ -73,7 +73,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(255, 112);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 28);
             this.button2.TabIndex = 3;
@@ -85,7 +85,7 @@
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(36, 178);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(539, 185);
             this.dataGridView2.TabIndex = 5;
@@ -93,7 +93,7 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(443, 112);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(100, 28);
             this.button3.TabIndex = 6;
@@ -111,6 +111,7 @@
             this.btn_atras.TabIndex = 22;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
+            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
             // 
             // Baja
             // 
@@ -124,9 +125,10 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Baja";
-            this.Text = "Form1";
+            this.Text = "Baja Rol";
+            this.Load += new System.EventHandler(this.Baja_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -139,5 +139,10 @@ namespace FrbaCrucero.CompraReservaPasaje
             }
             
         }
+
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -156,6 +156,11 @@ namespace FrbaCrucero.AbmRecorrido
             new ModificacionTramo(this).Show();
         }
 
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
        
     }
 }

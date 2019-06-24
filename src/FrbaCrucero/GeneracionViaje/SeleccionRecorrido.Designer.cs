@@ -62,7 +62,7 @@
             this.verColumn,
             this.seleccionarColumn});
             this.recorridosTable.Location = new System.Drawing.Point(52, 226);
-            this.recorridosTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.recorridosTable.Margin = new System.Windows.Forms.Padding(4);
             this.recorridosTable.Name = "recorridosTable";
             this.recorridosTable.ReadOnly = true;
             this.recorridosTable.Size = new System.Drawing.Size(791, 177);
@@ -131,9 +131,10 @@
             // 
             // ciudadDestinoCombo
             // 
+            this.ciudadDestinoCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ciudadDestinoCombo.FormattingEnabled = true;
             this.ciudadDestinoCombo.Location = new System.Drawing.Point(683, 34);
-            this.ciudadDestinoCombo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ciudadDestinoCombo.Margin = new System.Windows.Forms.Padding(4);
             this.ciudadDestinoCombo.Name = "ciudadDestinoCombo";
             this.ciudadDestinoCombo.Size = new System.Drawing.Size(160, 24);
             this.ciudadDestinoCombo.TabIndex = 17;
@@ -160,9 +161,10 @@
             // 
             // ciudadOrigenCombo
             // 
+            this.ciudadOrigenCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ciudadOrigenCombo.FormattingEnabled = true;
             this.ciudadOrigenCombo.Location = new System.Drawing.Point(158, 31);
-            this.ciudadOrigenCombo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ciudadOrigenCombo.Margin = new System.Windows.Forms.Padding(4);
             this.ciudadOrigenCombo.Name = "ciudadOrigenCombo";
             this.ciudadOrigenCombo.Size = new System.Drawing.Size(160, 24);
             this.ciudadOrigenCombo.TabIndex = 14;
@@ -170,7 +172,7 @@
             // buscar
             // 
             this.buscar.Location = new System.Drawing.Point(743, 148);
-            this.buscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buscar.Margin = new System.Windows.Forms.Padding(4);
             this.buscar.Name = "buscar";
             this.buscar.Size = new System.Drawing.Size(100, 28);
             this.buscar.TabIndex = 13;
@@ -181,7 +183,7 @@
             // limpiar
             // 
             this.limpiar.Location = new System.Drawing.Point(460, 148);
-            this.limpiar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.limpiar.Margin = new System.Windows.Forms.Padding(4);
             this.limpiar.Name = "limpiar";
             this.limpiar.Size = new System.Drawing.Size(100, 28);
             this.limpiar.TabIndex = 12;
@@ -192,7 +194,7 @@
             // codigoBox
             // 
             this.codigoBox.Location = new System.Drawing.Point(158, 92);
-            this.codigoBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.codigoBox.Margin = new System.Windows.Forms.Padding(4);
             this.codigoBox.Name = "codigoBox";
             this.codigoBox.Size = new System.Drawing.Size(132, 22);
             this.codigoBox.TabIndex = 11;
@@ -217,6 +219,7 @@
             this.btn_atras.TabIndex = 22;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
+            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
             // 
             // SeleccionRecorrido
             // 
@@ -233,7 +236,7 @@
             this.Controls.Add(this.limpiar);
             this.Controls.Add(this.codigoBox);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SeleccionRecorrido";
             this.Text = "SeleccionRecorrido";
             ((System.ComponentModel.ISupportInitialize)(this.recorridosTable)).EndInit();

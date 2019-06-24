@@ -22,5 +22,10 @@ namespace FrbaCrucero.CompraReservaPasaje
             MediosDeLosPagos form = new MediosDeLosPagos();
             form.Show();
         }
+
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

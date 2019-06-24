@@ -37,7 +37,7 @@
             // btnAlta
             // 
             this.btnAlta.Location = new System.Drawing.Point(120, 42);
-            this.btnAlta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAlta.Margin = new System.Windows.Forms.Padding(4);
             this.btnAlta.Name = "btnAlta";
             this.btnAlta.Size = new System.Drawing.Size(128, 28);
             this.btnAlta.TabIndex = 0;
@@ -48,7 +48,7 @@
             // btnBaja
             // 
             this.btnBaja.Location = new System.Drawing.Point(120, 114);
-            this.btnBaja.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBaja.Margin = new System.Windows.Forms.Padding(4);
             this.btnBaja.Name = "btnBaja";
             this.btnBaja.Size = new System.Drawing.Size(128, 28);
             this.btnBaja.TabIndex = 1;
@@ -59,7 +59,7 @@
             // btnModificacion
             // 
             this.btnModificacion.Location = new System.Drawing.Point(120, 182);
-            this.btnModificacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnModificacion.Margin = new System.Windows.Forms.Padding(4);
             this.btnModificacion.Name = "btnModificacion";
             this.btnModificacion.Size = new System.Drawing.Size(128, 28);
             this.btnModificacion.TabIndex = 2;
@@ -77,6 +77,7 @@
             this.btn_atras.TabIndex = 22;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
+            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
             // 
             // RecorridoAbm
             // 
@@ -87,7 +88,7 @@
             this.Controls.Add(this.btnModificacion);
             this.Controls.Add(this.btnBaja);
             this.Controls.Add(this.btnAlta);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "RecorridoAbm";
             this.Text = "AbmRecorrido";
             this.ResumeLayout(false);

@@ -57,7 +57,7 @@
             this.ciudadDestino,
             this.precio});
             this.tramosTable.Location = new System.Drawing.Point(107, 142);
-            this.tramosTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tramosTable.Margin = new System.Windows.Forms.Padding(4);
             this.tramosTable.Name = "tramosTable";
             this.tramosTable.ReadOnly = true;
             this.tramosTable.Size = new System.Drawing.Size(464, 196);
@@ -95,7 +95,7 @@
             // codigo
             // 
             this.codigo.Location = new System.Drawing.Point(161, 34);
-            this.codigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.codigo.Margin = new System.Windows.Forms.Padding(4);
             this.codigo.Name = "codigo";
             this.codigo.Size = new System.Drawing.Size(132, 22);
             this.codigo.TabIndex = 1;
@@ -116,7 +116,7 @@
             // addTramoButton
             // 
             this.addTramoButton.Location = new System.Drawing.Point(440, 34);
-            this.addTramoButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.addTramoButton.Margin = new System.Windows.Forms.Padding(4);
             this.addTramoButton.Name = "addTramoButton";
             this.addTramoButton.Size = new System.Drawing.Size(131, 27);
             this.addTramoButton.TabIndex = 3;
@@ -127,7 +127,7 @@
             // clean
             // 
             this.clean.Location = new System.Drawing.Point(342, 362);
-            this.clean.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.clean.Margin = new System.Windows.Forms.Padding(4);
             this.clean.Name = "clean";
             this.clean.Size = new System.Drawing.Size(100, 28);
             this.clean.TabIndex = 4;
@@ -138,7 +138,7 @@
             // saveButton
             // 
             this.saveButton.Location = new System.Drawing.Point(471, 362);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(4);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(100, 28);
             this.saveButton.TabIndex = 5;
@@ -164,6 +164,7 @@
             this.btn_atras.TabIndex = 22;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
+            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
             // 
             // AltaRecorrido
             // 
@@ -178,7 +179,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.codigo);
             this.Controls.Add(this.tramosTable);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AltaRecorrido";
             this.Text = "Alta recorrido";
             ((System.ComponentModel.ISupportInitialize)(this.tramosTable)).EndInit();

@@ -114,6 +114,11 @@ namespace FrbaCrucero.CompraReservaPasaje
             form2.Show();
         }
 
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
       ///  this.textBox1.AutoCompleteSource = AutoCompleteSource.CustomSource; 
      //
     }

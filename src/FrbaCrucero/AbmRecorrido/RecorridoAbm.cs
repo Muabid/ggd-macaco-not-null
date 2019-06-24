@@ -15,18 +15,18 @@ namespace FrbaCrucero.AbmRecorrido
         public RecorridoAbm()
         {
             InitializeComponent();
-            this.FormClosing += (sender, e) => Owner.Close();
+            //this.FormClosing += (sender, e) => Owner.Close();
         }
 
         private void btnAlta_Click(object sender, EventArgs e)
         {
-            BajaRecorrido fm = new BajaRecorrido();
+            AltaRecorrido fm = new AltaRecorrido();
             fm.ShowDialog(this);
         }   
 
         private void btnBaja_Click(object sender, EventArgs e)
         {
-            AltaRecorrido fm = new AltaRecorrido();
+            BajaRecorrido fm = new BajaRecorrido();
             fm.ShowDialog(this);
         }
 
@@ -34,6 +34,11 @@ namespace FrbaCrucero.AbmRecorrido
         {
             ListadoModificacionRecorrido fm = new ListadoModificacionRecorrido();
             fm.ShowDialog(this);
+        }
+
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

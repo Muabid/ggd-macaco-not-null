@@ -72,5 +72,10 @@ namespace FrbaCrucero.GeneracionViaje
             this.ciudadDestinoCombo.SelectedIndex = -1;
             this.ciudadOrigenCombo.SelectedIndex = -1;
         }
+
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

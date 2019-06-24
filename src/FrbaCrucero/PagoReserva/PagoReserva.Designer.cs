@@ -52,7 +52,7 @@
             // codigoReservaBox
             // 
             this.codigoReservaBox.Location = new System.Drawing.Point(396, 58);
-            this.codigoReservaBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.codigoReservaBox.Margin = new System.Windows.Forms.Padding(4);
             this.codigoReservaBox.Name = "codigoReservaBox";
             this.codigoReservaBox.Size = new System.Drawing.Size(213, 22);
             this.codigoReservaBox.TabIndex = 1;
@@ -63,7 +63,7 @@
             this.pagoReservaTable.AllowUserToDeleteRows = false;
             this.pagoReservaTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.pagoReservaTable.Location = new System.Drawing.Point(24, 111);
-            this.pagoReservaTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pagoReservaTable.Margin = new System.Windows.Forms.Padding(4);
             this.pagoReservaTable.Name = "pagoReservaTable";
             this.pagoReservaTable.ReadOnly = true;
             this.pagoReservaTable.Size = new System.Drawing.Size(711, 245);
@@ -72,7 +72,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(635, 364);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 3;
@@ -83,7 +83,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(448, 364);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 28);
             this.button2.TabIndex = 4;
@@ -94,7 +94,7 @@
             // botonBuscarReserva
             // 
             this.botonBuscarReserva.Location = new System.Drawing.Point(635, 55);
-            this.botonBuscarReserva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.botonBuscarReserva.Margin = new System.Windows.Forms.Padding(4);
             this.botonBuscarReserva.Name = "botonBuscarReserva";
             this.botonBuscarReserva.Size = new System.Drawing.Size(100, 28);
             this.botonBuscarReserva.TabIndex = 5;
@@ -112,6 +112,7 @@
             this.btn_atras.TabIndex = 22;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
+            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
             // 
             // PagoReserva
             // 
@@ -125,7 +126,7 @@
             this.Controls.Add(this.pagoReservaTable);
             this.Controls.Add(this.codigoReservaBox);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PagoReserva";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.PagoReserva_Load);
