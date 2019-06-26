@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FrbaCrucero.Model.CompraReservaPasaje;
+using FrbaCrucero.Model.Viajes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,9 +18,8 @@ namespace FrbaCrucero.CompraReservaPasaje
         private Model.CompraReservaPasaje.Cliente cliente;
         private List<int> cabinasId;
         private int crucero;
-        private Model.CompraReservaPasaje.Cliente loCliente;
         private DataTable cabinas;
-        private Model.Viajes.Viaje crucero1;
+        private Model.Viajes.Viaje viaje;
 
 
         public Reserva(Model.CompraReservaPasaje.Cliente cliente, List<int> cabinasId, int crucero)
@@ -27,8 +28,8 @@ namespace FrbaCrucero.CompraReservaPasaje
             this.cliente = cliente;
             this.cabinasId = cabinasId;
             this.crucero = crucero;
+            this.cliente = cliente;
             InitializeComponent();
-
             textBox1.Text = cliente.dni.ToString();
             textBox2.Text = cliente.direccion;
             textBox3.Text = cliente.telefono.ToString();
@@ -37,15 +38,23 @@ namespace FrbaCrucero.CompraReservaPasaje
             textBox6.Text = cliente.fechaNacimiento.ToString();
             textBox7.Text = crucero.ToString();
 
-
         }
 
-        public Reserva(Model.CompraReservaPasaje.Cliente loCliente, DataTable cabinas, Model.Viajes.Viaje crucero1)
+        public Reserva(Cliente cliente, DataTable cabinas, Viaje viaje)
         {
-            // TODO: Complete member initialization
-            this.loCliente = loCliente;
+            InitializeComponent();
+            this.cliente = cliente;
             this.cabinas = cabinas;
-            this.crucero1 = crucero1;
+            pagoReservaTable.DataSource = cabinas;
+            this.viaje = viaje;
+            textBox1.Text = cliente.dni.ToString();
+            textBox2.Text = cliente.direccion;
+            textBox3.Text = cliente.telefono.ToString();
+            textBox4.Text = cliente.nombreApellido;
+            textBox5.Text = cliente.mail;
+            textBox6.Text = cliente.fechaNacimiento.ToString();
+            textBox7.Text = viaje.fecha_llegada_estimada.ToShortDateString();
+            textBox8.Text = viaje.fecha_salida.ToShortDateString();
         }
 
         private void btn_atras_Click(object sender, EventArgs e)
@@ -54,6 +63,11 @@ namespace FrbaCrucero.CompraReservaPasaje
         }
 
         private void Reserva_Load(object sender, EventArgs e)
+        {
+         
+        }
+
+        private void pagoReservaTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

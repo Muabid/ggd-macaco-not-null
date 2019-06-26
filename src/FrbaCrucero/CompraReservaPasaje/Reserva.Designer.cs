@@ -167,6 +167,7 @@
             this.pagoReservaTable.ReadOnly = true;
             this.pagoReservaTable.Size = new System.Drawing.Size(533, 199);
             this.pagoReservaTable.TabIndex = 41;
+            this.pagoReservaTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.pagoReservaTable_CellContentClick);
             // 
             // label1
             // 

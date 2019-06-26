@@ -31,7 +31,7 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         public Pago(Model.CompraReservaPasaje.Cliente elCliente, DataTable cabinas, Model.Viajes.Viaje crucero1)
         {
-            // TODO: Complete member initialization
+            InitializeComponent();
             this.elCliente = elCliente;
             this.cabinas = cabinas;
             this.crucero1 = crucero1;
