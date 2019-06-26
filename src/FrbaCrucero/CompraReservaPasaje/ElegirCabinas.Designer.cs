@@ -276,6 +276,7 @@
             this.button5.TabIndex = 32;
             this.button5.Text = "Atras";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // check
             // 
@@ -325,8 +326,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cabi_piso;
         private System.Windows.Forms.DataGridViewTextBoxColumn servicio1;
         private System.Windows.Forms.DataGridViewButtonColumn agregar;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DataGridViewCheckBoxColumn check;

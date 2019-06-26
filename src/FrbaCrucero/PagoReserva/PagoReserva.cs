@@ -107,6 +107,11 @@ namespace FrbaCrucero.PagoReserva
 
         }
 
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
 
 
     }

@@ -10,3 +10,5 @@ Decisiones de diseño
 En el caso de que un crucero fuera dado de baja ya sea por fuera de servicio o por vida útil se decidió qué ante esta situación todos los pasajes que estén involucrados en dicho crucero se cancelen de forma automática.
 
 Al momento de dar de alta un crucero, cuándo se eligen la cantidad de cabinas con sus respectivos servicios, sólo se puede agregar un tipo de servicio por piso, con la intención de simplificar la manipulación de los datos y su representación en las vistas.
+
+Cuando se desea MODIFICAR un Crucero que ya está creado, primero se lo busca desde el Listado Cruceros. Después se selecciona con la Celda de Modificar, y luego se abre la ventana de  Modificación Crucero con los datos actuales del mismo. En este punto no se habilita la opción para Agregar o Eliminar cabinas del crucero que estás modificando, sólo se considera el hecho de poder cambiar el Nombre, Modelo o Compañia del Crucero.

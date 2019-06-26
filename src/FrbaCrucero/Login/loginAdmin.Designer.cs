@@ -63,7 +63,7 @@
             // usuarioTextBox
             // 
             this.usuarioTextBox.Location = new System.Drawing.Point(175, 55);
-            this.usuarioTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.usuarioTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.usuarioTextBox.Name = "usuarioTextBox";
             this.usuarioTextBox.Size = new System.Drawing.Size(132, 22);
             this.usuarioTextBox.TabIndex = 2;
@@ -71,7 +71,7 @@
             // passwordTextBox
             // 
             this.passwordTextBox.Location = new System.Drawing.Point(175, 113);
-            this.passwordTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.passwordTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(132, 22);
             this.passwordTextBox.TabIndex = 3;
@@ -79,7 +79,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(208, 197);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 4;
@@ -90,7 +90,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(49, 197);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 28);
             this.button2.TabIndex = 5;
@@ -108,6 +108,7 @@
             this.btn_atras.TabIndex = 22;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
+            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
             // 
             // LoginAdmin
             // 
@@ -121,9 +122,10 @@
             this.Controls.Add(this.usuarioTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "LoginAdmin";
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.LoginAdmin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

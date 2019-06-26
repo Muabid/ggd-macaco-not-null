@@ -79,5 +79,10 @@ namespace FrbaCrucero.AbmRecorrido
             this.ciudadOrigenCombo.SelectedIndex = -1;
         }
 
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

@@ -81,6 +81,11 @@ namespace FrbaCrucero.GeneracionViaje
 
             }
         }
+
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
         
     }
 }

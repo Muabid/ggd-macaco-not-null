@@ -60,10 +60,10 @@
             this.precioColumn,
             this.modificarColumn});
             this.recorridosTable.Location = new System.Drawing.Point(46, 241);
-            this.recorridosTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.recorridosTable.Margin = new System.Windows.Forms.Padding(4);
             this.recorridosTable.Name = "recorridosTable";
             this.recorridosTable.ReadOnly = true;
-            this.recorridosTable.Size = new System.Drawing.Size(662, 214);
+            this.recorridosTable.Size = new System.Drawing.Size(701, 214);
             this.recorridosTable.TabIndex = 0;
             this.recorridosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.recorridosTable_CellContentClick);
             // 
@@ -119,7 +119,7 @@
             // codigoBox
             // 
             this.codigoBox.Location = new System.Drawing.Point(191, 48);
-            this.codigoBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.codigoBox.Margin = new System.Windows.Forms.Padding(4);
             this.codigoBox.Name = "codigoBox";
             this.codigoBox.Size = new System.Drawing.Size(132, 22);
             this.codigoBox.TabIndex = 1;
@@ -137,7 +137,7 @@
             // limpiarButton
             // 
             this.limpiarButton.Location = new System.Drawing.Point(55, 192);
-            this.limpiarButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.limpiarButton.Margin = new System.Windows.Forms.Padding(4);
             this.limpiarButton.Name = "limpiarButton";
             this.limpiarButton.Size = new System.Drawing.Size(100, 28);
             this.limpiarButton.TabIndex = 3;
@@ -148,7 +148,7 @@
             // buscarButton
             // 
             this.buscarButton.Location = new System.Drawing.Point(608, 192);
-            this.buscarButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buscarButton.Margin = new System.Windows.Forms.Padding(4);
             this.buscarButton.Name = "buscarButton";
             this.buscarButton.Size = new System.Drawing.Size(100, 28);
             this.buscarButton.TabIndex = 5;
@@ -158,18 +158,20 @@
             // 
             // destinoCombo
             // 
+            this.destinoCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.destinoCombo.FormattingEnabled = true;
             this.destinoCombo.Location = new System.Drawing.Point(191, 130);
-            this.destinoCombo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.destinoCombo.Margin = new System.Windows.Forms.Padding(4);
             this.destinoCombo.Name = "destinoCombo";
             this.destinoCombo.Size = new System.Drawing.Size(160, 24);
             this.destinoCombo.TabIndex = 6;
             // 
             // origenCombo
             // 
+            this.origenCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.origenCombo.FormattingEnabled = true;
             this.origenCombo.Location = new System.Drawing.Point(548, 44);
-            this.origenCombo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.origenCombo.Margin = new System.Windows.Forms.Padding(4);
             this.origenCombo.Name = "origenCombo";
             this.origenCombo.Size = new System.Drawing.Size(160, 24);
             this.origenCombo.TabIndex = 7;
@@ -204,6 +206,7 @@
             this.btn_atras.TabIndex = 22;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
+            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
             // 
             // ListadoModificacionRecorrido
             // 
@@ -220,7 +223,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.codigoBox);
             this.Controls.Add(this.recorridosTable);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ListadoModificacionRecorrido";
             this.Text = "Modificación recorrido";
             ((System.ComponentModel.ISupportInitialize)(this.recorridosTable)).EndInit();

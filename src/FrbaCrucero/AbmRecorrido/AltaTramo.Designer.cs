@@ -49,7 +49,7 @@
             this.origenComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.origenComboBox.FormattingEnabled = true;
             this.origenComboBox.Location = new System.Drawing.Point(171, 39);
-            this.origenComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.origenComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.origenComboBox.Name = "origenComboBox";
             this.origenComboBox.Size = new System.Drawing.Size(160, 24);
             this.origenComboBox.TabIndex = 0;
@@ -84,7 +84,7 @@
             this.destinoComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.destinoComboBox.FormattingEnabled = true;
             this.destinoComboBox.Location = new System.Drawing.Point(171, 89);
-            this.destinoComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.destinoComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.destinoComboBox.Name = "destinoComboBox";
             this.destinoComboBox.Size = new System.Drawing.Size(160, 24);
             this.destinoComboBox.TabIndex = 3;
@@ -104,7 +104,7 @@
             // precioField
             // 
             this.precioField.Location = new System.Drawing.Point(171, 143);
-            this.precioField.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.precioField.Margin = new System.Windows.Forms.Padding(4);
             this.precioField.Name = "precioField";
             this.precioField.Size = new System.Drawing.Size(160, 22);
             this.precioField.TabIndex = 5;
@@ -115,7 +115,7 @@
             // limpiarButton
             // 
             this.limpiarButton.Location = new System.Drawing.Point(34, 209);
-            this.limpiarButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.limpiarButton.Margin = new System.Windows.Forms.Padding(4);
             this.limpiarButton.Name = "limpiarButton";
             this.limpiarButton.Size = new System.Drawing.Size(100, 28);
             this.limpiarButton.TabIndex = 6;
@@ -126,7 +126,7 @@
             // btn_guardar
             // 
             this.btn_guardar.Location = new System.Drawing.Point(231, 209);
-            this.btn_guardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_guardar.Margin = new System.Windows.Forms.Padding(4);
             this.btn_guardar.Name = "btn_guardar";
             this.btn_guardar.Size = new System.Drawing.Size(100, 28);
             this.btn_guardar.TabIndex = 7;
@@ -148,6 +148,7 @@
             this.btn_atras.TabIndex = 22;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
+            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
             // 
             // AltaTramo
             // 
@@ -164,7 +165,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.origenComboBox);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AltaTramo";
             this.Text = "Tramo";
             this.Load += new System.EventHandler(this.label1_Click);

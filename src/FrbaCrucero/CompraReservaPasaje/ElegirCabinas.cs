@@ -96,16 +96,27 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Cliente form = new Cliente();
-            form.Show();
-        }
+      
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Cliente form = new Cliente();
+            List<int> cabinasId = new List<int>();
+            foreach (DataGridViewRow item in dataGridViewCabinasReservadas.Rows)
+            {
+                cabinasId.Add((int)item.Cells[1].Value);
+            
+            
+            } 
+            
+
+
+            Cliente form = new Cliente(cabinasId,crucero);
             form.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

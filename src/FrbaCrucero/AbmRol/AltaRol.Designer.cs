@@ -40,7 +40,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 34);
+            this.label1.Location = new System.Drawing.Point(13, 24);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 17);
@@ -51,7 +51,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 83);
+            this.label2.Location = new System.Drawing.Point(13, 73);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 17);
@@ -61,17 +61,17 @@
             // 
             // NombreNuevoRol
             // 
-            this.NombreNuevoRol.Location = new System.Drawing.Point(138, 34);
-            this.NombreNuevoRol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NombreNuevoRol.Location = new System.Drawing.Point(118, 24);
+            this.NombreNuevoRol.Margin = new System.Windows.Forms.Padding(4);
             this.NombreNuevoRol.Name = "NombreNuevoRol";
-            this.NombreNuevoRol.Size = new System.Drawing.Size(132, 22);
+            this.NombreNuevoRol.Size = new System.Drawing.Size(216, 22);
             this.NombreNuevoRol.TabIndex = 2;
             this.NombreNuevoRol.TextChanged += new System.EventHandler(this.NombreNuevoRol_TextChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(234, 142);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(234, 132);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 4;
@@ -81,8 +81,8 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(36, 142);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Location = new System.Drawing.Point(16, 132);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 28);
             this.button2.TabIndex = 5;
@@ -92,11 +92,12 @@
             // 
             // Funcionalidades
             // 
+            this.Funcionalidades.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Funcionalidades.FormattingEnabled = true;
-            this.Funcionalidades.Location = new System.Drawing.Point(138, 76);
-            this.Funcionalidades.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Funcionalidades.Location = new System.Drawing.Point(118, 66);
+            this.Funcionalidades.Margin = new System.Windows.Forms.Padding(4);
             this.Funcionalidades.Name = "Funcionalidades";
-            this.Funcionalidades.Size = new System.Drawing.Size(132, 24);
+            this.Funcionalidades.Size = new System.Drawing.Size(216, 24);
             this.Funcionalidades.TabIndex = 3;
             this.Funcionalidades.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -110,6 +111,7 @@
             this.btn_atras.TabIndex = 22;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
+            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
             // 
             // AltaRol
             // 
@@ -123,7 +125,7 @@
             this.Controls.Add(this.NombreNuevoRol);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AltaRol";
             this.Text = "Alta Rol";
             this.ResumeLayout(false);

@@ -55,6 +55,7 @@
             this.label1.Size = new System.Drawing.Size(202, 30);
             this.label1.TabIndex = 1;
             this.label1.Text = "Medios De Pago";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // tablaMediosDePago
             // 
@@ -92,7 +93,7 @@
             // 
             // botonAgregar
             // 
-            this.botonAgregar.Location = new System.Drawing.Point(705, 147);
+            this.botonAgregar.Location = new System.Drawing.Point(705, 146);
             this.botonAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.botonAgregar.Name = "botonAgregar";
             this.botonAgregar.Size = new System.Drawing.Size(100, 28);
@@ -109,6 +110,7 @@
             this.reserva.ReadOnly = true;
             this.reserva.Size = new System.Drawing.Size(132, 22);
             this.reserva.TabIndex = 6;
+            this.reserva.TextChanged += new System.EventHandler(this.reserva_TextChanged);
             // 
             // label2
             // 
@@ -120,6 +122,7 @@
             this.label2.Size = new System.Drawing.Size(246, 30);
             this.label2.TabIndex = 7;
             this.label2.Text = "Codigo de Reserva :";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // botonPagar
             // 
@@ -139,6 +142,7 @@
             this.descripcion.Name = "descripcion";
             this.descripcion.Size = new System.Drawing.Size(220, 22);
             this.descripcion.TabIndex = 9;
+            this.descripcion.TextChanged += new System.EventHandler(this.descripcion_TextChanged);
             // 
             // cantCuotas
             // 
@@ -147,6 +151,7 @@
             this.cantCuotas.Name = "cantCuotas";
             this.cantCuotas.Size = new System.Drawing.Size(208, 22);
             this.cantCuotas.TabIndex = 10;
+            this.cantCuotas.TextChanged += new System.EventHandler(this.cantCuotas_TextChanged);
             // 
             // label3
             // 
@@ -158,6 +163,7 @@
             this.label3.Size = new System.Drawing.Size(131, 25);
             this.label3.TabIndex = 11;
             this.label3.Text = "Descripcion:";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -200,7 +206,7 @@
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MediosDePago";
-            this.Text = "mediosDePago";
+            this.Text = "Medios de Pago";
             this.Load += new System.EventHandler(this.mediosDePago_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tablaMediosDePago)).EndInit();
             this.ResumeLayout(false);

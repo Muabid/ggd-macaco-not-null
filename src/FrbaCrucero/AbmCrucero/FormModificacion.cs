@@ -32,6 +32,9 @@ namespace FrbaCrucero.AbmCrucero
 
         private void btn_limpiar_Click(object sender, EventArgs e)
         {
+            DataTable dt = (DataTable)this.dgv_cabinas.DataSource;
+            if (dt != null)
+                dt.Clear();
             this.Controls.Cast<Control>().ToList()
                  .Where(c => c is GroupBox)
                  .SelectMany(c => c.Controls.Cast<Control>().ToList())
@@ -41,9 +44,18 @@ namespace FrbaCrucero.AbmCrucero
                          ((ComboBox)c).SelectedIndex = -1;
                      if (c is TextBox)
                          c.Text = null;
-                     if (c is DataGridView)
-                         ((DataGridView)c).Rows.Clear();
                  });
+             /*
+            txt_nombre.Clear();
+            cbo_modelo.SelectedIndex = -1;
+            cbo_compania.SelectedIndex = -1;
+            txt_cabinas.Clear();
+            txt_fecha_alta.Clear();
+            cbo_tipo_servicio.SelectedIndex = -1;
+            txt_cantidad.Clear();
+            txt_piso.Clear();
+            dgv_cabinas.Rows.Clear();
+             */ 
         }
 
         private void btn_seleccionar_Click(object sender, EventArgs e)

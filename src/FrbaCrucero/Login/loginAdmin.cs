@@ -60,5 +60,15 @@ namespace FrbaCrucero.Login
             }
 
         }
+
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void LoginAdmin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

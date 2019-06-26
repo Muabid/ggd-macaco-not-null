@@ -73,5 +73,10 @@ namespace FrbaCrucero.AbmRecorrido
             base.Refresh();
             this.buscarButton_Click(null, null);
         }
+
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

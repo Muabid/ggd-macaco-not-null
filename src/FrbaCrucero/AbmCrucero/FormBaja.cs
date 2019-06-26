@@ -34,6 +34,8 @@ namespace FrbaCrucero.AbmCrucero
                         ((DataGridView)c).Rows.Clear();
                     if (c is CheckBox)
                         ((CheckBox)c).Checked = false;
+                    if (c is MonthCalendar)
+                        ((MonthCalendar)c).Visible = false;
                 });
            /*
             txt_fecha_fuera_servicio.Clear();

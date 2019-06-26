@@ -34,5 +34,10 @@ namespace FrbaCrucero.AbmRol
             Modificacion modificacion = new Modificacion();
             modificacion.ShowDialog(this);
         }
+
+        private void btn_atras_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

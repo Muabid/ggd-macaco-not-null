@@ -51,7 +51,7 @@
             // btn_limpiar
             // 
             this.btn_limpiar.Location = new System.Drawing.Point(304, 414);
-            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(4);
             this.btn_limpiar.Name = "btn_limpiar";
             this.btn_limpiar.Size = new System.Drawing.Size(100, 28);
             this.btn_limpiar.TabIndex = 11;
@@ -62,7 +62,7 @@
             // btn_guardar
             // 
             this.btn_guardar.Location = new System.Drawing.Point(488, 414);
-            this.btn_guardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_guardar.Margin = new System.Windows.Forms.Padding(4);
             this.btn_guardar.Name = "btn_guardar";
             this.btn_guardar.Size = new System.Drawing.Size(100, 28);
             this.btn_guardar.TabIndex = 10;
@@ -75,17 +75,17 @@
             this.comboBoxFuncionalidades.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFuncionalidades.FormattingEnabled = true;
             this.comboBoxFuncionalidades.Location = new System.Drawing.Point(137, 77);
-            this.comboBoxFuncionalidades.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxFuncionalidades.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxFuncionalidades.Name = "comboBoxFuncionalidades";
-            this.comboBoxFuncionalidades.Size = new System.Drawing.Size(132, 24);
+            this.comboBoxFuncionalidades.Size = new System.Drawing.Size(213, 24);
             this.comboBoxFuncionalidades.TabIndex = 9;
             // 
             // NombreTextBox
             // 
             this.NombreTextBox.Location = new System.Drawing.Point(137, 38);
-            this.NombreTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NombreTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.NombreTextBox.Name = "NombreTextBox";
-            this.NombreTextBox.Size = new System.Drawing.Size(132, 22);
+            this.NombreTextBox.Size = new System.Drawing.Size(213, 22);
             this.NombreTextBox.TabIndex = 8;
             this.NombreTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.NombreTextBox_Validating);
             // 
@@ -119,7 +119,7 @@
             this.Funcionalidad,
             this.Eliminar});
             this.table_funcionalidades.Location = new System.Drawing.Point(36, 130);
-            this.table_funcionalidades.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.table_funcionalidades.Margin = new System.Windows.Forms.Padding(4);
             this.table_funcionalidades.Name = "table_funcionalidades";
             this.table_funcionalidades.Size = new System.Drawing.Size(552, 244);
             this.table_funcionalidades.TabIndex = 12;
@@ -154,8 +154,8 @@
             // 
             // BotonAgregar
             // 
-            this.BotonAgregar.Location = new System.Drawing.Point(304, 74);
-            this.BotonAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BotonAgregar.Location = new System.Drawing.Point(394, 77);
+            this.BotonAgregar.Margin = new System.Windows.Forms.Padding(4);
             this.BotonAgregar.Name = "BotonAgregar";
             this.BotonAgregar.Size = new System.Drawing.Size(100, 28);
             this.BotonAgregar.TabIndex = 13;
@@ -165,8 +165,8 @@
             // 
             // btn_activar
             // 
-            this.btn_activar.Location = new System.Drawing.Point(304, 32);
-            this.btn_activar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_activar.Location = new System.Drawing.Point(394, 35);
+            this.btn_activar.Margin = new System.Windows.Forms.Padding(4);
             this.btn_activar.Name = "btn_activar";
             this.btn_activar.Size = new System.Drawing.Size(100, 28);
             this.btn_activar.TabIndex = 14;
@@ -188,6 +188,7 @@
             this.btn_atras.TabIndex = 22;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
+            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
             // 
             // FormularioModificacion
             // 
@@ -205,9 +206,9 @@
             this.Controls.Add(this.NombreTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormularioModificacion";
-            this.Text = "FormularioModificacion";
+            this.Text = "Formulario Modificacion";
             this.Load += new System.EventHandler(this.FormularioModificacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.table_funcionalidades)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
