@@ -100,9 +100,9 @@ namespace FrbaCrucero.CompraReservaPasaje
                 cabinasId.Add((int)item.Cells[1].Value);
             
             
-            } 
-
-            Cliente form = new Cliente(cabinasId,viaje.crucero_id);
+            }
+            DataTable data = (DataTable)(dataGridViewCabinasReservadas.DataSource);
+            ClienteForm form = new ClienteForm(data,viaje);
             form.Show();
         }
 

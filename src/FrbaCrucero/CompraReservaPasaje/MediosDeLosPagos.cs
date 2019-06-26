@@ -15,6 +15,7 @@ namespace FrbaCrucero.CompraReservaPasaje
         private Model.CompraReservaPasaje.Cliente cliente;
         private List<int> cabinasId;
         private int crucero;
+        private DataTable cabinas;
 
 
         public MediosDeLosPagos(Model.CompraReservaPasaje.Cliente cliente, List<int> cabinasId, int crucero)
@@ -25,6 +26,14 @@ namespace FrbaCrucero.CompraReservaPasaje
             this.crucero = crucero;
 
             InitializeComponent();
+        }
+
+        public MediosDeLosPagos(Model.CompraReservaPasaje.Cliente cliente, DataTable cabinas, int crucero)
+        {
+            // TODO: Complete member initialization
+            this.cliente = cliente;
+            this.cabinas = cabinas;
+            this.crucero = crucero;
         }
 
         private void botonPagar_Click(object sender, EventArgs e)

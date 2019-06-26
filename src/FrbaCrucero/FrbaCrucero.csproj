@@ -228,7 +228,6 @@
     <Compile Include="GeneracionViaje\SeleccionRecorrido.Designer.cs">
       <DependentUpon>SeleccionRecorrido.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ICruceroForm.cs" />
     <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -398,6 +397,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AbmPuerto\" />
+    <Folder Include="Forms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

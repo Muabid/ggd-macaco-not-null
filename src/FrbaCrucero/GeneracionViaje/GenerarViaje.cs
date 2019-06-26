@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace FrbaCrucero.GeneracionViaje
 {
-    public partial class GenerarViaje : Form,ICrucero
+    public partial class GenerarViaje : Form
     {
         Recorrido recorrido;
         DateTime salida;

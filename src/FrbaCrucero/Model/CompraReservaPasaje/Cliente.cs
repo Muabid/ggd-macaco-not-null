@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FrbaCrucero.Model.CompraReservaPasaje
 {
-    class Cliente
+    public class Cliente
     {
        public int dni {get; set;}
         public String nombreApellido{get; set;}

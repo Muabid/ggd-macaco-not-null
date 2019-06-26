@@ -15,10 +15,10 @@ using System.Windows.Forms;
 namespace FrbaCrucero.CompraReservaPasaje
 {
 
-    public partial class Cliente : Form
-    {   private  DataTable cabinas;
-        Viaje crucero;
-        public Cliente(DataTable cabinasId, Viaje crucero)
+    public partial class ClienteForm : Form
+    {   public  DataTable cabinas;
+        public Viaje crucero;
+        public ClienteForm(DataTable cabinasId, Viaje crucero)
         {
             InitializeComponent();
             this.cabinas = cabinasId;
@@ -116,12 +116,12 @@ namespace FrbaCrucero.CompraReservaPasaje
             String mail = txt_mail.Text;
             DateTime fecha_alta = DateTime.Parse(txt_fecha_alta.Text);
 
-            Cliente elCliente = new Model.CompraReservaPasaje.Cliente(dni, var_nombre_apellido, direccion, telefono, mail, fecha_alta);
+            Cliente elCliente = new Cliente(dni, var_nombre_apellido, direccion, telefono, mail, fecha_alta);
 
 
 
 
-            Pago form = new Pago(elCliente, cabinasId, crucero);
+            Pago form = new Pago(elCliente, cabinas, crucero);
             form.Show();
         }
 
@@ -138,7 +138,7 @@ namespace FrbaCrucero.CompraReservaPasaje
 
 
 
-            Reserva form2 = new Reserva(loCliente, cabinasId, crucero);
+            Reserva form2 = new Reserva(loCliente, cabinas, crucero);
             form2.Show();
         }
 
