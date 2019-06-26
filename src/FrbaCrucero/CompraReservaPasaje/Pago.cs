@@ -42,5 +42,15 @@ namespace FrbaCrucero.CompraReservaPasaje
         {
 
         }
+
+        private void botonBuscarReserva_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

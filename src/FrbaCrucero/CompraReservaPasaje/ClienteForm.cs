@@ -105,7 +105,21 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Pago form = new Pago();
+
+
+            int dni = int.Parse(txt_dni.Text);
+            String var_nombre_apellido = txt_nombre_apellido.Text;
+            String direccion = txt_direccion.Text;
+            int telefono = int.Parse(txt_telefono.Text);
+            String mail = txt_mail.Text;
+            DateTime fecha_alta = DateTime.Parse(txt_fecha_alta.Text);
+
+            Cliente elCliente = new Model.CompraReservaPasaje.Cliente(dni, var_nombre_apellido, direccion, telefono, mail, fecha_alta);
+
+
+
+
+            Pago form = new Pago(elCliente, cabinasId, crucero);
             form.Show();
         }
 
@@ -118,11 +132,11 @@ namespace FrbaCrucero.CompraReservaPasaje
             String mail = txt_mail.Text;
             DateTime fecha_alta = DateTime.Parse(txt_fecha_alta.Text);
 
-            Cliente unCliente = new Model.CompraReservaPasaje.Cliente(dni,var_nombre_apellido,direccion,telefono,mail,fecha_alta);
+            Cliente loCliente = new Model.CompraReservaPasaje.Cliente(dni,var_nombre_apellido,direccion,telefono,mail,fecha_alta);
 
-            
 
-            Reserva form2 = new Reserva();
+
+            Reserva form2 = new Reserva(loCliente, cabinasId, crucero);
             form2.Show();
         }
 

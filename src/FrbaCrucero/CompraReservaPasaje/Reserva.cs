@@ -25,6 +25,16 @@ namespace FrbaCrucero.CompraReservaPasaje
             this.cabinasId = cabinasId;
             this.crucero = crucero;
             InitializeComponent();
+
+            textBox1.Text = cliente.dni.ToString();
+            textBox2.Text = cliente.direccion;
+            textBox3.Text = cliente.telefono.ToString();
+            textBox4.Text = cliente.nombreApellido;
+            textBox5.Text = cliente.mail;
+            textBox6.Text = cliente.fechaNacimiento.ToString();
+            textBox.Text = crucero.ToString();
+
+
         }
 
         private void btn_atras_Click(object sender, EventArgs e)
