@@ -1,4 +1,5 @@
-﻿using FrbaCrucero.Model.Viajes;
+using FrbaCrucero.Model.Viajes;
+﻿using FrbaCrucero.Model.CompraReservaPasaje;
 using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Windows.Forms;
 
 namespace FrbaCrucero.CompraReservaPasaje
 {
+
     public partial class Cliente : Form
     {   private  DataTable cabinas;
         Viaje crucero;
@@ -105,19 +107,49 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Pago form = new Pago();
+
+
+            int dni = int.Parse(txt_dni.Text);
+            String var_nombre_apellido = txt_nombre_apellido.Text;
+            String direccion = txt_direccion.Text;
+            int telefono = int.Parse(txt_telefono.Text);
+            String mail = txt_mail.Text;
+            DateTime fecha_alta = DateTime.Parse(txt_fecha_alta.Text);
+
+            Cliente elCliente = new Model.CompraReservaPasaje.Cliente(dni, var_nombre_apellido, direccion, telefono, mail, fecha_alta);
+
+
+
+
+            Pago form = new Pago(elCliente, cabinasId, crucero);
             form.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Reserva form2 = new Reserva();
+            int dni =int.Parse(txt_dni.Text);
+            String var_nombre_apellido = txt_nombre_apellido.Text;
+            String direccion = txt_direccion.Text;
+            int telefono = int.Parse(txt_telefono.Text);
+            String mail = txt_mail.Text;
+            DateTime fecha_alta = DateTime.Parse(txt_fecha_alta.Text);
+
+            Cliente loCliente = new Model.CompraReservaPasaje.Cliente(dni,var_nombre_apellido,direccion,telefono,mail,fecha_alta);
+
+
+
+            Reserva form2 = new Reserva(loCliente, cabinasId, crucero);
             form2.Show();
         }
 
         private void btn_atras_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ClienteForm_Load(object sender, EventArgs e)
+        {
+
         }
 
       ///  this.textBox1.AutoCompleteSource = AutoCompleteSource.CustomSource; 

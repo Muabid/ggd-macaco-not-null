@@ -28,56 +28,133 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.btn_atras = new System.Windows.Forms.Button();
-            this.botonBuscarReserva = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pagoReservaTable = new System.Windows.Forms.DataGridView();
-            this.codigoReservaBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pagoReservaTable)).BeginInit();
             this.SuspendLayout();
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.label2.Location = new System.Drawing.Point(125, 163);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(268, 22);
+            this.label2.TabIndex = 54;
+            this.label2.Text = "Listas de cabinas seleccionadas";
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(561, 54);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
+            this.textBox9.Size = new System.Drawing.Size(100, 20);
+            this.textBox9.TabIndex = 53;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(396, 91);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.ReadOnly = true;
+            this.textBox8.Size = new System.Drawing.Size(100, 20);
+            this.textBox8.TabIndex = 52;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(396, 54);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.ReadOnly = true;
+            this.textBox7.Size = new System.Drawing.Size(100, 20);
+            this.textBox7.TabIndex = 51;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(186, 117);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.ReadOnly = true;
+            this.textBox6.Size = new System.Drawing.Size(100, 20);
+            this.textBox6.TabIndex = 50;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(186, 91);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(100, 20);
+            this.textBox5.TabIndex = 49;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(186, 54);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 48;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(45, 117);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 47;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(45, 91);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 46;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(45, 54);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 45;
+            // 
             // btn_atras
             // 
             this.btn_atras.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_atras.Location = new System.Drawing.Point(131, 385);
-            this.btn_atras.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_atras.Location = new System.Drawing.Point(627, 297);
+            this.btn_atras.Margin = new System.Windows.Forms.Padding(2);
             this.btn_atras.Name = "btn_atras";
-            this.btn_atras.Size = new System.Drawing.Size(97, 31);
-            this.btn_atras.TabIndex = 36;
+            this.btn_atras.Size = new System.Drawing.Size(73, 25);
+            this.btn_atras.TabIndex = 44;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
-            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
-            // 
-            // botonBuscarReserva
-            // 
-            this.botonBuscarReserva.Location = new System.Drawing.Point(741, 80);
-            this.botonBuscarReserva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.botonBuscarReserva.Name = "botonBuscarReserva";
-            this.botonBuscarReserva.Size = new System.Drawing.Size(100, 28);
-            this.botonBuscarReserva.TabIndex = 35;
-            this.botonBuscarReserva.Text = "Buscar";
-            this.botonBuscarReserva.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(555, 389);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Location = new System.Drawing.Point(625, 346);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 28);
-            this.button2.TabIndex = 34;
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 43;
             this.button2.Text = "Limpiar";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(741, 389);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(625, 375);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 28);
-            this.button1.TabIndex = 33;
-            this.button1.Text = "Reserva";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 42;
+            this.button1.Text = "Reservar";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // pagoReservaTable
@@ -85,47 +162,45 @@
             this.pagoReservaTable.AllowUserToAddRows = false;
             this.pagoReservaTable.AllowUserToDeleteRows = false;
             this.pagoReservaTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.pagoReservaTable.Location = new System.Drawing.Point(131, 135);
-            this.pagoReservaTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pagoReservaTable.Location = new System.Drawing.Point(22, 199);
             this.pagoReservaTable.Name = "pagoReservaTable";
             this.pagoReservaTable.ReadOnly = true;
-            this.pagoReservaTable.Size = new System.Drawing.Size(711, 245);
-            this.pagoReservaTable.TabIndex = 32;
-            // 
-            // codigoReservaBox
-            // 
-            this.codigoReservaBox.Location = new System.Drawing.Point(503, 82);
-            this.codigoReservaBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.codigoReservaBox.Name = "codigoReservaBox";
-            this.codigoReservaBox.Size = new System.Drawing.Size(213, 22);
-            this.codigoReservaBox.TabIndex = 31;
+            this.pagoReservaTable.Size = new System.Drawing.Size(533, 199);
+            this.pagoReservaTable.TabIndex = 41;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.label1.Location = new System.Drawing.Point(123, 78);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(333, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(252, 29);
-            this.label1.TabIndex = 30;
-            this.label1.Text = "Detalles de la reserva:";
+            this.label1.Size = new System.Drawing.Size(183, 22);
+            this.label1.TabIndex = 40;
+            this.label1.Text = "Detalles de la compra";
             // 
             // Reserva
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(964, 496);
+            this.ClientSize = new System.Drawing.Size(723, 403);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBox9);
+            this.Controls.Add(this.textBox8);
+            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btn_atras);
-            this.Controls.Add(this.botonBuscarReserva);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pagoReservaTable);
-            this.Controls.Add(this.codigoReservaBox);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Reserva";
             this.Text = "Form3";
+            this.Load += new System.EventHandler(this.Reserva_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pagoReservaTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -134,12 +209,21 @@
 
         #endregion
 
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btn_atras;
-        private System.Windows.Forms.Button botonBuscarReserva;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView pagoReservaTable;
-        private System.Windows.Forms.TextBox codigoReservaBox;
         private System.Windows.Forms.Label label1;
+
     }
 }
