@@ -1,4 +1,5 @@
-﻿using FrbaCrucero.Utils;
+﻿using FrbaCrucero.Model.Viajes;
+using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,12 +14,12 @@ using System.Windows.Forms;
 namespace FrbaCrucero.CompraReservaPasaje
 {
     public partial class Cliente : Form
-    {   private  List<int> cabinasId;
-        int crucero;
-        public Cliente(List<int> cabinasId, int crucero)
+    {   private  DataTable cabinas;
+        Viaje crucero;
+        public Cliente(DataTable cabinasId, Viaje crucero)
         {
             InitializeComponent();
-            this.cabinasId = cabinasId;
+            this.cabinas = cabinasId;
             this.crucero = crucero;
         }
 
