@@ -12,8 +12,18 @@ namespace FrbaCrucero.CompraReservaPasaje
 {
     public partial class MediosDeLosPagos : Form
     {
-        public MediosDeLosPagos()
+        private Model.CompraReservaPasaje.Cliente cliente;
+        private List<int> cabinasId;
+        private int crucero;
+
+
+        public MediosDeLosPagos(Model.CompraReservaPasaje.Cliente cliente, List<int> cabinasId, int crucero)
         {
+
+            this.cliente = cliente;
+            this.cabinasId = cabinasId;
+            this.crucero = crucero;
+
             InitializeComponent();
         }
 

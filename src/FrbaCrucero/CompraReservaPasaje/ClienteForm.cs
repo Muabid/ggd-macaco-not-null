@@ -1,4 +1,5 @@
-﻿using FrbaCrucero.Utils;
+﻿using FrbaCrucero.Model.CompraReservaPasaje;
+using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,10 +13,10 @@ using System.Windows.Forms;
 
 namespace FrbaCrucero.CompraReservaPasaje
 {
-    public partial class Cliente : Form
+    public partial class ClienteForm : Form
     {   private  List<int> cabinasId;
         int crucero;
-        public Cliente(List<int> cabinasId, int crucero)
+        public ClienteForm(List<int> cabinasId, int crucero)
         {
             InitializeComponent();
             this.cabinasId = cabinasId;
@@ -110,6 +111,17 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int dni =int.Parse(txt_dni.Text);
+            String var_nombre_apellido = txt_nombre_apellido.Text;
+            String direccion = txt_direccion.Text;
+            int telefono = int.Parse(txt_telefono.Text);
+            String mail = txt_mail.Text;
+            DateTime fecha_alta = DateTime.Parse(txt_fecha_alta.Text);
+
+            Cliente unCliente = new Model.CompraReservaPasaje.Cliente(dni,var_nombre_apellido,direccion,telefono,mail,fecha_alta);
+
+            
+
             Reserva form2 = new Reserva();
             form2.Show();
         }
@@ -117,6 +129,11 @@ namespace FrbaCrucero.CompraReservaPasaje
         private void btn_atras_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ClienteForm_Load(object sender, EventArgs e)
+        {
+
         }
 
       ///  this.textBox1.AutoCompleteSource = AutoCompleteSource.CustomSource; 
