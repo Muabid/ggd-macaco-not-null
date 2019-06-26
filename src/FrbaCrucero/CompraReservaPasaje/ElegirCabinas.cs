@@ -1,4 +1,5 @@
 ﻿using FrbaCrucero.Model.TipoServicio;
+using FrbaCrucero.Model.Viajes;
 using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace FrbaCrucero.CompraReservaPasaje
     public partial class ElegirCabinas : Form
     {
         private TipoServicioDAO tipoServicioDao = new TipoServicioDAO();
-        int viaje;
-        public ElegirCabinas()
+        Viaje viaje;
+        public ElegirCabinas(Viaje viaje)
         {
             InitializeComponent();
             var tiposServicio = tipoServicioDao.getTiposServicios();
@@ -25,20 +26,13 @@ namespace FrbaCrucero.CompraReservaPasaje
             {
                 cbo_tipo_servicio.Items.Add(tipoServicio);                
             }
+            this.viaje = viaje;
         }
 
         private void label7_Click(object sender, EventArgs e)
         {
 
         }
-
-        public void ShowDialog(Form form, int viaje)
-        {
-            this.viaje = viaje;
-            this.ShowDialog(form);
-        }
-
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -50,7 +44,7 @@ namespace FrbaCrucero.CompraReservaPasaje
                 command.Parameters.Add(new SqlParameter("@viajeId", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@piso", SqlDbType.Decimal));
                 command.Parameters.Add(new SqlParameter("@tipo_servicio", SqlDbType.NVarChar));
-                command.Parameters["@viajeId"].Value = viaje;
+                command.Parameters["@viajeId"].Value = viaje.id;
                 command.Parameters["@piso"].Value = Database.orDbNull(txt_piso.Text);
                command.Parameters["@tipo_servicio"].Value = Database.orDbNull(cbo_tipo_servicio.Text);
                 try
@@ -107,10 +101,8 @@ namespace FrbaCrucero.CompraReservaPasaje
             
             
             } 
-            
 
-
-            Cliente form = new Cliente(cabinasId,crucero);
+            Cliente form = new Cliente(cabinasId,viaje.crucero_id);
             form.Show();
         }
 

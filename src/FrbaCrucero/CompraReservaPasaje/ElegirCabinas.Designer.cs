@@ -31,11 +31,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridViewCabinasDisponibles = new System.Windows.Forms.DataGridView();
-            this.cabi_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cabi_nro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cabi_piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.servicio1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.agregar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.txt_piso = new System.Windows.Forms.TextBox();
             this.cbo_tipo_servicio = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -49,7 +44,11 @@
             this.eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cabi_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cabi_nro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cabi_piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.servicio1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.agregar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCabinasDisponibles)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -93,8 +92,7 @@
             this.cabi_nro,
             this.cabi_piso,
             this.servicio1,
-            this.agregar,
-            this.check});
+            this.agregar});
             this.dataGridViewCabinasDisponibles.Location = new System.Drawing.Point(-9, 76);
             this.dataGridViewCabinasDisponibles.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewCabinasDisponibles.Name = "dataGridViewCabinasDisponibles";
@@ -103,49 +101,6 @@
             this.dataGridViewCabinasDisponibles.Size = new System.Drawing.Size(414, 303);
             this.dataGridViewCabinasDisponibles.TabIndex = 14;
             this.dataGridViewCabinasDisponibles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCabinasDisponibles_CellContentClick);
-            // 
-            // cabi_id
-            // 
-            this.cabi_id.DataPropertyName = "cabi_id";
-            this.cabi_id.HeaderText = "id";
-            this.cabi_id.Name = "cabi_id";
-            this.cabi_id.ReadOnly = true;
-            this.cabi_id.Visible = false;
-            // 
-            // cabi_nro
-            // 
-            this.cabi_nro.DataPropertyName = "cabi_nro";
-            this.cabi_nro.HeaderText = "Numero";
-            this.cabi_nro.Name = "cabi_nro";
-            this.cabi_nro.ReadOnly = true;
-            this.cabi_nro.Width = 50;
-            // 
-            // cabi_piso
-            // 
-            this.cabi_piso.DataPropertyName = "cabi_piso";
-            this.cabi_piso.HeaderText = "Piso";
-            this.cabi_piso.Name = "cabi_piso";
-            this.cabi_piso.ReadOnly = true;
-            this.cabi_piso.Width = 50;
-            // 
-            // servicio1
-            // 
-            this.servicio1.DataPropertyName = "tipo_servicio_descripcion";
-            this.servicio1.HeaderText = "Tipo Servicio";
-            this.servicio1.Name = "servicio1";
-            this.servicio1.ReadOnly = true;
-            this.servicio1.Width = 200;
-            // 
-            // agregar
-            // 
-            this.agregar.DataPropertyName = "agregar";
-            this.agregar.HeaderText = "Agregar";
-            this.agregar.Name = "agregar";
-            this.agregar.ReadOnly = true;
-            this.agregar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.agregar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.agregar.Text = "Agregar";
-            this.agregar.Width = 50;
             // 
             // txt_piso
             // 
@@ -278,11 +233,48 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // check
+            // cabi_id
             // 
-            this.check.HeaderText = "";
-            this.check.Name = "check";
-            this.check.ReadOnly = true;
+            this.cabi_id.DataPropertyName = "cabi_id";
+            this.cabi_id.HeaderText = "id";
+            this.cabi_id.Name = "cabi_id";
+            this.cabi_id.ReadOnly = true;
+            this.cabi_id.Visible = false;
+            // 
+            // cabi_nro
+            // 
+            this.cabi_nro.DataPropertyName = "cabi_nro";
+            this.cabi_nro.HeaderText = "Numero";
+            this.cabi_nro.Name = "cabi_nro";
+            this.cabi_nro.ReadOnly = true;
+            this.cabi_nro.Width = 50;
+            // 
+            // cabi_piso
+            // 
+            this.cabi_piso.DataPropertyName = "cabi_piso";
+            this.cabi_piso.HeaderText = "Piso";
+            this.cabi_piso.Name = "cabi_piso";
+            this.cabi_piso.ReadOnly = true;
+            this.cabi_piso.Width = 50;
+            // 
+            // servicio1
+            // 
+            this.servicio1.DataPropertyName = "tipo_servicio_descripcion";
+            this.servicio1.HeaderText = "Tipo Servicio";
+            this.servicio1.Name = "servicio1";
+            this.servicio1.ReadOnly = true;
+            this.servicio1.Width = 200;
+            // 
+            // agregar
+            // 
+            this.agregar.DataPropertyName = "agregar";
+            this.agregar.HeaderText = "Agregar";
+            this.agregar.Name = "agregar";
+            this.agregar.ReadOnly = true;
+            this.agregar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.agregar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.agregar.Text = "Agregar";
+            this.agregar.Width = 50;
             // 
             // ElegirCabinas
             // 
@@ -321,13 +313,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn piso;
         private System.Windows.Forms.DataGridViewButtonColumn eliminar;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DataGridViewTextBoxColumn cabi_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cabi_nro;
         private System.Windows.Forms.DataGridViewTextBoxColumn cabi_piso;
         private System.Windows.Forms.DataGridViewTextBoxColumn servicio1;
         private System.Windows.Forms.DataGridViewButtonColumn agregar;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn check;
     }
 }

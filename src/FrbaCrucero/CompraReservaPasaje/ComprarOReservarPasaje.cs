@@ -1,5 +1,6 @@
 ﻿using FrbaCrucero.AbmRecorrido;
 using FrbaCrucero.Model.Recorridos;
+using FrbaCrucero.Model.Viajes;
 using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
@@ -113,8 +114,13 @@ namespace FrbaCrucero.CompraReservaPasaje
         {
             if (e.ColumnIndex == dataGridViewViajes.Columns["ButtonSelection"].Index)
             {
-                var id = int.Parse(dataGridViewViajes["viaj_id", e.RowIndex].Value.ToString());
-                new ElegirCabinas().ShowDialog(this, id);
+                var idViaje = int.Parse(dataGridViewViajes["viaj_id", e.RowIndex].Value.ToString());
+                var fechaSalida = DateTime.Parse(dataGridViewViajes["viaj_fecha_salida", e.RowIndex].Value.ToString());
+                var fechaLlegadaEstimada = DateTime.Parse(dataGridViewViajes["viaj_fecha_llegada_estimada", e.RowIndex].Value.ToString());
+                var fechaLlegada = DateTime.Parse(dataGridViewViajes["viaj_fecha_llegada", e.RowIndex].Value.ToString());
+                var crucero = int.Parse(dataGridViewViajes["viaj_recorrido_id", e.RowIndex].Value.ToString());
+                var viaje = new Viaje(idViaje, fechaSalida, fechaLlegada, fechaLlegadaEstimada, crucero); 
+                new ElegirCabinas(viaje).ShowDialog(this);
             }
             else if (e.ColumnIndex == dataGridViewViajes.Columns["verRecorridoButton"].Index)
             {

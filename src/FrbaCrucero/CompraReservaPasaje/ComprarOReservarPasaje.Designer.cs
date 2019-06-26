@@ -65,11 +65,11 @@
             this.groupBox1.Controls.Add(this.btn_seleccionar_salida);
             this.groupBox1.Controls.Add(this.salidaText);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Location = new System.Drawing.Point(9, 10);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(1021, 261);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(766, 212);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Compra / Reserva Pasaje";
@@ -81,29 +81,26 @@
             this.destinoComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.destinoComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.destinoComboBox.FormattingEnabled = true;
-            this.destinoComboBox.Location = new System.Drawing.Point(159, 110);
-            this.destinoComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.destinoComboBox.Location = new System.Drawing.Point(119, 89);
             this.destinoComboBox.Name = "destinoComboBox";
-            this.destinoComboBox.Size = new System.Drawing.Size(160, 24);
+            this.destinoComboBox.Size = new System.Drawing.Size(121, 21);
             this.destinoComboBox.TabIndex = 22;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 112);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(14, 91);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 17);
+            this.label2.Size = new System.Drawing.Size(77, 13);
             this.label2.TabIndex = 21;
             this.label2.Text = "Ciudad destino";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 57);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(14, 46);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 17);
+            this.label3.Size = new System.Drawing.Size(72, 13);
             this.label3.TabIndex = 20;
             this.label3.Text = "Ciudad origen";
             // 
@@ -113,18 +110,16 @@
             this.origenComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.origenComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.origenComboBox.FormattingEnabled = true;
-            this.origenComboBox.Location = new System.Drawing.Point(159, 52);
-            this.origenComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.origenComboBox.Location = new System.Drawing.Point(119, 42);
             this.origenComboBox.Name = "origenComboBox";
-            this.origenComboBox.Size = new System.Drawing.Size(160, 24);
+            this.origenComboBox.Size = new System.Drawing.Size(121, 21);
             this.origenComboBox.TabIndex = 19;
             this.origenComboBox.SelectedIndexChanged += new System.EventHandler(this.origenComboBox_SelectedIndexChanged);
             // 
             // monthCalendar
             // 
             this.monthCalendar.FirstDayOfWeek = System.Windows.Forms.Day.Sunday;
-            this.monthCalendar.Location = new System.Drawing.Point(549, 30);
-            this.monthCalendar.Margin = new System.Windows.Forms.Padding(12, 11, 12, 11);
+            this.monthCalendar.Location = new System.Drawing.Point(412, 24);
             this.monthCalendar.MaxSelectionCount = 1;
             this.monthCalendar.MinDate = new System.DateTime(1900, 6, 23, 0, 0, 0, 0);
             this.monthCalendar.Name = "monthCalendar";
@@ -137,10 +132,9 @@
             // 
             // btn_seleccionar_salida
             // 
-            this.btn_seleccionar_salida.Location = new System.Drawing.Point(327, 165);
-            this.btn_seleccionar_salida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_seleccionar_salida.Location = new System.Drawing.Point(245, 134);
             this.btn_seleccionar_salida.Name = "btn_seleccionar_salida";
-            this.btn_seleccionar_salida.Size = new System.Drawing.Size(100, 28);
+            this.btn_seleccionar_salida.Size = new System.Drawing.Size(75, 23);
             this.btn_seleccionar_salida.TabIndex = 17;
             this.btn_seleccionar_salida.Text = "Seleccionar";
             this.btn_seleccionar_salida.UseVisualStyleBackColor = true;
@@ -148,30 +142,28 @@
             // 
             // salidaText
             // 
-            this.salidaText.Location = new System.Drawing.Point(159, 165);
-            this.salidaText.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.salidaText.Location = new System.Drawing.Point(119, 134);
             this.salidaText.Name = "salidaText";
             this.salidaText.ReadOnly = true;
-            this.salidaText.Size = new System.Drawing.Size(160, 22);
+            this.salidaText.Size = new System.Drawing.Size(121, 20);
             this.salidaText.TabIndex = 16;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 165);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(14, 134);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 17);
+            this.label1.Size = new System.Drawing.Size(82, 13);
             this.label1.TabIndex = 15;
             this.label1.Text = "Fecha de salida";
             // 
             // btn_cancelar
             // 
             this.btn_cancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_cancelar.Location = new System.Drawing.Point(793, 748);
-            this.btn_cancelar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_cancelar.Location = new System.Drawing.Point(595, 608);
+            this.btn_cancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_cancelar.Name = "btn_cancelar";
-            this.btn_cancelar.Size = new System.Drawing.Size(197, 31);
+            this.btn_cancelar.Size = new System.Drawing.Size(148, 25);
             this.btn_cancelar.TabIndex = 26;
             this.btn_cancelar.Text = "Cancelar Operación";
             this.btn_cancelar.UseVisualStyleBackColor = true;
@@ -179,10 +171,10 @@
             // 
             // btn_buscar
             // 
-            this.btn_buscar.Location = new System.Drawing.Point(477, 278);
-            this.btn_buscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_buscar.Location = new System.Drawing.Point(358, 226);
+            this.btn_buscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_buscar.Name = "btn_buscar";
-            this.btn_buscar.Size = new System.Drawing.Size(97, 30);
+            this.btn_buscar.Size = new System.Drawing.Size(73, 24);
             this.btn_buscar.TabIndex = 24;
             this.btn_buscar.Text = "Buscar";
             this.btn_buscar.UseVisualStyleBackColor = true;
@@ -190,10 +182,10 @@
             // 
             // btn_limpiar
             // 
-            this.btn_limpiar.Location = new System.Drawing.Point(12, 278);
-            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_limpiar.Location = new System.Drawing.Point(9, 226);
+            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_limpiar.Name = "btn_limpiar";
-            this.btn_limpiar.Size = new System.Drawing.Size(97, 30);
+            this.btn_limpiar.Size = new System.Drawing.Size(73, 24);
             this.btn_limpiar.TabIndex = 23;
             this.btn_limpiar.Text = "Limpiar";
             this.btn_limpiar.UseVisualStyleBackColor = true;
@@ -214,10 +206,9 @@
             this.recorridoColumn,
             this.verRecorridoButton,
             this.ButtonSelection});
-            this.dataGridViewViajes.Location = new System.Drawing.Point(35, 337);
-            this.dataGridViewViajes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewViajes.Location = new System.Drawing.Point(26, 274);
             this.dataGridViewViajes.Name = "dataGridViewViajes";
-            this.dataGridViewViajes.Size = new System.Drawing.Size(999, 350);
+            this.dataGridViewViajes.Size = new System.Drawing.Size(749, 284);
             this.dataGridViewViajes.TabIndex = 32;
             this.dataGridViewViajes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewViajes_CellContentClick);
             // 
@@ -233,7 +224,7 @@
             // 
             this.viaj_fecha_salida.DataPropertyName = "viaj_fecha_salida";
             this.viaj_fecha_salida.FillWeight = 200F;
-            this.viaj_fecha_salida.HeaderText = "Viaje_Fecha_Salida";
+            this.viaj_fecha_salida.HeaderText = "Viaje Fecha Salida";
             this.viaj_fecha_salida.Name = "viaj_fecha_salida";
             this.viaj_fecha_salida.Width = 126;
             // 
@@ -258,9 +249,10 @@
             // viaj_crucero_id
             // 
             this.viaj_crucero_id.DataPropertyName = "viaj_crucero_id";
-            this.viaj_crucero_id.HeaderText = "Viaje_crucero_id";
+            this.viaj_crucero_id.HeaderText = "Viaje crucero id";
             this.viaj_crucero_id.Name = "viaj_crucero_id";
             this.viaj_crucero_id.ReadOnly = true;
+            this.viaj_crucero_id.Visible = false;
             // 
             // cruceroColumn
             // 
@@ -274,6 +266,7 @@
             this.viaj_recorrido_id.HeaderText = "Viaje_recorrido_id";
             this.viaj_recorrido_id.Name = "viaj_recorrido_id";
             this.viaj_recorrido_id.ReadOnly = true;
+            this.viaj_recorrido_id.Visible = false;
             // 
             // recorridoColumn
             // 
@@ -294,16 +287,16 @@
             // 
             // ComprarOReservarPasaje
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1132, 484);
+            this.ClientSize = new System.Drawing.Size(849, 393);
             this.Controls.Add(this.dataGridViewViajes);
             this.Controls.Add(this.btn_buscar);
             this.Controls.Add(this.btn_cancelar);
             this.Controls.Add(this.btn_limpiar);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ComprarOReservarPasaje";
             this.Text = "ComprarPasaje";
             this.Load += new System.EventHandler(this.ComprarOReservarPasaje_Load);

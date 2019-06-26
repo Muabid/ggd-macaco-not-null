@@ -208,6 +208,7 @@
       <DependentUpon>GenerarViaje.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Tipo Servicio\TipoServicio.cs" />
+    <Compile Include="Model\Viajes\Viaje.cs" />
     <Compile Include="PagoReserva\MediosDePago.cs">
       <SubType>Form</SubType>
     </Compile>
