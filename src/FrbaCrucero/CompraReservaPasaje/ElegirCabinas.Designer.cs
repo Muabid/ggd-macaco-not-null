@@ -49,6 +49,7 @@
             this.eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCabinasDisponibles)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -92,7 +93,8 @@
             this.cabi_nro,
             this.cabi_piso,
             this.servicio1,
-            this.agregar});
+            this.agregar,
+            this.check});
             this.dataGridViewCabinasDisponibles.Location = new System.Drawing.Point(-9, 76);
             this.dataGridViewCabinasDisponibles.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewCabinasDisponibles.Name = "dataGridViewCabinasDisponibles";
@@ -275,6 +277,12 @@
             this.button5.Text = "Atras";
             this.button5.UseVisualStyleBackColor = true;
             // 
+            // check
+            // 
+            this.check.HeaderText = "";
+            this.check.Name = "check";
+            this.check.ReadOnly = true;
+            // 
             // ElegirCabinas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,5 +329,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn check;
     }
 }

@@ -16,7 +16,7 @@ namespace FrbaCrucero.CompraReservaPasaje
     public partial class ElegirCabinas : Form
     {
         private TipoServicioDAO tipoServicioDao = new TipoServicioDAO();
-        int crucero;
+        int viaje;
         public ElegirCabinas()
         {
             InitializeComponent();
@@ -32,9 +32,9 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         }
 
-        public void ShowDialog(Form form, int crucero)
+        public void ShowDialog(Form form, int viaje)
         {
-            this.crucero = crucero;
+            this.viaje = viaje;
             this.ShowDialog(form);
         }
 
@@ -47,10 +47,10 @@ namespace FrbaCrucero.CompraReservaPasaje
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("@cruceroID", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@viajeId", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@piso", SqlDbType.Decimal));
                 command.Parameters.Add(new SqlParameter("@tipo_servicio", SqlDbType.NVarChar));
-                command.Parameters["@cruceroID"].Value = crucero;
+                command.Parameters["@viajeId"].Value = viaje;
                 command.Parameters["@piso"].Value = Database.orDbNull(txt_piso.Text);
                command.Parameters["@tipo_servicio"].Value = Database.orDbNull(cbo_tipo_servicio.Text);
                 try

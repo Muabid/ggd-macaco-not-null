@@ -1544,7 +1544,7 @@ END
 
 GO
 
-create procedure [MACACO_NOT_NULL].ObtenerCabinasDelCrucero @cruceroID int ,@piso [decimal] (18,0),@tipo_servicio [nvarchar](255) 
+create procedure [MACACO_NOT_NULL].ObtenerCabinasDelCrucero @viajeId int ,@piso [decimal] (18,0),@tipo_servicio [nvarchar](255) 
 As
 BEGIN    
     SELECT 
@@ -1552,14 +1552,21 @@ BEGIN
 	cabi_nro ,
  	cabi_piso ,     
 	tipo_servicio_descripcion 
-    FROM [MACACO_NOT_NULL].[CABINA]
+    FROM [MACACO_NOT_NULL].[CABINA] c
+	JOIN [MACACO_NOT_NULL].CRUCERO cr
+	ON c.cabi_crucero_id = cr.cruc_id
+	JOIN [MACACO_NOT_NULL].VIAJE v
+	ON v.viaj_crucero_id = cr.cruc_id
 	INNER JOIN [MACACO_NOT_NULL].TIPO_SERVICIO  ON tipo_servicio_id= cabi_tipo_servicio_id 
 	WHERE (@piso is null or cabi_piso = @piso) and (@tipo_servicio is null or tipo_servicio_descripcion = @tipo_servicio)
-		and @cruceroID = cabi_crucero_id
+		and @viajeId = v.viaj_id
+		and NOT EXISTS (SELECT 1 FROM [MACACO_NOT_NULL].RESERVA_CABINA rc 
+		JOIN [MACACO_NOT_NULL].RESERVA r ON r.rese_id=rc.reserva_id  where cabina_id = cabi_id and r.rese_viaje_id=@viajeId 
+		UNION SELECT 1 FROM [MACACO_NOT_NULL].PASAJE WHERE pasa_cab_id =cabi_id and pasa_viaje_id = @viajeId)
 		order by  cabi_piso, tipo_servicio_descripcion, cabi_nro
 END
-
 GO
+
 
 /*
 DROP TABLE [MACACO_NOT_NULL].[TRAMO]
