@@ -32,6 +32,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pagoReservaTable = new System.Windows.Forms.DataGridView();
+            this.cabi_nro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cabi_piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cabi_tipoServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -43,9 +46,10 @@
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cabi_nro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cabi_piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cabi_tipoServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pagoReservaTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,6 +73,7 @@
             this.button2.TabIndex = 27;
             this.button2.Text = "Limpiar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -94,6 +99,24 @@
             this.pagoReservaTable.ReadOnly = true;
             this.pagoReservaTable.Size = new System.Drawing.Size(533, 199);
             this.pagoReservaTable.TabIndex = 25;
+            // 
+            // cabi_nro
+            // 
+            this.cabi_nro.HeaderText = "Numero";
+            this.cabi_nro.Name = "cabi_nro";
+            this.cabi_nro.ReadOnly = true;
+            // 
+            // cabi_piso
+            // 
+            this.cabi_piso.HeaderText = "Piso";
+            this.cabi_piso.Name = "cabi_piso";
+            this.cabi_piso.ReadOnly = true;
+            // 
+            // cabi_tipoServicio
+            // 
+            this.cabi_tipoServicio.HeaderText = "Tipo de Servicio";
+            this.cabi_tipoServicio.Name = "cabi_tipoServicio";
+            this.cabi_tipoServicio.ReadOnly = true;
             // 
             // label1
             // 
@@ -132,7 +155,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(386, 96);
+            this.textBox4.Location = new System.Drawing.Point(386, 107);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(100, 20);
@@ -188,29 +211,55 @@
             this.label2.TabIndex = 39;
             this.label2.Text = "Listas de cabinas seleccionadas";
             // 
-            // cabi_nro
+            // label3
             // 
-            this.cabi_nro.HeaderText = "Numero";
-            this.cabi_nro.Name = "cabi_nro";
-            this.cabi_nro.ReadOnly = true;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.label3.Location = new System.Drawing.Point(76, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(172, 25);
+            this.label3.TabIndex = 56;
+            this.label3.Text = "Datos del cliente";
             // 
-            // cabi_piso
+            // label4
             // 
-            this.cabi_piso.HeaderText = "Piso";
-            this.cabi_piso.Name = "cabi_piso";
-            this.cabi_piso.ReadOnly = true;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label4.Location = new System.Drawing.Point(383, 39);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 17);
+            this.label4.TabIndex = 57;
+            this.label4.Text = "Fecha Inicio";
             // 
-            // cabi_tipoServicio
+            // label5
             // 
-            this.cabi_tipoServicio.HeaderText = "Tipo de Servicio";
-            this.cabi_tipoServicio.Name = "cabi_tipoServicio";
-            this.cabi_tipoServicio.ReadOnly = true;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label5.Location = new System.Drawing.Point(384, 87);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(102, 17);
+            this.label5.TabIndex = 58;
+            this.label5.Text = "Fecha Llegada";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label6.Location = new System.Drawing.Point(548, 39);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(96, 17);
+            this.label6.TabIndex = 59;
+            this.label6.Text = "ID del crucero";
             // 
             // Pago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(837, 426);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox9);
             this.Controls.Add(this.textBox8);
@@ -255,5 +304,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cabi_nro;
         private System.Windows.Forms.DataGridViewTextBoxColumn cabi_piso;
         private System.Windows.Forms.DataGridViewTextBoxColumn cabi_tipoServicio;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -112,9 +112,15 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-
-            int dni = int.Parse(txt_dni.Text);
+            int dni;
+            if (txt_dni.Text != "")
+            {
+                 dni = int.Parse(txt_dni.Text);
+            }
+            else
+            {
+                 dni = 0;
+            }
             String var_nombre_apellido = txt_nombre_apellido.Text;
             String direccion = txt_direccion.Text;
             int telefono = int.Parse(txt_telefono.Text);
@@ -144,6 +150,8 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void btn_atras_Click(object sender, EventArgs e)
         {
+            ElegirCabinas trom = new ElegirCabinas(this.viaje);
+            trom.Show();
             this.Close();
         }
 

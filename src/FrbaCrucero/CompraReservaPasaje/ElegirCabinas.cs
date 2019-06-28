@@ -48,6 +48,7 @@ namespace FrbaCrucero.CompraReservaPasaje
                 command.Parameters["@viajeId"].Value = viaje.id;
                 command.Parameters["@piso"].Value = Database.orDbNull(txt_piso.Text);
                 command.Parameters["@tipo_servicio"].Value = Database.orDbNull(cbo_tipo_servicio.Text);
+               
                 try
                 {
                     dataAdapter.Fill(dataTable);
@@ -67,14 +68,32 @@ namespace FrbaCrucero.CompraReservaPasaje
             {
                 return;
             }
-            if (e.ColumnIndex == dataGridViewCabinasDisponibles.Columns["agregar"].Index)
+            if (e.ColumnIndex == dataGridViewCabinasDisponibles.Columns["agregar"].Index  )
             {
                 object[] new_row = new object[4];
                 new_row[0] = dataGridViewCabinasDisponibles["servicio1", e.RowIndex].Value;
                 new_row[1] = dataGridViewCabinasDisponibles["cabi_id", e.RowIndex].Value;
                 new_row[2] = dataGridViewCabinasDisponibles["cabi_nro", e.RowIndex].Value;
                 new_row[3] = dataGridViewCabinasDisponibles["cabi_piso", e.RowIndex].Value;
-                dataGridViewCabinasReservadas.Rows.Add(new_row);
+                //dataGridViewCabinasReservadas.Rows.Add(new_row);
+
+
+                Boolean found = false;
+                foreach (DataGridViewRow row in dataGridViewCabinasReservadas.Rows)
+                {
+                    if (row.Cells[1].Value.ToString() == new_row[1].ToString())
+                    {
+                        
+                        found = true;
+                        MessageBox.Show("La cabina ya fue ingresada");
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    dataGridViewCabinasReservadas.Rows.Add(new_row); 
+                }
             }
         }
 
@@ -107,10 +126,13 @@ namespace FrbaCrucero.CompraReservaPasaje
            // DataTable data = (DataTable)(dataGridViewCabinasReservadas.DataSource);
             ClienteForm form = new ClienteForm(cabinasElegidas, viaje);
             form.Show();
+            this.Hide();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            CompraReservaPasaje.ComprarOReservarPasaje gorm = new ComprarOReservarPasaje();
+            gorm.Show();
             this.Close();
         }
     }

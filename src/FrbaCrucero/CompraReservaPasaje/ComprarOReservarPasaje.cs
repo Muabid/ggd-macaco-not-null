@@ -124,11 +124,13 @@ namespace FrbaCrucero.CompraReservaPasaje
                 var crucero = int.Parse(dataGridViewViajes["viaj_recorrido_id", e.RowIndex].Value.ToString());
                 var viaje = new Viaje(idViaje, fechaSalida, fechaLlegada, fechaLlegadaEstimada, crucero); 
                 new ElegirCabinas(viaje).ShowDialog(this);
+                this.Hide();
             }
             else if (e.ColumnIndex == dataGridViewViajes.Columns["verRecorridoButton"].Index)
             {
                 var codigo = Convert.ToDecimal(dataGridViewViajes["recorridoColumn",e.RowIndex].Value);
                 new RecorridoForm().Show(this, codigo);
+                
             }
 
         }
@@ -140,7 +142,7 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void monthCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
-            if (monthCalendar.SelectionStart >= DateTime.Today)
+            if (monthCalendar.SelectionStart <= DateTime.Today)
             {
                 salida = monthCalendar.SelectionStart;
                 salidaText.Text = salida.Value.ToShortDateString();
@@ -152,6 +154,11 @@ namespace FrbaCrucero.CompraReservaPasaje
         private void btn_cancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void salidaText_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

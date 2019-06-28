@@ -66,9 +66,9 @@
             this.groupBox1.Controls.Add(this.salidaText);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(9, 10);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(766, 212);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -147,6 +147,7 @@
             this.salidaText.ReadOnly = true;
             this.salidaText.Size = new System.Drawing.Size(121, 20);
             this.salidaText.TabIndex = 16;
+            this.salidaText.TextChanged += new System.EventHandler(this.salidaText_TextChanged);
             // 
             // label1
             // 
@@ -161,7 +162,7 @@
             // 
             this.btn_cancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_cancelar.Location = new System.Drawing.Point(595, 608);
-            this.btn_cancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_cancelar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_cancelar.Name = "btn_cancelar";
             this.btn_cancelar.Size = new System.Drawing.Size(148, 25);
             this.btn_cancelar.TabIndex = 26;
@@ -172,7 +173,7 @@
             // btn_buscar
             // 
             this.btn_buscar.Location = new System.Drawing.Point(358, 226);
-            this.btn_buscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_buscar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_buscar.Name = "btn_buscar";
             this.btn_buscar.Size = new System.Drawing.Size(73, 24);
             this.btn_buscar.TabIndex = 24;
@@ -183,7 +184,7 @@
             // btn_limpiar
             // 
             this.btn_limpiar.Location = new System.Drawing.Point(9, 226);
-            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_limpiar.Name = "btn_limpiar";
             this.btn_limpiar.Size = new System.Drawing.Size(73, 24);
             this.btn_limpiar.TabIndex = 23;
@@ -296,7 +297,7 @@
             this.Controls.Add(this.btn_cancelar);
             this.Controls.Add(this.btn_limpiar);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ComprarOReservarPasaje";
             this.Text = "ComprarPasaje";
             this.Load += new System.EventHandler(this.ComprarOReservarPasaje_Load);

@@ -58,6 +58,7 @@ namespace FrbaCrucero.CompraReservaPasaje
             textBox6.Text = cliente.fechaNacimiento.ToString();
             textBox7.Text = viaje.fecha_llegada_estimada.ToShortDateString();
             textBox8.Text = viaje.fecha_salida.ToShortDateString();
+            textBox9.Text = viaje.crucero_id.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -83,6 +84,24 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void label1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.pagoReservaTable.Rows.Clear();
+            this.pagoReservaTable.Refresh();
+            this.textBox1.Clear();
+            this.textBox2.Clear();
+            this.textBox3.Clear();
+            this.textBox4.Clear();
+            this.textBox5.Clear();
+            this.textBox6.Clear();
+            this.textBox7.Clear();
+            this.textBox8.Clear();
+            this.textBox9.Clear();
+
+
 
         }
     }
