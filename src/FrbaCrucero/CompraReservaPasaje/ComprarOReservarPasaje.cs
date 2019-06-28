@@ -90,7 +90,10 @@ namespace FrbaCrucero.CompraReservaPasaje
             this.origenComboBox.SelectedIndex = -1;
             salidaText.Text = String.Empty;
             salida = null;
-
+            monthCalendar.Visible = false;
+            DataTable dt = (DataTable)this.dataGridViewViajes.DataSource;
+            if (dt != null)
+                dt.Clear();
         }
 
         private void ComprarOReservarPasaje_Load(object sender, EventArgs e)
