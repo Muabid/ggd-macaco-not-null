@@ -43,6 +43,9 @@
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.cabi_nro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cabi_piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cabi_tipoServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pagoReservaTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,7 +53,7 @@
             // 
             this.btn_atras.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_atras.Location = new System.Drawing.Point(617, 302);
-            this.btn_atras.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_atras.Margin = new System.Windows.Forms.Padding(2);
             this.btn_atras.Name = "btn_atras";
             this.btn_atras.Size = new System.Drawing.Size(73, 25);
             this.btn_atras.TabIndex = 29;
@@ -82,6 +85,10 @@
             this.pagoReservaTable.AllowUserToAddRows = false;
             this.pagoReservaTable.AllowUserToDeleteRows = false;
             this.pagoReservaTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.pagoReservaTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cabi_nro,
+            this.cabi_piso,
+            this.cabi_tipoServicio});
             this.pagoReservaTable.Location = new System.Drawing.Point(12, 204);
             this.pagoReservaTable.Name = "pagoReservaTable";
             this.pagoReservaTable.ReadOnly = true;
@@ -181,6 +188,24 @@
             this.label2.TabIndex = 39;
             this.label2.Text = "Listas de cabinas seleccionadas";
             // 
+            // cabi_nro
+            // 
+            this.cabi_nro.HeaderText = "Numero";
+            this.cabi_nro.Name = "cabi_nro";
+            this.cabi_nro.ReadOnly = true;
+            // 
+            // cabi_piso
+            // 
+            this.cabi_piso.HeaderText = "Piso";
+            this.cabi_piso.Name = "cabi_piso";
+            this.cabi_piso.ReadOnly = true;
+            // 
+            // cabi_tipoServicio
+            // 
+            this.cabi_tipoServicio.HeaderText = "Tipo de Servicio";
+            this.cabi_tipoServicio.Name = "cabi_tipoServicio";
+            this.cabi_tipoServicio.ReadOnly = true;
+            // 
             // Pago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -227,5 +252,8 @@
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cabi_nro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cabi_piso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cabi_tipoServicio;
     }
 }

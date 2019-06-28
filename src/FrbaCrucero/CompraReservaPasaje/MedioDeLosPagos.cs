@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrbaCrucero.Model.Cruceros;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,28 +14,28 @@ namespace FrbaCrucero.CompraReservaPasaje
     public partial class MediosDeLosPagos : Form
     {
         private Model.CompraReservaPasaje.Cliente cliente;
-        private List<int> cabinasId;
+        private List<Cabina> cabinas;
         private int crucero;
-        private DataTable cabinas;
+      //  private DataTable cabinas;
 
 
-        public MediosDeLosPagos(Model.CompraReservaPasaje.Cliente cliente, List<int> cabinasId, int crucero)
+        public MediosDeLosPagos(Model.CompraReservaPasaje.Cliente cliente, List<Cabina> cabinasId, int crucero)
         {
 
             this.cliente = cliente;
-            this.cabinasId = cabinasId;
+            this.cabinas = cabinasId;
             this.crucero = crucero;
 
             InitializeComponent();
         }
 
-        public MediosDeLosPagos(Model.CompraReservaPasaje.Cliente cliente, DataTable cabinas, int crucero)
-        {
+       // public MediosDeLosPagos(Model.CompraReservaPasaje.Cliente cliente, DataTable cabinas, int crucero)
+     //   {
             // TODO: Complete member initialization
-            this.cliente = cliente;
-            this.cabinas = cabinas;
-            this.crucero = crucero;
-        }
+     //       this.cliente = cliente;
+     //       this.cabinas = cabinas;
+     //       this.crucero = crucero;
+    //    }
 
         private void botonPagar_Click(object sender, EventArgs e)
         {

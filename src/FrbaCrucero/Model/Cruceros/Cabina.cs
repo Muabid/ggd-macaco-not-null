@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace FrbaCrucero.Model.Cruceros
 {
-    class Cabina
+    public class Cabina
     {
         SqlConnection cn = new SqlConnection(
                 ConfigurationManager.ConnectionStrings["FRBACrucero"].ConnectionString
                 );
+       
 
         // ESTAS SON LAS PROPIEDADES DE LA CLASE
 
@@ -23,6 +24,8 @@ namespace FrbaCrucero.Model.Cruceros
         public decimal cabi_piso { get; set; }
 
         public int cabi_tipo_servicio { get; set; }
+
+        public String cabi_tipo_servicio_descr { get; set; }
 
         public int cabi_crucero { get; set; }
 
@@ -63,6 +66,14 @@ namespace FrbaCrucero.Model.Cruceros
         public Cabina(int _cabi_id)
         {
             this.cabi_id = _cabi_id;
+        }
+
+        public Cabina(int p1, string p2, decimal p3, decimal p4)
+        {     
+            this.cabi_id = p1;
+            this.cabi_tipo_servicio_descr = p2;
+            this.cabi_nro = p3;
+            this.cabi_piso = p4;
         }
     }
 }

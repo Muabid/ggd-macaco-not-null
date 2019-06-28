@@ -11,18 +11,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FrbaCrucero.Model.Cruceros;
 
 namespace FrbaCrucero.CompraReservaPasaje
 {
 
     public partial class ClienteForm : Form
-    {   public  DataTable cabinas;
-        public Viaje crucero;
-        public ClienteForm(DataTable cabinasId, Viaje crucero)
+    {
+        public int usua_id;
+        public List<Cabina> cabinas;
+        public Viaje viaje;
+
+        public ClienteForm(List<Cabina> cabinas, Viaje viaje)
         {
             InitializeComponent();
-            this.cabinas = cabinasId;
-            this.crucero = crucero;
+            this.cabinas = cabinas;
+            this.viaje = viaje;
         }
 
         private void txt_dni_LostFocus(object sender, System.EventArgs e)
@@ -63,11 +67,12 @@ namespace FrbaCrucero.CompraReservaPasaje
             if (!String.IsNullOrEmpty(txt_dni.Text))
             {
 
-                SqlCommand command = Database.createCommand(" select concat(usua_nombre ,' ' ,usua_apellido) as usua_nombre,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac from MACACO_NOT_NULL.USUARIO where usua_dni = '" + txt_dni.Text + "';");
+                SqlCommand command = Database.createCommand(" select usua_id, concat(usua_nombre ,' ' ,usua_apellido) as usua_nombre,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac from MACACO_NOT_NULL.USUARIO where usua_dni = '" + txt_dni.Text + "';");
                 DataTable data = Database.getData(command);
                 if (data.Rows.Count > 0)
                 {
                     var usuario = data.Rows[0];
+                    this.usua_id = int.Parse(usuario["usua_id"].ToString());
                     txt_nombre_apellido.Text = usuario["usua_nombre"].ToString();
                     txt_telefono.Text = usuario["usua_telefono"].ToString();
                     txt_mail.Text = usuario["usua_mail"].ToString();
@@ -116,12 +121,9 @@ namespace FrbaCrucero.CompraReservaPasaje
             String mail = txt_mail.Text;
             DateTime fecha_alta = DateTime.Parse(txt_fecha_alta.Text);
 
-            Cliente elCliente = new Cliente(dni, var_nombre_apellido, direccion, telefono, mail, fecha_alta);
+            Cliente elCliente = new Cliente(this.usua_id,dni, var_nombre_apellido, direccion, telefono, mail, fecha_alta);
 
-
-
-
-            Pago form = new Pago(elCliente, cabinas, crucero);
+            Pago form = new Pago(elCliente, cabinas, viaje);
             form.Show();
         }
 
@@ -134,11 +136,9 @@ namespace FrbaCrucero.CompraReservaPasaje
             String mail = txt_mail.Text;
             DateTime fecha_alta = DateTime.Parse(txt_fecha_alta.Text);
 
-            Cliente loCliente = new Model.CompraReservaPasaje.Cliente(dni,var_nombre_apellido,direccion,telefono,mail,fecha_alta);
+            Cliente loCliente = new Model.CompraReservaPasaje.Cliente(this.usua_id,dni,var_nombre_apellido,direccion,telefono,mail,fecha_alta);
 
-
-
-            Reserva form2 = new Reserva(loCliente, cabinas, crucero);
+            Reserva form2 = new Reserva(loCliente, cabinas, viaje);
             form2.Show();
         }
 

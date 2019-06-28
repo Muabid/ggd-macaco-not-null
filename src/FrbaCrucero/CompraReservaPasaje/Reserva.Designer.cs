@@ -40,8 +40,11 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btn_atras = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonReservar = new System.Windows.Forms.Button();
             this.pagoReservaTable = new System.Windows.Forms.DataGridView();
+            this.cabi_nro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cabi_piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cabi_tipoServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pagoReservaTable)).BeginInit();
             this.SuspendLayout();
@@ -138,6 +141,7 @@
             this.btn_atras.TabIndex = 44;
             this.btn_atras.Text = "Atrás";
             this.btn_atras.UseVisualStyleBackColor = true;
+            this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click_1);
             // 
             // button2
             // 
@@ -148,20 +152,25 @@
             this.button2.Text = "Limpiar";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonReservar
             // 
-            this.button1.Location = new System.Drawing.Point(625, 375);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 42;
-            this.button1.Text = "Reservar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonReservar.Location = new System.Drawing.Point(625, 375);
+            this.buttonReservar.Name = "buttonReservar";
+            this.buttonReservar.Size = new System.Drawing.Size(75, 23);
+            this.buttonReservar.TabIndex = 42;
+            this.buttonReservar.Text = "Reservar";
+            this.buttonReservar.UseVisualStyleBackColor = true;
+            this.buttonReservar.Click += new System.EventHandler(this.buttonReservar_Click);
             // 
             // pagoReservaTable
             // 
             this.pagoReservaTable.AllowUserToAddRows = false;
             this.pagoReservaTable.AllowUserToDeleteRows = false;
             this.pagoReservaTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.pagoReservaTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cabi_nro,
+            this.cabi_piso,
+            this.cabi_tipoServicio});
             this.pagoReservaTable.Location = new System.Drawing.Point(22, 199);
             this.pagoReservaTable.Name = "pagoReservaTable";
             this.pagoReservaTable.ReadOnly = true;
@@ -169,15 +178,33 @@
             this.pagoReservaTable.TabIndex = 41;
             this.pagoReservaTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.pagoReservaTable_CellContentClick);
             // 
+            // cabi_nro
+            // 
+            this.cabi_nro.HeaderText = "Numero";
+            this.cabi_nro.Name = "cabi_nro";
+            this.cabi_nro.ReadOnly = true;
+            // 
+            // cabi_piso
+            // 
+            this.cabi_piso.HeaderText = "Piso";
+            this.cabi_piso.Name = "cabi_piso";
+            this.cabi_piso.ReadOnly = true;
+            // 
+            // cabi_tipoServicio
+            // 
+            this.cabi_tipoServicio.HeaderText = "Tipo Servicio";
+            this.cabi_tipoServicio.Name = "cabi_tipoServicio";
+            this.cabi_tipoServicio.ReadOnly = true;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.label1.Location = new System.Drawing.Point(333, 4);
+            this.label1.Location = new System.Drawing.Point(251, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(183, 22);
+            this.label1.Size = new System.Drawing.Size(191, 22);
             this.label1.TabIndex = 40;
-            this.label1.Text = "Detalles de la compra";
+            this.label1.Text = "Detalles de la Reserva";
             // 
             // Reserva
             // 
@@ -196,7 +223,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btn_atras);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonReservar);
             this.Controls.Add(this.pagoReservaTable);
             this.Controls.Add(this.label1);
             this.Name = "Reserva";
@@ -222,9 +249,12 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btn_atras;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonReservar;
         private System.Windows.Forms.DataGridView pagoReservaTable;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cabi_nro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cabi_piso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cabi_tipoServicio;
 
     }
 }

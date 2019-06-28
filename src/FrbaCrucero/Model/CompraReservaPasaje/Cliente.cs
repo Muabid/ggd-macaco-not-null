@@ -8,16 +8,16 @@ namespace FrbaCrucero.Model.CompraReservaPasaje
 {
     public class Cliente
     {
+        public int id { get; set; }
        public int dni {get; set;}
         public String nombreApellido{get; set;}
         public String direccion { get; set; }
         public int telefono { get; set; }
         public String mail { get; set; }
         public DateTime fechaNacimiento { get; set; }
-      public Cliente(int dni, String nombreApellido, String direccion, int telefono, String mail, DateTime fechaNacimiento)
+      public Cliente(int id, int dni, String nombreApellido, String direccion, int telefono, String mail, DateTime fechaNacimiento)
         {
-
-
+            this.id = id;
             this.dni = dni;
             this.nombreApellido = nombreApellido;
             this.direccion = direccion;

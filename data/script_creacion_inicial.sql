@@ -1155,11 +1155,8 @@ END
 GO
 
 ----------- GENERACION RESERVA ------------
-CREATE PROCEDURE [MACACO_NOT_NULL].GenerarReserva
-@nombre_usuario  NVARCHAR(255),
-@apellido_usuario NVARCHAR(255),
-@dni_usuario INT,
-@direccion_usuario NVARCHAR(255),
+CREATE PROCEDURE [MACACO_NOT_NULL].[GenerarReserva]
+@id_usuario INT,
 @idViaje INT
 --agregar fechaNac telefono y mail y generar el rese_codigo para q no se repita
 AS
@@ -1167,10 +1164,7 @@ BEGIN
 	DECLARE @reseProxId INT 
 	SET @reseProxId = (SELECT MAX(rese_id) from [MACACO_NOT_NULL].RESERVA) + 1
 	INSERT INTO [MACACO_NOT_NULL].RESERVA (rese_usuario_id,rese_codigo,rese_fecha,rese_viaje_id)	
-		SELECT usua_id,@reseProxId,CONVERT(datetime2(3), GETDATE(),121),@idViaje
-		FROM [MACACO_NOT_NULL].USUARIO
-		WHERE usua_apellido = @apellido_usuario and usua_nombre = @nombre_usuario and usua_dni = @dni_usuario
-		and @direccion_usuario = usua_direccion
+		VALUES (@id_usuario,@reseProxId,CONVERT(datetime2(3), GETDATE(),121),@idViaje)		
 END
 GO
 
@@ -1181,7 +1175,7 @@ CREATE PROCEDURE [MACACO_NOT_NULL].AgregarCabina_Reserva
 AS
 BEGIN
 	DECLARE @porcentajeRecargo DECIMAL (18,2)
-	SET @porcentajeRecargo = (SELECT tipo_servicio_porc_recargo FROM [MACACO_NOT_NULL].CABINA INNER JOIN TIPO_SERVICIO ON cabi_tipo_servicio_id = tipo_servicio_id)
+	SET @porcentajeRecargo = (SELECT tipo_servicio_porc_recargo FROM [MACACO_NOT_NULL].CABINA INNER JOIN TIPO_SERVICIO ON cabi_tipo_servicio_id = tipo_servicio_id where cabi_id = @cab_id_pasaje)
 	INSERT INTO [MACACO_NOT_NULL].RESERVA_CABINA (reserva_id,cabina_id,rese_cabi_costo)
 	VALUES (
 			@reserva_id,@cab_id_pasaje,

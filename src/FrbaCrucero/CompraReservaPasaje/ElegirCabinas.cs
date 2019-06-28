@@ -1,4 +1,5 @@
-﻿using FrbaCrucero.Model.TipoServicio;
+﻿using FrbaCrucero.Model.Cruceros;
+using FrbaCrucero.Model.TipoServicio;
 using FrbaCrucero.Model.Viajes;
 using FrbaCrucero.Utils;
 using System;
@@ -22,7 +23,7 @@ namespace FrbaCrucero.CompraReservaPasaje
         {
             InitializeComponent();
             var tiposServicio = tipoServicioDao.getTiposServicios();
-            foreach (TipoServicio tipoServicio in tiposServicio)
+            foreach (FrbaCrucero.Model.TipoServicio.TipoServicio tipoServicio in tiposServicio)
             {
                 cbo_tipo_servicio.Items.Add(tipoServicio);                
             }
@@ -46,7 +47,7 @@ namespace FrbaCrucero.CompraReservaPasaje
                 command.Parameters.Add(new SqlParameter("@tipo_servicio", SqlDbType.NVarChar));
                 command.Parameters["@viajeId"].Value = viaje.id;
                 command.Parameters["@piso"].Value = Database.orDbNull(txt_piso.Text);
-               command.Parameters["@tipo_servicio"].Value = Database.orDbNull(cbo_tipo_servicio.Text);
+                command.Parameters["@tipo_servicio"].Value = Database.orDbNull(cbo_tipo_servicio.Text);
                 try
                 {
                     dataAdapter.Fill(dataTable);
@@ -95,14 +96,16 @@ namespace FrbaCrucero.CompraReservaPasaje
         private void button4_Click(object sender, EventArgs e)
         {
             List<int> cabinasId = new List<int>();
+            List<Cabina> cabinasElegidas = new List<Cabina>();
             foreach (DataGridViewRow item in dataGridViewCabinasReservadas.Rows)
             {
                 cabinasId.Add((int)item.Cells[1].Value);
-            
-            
+                Cabina cabina = new Cabina((int)item.Cells[1].Value, (String)item.Cells[0].Value, (Decimal)item.Cells[2].Value, (Decimal)item.Cells[3].Value); // id, tipoServicio, nro, piso
+                cabinasElegidas.Add(cabina);
             }
-            DataTable data = (DataTable)(dataGridViewCabinasReservadas.DataSource);
-            ClienteForm form = new ClienteForm(data,viaje);
+           
+           // DataTable data = (DataTable)(dataGridViewCabinasReservadas.DataSource);
+            ClienteForm form = new ClienteForm(cabinasElegidas, viaje);
             form.Show();
         }
 

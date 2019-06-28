@@ -36,6 +36,8 @@ AS INT
 START WITH 1
 INCREMENT BY 1;
 
+GO
+
 CREATE PROCEDURE [MACACO_NOT_NULL].CreateCrucero @nombre NVARCHAR(256), @modelo NVARCHAR(256),
 	@compania INT,@fecha_alta DATETIME2(3),@cant_cabinas INT, @cabinas [MACACO_NOT_NULL].CABINA_PISO readonly  
 AS
