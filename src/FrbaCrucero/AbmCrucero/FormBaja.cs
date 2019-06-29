@@ -115,34 +115,6 @@ namespace FrbaCrucero.AbmCrucero
         private void btn_guardar_Click(object sender, EventArgs e)
         {
 
-            if (estadoPasajes.Text == "Reemplazar crucero por otro")
-            {
-
-
-                SqlCommand reemplazarCrucero = Database.createCommand(" [MACACO_NOT_NULL].IdCruceroRemplazante");
-                reemplazarCrucero.Parameters.Add("@cruc_id", SqlDbType.Int).Value = crucero.cruc_id;
-                int cruceroDeReemplazo = Database.executeProcedure(reemplazarCrucero);
-                SqlCommand reemplazarCrucero2 = Database.createCommand(" [MACACO_NOT_NULL].ReemplazarCrucero");
-                reemplazarCrucero2.Parameters.Add("@idCruceroInactivo", SqlDbType.Int).Value = crucero.cruc_id;
-                reemplazarCrucero2.Parameters.Add("@idCruceroReemplazante", SqlDbType.Int).Value = cruceroDeReemplazo;
-                Database.executeProcedure(reemplazarCrucero2);
-
-            }
-            else if (estadoPasajes.Text == "Cancelar todos los pasajes")
-            {
-
-                 SqlCommand cancelarTodosPasajes = Database.createCommand(" [MACACO_NOT_NULL].CancelarPasajes");
-                 cancelarTodosPasajes.Parameters.Add("@idCrucero", SqlDbType.Int).Value = crucero.cruc_id;
-                 Database.executeProcedure(cancelarTodosPasajes);
-
-
-            }
-            else
-            {
-
-                MessageBox.Show("No se eligio ninguna opcion para los pasajes");
-            }
-
 
             if (chb_vida_util.Checked)
             {
@@ -164,18 +136,55 @@ namespace FrbaCrucero.AbmCrucero
                 cmd2.Parameters.Add("@baja_cruc_fecha_reinicio_servicio", SqlDbType.DateTime2).Value = txt_fecha_reinicio_servicio.Text;
                 cmd2.Parameters.Add("@motivo", SqlDbType.NVarChar).Value = txt_motivo.Text;
 
-                
+
                 Database.executeProcedure(cmd2);
 
                 MessageBox.Show("El  crucero fue dado de baja temporal");
 
-            }else{
+            }
+            else
+            {
 
 
                 MessageBox.Show("No se eligio ninguna opcion, elegir definitivo o temporal");
 
 
             }
+
+
+
+
+
+            if (estadoPasajes.Text == "Reemplazar crucero por otro")
+            {
+
+
+                SqlCommand reemplazarCrucero = Database.createCommand("[MACACO_NOT_NULL].IdCruceroRemplazante");
+                reemplazarCrucero.Parameters.Add("@cruc_id", SqlDbType.Int).Value = crucero.cruc_id;
+                int cruceroDeReemplazo = Database.executeProcedure(reemplazarCrucero);
+                SqlCommand reemplazarCrucero2 = Database.createCommand("[MACACO_NOT_NULL].ReemplazarCrucero");
+                reemplazarCrucero2.Parameters.Add("@idCruceroInactivo", SqlDbType.Int).Value = crucero.cruc_id;
+                reemplazarCrucero2.Parameters.Add("@idCruceroReemplazante", SqlDbType.Int).Value = cruceroDeReemplazo;
+                Database.executeProcedure(reemplazarCrucero2);
+
+            }
+            else if (estadoPasajes.Text == "Cancelar todos los pasajes")
+            {
+
+                 SqlCommand cancelarTodosPasajes = Database.createCommand("[MACACO_NOT_NULL].CancelarPasajes");
+                 cancelarTodosPasajes.Parameters.Add("@idCrucero", SqlDbType.Int).Value = crucero.cruc_id;
+                 Database.executeProcedure(cancelarTodosPasajes);
+
+                 MessageBox.Show("Se cancelaron todos los pasajes");
+            }
+            else
+            {
+
+                MessageBox.Show("No se eligio ninguna opcion para los pasajes");
+            }
+
+
+          
 
 
 

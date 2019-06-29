@@ -954,7 +954,7 @@ BEGIN
 		VALUES (@idCrucero,@baja_cruc_fecha_fuera_servicio,@baja_cruc_fecha_reinicio_servicio,@motivo)
 END
 
-
+GO
 CREATE PROCEDURE [MACACO_NOT_NULL].AgregarBajaCruceroDefinitivo
 @idCrucero int,
 @baja_cruc_fecha_fuera_servicio_definitiva [datetime2](3)
@@ -978,7 +978,7 @@ GO
 -- 3) SETEA LA FOREIGN KEY DE LOS PASAJES CANCELADOS, RELACIONANDOLOS CON LA BAJA QUE SE ACABA DE REALIZAR
 -- 4) BORRA LAS RESERVAS ASOCIADAS (SI LAS HAY) A TODOS LOS PASAJES CANCELADOS
 
-CREATE PROCEDURE [MACACO_NOT_NULL].CancelarPasajes
+ALTER PROCEDURE [MACACO_NOT_NULL].CancelarPasajes
 @idCrucero int
 AS
 BEGIN
@@ -988,7 +988,7 @@ BEGIN
 		INNER JOIN [MACACO_NOT_NULL].PASAJE Pasaje ON Pago.pago_id = Pasaje.pasa_pago_id 
 		INNER JOIN [MACACO_NOT_NULL].VIAJE Viaje ON Pasaje.pasa_viaje_id = Viaje.viaj_id
 		WHERE Viaje.viaj_crucero_id = @idCrucero
-	UPDATE Pasaje SET pasa_baja_id = (SELECT MAX(baja_id) from [MACACO_NOT_NULL].BAJA_CRUCERO)
+	UPDATE Pasaje SET pasa_baja_id = (SELECT MAX(baja_id) from [MACACO_NOT_NULL].BAJA_CRUCERO), pasa_pago_id = null
 		FROM [MACACO_NOT_NULL].PASAJE Pasaje
 		INNER JOIN [MACACO_NOT_NULL].VIAJE Viaje ON Pasaje.pasa_viaje_id = Viaje.viaj_id
 		WHERE Viaje.viaj_crucero_id = @idCrucero
@@ -1076,7 +1076,6 @@ END
   
 GO
  
-
 CREATE PROCEDURE MACACO_NOT_NULL.IdCruceroRemplazante (@cruc_id int)
 AS	
 	BEGIN 
@@ -1171,7 +1170,7 @@ AS
 
 
 
-
+GO
 
 ---------------------- CREACION DE UN NUEVO VIAJE ----------------------
 
