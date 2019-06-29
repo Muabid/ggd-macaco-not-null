@@ -1,8 +1,10 @@
 ﻿using FrbaCrucero.Model.Cruceros;
+using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,10 +15,14 @@ namespace FrbaCrucero.AbmCrucero
 {
     public partial class FormBaja : Form
     {
+        private Crucero crucero;
         BajaCrucero bajaCrucero = new BajaCrucero();
-        public FormBaja()
+        public FormBaja(Crucero crucero)
         {
             InitializeComponent();
+            estadoPasajes.Items.Add("Reemplazar crucero por otro");
+            estadoPasajes.Items.Add("Cancelar todos los pasajes");
+            this.crucero = crucero;
         }
         int btn;
         private void btn_limpiar_Click(object sender, EventArgs e)
@@ -99,6 +105,103 @@ namespace FrbaCrucero.AbmCrucero
         private void btn_atras_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void estadoPasajes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_guardar_Click(object sender, EventArgs e)
+        {
+
+            if (estadoPasajes.Text == "Reemplazar crucero por otro")
+            {
+
+
+   
+
+
+
+
+            }
+            else if (estadoPasajes.Text == "Cancelar todos los pasajes")
+            {
+
+                 SqlCommand cancelarTodosPasajes = Database.createCommand(" [MACACO_NOT_NULL].CancelarPasajes");
+                 cancelarTodosPasajes.Parameters.Add("@idCrucero", SqlDbType.Int).Value = crucero.cruc_id;
+                 Database.executeProcedure(cancelarTodosPasajes);
+
+
+            }
+            else
+            {
+
+                MessageBox.Show("No se eligio ninguna opcion para los pasajes");
+            }
+
+
+            if (chb_vida_util.Checked)
+            {
+
+                SqlCommand cmd1 = Database.createCommand("[MACACO_NOT_NULL].AgregarBajaCruceroDefinitivo");
+                cmd1.Parameters.Add("@idCrucero", SqlDbType.Int).Value = crucero.cruc_id;
+                cmd1.Parameters.Add("@baja_cruc_fecha_fuera_servicio_definitiva", SqlDbType.DateTime2).Value = txt_fecha_baja_definitiva.Text;
+                Database.executeProcedure(cmd1);
+
+                MessageBox.Show("El  crucero fue dado de baja definitivo");
+
+            }
+            else if (chb_vida_util.Checked)
+            {
+
+                SqlCommand cmd2 = Database.createCommand("[MACACO_NOT_NULL].AgregarBajaCrucero");
+                cmd2.Parameters.Add("@idCrucero", SqlDbType.Int).Value = crucero.cruc_id;
+                cmd2.Parameters.Add("@baja_cruc_fecha_fuera_servicio", SqlDbType.DateTime2).Value = txt_fecha_fuera_servicio.Text;
+                cmd2.Parameters.Add("@baja_cruc_fecha_reinicio_servicio", SqlDbType.DateTime2).Value = txt_fecha_reinicio_servicio.Text;
+                cmd2.Parameters.Add("@motivo", SqlDbType.NVarChar).Value = txt_motivo.Text;
+
+                
+                Database.executeProcedure(cmd2);
+
+                MessageBox.Show("El  crucero fue dado de baja temporal");
+
+            }else{
+
+
+                MessageBox.Show("No se eligio ninguna opcion, elegir definitivo o temporal");
+
+
+            }
+
+
+
+
+        }
+
+        private void chb_fuera_de_servicio_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (chb_vida_util.Checked == true)
+            {
+                chb_vida_util.Checked = false;
+
+            }
+        }
+
+        private void chb_vida_util_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chb_fuera_de_servicio.Checked == true)
+            {
+                chb_fuera_de_servicio.Checked = false;
+   
+        }
+                
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

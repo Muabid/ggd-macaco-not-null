@@ -30,6 +30,8 @@ namespace FrbaCrucero
             //Application.Run(new AbmRol.RolAbm());
             //Application.Run(new GeneracionViaje.GenerarViaje());
             //Application.Run(new PagoReserva.PagoReserva());
+            Application.Run(new AbmCrucero.FormPantallaInicio());
+
         }
     }
 }

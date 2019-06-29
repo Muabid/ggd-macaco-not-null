@@ -954,6 +954,20 @@ BEGIN
 		VALUES (@idCrucero,@baja_cruc_fecha_fuera_servicio,@baja_cruc_fecha_reinicio_servicio,@motivo)
 END
 
+
+CREATE PROCEDURE [MACACO_NOT_NULL].AgregarBajaCruceroDefinitivo
+@idCrucero int,
+@baja_cruc_fecha_fuera_servicio_definitiva [datetime2](3)
+AS
+BEGIN
+	INSERT INTO [MACACO_NOT_NULL].[BAJA_CRUCERO] (baja_cruc_id,baja_cruc_fecha_fuera_servicio,baja_cruc_fecha_reinicio_servicio,baja_cruc_motivo)
+		VALUES (@idCrucero,@baja_cruc_fecha_fuera_servicio_definitiva,null,null)
+END
+
+
+
+
+
 GO
   
   -------------------------------- CANCELACION DE PASAJES VENDIDOS ---------------------------
@@ -1155,7 +1169,7 @@ END
 GO
 
 ----------- GENERACION RESERVA ------------
-ALTER PROCEDURE [MACACO_NOT_NULL].[GenerarReserva]
+CREATE PROCEDURE [MACACO_NOT_NULL].[GenerarReserva]
 @id_usuario INT,
 @idViaje INT
 --agregar fechaNac telefono y mail y generar el rese_codigo para q no se repita
@@ -1169,7 +1183,7 @@ END
 GO
 
 --------- PROCEDURE QUE AGREGA 1 CABINA A 1 RESERVA -----------
-ALTER PROCEDURE [MACACO_NOT_NULL].AgregarCabina_Reserva
+CREATE PROCEDURE [MACACO_NOT_NULL].AgregarCabina_Reserva
 	@cab_id_pasaje int,
 	@reserva_id int 
 AS
@@ -1202,7 +1216,7 @@ GO
 -------- OSEA EL PUNTO 1) ES TODO POR VISUAL STUDIO (A LO SUMO HACER DESPUES UN PROCEDURE DE MODIFICACION DE UN USUARIO)
 -- 2) SE DEBE AGREGAR EL/LOS MEDIO DE PAGO. SE LLAMA AL PROCEDURE AgregarMedioDePago_Al_NuevoPago TANTAS VECES COMO MEDIO DE PAGO INGRESO EL USUARIO (PASANDO LOS PARAMETROS CORRECTOS EN CADA LLAMADA)
 -- 3) SE LLAMA A ESTE PROCEDURE TANTAS VECES COMO PASAJES HAYA COMPRADO (LOS PARAMETROS DEL VIAJE Y PAGO SON LOS MISMOS PERO EL IDCABINA CAMBIA)
-ALTER PROCEDURE [MACACO_NOT_NULL].AgregarPasajeA_Cliente
+CREATE PROCEDURE [MACACO_NOT_NULL].AgregarPasajeA_Cliente
 	@cab_id_pasaje int,
 	@viaje_id_pasaje int
 AS
@@ -1538,7 +1552,7 @@ END
 
 GO
 
-ALTER procedure [MACACO_NOT_NULL].ObtenerCabinasDelCrucero @viajeId int ,@piso [decimal] (18,0),@tipo_servicio [nvarchar](255) 
+CREATE procedure [MACACO_NOT_NULL].ObtenerCabinasDelCrucero @viajeId int ,@piso [decimal] (18,0),@tipo_servicio [nvarchar](255) 
 As
 BEGIN    
     SELECT 

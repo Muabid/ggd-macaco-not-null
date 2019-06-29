@@ -59,7 +59,7 @@ namespace FrbaCrucero.AbmCrucero
             crucero.cruc_compañia_id = Convert.ToInt32(cell["CompaniaId"].Value);
             
             if (e.ColumnIndex == dgv_cruceros.Columns["Baja"].Index)
-                new FormBaja().ShowDialog(this);
+                new FormBaja(crucero).ShowDialog(this);
 
             if (e.ColumnIndex == dgv_cruceros.Columns["Editar"].Index)
                 new FormModificacion(crucero).ShowDialog(this);
