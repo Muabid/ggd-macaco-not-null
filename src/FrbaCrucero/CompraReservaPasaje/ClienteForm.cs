@@ -122,7 +122,7 @@ namespace FrbaCrucero.CompraReservaPasaje
                  dni = 0;
             }
             String array = txt_nombre_apellido.Text;
-           // String[] otro = array.Split(",");   NO FUNCA
+            String[] otro = array.Split(',');   
             String nombre = otro[1];
             String apellido = otro[2];    
             //EL original
