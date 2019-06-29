@@ -121,6 +121,27 @@ namespace FrbaCrucero.CompraReservaPasaje
             {
                  dni = 0;
             }
+            String array = txt_nombre_apellido.Text;
+           // String[] otro = array.Split(",");   NO FUNCA
+            String nombre = otro[1];
+            String apellido = otro[2];    
+            //EL original
+            SqlCommand command = Database.createCommand(" select usua_id," +
+            "concat(usua_nombre ,' ' ,usua_apellido) as usua_nombre,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac from MACACO_NOT_NULL.USUARIO where usua_dni = '" + txt_dni.Text + "';");
+
+            //El neuvo para que cuando busque cree uno nuevo
+
+            SqlCommand command2 = Database.createCommand("IF NOT EXISTS (select 1 from MACACO_NOT_NULL.USUARIO where usua_dni =" + txt_dni.Text + " )" +
+   "BEGIN " +
+     "INSERT INTO MACACO_NOT_NULL.USUARIO (usua_nombre,usua_apellido,usua_dni,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac) VALUES("+ nombre +";"+apellido+","+ ")" +
+   "END" +
+   "ELSE" +
+   "select usua_id," +
+               "concat(usua_nombre ,' ' ,usua_apellido) as usua_nombre,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac from MACACO_NOT_NULL.USUARIO where usua_dni = '" + txt_dni.Text + "';" +
+   "END");
+
+
+
             String var_nombre_apellido = txt_nombre_apellido.Text;
             String direccion = txt_direccion.Text;
             int telefono = int.Parse(txt_telefono.Text);
