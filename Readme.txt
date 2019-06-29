@@ -1,16 +1,13 @@
-Readme.txt
-Es un archivo de texto plano con los siguientes datos: 
+Curso: K3012
 
-Curso
-MACACO_NOT_NULL
+Número de grupo: ¿6?
 
-Número de grupo
-6???
+Integrantes:
 
-Nombre y legajo de todos los integrantes
-Cobos Bruno - 1596767
-Jugo German - 1589179
-Nikcevich, Carlos Alexis - 1466987
-Verdile, Guillermo - ???
+Nombre				Legajo
+COBOS Bruno			159676-7
+JUGO German			158917-9
+NIKCEVICH, Carlos Alexis	146698-7
+VERDILE, Guillermo		XXXXXX-X	Responsable del Grupo
 
-Email del integrante responsable del grupo
+Email del integrante responsable del grupo: ¿?
