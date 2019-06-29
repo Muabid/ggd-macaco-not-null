@@ -69,7 +69,7 @@ namespace FrbaCrucero.CompraReservaPasaje
 
              }
 
-             SqlCommand maxPago = Utils.Database.createCommand("SELECT  max (pago_id) from MACACO_NOT_NULL.PAGO);");
+             SqlCommand maxPago = Utils.Database.createCommand("SELECT  max (pago_id) from MACACO_NOT_NULL.PAGO;");
              int escalar = Utils.Database.executeScalar(maxPago);
 
              MessageBox.Show("Pago Realizado - Codigo: " + escalar.ToString());
