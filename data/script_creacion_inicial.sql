@@ -1076,6 +1076,103 @@ END
   
 GO
  
+
+CREATE PROCEDURE MACACO_NOT_NULL.IdCruceroRemplazante (@cruc_id int)
+AS	
+	BEGIN 
+				
+		CREATE TABLE #CRUCEROS_NO_REEMPLAZANTES(
+			id int identity(1,1) primary key,
+			cruc_id int)
+
+		DECLARE @fechaDesde date = getdate();
+		DECLARE @crucero_reemplazo_id int 
+
+		DECLARE @viajes TABLE 
+			(viaj_id int,
+			 viaj_salida date,
+			 viaj_llegada date)
+
+		
+		/* Obtengo todos los viajes del crucero al cual tengo que  remplazar */
+		INSERT INTO @viajes (viaj_id, viaj_salida, viaj_llegada)
+			SELECT viaj_id, viaj_fecha_salida, viaj_fecha_llegada
+			FROM MACACO_NOT_NULL.viaje v
+			where viaj_crucero_id = @cruc_id and v.viaj_fecha_salida > convert(date,@fechaDesde)
+
+		DECLARE @FECHA_DESDE DATE
+		DECLARE @FECHA_HASTA DATE
+ 
+		DECLARE @count INT
+		SELECT @count = COUNT(*) FROM @viajes;
+
+		/* Creo una tanla con la cantidad de cabinas de cada tipo del crucero que voy a remplazar */ 
+		SELECT cabi_tipo_servicio_id, COUNT(*) cantidad
+		INTO #cantidadCabinasARemplazar
+		FROM MACACO_NOT_NULL.cabina
+		WHERE cabi_crucero_id = @cruc_id
+		GROUP BY cabi_tipo_servicio_id
+
+		/*Hago una iteracion por cada viaje del crucero a remplazar */
+		IF @count = 0 
+			SET @crucero_reemplazo_id = 0 
+		ELSE 
+			BEGIN
+
+				WHILE  @count > 0
+					BEGIN
+					/* Seteo las fechas de inicio y fin del viaje al que voy a remplazar */
+					SET @FECHA_DESDE = (select top (1) viaj_salida from @viajes)
+					SET @FECHA_HASTA = (select top (1) viaj_llegada from @viajes)	
+
+					/* Inserto los cruceros que no cumplen con el criterio */
+					INSERT INTO #CRUCEROS_NO_REEMPLAZANTES (cruc_id)
+						SELECT V.viaj_crucero_id
+						FROM MACACO_NOT_NULL.viaje v 
+						WHERE (convert(date,v.viaj_fecha_salida) between convert(date,@FECHA_DESDE)  and convert(date,@FECHA_HASTA) or
+							  convert(date,v.viaj_fecha_llegada) between convert(date,@FECHA_DESDE)  and  convert(date,@FECHA_HASTA)or
+							  convert(date,@FECHA_DESDE) > convert(date,v.viaj_fecha_salida) and convert(date,@FECHA_HASTA) < convert(date,v.viaj_fecha_llegada))
+					  
+							
+					DELETE TOP (1) FROM @viajes
+					SELECT @count = COUNT(*) FROM @viajes;
+					END
+		
+					select c.cruc_id ,CA.cabi_tipo_servicio_id , COUNT(CA.cabi_tipo_servicio_id) cant_tipo
+					into #CRUCEROSCONFECHASDISPONIBLES 
+					from MACACO_NOT_NULL.crucero C 
+					JOIN MACACO_NOT_NULL.cabina CA ON C.cruc_id = CA.cabi_crucero_id
+					where C.cruc_id NOT IN 
+						(SELECT T.cruc_id 
+						FROM #CRUCEROS_NO_REEMPLAZANTES T group by T.cruc_id) 
+						AND c.cruc_activo = 0
+					group by c.cruc_id ,CA.cabi_tipo_servicio_id 
+
+				/* consulta si existe algun crucero no exista en la tabla no remplazantes y tomo el primero */
+				SET @crucero_reemplazo_id = (SELECT DISTINCT TOP(1) C.cruc_id
+									FROM  #CRUCEROSCONFECHASDISPONIBLES C
+									JOIN #cantidadCabinasARemplazar CR ON CR.cabi_tipo_servicio_id = C.cabi_tipo_servicio_id
+									WHERE C.cant_tipo >= CR.cantidad
+									GROUP BY C.cruc_id
+									HAVING COUNT(*) = (SELECT COUNT(*) FROM #cantidadCabinasARemplazar))
+		
+				
+				
+				IF(@crucero_reemplazo_id IS NULL) 
+					SET @crucero_reemplazo_id = -1
+
+			END
+				DROP TABLE #CRUCEROS_NO_REEMPLAZANTES
+
+		END 
+
+
+
+
+
+
+
+
 ---------------------- CREACION DE UN NUEVO VIAJE ----------------------
 
 CREATE PROCEDURE [MACACO_NOT_NULL].CrearViaje 
