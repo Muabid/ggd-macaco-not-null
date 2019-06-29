@@ -17,7 +17,7 @@ namespace FrbaCrucero.CompraReservaPasaje
         private List<Cabina> cabinas;
         private int crucero;
         private Model.CompraReservaPasaje.Cliente elCliente;
-        private Model.Viajes.Viaje crucero1;
+        private Model.Viajes.Viaje viaje;
 
 
         public Pago(Model.CompraReservaPasaje.Cliente cliente, List<Cabina> cabinas, int crucero)
@@ -35,7 +35,7 @@ namespace FrbaCrucero.CompraReservaPasaje
             InitializeComponent();
             this.elCliente = cliente;
             this.cabinas = cabinas;
-            this.crucero1 = viaje;
+            this.viaje = viaje;
             for (int i = 0; i < cabinas.Count; i++)
             {
                 Cabina unaCabina = cabinas.ElementAt(i);
@@ -63,7 +63,7 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MediosDeLosPagos form = new MediosDeLosPagos(cliente, cabinas, crucero);
+            MediosDeLosPagos form = new MediosDeLosPagos(elCliente, cabinas, viaje);
             form.Show();
         }
 

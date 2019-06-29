@@ -1155,7 +1155,7 @@ END
 GO
 
 ----------- GENERACION RESERVA ------------
-CREATE PROCEDURE [MACACO_NOT_NULL].[GenerarReserva]
+ALTER PROCEDURE [MACACO_NOT_NULL].[GenerarReserva]
 @id_usuario INT,
 @idViaje INT
 --agregar fechaNac telefono y mail y generar el rese_codigo para q no se repita
@@ -1169,7 +1169,7 @@ END
 GO
 
 --------- PROCEDURE QUE AGREGA 1 CABINA A 1 RESERVA -----------
-CREATE PROCEDURE [MACACO_NOT_NULL].AgregarCabina_Reserva
+ALTER PROCEDURE [MACACO_NOT_NULL].AgregarCabina_Reserva
 	@cab_id_pasaje int,
 	@reserva_id int 
 AS
@@ -1202,13 +1202,13 @@ GO
 -------- OSEA EL PUNTO 1) ES TODO POR VISUAL STUDIO (A LO SUMO HACER DESPUES UN PROCEDURE DE MODIFICACION DE UN USUARIO)
 -- 2) SE DEBE AGREGAR EL/LOS MEDIO DE PAGO. SE LLAMA AL PROCEDURE AgregarMedioDePago_Al_NuevoPago TANTAS VECES COMO MEDIO DE PAGO INGRESO EL USUARIO (PASANDO LOS PARAMETROS CORRECTOS EN CADA LLAMADA)
 -- 3) SE LLAMA A ESTE PROCEDURE TANTAS VECES COMO PASAJES HAYA COMPRADO (LOS PARAMETROS DEL VIAJE Y PAGO SON LOS MISMOS PERO EL IDCABINA CAMBIA)
-CREATE PROCEDURE [MACACO_NOT_NULL].AgregarPasajeA_Cliente
+ALTER PROCEDURE [MACACO_NOT_NULL].AgregarPasajeA_Cliente
 	@cab_id_pasaje int,
 	@viaje_id_pasaje int
 AS
 BEGIN
 	DECLARE @porcentajeRecargo DECIMAL (18,2)
-	SET @porcentajeRecargo = (SELECT tipo_servicio_porc_recargo FROM [MACACO_NOT_NULL].CABINA INNER JOIN TIPO_SERVICIO ON cabi_tipo_servicio_id = tipo_servicio_id)
+	SET @porcentajeRecargo = (SELECT tipo_servicio_porc_recargo FROM [MACACO_NOT_NULL].CABINA INNER JOIN TIPO_SERVICIO ON cabi_tipo_servicio_id = tipo_servicio_id where cabi_id = @cab_id_pasaje)
 	INSERT INTO [MACACO_NOT_NULL].PASAJE (pasa_codigo,pasa_precio,pasa_fecha_compra,pasa_cab_id,pasa_viaje_id,pasa_pago_id)
 	VALUES 
 	(
@@ -1218,7 +1218,7 @@ BEGIN
 			FROM [MACACO_NOT_NULL].TRAMO 
 			INNER JOIN [MACACO_NOT_NULL].RECORRIDO ON reco_id = tram_recorrido_id
 			INNER JOIN [MACACO_NOT_NULL].VIAJE ON reco_id = viaj_recorrido_id
-			WHERE viaj_id = @viaje_id_pasaje
+			WHERE viaj_id =@viaje_id_pasaje
 		 ) * @porcentajeRecargo,				
 		 CONVERT(datetime2(3), GETDATE(),121),
 		 @cab_id_pasaje,@viaje_id_pasaje,(SELECT MAX(pago_id) FROM [MACACO_NOT_NULL].PAGO)
@@ -1538,7 +1538,7 @@ END
 
 GO
 
-create procedure [MACACO_NOT_NULL].ObtenerCabinasDelCrucero @viajeId int ,@piso [decimal] (18,0),@tipo_servicio [nvarchar](255) 
+ALTER procedure [MACACO_NOT_NULL].ObtenerCabinasDelCrucero @viajeId int ,@piso [decimal] (18,0),@tipo_servicio [nvarchar](255) 
 As
 BEGIN    
     SELECT 
@@ -1560,6 +1560,7 @@ BEGIN
 		order by  cabi_piso, tipo_servicio_descripcion, cabi_nro
 END
 GO
+
 
 CREATE PROCEDURE [MACACO_NOT_NULL].CreteOrUpdateCliente @dni decimal(18,0), @nombre nvarchar(255),
 @apellido nvarchar(255), @direccion nvarchar(255), @telefono int, @mail nvarchar(255), @nacimiento datetime2(3)
@@ -1583,7 +1584,6 @@ BEGIN
 	VALUES (@nombre,@apellido,@dni,@direccion,@telefono,@mail,@nacimiento)
 END
 END
-
 
 
 
