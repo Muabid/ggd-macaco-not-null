@@ -68,12 +68,18 @@ namespace FrbaCrucero.CompraReservaPasaje
                  Utils.Database.executeProcedure(procedure2);
 
              }
+             if (tablaMediosDePago.Rows.Count > 0 && cabinas.Count > 0)
+             {
 
-             SqlCommand maxPago = Utils.Database.createCommand("SELECT  max (pago_id) from MACACO_NOT_NULL.PAGO;");
-             int escalar = Utils.Database.executeScalar(maxPago);
+                 SqlCommand maxPago = Utils.Database.createCommand("SELECT  max (pago_id) from MACACO_NOT_NULL.PAGO;");
+                 int escalar = Utils.Database.executeScalar(maxPago);
 
-             MessageBox.Show("Pago Realizado - Codigo: " + escalar.ToString());
-
+                 MessageBox.Show("Pago Realizado - Codigo: " + escalar.ToString());
+             }
+             else
+             {
+                 MessageBox.Show("No se eligieron cabinas o medios de pago");
+             }
 
 
         }

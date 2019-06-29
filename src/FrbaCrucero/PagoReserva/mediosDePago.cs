@@ -89,24 +89,39 @@ namespace FrbaCrucero.PagoReserva
             Utils.Database.executeProcedure(procedure);
 
 
-             foreach (DataGridViewRow row in tablaMediosDePago.Rows)
-            {   int var_cuotas = int.Parse(row.Cells["cuotas"].Value.ToString());
-                String var_descripcion= row.Cells["methodOfPayment"].Value.ToString();
-               
-               SqlCommand procedure2 = Utils.Database.createCommand("MACACO_NOT_NULL.AgregarMedioDePago_Al_NuevoPago");
-                 
-               procedure2.Parameters.Add("@medio_Pago", SqlDbType.NVarChar).Value = var_descripcion;
+            foreach (DataGridViewRow row in tablaMediosDePago.Rows)
+            {
+                int var_cuotas = int.Parse(row.Cells["cuotas"].Value.ToString());
+                String var_descripcion = row.Cells["methodOfPayment"].Value.ToString();
+
+                SqlCommand procedure2 = Utils.Database.createCommand("MACACO_NOT_NULL.AgregarMedioDePago_Al_NuevoPago");
+
+                procedure2.Parameters.Add("@medio_Pago", SqlDbType.NVarChar).Value = var_descripcion;
                 procedure2.Parameters.Add("@cantidad_cuotas", SqlDbType.Int).Value = var_cuotas;
                 Utils.Database.executeProcedure(procedure2);
             }
 
-             SqlCommand procedure3 = Utils.Database.createCommand("MACACO_NOT_NULL.EliminarReserva");
-             procedure3.Parameters.Add("@codigo_reserva", SqlDbType.Decimal).Value = cod_reserva;
-             Utils.Database.executeProcedure(procedure3);
-             MessageBox.Show("Se ha pagado la reserva ");
-             this.Hide();
-             PagoReserva pago = new PagoReserva();
-             pago.Show();
+            if (tablaMediosDePago.Rows.Count > 0)
+            {
+
+
+
+                SqlCommand procedure3 = Utils.Database.createCommand("MACACO_NOT_NULL.EliminarReserva");
+                procedure3.Parameters.Add("@codigo_reserva", SqlDbType.Decimal).Value = cod_reserva;
+                Utils.Database.executeProcedure(procedure3);
+                MessageBox.Show("Se ha pagado la reserva ");
+                this.Hide();
+                PagoReserva pago = new PagoReserva();
+                pago.Show();
+            }
+            else
+            {
+
+                MessageBox.Show("No se eligieron  medios de pago");
+
+
+            }
+
         }
 
         private void buttonAtras_Click(object sender, EventArgs e)

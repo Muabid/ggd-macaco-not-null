@@ -110,7 +110,7 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         }
 
-      
+
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -122,11 +122,20 @@ namespace FrbaCrucero.CompraReservaPasaje
                 Cabina cabina = new Cabina((int)item.Cells[1].Value, (String)item.Cells[0].Value, (Decimal)item.Cells[2].Value, (Decimal)item.Cells[3].Value); // id, tipoServicio, nro, piso
                 cabinasElegidas.Add(cabina);
             }
-           
-           // DataTable data = (DataTable)(dataGridViewCabinasReservadas.DataSource);
-            ClienteForm form = new ClienteForm(cabinasElegidas, viaje);
-            form.Show();
-            this.Hide();
+
+            if (dataGridViewCabinasReservadas.Rows.Count > 0)
+            {
+
+                // DataTable data = (DataTable)(dataGridViewCabinasReservadas.DataSource);
+                ClienteForm form = new ClienteForm(cabinasElegidas, viaje);
+                form.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("No se eligieron cabinas");
+
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)

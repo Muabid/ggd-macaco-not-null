@@ -94,7 +94,7 @@ namespace FrbaCrucero.CompraReservaPasaje
         }
 
         private void buttonReservar_Click(object sender, EventArgs e)
-        {
+        {   
             SqlCommand procedure = Utils.Database.createCommand("MACACO_NOT_NULL.[GenerarReserva]");
             procedure.Parameters.Add("@id_usuario", SqlDbType.Int).Value = cliente.id;
             procedure.Parameters.Add("@idViaje", SqlDbType.Int).Value = viaje.id;
