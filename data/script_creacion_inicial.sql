@@ -1561,6 +1561,30 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [MACACO_NOT_NULL].CreteOrUpdateCliente @dni decimal(18,0), @nombre nvarchar(255),
+@apellido nvarchar(255), @direccion nvarchar(255), @telefono int, @mail nvarchar(255), @nacimiento datetime2(3)
+AS
+BEGIN
+IF EXISTS (SELECT 1 FROM [MACACO_NOT_NULL].USUARIO WHERE usua_dni = @dni)
+BEGIN
+	UPDATE [MACACO_NOT_NULL].USUARIO
+	SET usua_nombre = @nombre,
+	usua_apellido = @apellido,
+	usua_direccion = @direccion,
+	usua_telefono = @telefono,
+	usua_mail = @mail,
+	usua_fecha_nac = @nacimiento
+	
+END
+ELSE
+BEGIN
+	INSERT INTO [MACACO_NOT_NULL].USUARIO (usua_nombre,usua_apellido,usua_dni,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac)
+	VALUES (@nombre,@apellido,@dni,@direccion,@telefono,@mail,@nacimiento)
+END
+END
+
+
+
 
 /*
 DROP TABLE [MACACO_NOT_NULL].[TRAMO]
