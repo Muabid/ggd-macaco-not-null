@@ -67,17 +67,28 @@ namespace FrbaCrucero.CompraReservaPasaje
             if (!String.IsNullOrEmpty(txt_dni.Text))
             {
 
-                SqlCommand command = Database.createCommand(" select usua_id, concat(usua_nombre ,' ' ,usua_apellido) as usua_nombre,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac from MACACO_NOT_NULL.USUARIO where usua_dni = '" + txt_dni.Text + "';");
+                SqlCommand command = Database.createCommand(" select usua_id, usua_nombre,usua_apellido,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac from MACACO_NOT_NULL.USUARIO where usua_dni = '" + txt_dni.Text + "';");
                 DataTable data = Database.getData(command);
                 if (data.Rows.Count > 0)
                 {
                     var usuario = data.Rows[0];
                     this.usua_id = int.Parse(usuario["usua_id"].ToString());
-                    txt_nombre_apellido.Text = usuario["usua_nombre"].ToString();
+                    txt_nombre.Text = usuario["usua_nombre"].ToString();
+                    txt_apellido.Text = usuario["usua_apellido"].ToString();
                     txt_telefono.Text = usuario["usua_telefono"].ToString();
                     txt_mail.Text = usuario["usua_mail"].ToString();
                     txt_direccion.Text = usuario["usua_direccion"].ToString();
                     txt_fecha_alta.Text = usuario["usua_fecha_nac"].ToString();
+                }
+                else
+                {
+                    
+                    txt_nombre.Text = "";
+                    txt_apellido.Text = "";
+                    txt_telefono.Text = "";
+                    txt_mail.Text = "";
+                    txt_direccion.Text = "";
+                    txt_fecha_alta.Text = "";
                 }
             }
 
@@ -112,7 +123,9 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int dni;
+            try
+            {
+                 int dni;
             if (txt_dni.Text != "")
             {
                  dni = int.Parse(txt_dni.Text);
@@ -121,52 +134,106 @@ namespace FrbaCrucero.CompraReservaPasaje
             {
                  dni = 0;
             }
-            String array = txt_nombre_apellido.Text;
-            String[] otro = array.Split(',');   
-            String nombre = otro[1];
-            String apellido = otro[2];    
-            //EL original
-            SqlCommand command = Database.createCommand(" select usua_id," +
-            "concat(usua_nombre ,' ' ,usua_apellido) as usua_nombre,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac from MACACO_NOT_NULL.USUARIO where usua_dni = '" + txt_dni.Text + "';");
 
-            //El neuvo para que cuando busque cree uno nuevo
+            foreach (Control c in groupBox1.Controls)
+            {
+                if (c is TextBox)
+                {
+                    if (String.IsNullOrEmpty(c.Text))
+                    {
+                        throw new Exception("Requiere completar todos los datos");
+                    }
+                }
 
-            SqlCommand command2 = Database.createCommand("IF NOT EXISTS (select 1 from MACACO_NOT_NULL.USUARIO where usua_dni =" + txt_dni.Text + " )" +
-   "BEGIN " +
-     "INSERT INTO MACACO_NOT_NULL.USUARIO (usua_nombre,usua_apellido,usua_dni,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac) VALUES("+ nombre +";"+apellido+","+ ")" +
-   "END" +
-   "ELSE" +
-   "select usua_id," +
-               "concat(usua_nombre ,' ' ,usua_apellido) as usua_nombre,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac from MACACO_NOT_NULL.USUARIO where usua_dni = '" + txt_dni.Text + "';" +
-   "END");
+            }
 
-
-
-            String var_nombre_apellido = txt_nombre_apellido.Text;
+            String nombre = txt_nombre.Text;
+            String apellido = txt_apellido.Text;
+            
             String direccion = txt_direccion.Text;
             int telefono = int.Parse(txt_telefono.Text);
             String mail = txt_mail.Text;
             DateTime fecha_alta = DateTime.Parse(txt_fecha_alta.Text);
+            //EL original
 
-            Cliente elCliente = new Cliente(this.usua_id,dni, var_nombre_apellido, direccion, telefono, mail, fecha_alta);
+            SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].CreteOrUpdateCliente");
+            cmd.Parameters.Add("@dni",SqlDbType.Decimal).Value = dni;
+            cmd.Parameters.Add("@nombre",SqlDbType.NVarChar).Value = nombre;
+            cmd.Parameters.Add("@apellido",SqlDbType.NVarChar).Value = apellido;
+            cmd.Parameters.Add("@direccion",SqlDbType.NVarChar).Value = direccion;
+            cmd.Parameters.Add("@mail",SqlDbType.NVarChar).Value = mail;
+            cmd.Parameters.Add("@nacimiento",SqlDbType.DateTime2).Value = fecha_alta;
+            cmd.Parameters.Add("@telefono", SqlDbType.Int).Value = telefono;
+            Database.executeProcedure(cmd);
+
+
+
+          
+
+            Cliente elCliente = new Cliente(this.usua_id,dni,nombre+" " + apellido, direccion, telefono, mail, fecha_alta);
 
             Pago form = new Pago(elCliente, cabinas, viaje);
             form.Show();
+            }
+            catch(Exception er)
+            {
+                MessageBox.Show(er.Message, "ERROR",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int dni =int.Parse(txt_dni.Text);
-            String var_nombre_apellido = txt_nombre_apellido.Text;
-            String direccion = txt_direccion.Text;
-            int telefono = int.Parse(txt_telefono.Text);
-            String mail = txt_mail.Text;
-            DateTime fecha_alta = DateTime.Parse(txt_fecha_alta.Text);
 
-            Cliente loCliente = new Model.CompraReservaPasaje.Cliente(this.usua_id,dni,var_nombre_apellido,direccion,telefono,mail,fecha_alta);
 
-            Reserva form2 = new Reserva(loCliente, cabinas, viaje);
-            form2.Show();
+            try
+            {
+                foreach (Control c in groupBox1.Controls)
+                {
+                    if (c is TextBox)
+                    {
+                        if (String.IsNullOrEmpty(c.Text))
+                        {
+                            throw new Exception("Requiere completar todos los datos");
+                        }
+                    }
+
+                }
+                int dni = int.Parse(txt_dni.Text);
+                String nombre = txt_nombre.Text;
+                String apellido = txt_apellido.Text;
+                String direccion = txt_direccion.Text;
+                int telefono = int.Parse(txt_telefono.Text);
+                String mail = txt_mail.Text;
+                DateTime fecha_alta = DateTime.Parse(txt_fecha_alta.Text);
+
+
+
+
+                SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].CreteOrUpdateCliente");
+                cmd.Parameters.Add("@dni", SqlDbType.Decimal).Value = dni;
+                cmd.Parameters.Add("@nombre", SqlDbType.NVarChar).Value = nombre;
+                cmd.Parameters.Add("@apellido", SqlDbType.NVarChar).Value = apellido;
+                cmd.Parameters.Add("@direccion", SqlDbType.NVarChar).Value = direccion;
+                cmd.Parameters.Add("@mail", SqlDbType.NVarChar).Value = mail;
+                cmd.Parameters.Add("@nacimiento", SqlDbType.DateTime2).Value = fecha_alta;
+                cmd.Parameters.Add("@telefono", SqlDbType.Int).Value = telefono;
+                Database.executeProcedure(cmd);
+
+                Cliente loCliente = new Model.CompraReservaPasaje.Cliente(this.usua_id, dni, nombre + " "+ apellido, direccion, telefono, mail, fecha_alta);
+
+                Reserva form2 = new Reserva(loCliente, cabinas, viaje);
+                form2.Show();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "ERROR",
+                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
         }
 
         private void btn_atras_Click(object sender, EventArgs e)

@@ -1574,6 +1574,7 @@ BEGIN
 	usua_telefono = @telefono,
 	usua_mail = @mail,
 	usua_fecha_nac = @nacimiento
+	WHERE usua_dni = @dni;
 	
 END
 ELSE
