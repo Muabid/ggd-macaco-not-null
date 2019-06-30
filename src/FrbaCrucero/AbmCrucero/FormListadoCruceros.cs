@@ -47,22 +47,25 @@ namespace FrbaCrucero.AbmCrucero
 
         private void dgv_cruceros_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex > -1)
+            {
+                DataGridViewCellCollection cell = dgv_cruceros.Rows[e.RowIndex].Cells;
+                crucero.cruc_id = Convert.ToInt32(cell["Id"].Value);
+                crucero.cruc_nombre = cell["Nombre"].Value.ToString();
+                crucero.cruc_modelo = cell["Modelo"].Value.ToString();
+                if (!String.IsNullOrEmpty(cell["Alta"].Value.ToString()))
+                    crucero.cruc_fecha_alta = DateTime.Parse(cell["Alta"].Value.ToString());
 
-            DataGridViewCellCollection cell = dgv_cruceros.Rows[e.RowIndex].Cells;
-            crucero.cruc_id = Convert.ToInt32(cell["Id"].Value);
-            crucero.cruc_nombre = cell["Nombre"].Value.ToString();
-            crucero.cruc_modelo = cell["Modelo"].Value.ToString();
-            if(!String.IsNullOrEmpty(cell["Alta"].Value.ToString()))
-                crucero.cruc_fecha_alta = DateTime.Parse(cell["Alta"].Value.ToString());
+                crucero.cruc_cantidad_cabinas = Convert.ToInt32(cell["Cabinas"].Value);
+                crucero.cruc_compañia_id = Convert.ToInt32(cell["CompaniaId"].Value);
 
-            crucero.cruc_cantidad_cabinas = Convert.ToInt32(cell["Cabinas"].Value);
-            crucero.cruc_compañia_id = Convert.ToInt32(cell["CompaniaId"].Value);
-            
-            if (e.ColumnIndex == dgv_cruceros.Columns["Baja"].Index)
-                new FormBaja(crucero).ShowDialog(this);
+                if (e.ColumnIndex == dgv_cruceros.Columns["Baja"].Index)
+                    new FormBaja(crucero).ShowDialog(this);
 
-            if (e.ColumnIndex == dgv_cruceros.Columns["Editar"].Index)
-                new FormModificacion(crucero).ShowDialog(this);
+                if (e.ColumnIndex == dgv_cruceros.Columns["Editar"].Index)
+                    new FormModificacion(crucero).ShowDialog(this);
+            }
+           
         }
 
         private void btn_buscar_Click_1(object sender, EventArgs e)

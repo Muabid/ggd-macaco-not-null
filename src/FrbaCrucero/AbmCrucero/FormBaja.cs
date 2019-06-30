@@ -3,6 +3,7 @@ using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -146,7 +147,7 @@ namespace FrbaCrucero.AbmCrucero
                 }
 
 
-                if ("Reemplazar crucero por otro".Equals(estadoPasajes.Text))
+                if ("Reemplazar crucero por otro".Equals(ConfigurationManager.AppSettings["ESTRATEGIA_BAJA_CRUCERO"]))
                 {
 
 
@@ -160,7 +161,7 @@ namespace FrbaCrucero.AbmCrucero
                         reemplazarCrucero2.Parameters.Add("@idCruceroReemplazante", SqlDbType.Int).Value = cruceroDeReemplazo;
                         Database.executeProcedure(reemplazarCrucero2);
                         MessageBox.Show("El  crucero fue reemplazado con exito");
-
+                        
                     }
                     else
                     {
@@ -169,7 +170,7 @@ namespace FrbaCrucero.AbmCrucero
 
 
                 }
-                else if ("Cancelar todos los pasajes".Equals(estadoPasajes.Text))
+                else if ("Cancelar todos los pasajes".Equals(ConfigurationManager.AppSettings["ESTRATEGIA_BAJA_CRUCERO"]))
                 {
 
                     SqlCommand cancelarTodosPasajes = Database.createCommand("[MACACO_NOT_NULL].CancelarPasajes");
@@ -180,10 +181,8 @@ namespace FrbaCrucero.AbmCrucero
                 }
                 else
                 {
-
                     MessageBox.Show("No se eligio ninguna opcion para los pasajes");
-                }
-           
+                }           
 
             }
             else
@@ -191,12 +190,6 @@ namespace FrbaCrucero.AbmCrucero
                 MessageBox.Show("No se eligio ninguna opcion para los pasajes");
 
             }
-
-
-           
-
-
-  
 
         }
 

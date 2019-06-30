@@ -13,14 +13,14 @@ where cruc_activo = 1 and
 (@cabinas is null or @cabinas < cruc_cantidad_cabinas) and
 cruc_id not in ( select viaj_crucero_id 
 											from MACACO_NOT_NULL.VIAJE
-											WHERE viaj_fecha_llegada_estimada between @fecha_salida and @fecha_salida
-											or viaj_fecha_salida between @fecha_salida and @fecha_salida
+											WHERE viaj_fecha_llegada_estimada between @fecha_salida and @fecha_llegada
+											or viaj_fecha_salida between @fecha_salida and @fecha_llegada
 											union
 											select baja_cruc_id
 											from MACACO_NOT_NULL.BAJA_CRUCERO
 											where baja_cruc_id = cruc_id and
-											baja_cruc_fecha_fuera_servicio between @fecha_salida and @fecha_salida
-											or baja_cruc_fecha_reinicio_servicio between @fecha_salida and @fecha_salida)
+											baja_cruc_fecha_fuera_servicio between @fecha_salida and @fecha_llegada
+											or baja_cruc_fecha_reinicio_servicio between @fecha_salida and @fecha_llegada)
 
 GO
 
