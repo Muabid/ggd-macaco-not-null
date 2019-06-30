@@ -144,5 +144,18 @@ namespace FrbaCrucero.CompraReservaPasaje
             gorm.Show();
             this.Close();
         }
+
+        private void txt_piso_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_piso_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
