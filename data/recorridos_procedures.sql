@@ -177,3 +177,16 @@ BEGIN
 	RETURN (@reco_id)
 END
 GO
+
+CREATE FUNCTION [MACACO_NOT_NULL].PrecioRecorrido (@reco_id decimal(18,0))
+RETURNS DECIMAL(18,2)
+AS
+BEGIN
+DECLARE @sum DECIMAL(18,2)
+
+SET @sum = 	(SELECT SUM(tram_precio_base)
+	FROM [MACACO_NOT_NULL].TRAMO
+	WHERE tram_recorrido_id = @reco_id)
+return(@sum)
+END
+GO

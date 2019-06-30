@@ -1172,37 +1172,13 @@ END
 GO
  
   --------- COMPROBACION VENCIMIENTO DE TODAS LAS RESERVAS DEL SISTEMA --------------
- 
 CREATE PROCEDURE [MACACO_NOT_NULL].ComprobarVigenciaReservasDelSistema
-@fecha_sistema DATETIME2(3)
-AS
-BEGIN 
-	DECLARE @loopCounter INT,@maxReservaId INT,@reserva_codigo decimal (18,0),@reserva_fecha DATETIME2(3)
-	SELECT @loopCounter = min(rese_id),@maxReservaId = max(rese_id) FROM [MACACO_NOT_NULL].[RESERVA]
-	WHILE (@loopCounter IS NOT NULL AND @loopCounter <= @maxReservaId)
-	BEGIN
-	   SELECT @reserva_codigo = rese_codigo FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_id = @loopCounter 
-	   SELECT @reserva_fecha = rese_fecha FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_id = @loopCounter 
-	   IF (DATEDIFF(day, @reserva_fecha, @fecha_sistema) > 3) 
-	   BEGIN
-			DELETE FROM [MACACO_NOT_NULL].[RESERVA_CABINA] WHERE reserva_id = @loopCounter
-			DELETE FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_codigo = @reserva_codigo
-	   END
-	   SELECT @loopCounter = min(rese_id) FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_id > @loopCounter
-	END
-END
- 
-GO
- 
-
-EXEC MACACO_NOT_NULL.ComprobarVigenciaReservasDelSistema2 @fecha_sistema = '2019-06-30'
-
-CREATE PROCEDURE [MACACO_NOT_NULL].ComprobarVigenciaReservasDelSistema2
 @fecha_sistema DATETIME2(3)
 AS
 BEGIN
 	DELETE FROM [MACACO_NOT_NULL].RESERVA Where DATEDIFF(day, rese_fecha, @fecha_sistema) > 3
 END
+GO
 
 CREATE TRIGGER [MACACO_NOT_NULL].DeleteReservasCabinas
 ON [MACACO_NOT_NULL].RESERVA
@@ -1211,8 +1187,6 @@ BEGIN
 	DELETE FROM [MACACO_NOT_NULL].RESERVA_CABINA WHERE reserva_id IN (select rese_id from deleted)
 	DELETE FROM [MACACO_NOT_NULL].RESERVA WHERE rese_id IN (select rese_id from deleted) 
 END
-
-
 GO
 
  --------- COMPROBACION VENCIMIENTO RESERVA --------------
@@ -1442,7 +1416,7 @@ CREATE FUNCTION [MACACO_NOT_NULL].DetallesReserva(@codigo_reserva [decimal] (18,
 	  reco_codigo [decimal](18, 0),
 	  puer_origen [nvarchar](255),
 	  puer_destino [nvarchar](255),
-	  tram_precio_base [decimal](18,2)
+	  precio_total_recorrido [decimal](18,2)
     )
 AS
 BEGIN
@@ -1468,9 +1442,9 @@ BEGIN
 	  cruc_modelo,
 	  comp_nombre,
 	  reco_codigo,
-	  P1.puer_nombre,
-	  P2.puer_id,
-	  tram_precio_base
+	  MACACO_NOT_NULL.ciudad_origen(reco_id),
+	  MACACO_NOT_NULL.ciudad_destino(reco_id),
+	  [MACACO_NOT_NULL].PrecioRecorrido(reco_id) 
     FROM [MACACO_NOT_NULL].[RESERVA]
 	INNER JOIN [MACACO_NOT_NULL].USUARIO ON usua_id = rese_usuario_id
 	INNER JOIN [MACACO_NOT_NULL].VIAJE on viaj_id = rese_viaje_id
@@ -1480,9 +1454,6 @@ BEGIN
 	INNER JOIN [MACACO_NOT_NULL].CABINA on cabi_id = cabina_id
 	INNER JOIN [MACACO_NOT_NULL].TIPO_SERVICIO on cabi_tipo_servicio_id = tipo_servicio_id
 	INNER JOIN [MACACO_NOT_NULL].RECORRIDO on reco_id = viaj_recorrido_id
-	INNER JOIN [MACACO_NOT_NULL].TRAMO on tram_recorrido_id = reco_id
-	INNER JOIN [MACACO_NOT_NULL].PUERTO P1 on tram_puerto_desde = P1.puer_id
-	INNER JOIN [MACACO_NOT_NULL].PUERTO P2 on tram_puerto_hasta = P2.puer_id
 	WHERE rese_codigo = @codigo_reserva 
  
     RETURN

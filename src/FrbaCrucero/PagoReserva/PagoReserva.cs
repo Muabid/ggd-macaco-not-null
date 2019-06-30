@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -54,33 +55,44 @@ namespace FrbaCrucero.PagoReserva
 
         private void botonBuscarReserva_Click(object sender, EventArgs e)
         {
+            try
+            {
+                SqlCommand cmd = Utils.Database.createCommand("SELECT  MACACO_NOT_NULL.ComprobarExistenciaReserva(@codigo)");
+
+                SqlParameter value = new SqlParameter("@codigo", SqlDbType.Decimal);
+                
+
+                if(String.IsNullOrEmpty(codigoReservaBox.Text))
+                {
+                    throw new Exception("Ingrese un codigo de reserva");
+                }
+                value.Value = Decimal.Parse(codigoReservaBox.Text);
+
+                cmd.Parameters.Add(value);
+
+                int resultado = Utils.Database.executeScalar(cmd);
 
 
+                if (resultado == 1)
+                {
+                    Decimal codigo = Decimal.Parse(codigoReservaBox.Text);
+                    SqlCommand sp = Utils.Database.createCommand("[MACACO_NOT_NULL].ComprobarVigenciaReserva");
+                    sp.Parameters.Add("@codigo_reserva", SqlDbType.Decimal).Value = codigo;
+                    sp.Parameters.Add("@fecha_sistema", SqlDbType.DateTime2).Value = DateTime.Parse(ConfigurationManager.AppSettings.Get("DATE"));
+                    pagoReservaTable.DataSource = this.getReservas(codigo);
 
-            SqlCommand cmd = Utils.Database.createCommand("SELECT  MACACO_NOT_NULL.ComprobarExistenciaReserva(@codigo)");
+                }
+                else
+                {
+                    MessageBox.Show("No existe la reserva");
 
-            SqlParameter value = new SqlParameter("@codigo", SqlDbType.Decimal);
-
-            value.Value = Decimal.Parse(codigoReservaBox.Text);
-
-            cmd.Parameters.Add(value);
-
-            int resultado = Utils.Database.executeScalar(cmd);
-
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
             
-            if (resultado == 1)
-            {
-
-                MessageBox.Show("Existe la reserva");
-           
-                pagoReservaTable.DataSource = this.getReservas(Decimal.Parse(codigoReservaBox.Text));
-
-            }
-            else
-            {
-                MessageBox.Show("No existe la reserva");
-
-            }
 
         }
 
@@ -89,7 +101,7 @@ namespace FrbaCrucero.PagoReserva
 
         public DataTable getReservas(Decimal codigoReserva)
         {
-            SqlCommand cmd = Utils.Database.createCommand("SELECT TOP 1 * FROM  MACACO_NOT_NULL.DetallesReserva(@codigo_reserva)");
+            SqlCommand cmd = Utils.Database.createCommand("SELECT DISTINCT * FROM  MACACO_NOT_NULL.DetallesReserva(@codigo_reserva)");
 
             SqlParameter a_cod_reserva = cmd.Parameters.Add("@codigo_reserva", SqlDbType.Decimal);
 
