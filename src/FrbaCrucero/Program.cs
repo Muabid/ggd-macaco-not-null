@@ -1,4 +1,5 @@
 ﻿using FrbaCrucero.AbmRecorrido;
+using FrbaCrucero.CompraReservaPasaje;
 using FrbaCrucero.GeneracionViaje;
 using FrbaCrucero.ListadoEstadistico;
 using FrbaCrucero.Utils;
@@ -25,12 +26,11 @@ namespace FrbaCrucero
           //  Application.Run(new CompraReservaPasaje.ComprarOReservarPasaje());
             //Application.Run(new Login.pantallaInicio());
             //Application.Run(new CompraReservaPasaje.Cliente());
-            Application.Run(new CompraReservaPasaje.ComprarOReservarPasaje());
             //Application.Run(new AbmRecorrido.RecorridoAbm());
             //Application.Run(new AbmRol.RolAbm());
             //Application.Run(new GeneracionViaje.GenerarViaje());
             //Application.Run(new PagoReserva.PagoReserva());
-            Application.Run(new AbmCrucero.FormPantallaInicio());
+            Application.Run(new ComprarOReservarPasaje());
 
         }
     }
