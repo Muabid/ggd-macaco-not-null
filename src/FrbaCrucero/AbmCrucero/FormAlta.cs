@@ -24,6 +24,58 @@ namespace FrbaCrucero.AbmCrucero
             InitializeComponent();
         }
 
+        public FormAlta(Crucero crucero)
+        {
+            InitializeComponent();
+            this.crucero = crucero;
+            txt_cabinas.Text = crucero.cruc_cantidad_cabinas.ToString();
+            dgv_cabinas.DataSource = cruceroDao.getCabinas(crucero);
+            this.btn_guardar.Click -= this.btn_guardar_Click;
+            this.btn_guardar.Click += (sender, e) =>
+            {
+
+                DataTable dt = new DataTable();
+                dt.Columns.Add("cabinas", System.Type.GetType("System.Int32"));
+                dt.Columns.Add("piso", System.Type.GetType("System.Int32"));
+                dt.Columns.Add("servicio", System.Type.GetType("System.String"));
+
+                foreach (DataGridViewRow row in dgv_cabinas.Rows)
+                {
+                    DataRow drow = dt.NewRow();
+                    drow["cabinas"] = int.Parse(row.Cells["cabinas"].Value.ToString());
+                    drow["piso"] = int.Parse(row.Cells["piso"].Value.ToString());
+                    drow["servicio"] = row.Cells["servicio"].Value.ToString();
+                    dt.Rows.Add(drow);
+                }
+                try
+                {
+                    SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].CreateCrucero");
+                    cmd.Parameters.Add("@nombre", SqlDbType.NVarChar).Value = crucero.cruc_nombre;
+                    cmd.Parameters.Add("@modelo", SqlDbType.NVarChar).Value = crucero.cruc_modelo;
+                    cmd.Parameters.Add("@compania", SqlDbType.Int).Value = crucero.cruc_compañia_id;
+                    cmd.Parameters.Add("@cant_cabinas", SqlDbType.Int).Value = crucero.cruc_cantidad_cabinas;
+                    cmd.Parameters.Add("@fecha_alta", SqlDbType.DateTime2).Value = crucero.cruc_fecha_alta;
+                    cmd.Parameters.Add("@cabinas", SqlDbType.Structured).Value = dt;
+                    Database.executeProcedure(cmd);
+
+                    SqlCommand reemplazarCrucero = Database.createCommand("SELECT cruc_id FROM [MACACO_NOT_NULL].CRUCERO WHERE cruc_nombre = @nombre ");
+                    reemplazarCrucero.Parameters.Add("@nombre", SqlDbType.Int).Value = crucero.cruc_nombre;
+                    int cruceroDeReemplazo = Database.executeProcedure(reemplazarCrucero);
+
+                    SqlCommand reemplazarCrucero2 = Database.createCommand("[MACACO_NOT_NULL].ReemplazarCrucero");
+                    reemplazarCrucero2.Parameters.Add("@idCruceroInactivo", SqlDbType.Int).Value = crucero.cruc_id;
+                    reemplazarCrucero2.Parameters.Add("@idCruceroReemplazante", SqlDbType.Int).Value = cruceroDeReemplazo;
+                    Database.executeProcedure(reemplazarCrucero2);
+                    MessageBox.Show("Crucero dado de alta y reemplazado con exito", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            };
+        }
+
         private void label6_Click(object sender, EventArgs e)
         {
 

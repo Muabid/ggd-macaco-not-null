@@ -151,10 +151,6 @@ namespace FrbaCrucero.AbmCrucero
 
             }
 
-
-
-
-
             if (estadoPasajes.Text == "Reemplazar crucero por otro")
             {
 
@@ -162,10 +158,18 @@ namespace FrbaCrucero.AbmCrucero
                 SqlCommand reemplazarCrucero = Database.createCommand("[MACACO_NOT_NULL].IdCruceroRemplazante");
                 reemplazarCrucero.Parameters.Add("@cruc_id", SqlDbType.Int).Value = crucero.cruc_id;
                 int cruceroDeReemplazo = Database.executeProcedure(reemplazarCrucero);
-                SqlCommand reemplazarCrucero2 = Database.createCommand("[MACACO_NOT_NULL].ReemplazarCrucero");
-                reemplazarCrucero2.Parameters.Add("@idCruceroInactivo", SqlDbType.Int).Value = crucero.cruc_id;
-                reemplazarCrucero2.Parameters.Add("@idCruceroReemplazante", SqlDbType.Int).Value = cruceroDeReemplazo;
-                Database.executeProcedure(reemplazarCrucero2);
+                if (cruceroDeReemplazo != null)
+                {
+                    SqlCommand reemplazarCrucero2 = Database.createCommand("[MACACO_NOT_NULL].ReemplazarCrucero");
+                    reemplazarCrucero2.Parameters.Add("@idCruceroInactivo", SqlDbType.Int).Value = crucero.cruc_id;
+                    reemplazarCrucero2.Parameters.Add("@idCruceroReemplazante", SqlDbType.Int).Value = cruceroDeReemplazo;
+                    Database.executeProcedure(reemplazarCrucero2);
+                }
+                else
+                {
+                    new FormAlta(crucero).Show();
+                }
+                
 
             }
             else if (estadoPasajes.Text == "Cancelar todos los pasajes")
