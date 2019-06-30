@@ -107,7 +107,10 @@ namespace FrbaCrucero.CompraReservaPasaje
                 {
                     c.Text = "";
                 }
+                if (c is MonthCalendar)
+                    ((MonthCalendar)c).Visible = false;
             }
+
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -117,7 +120,8 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void btn_seleccionar_Click(object sender, EventArgs e)
         {
-            txt_fecha_alta.Text = this.monthCalendar1.SelectionRange.Start.ToString();
+            monthCalendar1.Visible = true;
+            //txt_fecha_alta.Text = this.monthCalendar1.SelectionRange.Start.ToString();
 
         }
 
@@ -246,6 +250,64 @@ namespace FrbaCrucero.CompraReservaPasaje
         private void ClienteForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            txt_fecha_alta.Text = monthCalendar1.SelectionRange.Start.ToShortDateString();
+            monthCalendar1.Visible = false;
+        }
+
+        private void txt_telefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txt_nombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && (e.KeyChar != ',') && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txt_apellido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && (e.KeyChar != ',') && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txt_dni_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
+            {
+                e.Handled = true;
+            }
         }
 
       ///  this.textBox1.AutoCompleteSource = AutoCompleteSource.CustomSource; 
