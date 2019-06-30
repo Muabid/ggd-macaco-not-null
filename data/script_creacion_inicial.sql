@@ -670,8 +670,6 @@ INSERT INTO [MACACO_NOT_NULL].PAGO(
 
 GO
 
-
-
 IF NOT EXISTS (
 	SELECT *
 	FROM INFORMATION_SCHEMA.SEQUENCES
@@ -727,10 +725,7 @@ END
 GO
 
 
-
 -----BuscarRol
-
-
 
 CREATE PROCEDURE [MACACO_NOT_NULL].BuscarRol
 @nombre_rol NVARCHAR(255),
@@ -955,6 +950,7 @@ BEGIN
 END
 
 GO
+
 CREATE PROCEDURE [MACACO_NOT_NULL].AgregarBajaCruceroDefinitivo
 @idCrucero int,
 @baja_cruc_fecha_fuera_servicio_definitiva [datetime2](3)
@@ -963,9 +959,6 @@ BEGIN
 	INSERT INTO [MACACO_NOT_NULL].[BAJA_CRUCERO] (baja_cruc_id,baja_cruc_fecha_fuera_servicio,baja_cruc_fecha_reinicio_servicio,baja_cruc_motivo)
 		VALUES (@idCrucero,@baja_cruc_fecha_fuera_servicio_definitiva,null,null)
 END
-
-
-
 
 
 GO
@@ -1080,9 +1073,7 @@ CREATE PROCEDURE MACACO_NOT_NULL.IdCruceroRemplazante (@cruc_id int)
 AS	
 	BEGIN 
 				
-		CREATE TABLE #CRUCEROS_NO_REEMPLAZANTES(
-			id int identity(1,1) primary key,
-			cruc_id int)
+		CREATE TABLE #CRUCEROS_NO_REEMPLAZANTES(id int identity(1,1) primary key,cruc_id int)
 
 		DECLARE @fechaDesde date = getdate();
 		DECLARE @crucero_reemplazo_id int 
@@ -1091,7 +1082,6 @@ AS
 			(viaj_id int,
 			 viaj_salida date,
 			 viaj_llegada date)
-
 		
 		/* Obtengo todos los viajes del crucero al cual tengo que  remplazar */
 		INSERT INTO @viajes (viaj_id, viaj_salida, viaj_llegada)
@@ -1154,21 +1144,13 @@ AS
 									WHERE C.cant_tipo >= CR.cantidad
 									GROUP BY C.cruc_id
 									HAVING COUNT(*) = (SELECT COUNT(*) FROM #cantidadCabinasARemplazar))
-		
-				
-				
+					
 				IF(@crucero_reemplazo_id IS NULL) 
 					SET @crucero_reemplazo_id = -1
 
 			END
 				DROP TABLE #CRUCEROS_NO_REEMPLAZANTES
-
 		END 
-
-
-
-
-
 
 GO
 
@@ -1231,9 +1213,8 @@ BEGIN
 END
 
 
-select * from MACACO_NOT_NULL.RESERVA_CABINA
+GO
 
-EXEC MACACO_NOT_NULL.ComprobarVigenciaReservasDelSistema @fecha_sistema = '2018-06-30'
  --------- COMPROBACION VENCIMIENTO RESERVA --------------
 
 CREATE PROCEDURE [MACACO_NOT_NULL].ComprobarVigenciaReserva
@@ -1504,8 +1485,8 @@ BEGIN
 	INNER JOIN [MACACO_NOT_NULL].PUERTO P2 on tram_puerto_hasta = P2.puer_id
 	WHERE rese_codigo = @codigo_reserva 
  
-    RETURN;
-END;
+    RETURN
+END
 
 
 GO
@@ -1654,8 +1635,8 @@ BEGIN
 	INNER JOIN [MACACO_NOT_NULL].TIPO_SERVICIO  ON tipo_servicio_id= cabi_tipo_servicio_id 
 	WHERE cabi_piso = @piso and tipo_servicio_descripcion = @tipo_servicio
 		and @cruceroID = cabi_crucero_id
-    RETURN;
-END;
+    RETURN
+END
 
 GO
 
@@ -1698,23 +1679,23 @@ CREATE PROCEDURE [MACACO_NOT_NULL].CreteOrUpdateCliente @dni decimal(18,0), @nom
 @apellido nvarchar(255), @direccion nvarchar(255), @telefono int, @mail nvarchar(255), @nacimiento datetime2(3)
 AS
 BEGIN
-IF EXISTS (SELECT 1 FROM [MACACO_NOT_NULL].USUARIO WHERE usua_dni = @dni)
-BEGIN
-	UPDATE [MACACO_NOT_NULL].USUARIO
-	SET usua_nombre = @nombre,
-	usua_apellido = @apellido,
-	usua_direccion = @direccion,
-	usua_telefono = @telefono,
-	usua_mail = @mail,
-	usua_fecha_nac = @nacimiento
-	WHERE usua_dni = @dni;
-	
-END
-ELSE
-BEGIN
-	INSERT INTO [MACACO_NOT_NULL].USUARIO (usua_nombre,usua_apellido,usua_dni,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac)
-	VALUES (@nombre,@apellido,@dni,@direccion,@telefono,@mail,@nacimiento)
-END
+	IF EXISTS (SELECT 1 FROM [MACACO_NOT_NULL].USUARIO WHERE usua_dni = @dni)
+	BEGIN
+		UPDATE [MACACO_NOT_NULL].USUARIO
+		SET usua_nombre = @nombre,
+		usua_apellido = @apellido,
+		usua_direccion = @direccion,
+		usua_telefono = @telefono,
+		usua_mail = @mail,
+		usua_fecha_nac = @nacimiento
+		WHERE usua_dni = @dni;
+		
+	END
+	ELSE
+	BEGIN
+		INSERT INTO [MACACO_NOT_NULL].USUARIO (usua_nombre,usua_apellido,usua_dni,usua_direccion,usua_telefono,usua_mail,usua_fecha_nac)
+		VALUES (@nombre,@apellido,@dni,@direccion,@telefono,@mail,@nacimiento)
+	END
 END
 
 

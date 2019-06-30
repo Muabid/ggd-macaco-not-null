@@ -47,7 +47,7 @@ namespace FrbaCrucero.Login
                 procedure.Parameters.Add("@password", SqlDbType.NVarChar).Value = passwordTextBox.Text;
                 Utils.Database.executeProcedure(procedure);
 
-                SqlCommand cmd = Utils.Database.createCommand("[MACACO_NOT_NULL].ComprobarVigenciaReservasDelSistema");
+                SqlCommand cmd = Utils.Database.createCommand("[MACACO_NOT_NULL].ComprobarVigenciaReservasDelSistema2");
                 cmd.Parameters.Add("@fecha_sistema", SqlDbType.DateTime2).Value = DateTime.Parse(ConfigurationManager.AppSettings["DATE"]);
                 Utils.Database.executeProcedure(cmd);
                 this.Close();
