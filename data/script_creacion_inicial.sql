@@ -1416,7 +1416,7 @@ CREATE FUNCTION [MACACO_NOT_NULL].DetallesReserva(@codigo_reserva [decimal] (18,
 	  reco_codigo [decimal](18, 0),
 	  puer_origen [nvarchar](255),
 	  puer_destino [nvarchar](255),
-	  tram_precio_base [decimal](18,2)
+	  precio_total_recorrido [decimal](18,2)
     )
 AS
 BEGIN
