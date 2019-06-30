@@ -1193,9 +1193,6 @@ BEGIN
 END
  
 GO
- 
-
-EXEC MACACO_NOT_NULL.ComprobarVigenciaReservasDelSistema2 @fecha_sistema = '2019-06-30'
 
 CREATE PROCEDURE [MACACO_NOT_NULL].ComprobarVigenciaReservasDelSistema2
 @fecha_sistema DATETIME2(3)

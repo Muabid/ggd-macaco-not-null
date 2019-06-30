@@ -46,8 +46,6 @@
             this.btn_guardar = new System.Windows.Forms.Button();
             this.btn_limpiar = new System.Windows.Forms.Button();
             this.btn_atras = new System.Windows.Forms.Button();
-            this.estadoPasajes = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,9 +66,9 @@
             this.groupBox1.Controls.Add(this.txt_fecha_fuera_servicio);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Location = new System.Drawing.Point(20, 20);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(567, 339);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -80,7 +78,7 @@
             // btn_seleccionar_fecha_baja_definitiva
             // 
             this.btn_seleccionar_fecha_baja_definitiva.Location = new System.Drawing.Point(490, 95);
-            this.btn_seleccionar_fecha_baja_definitiva.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_seleccionar_fecha_baja_definitiva.Margin = new System.Windows.Forms.Padding(2);
             this.btn_seleccionar_fecha_baja_definitiva.Name = "btn_seleccionar_fecha_baja_definitiva";
             this.btn_seleccionar_fecha_baja_definitiva.Size = new System.Drawing.Size(73, 21);
             this.btn_seleccionar_fecha_baja_definitiva.TabIndex = 22;
@@ -91,7 +89,7 @@
             // txt_fecha_baja_definitiva
             // 
             this.txt_fecha_baja_definitiva.Location = new System.Drawing.Point(363, 97);
-            this.txt_fecha_baja_definitiva.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_fecha_baja_definitiva.Margin = new System.Windows.Forms.Padding(2);
             this.txt_fecha_baja_definitiva.Name = "txt_fecha_baja_definitiva";
             this.txt_fecha_baja_definitiva.ReadOnly = true;
             this.txt_fecha_baja_definitiva.Size = new System.Drawing.Size(123, 20);
@@ -111,7 +109,7 @@
             // 
             this.chb_vida_util.AutoSize = true;
             this.chb_vida_util.Location = new System.Drawing.Point(363, 38);
-            this.chb_vida_util.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chb_vida_util.Margin = new System.Windows.Forms.Padding(2);
             this.chb_vida_util.Name = "chb_vida_util";
             this.chb_vida_util.Size = new System.Drawing.Size(175, 17);
             this.chb_vida_util.TabIndex = 20;
@@ -123,7 +121,7 @@
             // 
             this.chb_fuera_de_servicio.AutoSize = true;
             this.chb_fuera_de_servicio.Location = new System.Drawing.Point(26, 38);
-            this.chb_fuera_de_servicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chb_fuera_de_servicio.Margin = new System.Windows.Forms.Padding(2);
             this.chb_fuera_de_servicio.Name = "chb_fuera_de_servicio";
             this.chb_fuera_de_servicio.Size = new System.Drawing.Size(151, 17);
             this.chb_fuera_de_servicio.TabIndex = 19;
@@ -134,7 +132,7 @@
             // txt_motivo
             // 
             this.txt_motivo.Location = new System.Drawing.Point(26, 198);
-            this.txt_motivo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_motivo.Margin = new System.Windows.Forms.Padding(2);
             this.txt_motivo.Multiline = true;
             this.txt_motivo.Name = "txt_motivo";
             this.txt_motivo.Size = new System.Drawing.Size(298, 136);
@@ -153,7 +151,7 @@
             // monthCalendar1
             // 
             this.monthCalendar1.Location = new System.Drawing.Point(363, 154);
-            this.monthCalendar1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.monthCalendar1.Margin = new System.Windows.Forms.Padding(7);
             this.monthCalendar1.MaxSelectionCount = 1;
             this.monthCalendar1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.monthCalendar1.Name = "monthCalendar1";
@@ -164,7 +162,7 @@
             // btn_seleccionar_fecha_reinicio_servicio
             // 
             this.btn_seleccionar_fecha_reinicio_servicio.Location = new System.Drawing.Point(152, 154);
-            this.btn_seleccionar_fecha_reinicio_servicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_seleccionar_fecha_reinicio_servicio.Margin = new System.Windows.Forms.Padding(2);
             this.btn_seleccionar_fecha_reinicio_servicio.Name = "btn_seleccionar_fecha_reinicio_servicio";
             this.btn_seleccionar_fecha_reinicio_servicio.Size = new System.Drawing.Size(73, 21);
             this.btn_seleccionar_fecha_reinicio_servicio.TabIndex = 14;
@@ -175,7 +173,7 @@
             // txt_fecha_reinicio_servicio
             // 
             this.txt_fecha_reinicio_servicio.Location = new System.Drawing.Point(26, 155);
-            this.txt_fecha_reinicio_servicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_fecha_reinicio_servicio.Margin = new System.Windows.Forms.Padding(2);
             this.txt_fecha_reinicio_servicio.Name = "txt_fecha_reinicio_servicio";
             this.txt_fecha_reinicio_servicio.ReadOnly = true;
             this.txt_fecha_reinicio_servicio.Size = new System.Drawing.Size(123, 20);
@@ -194,7 +192,7 @@
             // btn_seleccionar_fecha_fuera_servicio
             // 
             this.btn_seleccionar_fecha_fuera_servicio.Location = new System.Drawing.Point(152, 95);
-            this.btn_seleccionar_fecha_fuera_servicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_seleccionar_fecha_fuera_servicio.Margin = new System.Windows.Forms.Padding(2);
             this.btn_seleccionar_fecha_fuera_servicio.Name = "btn_seleccionar_fecha_fuera_servicio";
             this.btn_seleccionar_fecha_fuera_servicio.Size = new System.Drawing.Size(73, 21);
             this.btn_seleccionar_fecha_fuera_servicio.TabIndex = 10;
@@ -205,7 +203,7 @@
             // txt_fecha_fuera_servicio
             // 
             this.txt_fecha_fuera_servicio.Location = new System.Drawing.Point(26, 97);
-            this.txt_fecha_fuera_servicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_fecha_fuera_servicio.Margin = new System.Windows.Forms.Padding(2);
             this.txt_fecha_fuera_servicio.Name = "txt_fecha_fuera_servicio";
             this.txt_fecha_fuera_servicio.ReadOnly = true;
             this.txt_fecha_fuera_servicio.Size = new System.Drawing.Size(123, 20);
@@ -225,7 +223,7 @@
             // 
             this.btn_guardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_guardar.Location = new System.Drawing.Point(510, 406);
-            this.btn_guardar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_guardar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_guardar.Name = "btn_guardar";
             this.btn_guardar.Size = new System.Drawing.Size(73, 25);
             this.btn_guardar.TabIndex = 19;
@@ -237,7 +235,7 @@
             // 
             this.btn_limpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_limpiar.Location = new System.Drawing.Point(383, 402);
-            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_limpiar.Name = "btn_limpiar";
             this.btn_limpiar.Size = new System.Drawing.Size(73, 25);
             this.btn_limpiar.TabIndex = 18;
@@ -249,7 +247,7 @@
             // 
             this.btn_atras.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_atras.Location = new System.Drawing.Point(12, 406);
-            this.btn_atras.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_atras.Margin = new System.Windows.Forms.Padding(2);
             this.btn_atras.Name = "btn_atras";
             this.btn_atras.Size = new System.Drawing.Size(73, 25);
             this.btn_atras.TabIndex = 20;
@@ -257,42 +255,21 @@
             this.btn_atras.UseVisualStyleBackColor = true;
             this.btn_atras.Click += new System.EventHandler(this.btn_atras_Click);
             // 
-            // estadoPasajes
-            // 
-            this.estadoPasajes.FormattingEnabled = true;
-            this.estadoPasajes.Location = new System.Drawing.Point(110, 402);
-            this.estadoPasajes.Name = "estadoPasajes";
-            this.estadoPasajes.Size = new System.Drawing.Size(184, 21);
-            this.estadoPasajes.TabIndex = 21;
-            this.estadoPasajes.SelectedIndexChanged += new System.EventHandler(this.estadoPasajes_SelectedIndexChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(107, 371);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(177, 13);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "Elegir que suceden con los pasajes:";
-            // 
             // FormBaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(669, 464);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.estadoPasajes);
             this.Controls.Add(this.btn_atras);
             this.Controls.Add(this.btn_guardar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_limpiar);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormBaja";
             this.Text = "Baja Crucero";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -316,7 +293,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox chb_vida_util;
         private System.Windows.Forms.CheckBox chb_fuera_de_servicio;
-        private System.Windows.Forms.ComboBox estadoPasajes;
-        private System.Windows.Forms.Label label4;
     }
 }
