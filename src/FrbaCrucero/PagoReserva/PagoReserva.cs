@@ -74,9 +74,6 @@ namespace FrbaCrucero.PagoReserva
 
                 if (resultado == 1)
                 {
-
-                    MessageBox.Show("Existe la reserva");
-
                     pagoReservaTable.DataSource = this.getReservas(Decimal.Parse(codigoReservaBox.Text));
 
                 }

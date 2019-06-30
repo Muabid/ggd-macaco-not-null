@@ -1172,34 +1172,13 @@ END
 GO
  
   --------- COMPROBACION VENCIMIENTO DE TODAS LAS RESERVAS DEL SISTEMA --------------
- 
 CREATE PROCEDURE [MACACO_NOT_NULL].ComprobarVigenciaReservasDelSistema
-@fecha_sistema DATETIME2(3)
-AS
-BEGIN 
-	DECLARE @loopCounter INT,@maxReservaId INT,@reserva_codigo decimal (18,0),@reserva_fecha DATETIME2(3)
-	SELECT @loopCounter = min(rese_id),@maxReservaId = max(rese_id) FROM [MACACO_NOT_NULL].[RESERVA]
-	WHILE (@loopCounter IS NOT NULL AND @loopCounter <= @maxReservaId)
-	BEGIN
-	   SELECT @reserva_codigo = rese_codigo FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_id = @loopCounter 
-	   SELECT @reserva_fecha = rese_fecha FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_id = @loopCounter 
-	   IF (DATEDIFF(day, @reserva_fecha, @fecha_sistema) > 3) 
-	   BEGIN
-			DELETE FROM [MACACO_NOT_NULL].[RESERVA_CABINA] WHERE reserva_id = @loopCounter
-			DELETE FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_codigo = @reserva_codigo
-	   END
-	   SELECT @loopCounter = min(rese_id) FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_id > @loopCounter
-	END
-END
- 
-GO
-
-CREATE PROCEDURE [MACACO_NOT_NULL].ComprobarVigenciaReservasDelSistema2
 @fecha_sistema DATETIME2(3)
 AS
 BEGIN
 	DELETE FROM [MACACO_NOT_NULL].RESERVA Where DATEDIFF(day, rese_fecha, @fecha_sistema) > 3
 END
+GO
 
 CREATE TRIGGER [MACACO_NOT_NULL].DeleteReservasCabinas
 ON [MACACO_NOT_NULL].RESERVA
@@ -1208,8 +1187,6 @@ BEGIN
 	DELETE FROM [MACACO_NOT_NULL].RESERVA_CABINA WHERE reserva_id IN (select rese_id from deleted)
 	DELETE FROM [MACACO_NOT_NULL].RESERVA WHERE rese_id IN (select rese_id from deleted) 
 END
-
-
 GO
 
  --------- COMPROBACION VENCIMIENTO RESERVA --------------
