@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -59,7 +60,7 @@ namespace FrbaCrucero.PagoReserva
                 SqlCommand cmd = Utils.Database.createCommand("SELECT  MACACO_NOT_NULL.ComprobarExistenciaReserva(@codigo)");
 
                 SqlParameter value = new SqlParameter("@codigo", SqlDbType.Decimal);
-
+                
 
                 if(String.IsNullOrEmpty(codigoReservaBox.Text))
                 {
@@ -74,7 +75,11 @@ namespace FrbaCrucero.PagoReserva
 
                 if (resultado == 1)
                 {
-                    pagoReservaTable.DataSource = this.getReservas(Decimal.Parse(codigoReservaBox.Text));
+                    Decimal codigo = Decimal.Parse(codigoReservaBox.Text);
+                    SqlCommand sp = Utils.Database.createCommand("[MACACO_NOT_NULL].ComprobarVigenciaReserva");
+                    sp.Parameters.Add("@codigo_reserva", SqlDbType.Decimal).Value = codigo;
+                    sp.Parameters.Add("@fecha_sistema", SqlDbType.DateTime2).Value = DateTime.Parse(ConfigurationManager.AppSettings.Get("DATE"));
+                    pagoReservaTable.DataSource = this.getReservas(codigo);
 
                 }
                 else

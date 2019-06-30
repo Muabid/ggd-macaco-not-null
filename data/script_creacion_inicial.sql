@@ -1442,9 +1442,9 @@ BEGIN
 	  cruc_modelo,
 	  comp_nombre,
 	  reco_codigo,
-	  P1.puer_nombre,
-	  P2.puer_id,
-	  tram_precio_base
+	  MACACO_NOT_NULL.ciudad_origen(reco_id),
+	  MACACO_NOT_NULL.ciudad_destino(reco_id),
+	  [MACACO_NOT_NULL].PrecioRecorrido(reco_id) 
     FROM [MACACO_NOT_NULL].[RESERVA]
 	INNER JOIN [MACACO_NOT_NULL].USUARIO ON usua_id = rese_usuario_id
 	INNER JOIN [MACACO_NOT_NULL].VIAJE on viaj_id = rese_viaje_id
@@ -1454,9 +1454,6 @@ BEGIN
 	INNER JOIN [MACACO_NOT_NULL].CABINA on cabi_id = cabina_id
 	INNER JOIN [MACACO_NOT_NULL].TIPO_SERVICIO on cabi_tipo_servicio_id = tipo_servicio_id
 	INNER JOIN [MACACO_NOT_NULL].RECORRIDO on reco_id = viaj_recorrido_id
-	INNER JOIN [MACACO_NOT_NULL].TRAMO on tram_recorrido_id = reco_id
-	INNER JOIN [MACACO_NOT_NULL].PUERTO P1 on tram_puerto_desde = P1.puer_id
-	INNER JOIN [MACACO_NOT_NULL].PUERTO P2 on tram_puerto_hasta = P2.puer_id
 	WHERE rese_codigo = @codigo_reserva 
  
     RETURN
