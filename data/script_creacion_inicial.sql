@@ -825,7 +825,7 @@ GO
 
 GO
  
-CREATE PROCEDURE [MACACO_NOT_NULL].LogearUsuario 
+alter PROCEDURE [MACACO_NOT_NULL].LogearUsuario 
 @username NVARCHAR(255),
 @password NVARCHAR(255)
 AS
@@ -841,7 +841,7 @@ BEGIN
 		IF (EXISTS(SELECT 1 FROM [MACACO_NOT_NULL].LOGIN JOIN [MACACO_NOT_NULL].USUARIO ON (logi_usuario_id=usua_id)
 		 WHERE logi_username = @username AND usua_activo = 0))
 			RAISERROR ('ERROR: Usuario %s bloqueado.',16,1,@username)		
-		ELSE IF(NOT EXISTS(SELECT logi_usuario_id FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username AND logi_password	= @password))
+		ELSE IF(NOT EXISTS(SELECT logi_usuario_id FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username AND logi_password	= [MACACO_NOT_NULL].EncriptarPassword(@password)))
 		BEGIN
 			SET @intentosFallidos = (SELECT logi_intento_fallido FROM [MACACO_NOT_NULL].LOGIN WHERE logi_username = @username) +1					
 			UPDATE [MACACO_NOT_NULL].LOGIN SET logi_intento_fallido = @intentosFallidos WHERE logi_username = @username
@@ -1212,6 +1212,28 @@ END
  
 GO
  
+
+EXEC MACACO_NOT_NULL.ComprobarVigenciaReservasDelSistema2 @fecha_sistema = '2019-06-30'
+
+CREATE PROCEDURE [MACACO_NOT_NULL].ComprobarVigenciaReservasDelSistema2
+@fecha_sistema DATETIME2(3)
+AS
+BEGIN
+	DELETE FROM [MACACO_NOT_NULL].RESERVA Where DATEDIFF(day, rese_fecha, @fecha_sistema) > 3
+END
+
+CREATE TRIGGER [MACACO_NOT_NULL].DeleteReservasCabinas
+ON [MACACO_NOT_NULL].RESERVA
+INSTEAD OF DELETE AS
+BEGIN
+	DELETE FROM [MACACO_NOT_NULL].RESERVA_CABINA WHERE reserva_id IN (select rese_id from deleted)
+	DELETE FROM [MACACO_NOT_NULL].RESERVA WHERE rese_id IN (select rese_id from deleted) 
+END
+
+
+select * from MACACO_NOT_NULL.RESERVA_CABINA
+
+EXEC MACACO_NOT_NULL.ComprobarVigenciaReservasDelSistema @fecha_sistema = '2018-06-30'
  --------- COMPROBACION VENCIMIENTO RESERVA --------------
 
 CREATE PROCEDURE [MACACO_NOT_NULL].ComprobarVigenciaReserva
