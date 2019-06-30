@@ -21,8 +21,6 @@ namespace FrbaCrucero.AbmCrucero
         public FormBaja(Crucero crucero)
         {
             InitializeComponent();
-            estadoPasajes.Items.Add("Reemplazar crucero por otro");
-            estadoPasajes.Items.Add("Cancelar todos los pasajes");
             this.crucero = crucero;
         }
         int btn;
