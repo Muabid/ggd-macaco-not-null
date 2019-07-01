@@ -43,11 +43,11 @@ CREATE TABLE [MACACO_NOT_NULL].[USUARIO] (
 	usua_mail [nvarchar](255),
 	usua_fecha_nac  [datetime2](3) NOT NULL,
 	usua_rol_id [int] FOREIGN KEY REFERENCES [MACACO_NOT_NULL].ROL(rol_id),
-	usua_activo [bit] NOT NULL
+	usua_activo [bit] NOT NULL DEFAULT 1 
 );
 END
 GO
- 
+
  IF NOT EXISTS (
 	SELECT 1
 	FROM INFORMATION_SCHEMA.TABLES 
