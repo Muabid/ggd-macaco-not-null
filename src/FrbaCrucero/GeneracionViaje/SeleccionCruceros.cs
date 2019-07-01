@@ -86,6 +86,25 @@ namespace FrbaCrucero.GeneracionViaje
         {
             this.Close();
         }
+
+        private void btn_limpiar_Click(object sender, EventArgs e)
+        {
+            DataTable dt = (DataTable)this.dgv_cruceros.DataSource;
+            if (dt != null)
+                dt.Clear();
+            this.Controls.Cast<Control>().ToList()
+                .Where(c => c is GroupBox)
+                .SelectMany(c => c.Controls.Cast<Control>().ToList())
+                .ToList().ForEach(c =>
+                {
+                    if (c is ComboBox)
+                        ((ComboBox)c).SelectedIndex = -1;
+                    if (c is TextBox)
+                        c.Text = null;
+                    if (c is MonthCalendar)
+                        ((MonthCalendar)c).Visible = false;
+                });
+        }
         
     }
 }
