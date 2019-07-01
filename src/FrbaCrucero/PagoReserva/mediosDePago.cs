@@ -20,35 +20,41 @@ namespace FrbaCrucero.PagoReserva
             InitializeComponent();
             this.codigo = Codigo;
             reserva.Text = codigo;
+            descripcion.Items.AddRange(new object[]{"TARJETA VISA", "TARJETA MASTERCARD", "TARJETA AMERICANEXPRESS", "TARJETA CREDENCIAL"});
+            cantCuotas.Items.AddRange(new object[]{1, 2, 3, 6, 12});
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            this.Controls.Cast<Control>().ToList()
-                .Where(c => c is GroupBox)
-                .SelectMany(c => c.Controls.Cast<Control>().ToList())
-                .ToList().ForEach(c =>
-                {
-                    if (c is TextBox)
-                    {
-                        if (String.IsNullOrEmpty(c.Text))
-                        {
-                            throw new Exception("Requiere completar todos los datos");
-                        }
-                    }
-                });
-            String cuotas = cantCuotas.Text;
-            String variable = descripcion.Text;
-
-
-
+            
+            if(String.IsNullOrEmpty(cantCuotas.Text) && String.IsNullOrEmpty(descripcion.Text))
+            {
+                MessageBox.Show("Ingrese todos los datos");
+            }
+            else if (String.IsNullOrEmpty(cantCuotas.Text))
+            {
+                MessageBox.Show("Ingrese la cantidad de cuotas");
+            }
+            else if(String.IsNullOrEmpty(descripcion.Text))
+            {
+                MessageBox.Show("Ingre el medio de pago");
+            }
+            else
+            {
+                String cuotas = cantCuotas.Text;
+                String variable = descripcion.Text;
 
                 string[] new_row = new string[2];
                 new_row[0] =variable;
                 new_row[1] = cuotas;
                 tablaMediosDePago.Rows.Add(new_row);
+
+                cantCuotas.SelectedIndex = -1;
+                descripcion.SelectedIndex = -1;
+            }
+
+            
 
         }
 
@@ -124,9 +130,7 @@ namespace FrbaCrucero.PagoReserva
                 procedure3.Parameters.Add("@codigo_reserva", SqlDbType.Decimal).Value = cod_reserva;
                 Utils.Database.executeProcedure(procedure3);
                 MessageBox.Show("Se ha pagado la reserva ");
-                this.Hide();
-                PagoReserva pago = new PagoReserva();
-                pago.Show();
+                this.Close();
             }
             else
             {
