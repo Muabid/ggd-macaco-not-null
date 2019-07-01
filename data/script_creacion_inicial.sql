@@ -1508,19 +1508,36 @@ CREATE PROCEDURE [MACACO_NOT_NULL].[CrucerosConMasReparaciones]
 @semestre int
 AS
 BEGIN
-  SELECT TOP 5 cruc_modelo,cruc_nombre,comp_nombre 
-  FROM [MACACO_NOT_NULL].[CRUCERO]
-  INNER JOIN [MACACO_NOT_NULL].[COMPANIA] ON cruc_compañia_id = comp_id
-  order by  (
-				SELECT SUM(DATEDIFF(day,baja_cruc_fecha_fuera_servicio, baja_cruc_fecha_reinicio_servicio))
-				FROM [MACACO_NOT_NULL].[BAJA_CRUCERO] 	
-				where baja_cruc_id = cruc_id
-				and YEAR(baja_cruc_fecha_fuera_servicio) = @anio
+	DECLARE @tablaCruceros TABLE(cruc_id int,diasFueraServicio int);
+	insert into @tablaCruceros (cruc_id,diasFueraServicio)
+		SELECT baja_cruc_id, isNull(SUM(DATEDIFF(day,baja_cruc_fecha_fuera_servicio, baja_cruc_fecha_reinicio_servicio)),0)
+			FROM [MACACO_NOT_NULL].[BAJA_CRUCERO] 					
+				WHERE YEAR(baja_cruc_fecha_fuera_servicio) = @anio
 				and @semestre = CASE
 						WHEN DATEPART(month,baja_cruc_fecha_fuera_servicio) <= 6 THEN 1
 						WHEN DATEPART(month,baja_cruc_fecha_fuera_servicio) > 7 THEN 2
 					END
-			) DESC 
+			group by baja_cruc_id
+	IF exists((select sum(diasFueraServicio) from @tablaCruceros))
+	BEGIN	
+		RAISERROR('No hubo reparaciones de cruceros en ese año', 16,1)
+	END
+	ELSE
+	BEGIN		
+	  SELECT TOP 5 cruc_modelo,cruc_nombre,comp_nombre 
+	  FROM [MACACO_NOT_NULL].[CRUCERO]
+	  INNER JOIN [MACACO_NOT_NULL].[COMPANIA] ON cruc_compañia_id = comp_id
+	  order by  (
+					SELECT SUM(DATEDIFF(day,baja_cruc_fecha_fuera_servicio, baja_cruc_fecha_reinicio_servicio))
+					FROM [MACACO_NOT_NULL].[BAJA_CRUCERO] 	
+					where baja_cruc_id = cruc_id
+					and YEAR(baja_cruc_fecha_fuera_servicio) = @anio
+					and @semestre = CASE
+							WHEN DATEPART(month,baja_cruc_fecha_fuera_servicio) <= 6 THEN 1
+							WHEN DATEPART(month,baja_cruc_fecha_fuera_servicio) > 7 THEN 2
+						END
+				) DESC 
+	END
  END
 GO 
  
