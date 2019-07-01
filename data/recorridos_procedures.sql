@@ -149,6 +149,17 @@ END
 
 GO
 
+
+CREATE FUNCTION [MACACO_NOT_NULL].GetRecorridoIdByRecoCodigo (@reco_codigo DECIMAL(18,0))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @reco_id INT
+	SET @reco_id = (SELECT reco_id FROM MACACO_NOT_NULL.RECORRIDO WHERE reco_codigo = @reco_codigo)
+	RETURN (@reco_id)
+END
+GO
+
 CREATE PROCEDURE [MACACO_NOT_NULL].ModificarRecorrido @reco_codigo decimal(18,0),
 @tramos [MACACO_NOT_NULL].TRAMOTYPE READONLY 
 AS
@@ -168,15 +179,6 @@ BEGIN
 END
 GO
 
-CREATE FUNCTION [MACACO_NOT_NULL].GetRecorridoIdByRecoCodigo (@reco_codigo DECIMAL(18,0))
-RETURNS INT
-AS
-BEGIN
-	DECLARE @reco_id INT
-	SET @reco_id = (SELECT reco_id FROM MACACO_NOT_NULL.RECORRIDO WHERE reco_codigo = @reco_codigo)
-	RETURN (@reco_id)
-END
-GO
 
 
 
@@ -186,7 +188,7 @@ AS
 BEGIN
 DECLARE @sum DECIMAL(18,2)
 
-SET @sum = 	(SELECT SUM(tram_precio_base)
+SET @sum = (SELECT SUM(tram_precio_base)
 	FROM [MACACO_NOT_NULL].TRAMO
 	WHERE tram_recorrido_id = @reco_id)
 return(@sum)

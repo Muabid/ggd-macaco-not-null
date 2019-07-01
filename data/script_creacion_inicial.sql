@@ -820,7 +820,7 @@ GO
 
 GO
  
-alter PROCEDURE [MACACO_NOT_NULL].LogearUsuario 
+CREATE PROCEDURE [MACACO_NOT_NULL].LogearUsuario 
 @username NVARCHAR(255),
 @password NVARCHAR(255)
 AS
@@ -971,7 +971,7 @@ GO
 -- 3) SETEA LA FOREIGN KEY DE LOS PASAJES CANCELADOS, RELACIONANDOLOS CON LA BAJA QUE SE ACABA DE REALIZAR
 -- 4) BORRA LAS RESERVAS ASOCIADAS (SI LAS HAY) A TODOS LOS PASAJES CANCELADOS
 
-ALTER PROCEDURE [MACACO_NOT_NULL].CancelarPasajes
+CREATE PROCEDURE [MACACO_NOT_NULL].CancelarPasajes
 @idCrucero int
 AS
 BEGIN
@@ -1295,11 +1295,11 @@ CREATE PROCEDURE [MACACO_NOT_NULL].AgregarPasajeA_Cliente
 AS
 BEGIN
 	DECLARE @porcentajeRecargo DECIMAL (18,2)
-	SET @porcentajeRecargo = (SELECT tipo_servicio_porc_recargo FROM [MACACO_NOT_NULL].CABINA INNER JOIN TIPO_SERVICIO ON cabi_tipo_servicio_id = tipo_servicio_id where cabi_id = @cab_id_pasaje)
+	SET @porcentajeRecargo = (SELECT isnull(tipo_servicio_porc_recargo,1) FROM [MACACO_NOT_NULL].CABINA INNER JOIN MACACO_NOT_NULL.TIPO_SERVICIO ON cabi_tipo_servicio_id = tipo_servicio_id where cabi_id = @cab_id_pasaje)
 	INSERT INTO [MACACO_NOT_NULL].PASAJE (pasa_codigo,pasa_precio,pasa_fecha_compra,pasa_cab_id,pasa_viaje_id,pasa_pago_id)
 	VALUES 
 	(
-		 (SELECT MAX(pasa_id) from [MACACO_NOT_NULL].PASAJE) + 1 ,
+		 (SELECT (MAX(pasa_id) + 1)  from [MACACO_NOT_NULL].PASAJE),
 		 (
 			SELECT SUM(tram_precio_base)
 			FROM [MACACO_NOT_NULL].TRAMO 
@@ -1311,8 +1311,6 @@ BEGIN
 		 @cab_id_pasaje,@viaje_id_pasaje,(SELECT MAX(pago_id) FROM [MACACO_NOT_NULL].PAGO)
 	)
 END
-
-
 GO
 
 ------------------------------- PAGO DE RESERVA --------------
@@ -1336,7 +1334,6 @@ BEGIN
 	END
 	RETURN 1 
 END
-
 GO
 
 CREATE PROCEDURE [MACACO_NOT_NULL].AgregarPagoReserva_Y_PasajesAlCliente
@@ -1385,8 +1382,55 @@ BEGIN
 	DELETE FROM [MACACO_NOT_NULL].[RESERVA_CABINA] WHERE reserva_id = @id_reserva
 	DELETE FROM [MACACO_NOT_NULL].[RESERVA] WHERE rese_codigo = @codigo_reserva
 END
-
 GO
+
+
+CREATE FUNCTION MACACO_NOT_NULL.ciudad_origen (@reco_id INT)  
+RETURNS nvarchar(255)
+AS
+BEGIN
+	DECLARE @origen nvarchar(255);
+	SET @origen = (select puer_nombre from MACACO_NOT_NULL.PUERTO as p 
+		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_desde)
+		where t.tram_recorrido_id = @reco_id
+		and t.tram_id = (select MIN(t.tram_id) from MACACO_NOT_NULL.PUERTO as p 
+		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_desde)
+		where t.tram_recorrido_id = @reco_id))
+
+	RETURN(@origen);
+END
+GO
+
+
+CREATE FUNCTION MACACO_NOT_NULL.ciudad_destino (@reco_id INT)  
+RETURNS nvarchar(255)
+AS
+BEGIN
+	DECLARE @destino nvarchar(255)
+	SET @destino = (select puer_nombre from MACACO_NOT_NULL.PUERTO as p 
+		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_hasta)
+		where t.tram_recorrido_id = @reco_id
+		and t.tram_id = (select MAX(t.tram_id) from MACACO_NOT_NULL.PUERTO as p 
+		join MACACO_NOT_NULL.TRAMO as t on (p.puer_id = t.tram_puerto_hasta)
+		where t.tram_recorrido_id = @reco_id))
+
+	RETURN(@destino)
+END
+GO
+
+CREATE FUNCTION [MACACO_NOT_NULL].PrecioRecorrido (@reco_id decimal(18,0))
+RETURNS DECIMAL(18,2)
+AS
+BEGIN
+DECLARE @sum DECIMAL(18,2)
+
+SET @sum = (SELECT SUM(tram_precio_base)
+	FROM [MACACO_NOT_NULL].TRAMO
+	WHERE tram_recorrido_id = @reco_id)
+return(@sum)
+END
+GO
+
 
 ------- FUNCION QUE RETORNA TODA LA INFORMACION ASOCIADA A UNA RESERVA --------------
 
@@ -1458,9 +1502,339 @@ BEGIN
  
     RETURN
 END
+GO
 
+--------------------------CRUCEROS-------------------------------
+CREATE PROCEDURE [MACACO_NOT_NULL].GetCruceros @nombre NVARCHAR(256), @modelo NVARCHAR(256), @compania NVARCHAR(256), @cabinas INT, @fecha_salida DATETIME2, @fecha_llegada DATETIME2
+AS
+select cr.cruc_id,cruc_nombre, cruc_modelo, cruc_compañia_id,comp_nombre, cruc_cantidad_cabinas,cruc_fecha_alta  
+from MACACO_NOT_NULL.CRUCERO cr
+join MACACO_NOT_NULL.COMPANIA co
+on cr.cruc_compañia_id = co.comp_id
+where cruc_activo = 1 and 
+(@nombre is null or cruc_nombre like CONCAT('%',@nombre,'%')) and
+(@modelo is null or cruc_modelo = @modelo) and 
+(@compania is null or co.comp_nombre = @compania) and 
+(@cabinas is null or @cabinas < cruc_cantidad_cabinas) and
+cruc_id not in ( select viaj_crucero_id 
+											from MACACO_NOT_NULL.VIAJE
+											WHERE viaj_fecha_llegada_estimada between @fecha_salida and @fecha_llegada
+											or viaj_fecha_salida between @fecha_salida and @fecha_llegada
+											union
+											select baja_cruc_id
+											from MACACO_NOT_NULL.BAJA_CRUCERO
+											where baja_cruc_id = cruc_id and
+											baja_cruc_fecha_fuera_servicio between @fecha_salida and @fecha_llegada
+											or baja_cruc_fecha_reinicio_servicio between @fecha_salida and @fecha_llegada)
 
 GO
+
+CREATE TYPE [MACACO_NOT_NULL].CABINA_PISO AS TABLE (
+cabinas INT,
+piso INT,
+servicio NVARCHAR(256) )
+GO
+
+
+CREATE SEQUENCE [MACACO_NOT_NULL].cabi_nro
+AS INT
+START WITH 1
+INCREMENT BY 1;
+
+GO
+
+CREATE PROCEDURE [MACACO_NOT_NULL].CreateCrucero @nombre NVARCHAR(256), @modelo NVARCHAR(256),
+	@compania INT,@fecha_alta DATETIME2(3),@cant_cabinas INT, @cabinas [MACACO_NOT_NULL].CABINA_PISO readonly  
+AS
+BEGIN TRANSACTION
+BEGIN TRY
+	IF(EXISTS(SELECT cruc_id from MACACO_NOT_NULL.CRUCERO WHERE cruc_nombre = @nombre))
+		THROW 51000, 'Nombre ya utilizado', 1;
+	INSERT INTO MACACO_NOT_NULL.CRUCERO (cruc_compañia_id, cruc_nombre, cruc_modelo, cruc_fecha_alta,cruc_cantidad_cabinas)
+	VALUES (@compania,@nombre,@modelo,@fecha_alta,@cant_cabinas)
+	DECLARE @cruc_id INT
+	SET @cruc_id = (SELECT cruc_id from MACACO_NOT_NULL.CRUCERO WHERE cruc_nombre = @nombre)
+	DECLARE @piso INT
+	DECLARE @cabinas_piso INT
+	DECLARE @servicio nvarchar(256)
+	DECLARE pisos CURSOR FOR SELECT DISTINCT piso FROM @cabinas
+	OPEN pisos
+	FETCH NEXT FROM pisos INTO @piso
+	WHILE  @@FETCH_STATUS = 0
+	BEGIN
+		DECLARE servicios CURSOR FOR SELECT servicio FROM @cabinas c WHERE c.piso = @piso
+		OPEN servicios
+		FETCH NEXT FROM servicios INTO @servicio
+		WHILE  @@FETCH_STATUS = 0
+		BEGIN
+			SET @cabinas_piso = (select cabinas from @cabinas where piso = @piso and servicio = @servicio)
+			DECLARE @i INT 
+			SET @i = 1
+				WHILE @i <= @cabinas_piso
+				BEGIN 
+					INSERT INTO MACACO_NOT_NULL.CABINA (cabi_piso,cabi_nro,cabi_tipo_servicio_id,cabi_crucero_id)
+					VALUES (@piso,(NEXT VALUE FOR [MACACO_NOT_NULL].cabi_nro),(select tipo_servicio_id from MACACO_NOT_NULL.TIPO_SERVICIO where tipo_servicio_descripcion = @servicio),@cruc_id)
+					SET @i = @i + 1;
+				END
+			FETCH NEXT FROM servicios INTO @servicio			
+		END
+		ALTER SEQUENCE [MACACO_NOT_NULL].cabi_nro RESTART
+		CLOSE servicios;
+		DEALLOCATE servicios;
+		FETCH NEXT FROM pisos INTO @piso
+	 END
+	 CLOSE pisos;
+	 DEALLOCATE pisos;
+COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+	ROLLBACK TRANSACTION;
+	THROW;
+END CATCH
+GO
+
+CREATE PROCEDURE [MACACO_NOT_NULL].UpdateCrucero @crucero_id INT, @nombre NVARCHAR(256), @modelo NVARCHAR(256), @compania INT
+AS
+BEGIN TRANSACTION
+UPDATE [MACACO_NOT_NULL].CRUCERO
+SET cruc_nombre = @nombre, cruc_modelo = @modelo, cruc_compañia_id = @compania
+WHERE cruc_id = @crucero_id
+
+IF((SELECT COUNT(1) FROM [MACACO_NOT_NULL].CRUCERO WHERE cruc_nombre = @nombre) > 1)
+BEGIN
+	ROLLBACK TRANSACTION;
+	THROW 51000, 'Nombre ya utilizado', 1;
+END
+COMMIT TRANSACTION; 
+GO
+
+CREATE PROCEDURE [MACACO_NOT_NULL].GetCabinasXPisoYServicio @crucero_id INT
+AS
+BEGIN
+SELECT cabi_piso as piso,COUNT(cabi_id) as cabinas,tipo_servicio_descripcion as servicio
+FROM [MACACO_NOT_NULL].CABINA	
+JOIN [MACACO_NOT_NULL].TIPO_SERVICIO
+ON cabi_tipo_servicio_id = tipo_servicio_id
+WHERE cabi_crucero_id = @crucero_id
+GROUP BY cabi_piso,tipo_servicio_descripcion
+ORDER BY cabi_piso, tipo_servicio_descripcion
+END
+GO
+
+
+-------------------------------RECORRIDOS--------------
+
+CREATE PROCEDURE [MACACO_NOT_NULL].GetTramos @reco_codigo decimal(18,0)
+AS
+BEGIN
+	SELECT tram_id as tramoId, p_d.puer_nombre as desde, p_h.puer_nombre as hasta, tram_precio_base as precio
+	FROM MACACO_NOT_NULL.RECORRIDO AS r
+	LEFT JOIN MACACO_NOT_NULL.TRAMO t
+	ON r.reco_id = t.tram_recorrido_id
+	LEFT JOIN MACACO_NOT_NULL.PUERTO AS p_d
+	ON p_d.puer_id = tram_puerto_desde
+	LEFT JOIN MACACO_NOT_NULL.PUERTO AS p_h
+	ON p_h.puer_id = tram_puerto_hasta
+	WHERE reco_codigo = @reco_codigo AND reco_activo = 1
+	ORDER BY tram_id
+END
+GO
+
+
+
+CREATE PROCEDURE [MACACO_NOT_NULL].getRecorridos @reco_codigo DECIMAL(18,0),
+	@ciudad_origen NVARCHAR(256), @ciudad_destino NVARCHAR(256)
+AS
+BEGIN
+	SELECT r.reco_id as id,r.reco_codigo as codigo, MACACO_NOT_NULL.ciudad_origen(t.tram_recorrido_id) as
+	 ciudadOrigen, MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) as
+	  ciudadDestino, SUM(t.tram_precio_base) as precio
+	FROM MACACO_NOT_NULL.RECORRIDO AS r
+	LEFT JOIN MACACO_NOT_NULL.TRAMO t
+	ON r.reco_id = t.tram_recorrido_id
+	LEFT JOIN MACACO_NOT_NULL.PUERTO AS p_d
+	ON p_d.puer_id = tram_puerto_desde
+	LEFT JOIN MACACO_NOT_NULL.PUERTO AS p_h
+	ON p_h.puer_id = tram_puerto_hasta
+	WHERE reco_activo = 1 
+	GROUP BY  r.reco_id,r.reco_codigo,t.tram_recorrido_id
+	HAVING (@reco_codigo IS NULL OR (CONVERT(NVARCHAR(18),reco_codigo) LIKE CONCAT('%',@reco_codigo,'%')))
+	AND (@ciudad_origen IS NULL OR (MACACO_NOT_NULL.ciudad_origen(t.tram_recorrido_id) = @ciudad_origen))
+	AND (@ciudad_destino IS NULL OR (MACACO_NOT_NULL.ciudad_destino(t.tram_recorrido_id) = @ciudad_destino)) 
+END
+GO
+
+
+CREATE TYPE [MACACO_NOT_NULL].TRAMOTYPE AS TABLE   
+( ciudadOrigen INT 
+, ciudadDestino INT
+,precio DECIMAL(18,2)
+,indice INT
+,tramoId INT )  
+GO
+
+
+CREATE PROCEDURE [MACACO_NOT_NULL].InsertRecorrido @reco_codigo decimal(18,0),
+ @tramos [MACACO_NOT_NULL].TRAMOTYPE READONLY
+AS
+BEGIN  
+	IF EXISTS (SELECT reco_id FROM [MACACO_NOT_NULL].RECORRIDO
+	 WHERE reco_codigo =@reco_codigo)
+		THROW 51000, 'Código ya existente', 1;
+	 ELSE
+	BEGIN TRANSACTION
+	BEGIN TRY
+		INSERT INTO [MACACO_NOT_NULL].RECORRIDO (reco_codigo,reco_activo)
+			VALUES (@reco_codigo,1);
+
+		DECLARE @reco_id INT;
+
+		SET @reco_id = (SELECT reco_id FROM  [MACACO_NOT_NULL].RECORRIDO
+					WHERE reco_codigo = @reco_codigo);
+
+		INSERT INTO [MACACO_NOT_NULL].TRAMO 
+		SELECT @reco_id, ciudadOrigen, ciudadDestino, precio 
+		FROM @tramos
+		ORDER BY indice
+
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK;
+		THROW;
+	END CATCH
+END 
+GO
+
+CREATE PROCEDURE [MACACO_NOT_NULL].BajaRecorrido @reco_codigo decimal(18,0)
+AS
+BEGIN
+IF EXISTS (SELECT pasa_id FROM [MACACO_NOT_NULL].RECORRIDO AS r 
+			JOIN [MACACO_NOT_NULL].VIAJE AS v
+			ON (r.reco_id = v.viaj_recorrido_id)
+			JOIN [MACACO_NOT_NULL].PASAJE AS p
+			ON (v.viaj_recorrido_id = p.pasa_viaje_id)
+			WHERE reco_codigo = @reco_codigo
+			AND v.viaj_fecha_llegada > GETDATE())
+		THROW 51000, 'Existen pasajes de viajes que contienen al recorrido', 1;
+	 ELSE
+		UPDATE [MACACO_NOT_NULL].RECORRIDO
+		SET reco_activo = 0
+		WHERE reco_codigo = @reco_codigo
+END
+GO
+
+
+CREATE FUNCTION [MACACO_NOT_NULL].GetPuertoId (@puerto NVARCHAR(256))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @id INT
+	SET @id = (SELECT puer_id FROM [MACACO_NOT_NULL].PUERTO WHERE puer_nombre = @puerto)
+	RETURN (@id)
+END
+GO
+
+CREATE PROCEDURE [MACACO_NOT_NULL].GetPuertoByName @name NVARCHAR(256)
+AS
+BEGIN 
+	SELECT puer_id,puer_nombre FROM [MACACO_NOT_NULL].PUERTO WHERE puer_nombre = @name
+END
+
+GO
+
+
+CREATE FUNCTION [MACACO_NOT_NULL].GetRecorridoIdByRecoCodigo (@reco_codigo DECIMAL(18,0))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @reco_id INT
+	SET @reco_id = (SELECT reco_id FROM MACACO_NOT_NULL.RECORRIDO WHERE reco_codigo = @reco_codigo)
+	RETURN (@reco_id)
+END
+GO
+
+CREATE PROCEDURE [MACACO_NOT_NULL].ModificarRecorrido @reco_codigo decimal(18,0),
+@tramos [MACACO_NOT_NULL].TRAMOTYPE READONLY 
+AS
+BEGIN
+	MERGE MACACO_NOT_NULL.TRAMO as t 
+		USING @tramos as t_n
+		on (t.tram_id = t_n.tramoId)
+	WHEN MATCHED THEN UPDATE
+	SET t.tram_puerto_desde = t_n.ciudadOrigen
+	, t.tram_puerto_hasta = t_n.ciudadDestino
+	, t.tram_precio_base = t_n.precio
+	WHEN NOT MATCHED BY TARGET
+	THEN INSERT (tram_recorrido_id,tram_puerto_desde,tram_puerto_hasta,tram_precio_base)
+	VALUES (MACACO_NOT_NULL.GetRecorridoIdByRecoCodigo(@reco_codigo),t_n.ciudadOrigen, t_n.ciudadDestino,t_n.precio)
+	WHEN NOT MATCHED  BY SOURCE AND t.tram_recorrido_id = MACACO_NOT_NULL.GetRecorridoIdByRecoCodigo(@reco_codigo)
+	 THEN DELETE;
+END
+GO
+
+
+-------VIAJES--------
+CREATE PROCEDURE [MACACO_NOT_NULL].GenerarViaje @fecha_salida datetime2(3),
+ @fecha_llegada datetime2(3), @recorrido_id INT, @crucero_id INT
+AS
+	BEGIN
+		INSERT INTO [MACACO_NOT_NULL].VIAJE (viaj_fecha_salida,viaj_fecha_llegada_estimada,viaj_crucero_id,viaj_recorrido_id)
+		VALUES(@fecha_salida,@fecha_llegada,@crucero_id,@recorrido_id)
+	END
+GO
+
+
+--------------------ROLES--------------------------
+
+CREATE VIEW [MACACO_NOT_NULL].RolesXFuncionalidades AS
+SELECT r_f.rol_funcionalidad_id,r.rol_id,r.rol_nombre, f.func_id, func_detalle FROM [MACACO_NOT_NULL].FUNCIONALIDAD as f
+JOIN [MACACO_NOT_NULL].ROL_FUNCIONALIDAD as r_f
+ON f.func_id = r_f.func_id
+JOIN [MACACO_NOT_NULL].ROL as r
+ON r_f.rol_id = r.rol_id;
+GO
+
+
+CREATE PROCEDURE [MACACO_NOT_NULL].GetFuncionalidades @rol_id INT
+AS
+BEGIN
+	SELECT func_id, func_detalle FROM [MACACO_NOT_NULL].RolesXFuncionalidades
+	WHERE rol_id = @rol_id
+END;
+GO
+
+
+
+
+CREATE TYPE [MACACO_NOT_NULL].FUNCIONALIDADES_ROL_LIST AS TABLE(
+rol_funcionalidad_id INT,
+func_id INT,
+func_detalle NVARCHAR(256));
+GO
+
+CREATE PROCEDURE [MACACO_NOT_NULL].UpdateRol @rol_id INT, @nombre NVARCHAR(256),
+ @funcionalidades [MACACO_NOT_NULL].FUNCIONALIDADES_ROL_LIST READONLY 
+AS
+BEGIN TRANSACTION
+
+	UPDATE [MACACO_NOT_NULL].ROL
+	SET rol_nombre = @nombre
+	WHERE rol_id = @rol_id;
+
+	MERGE [MACACO_NOT_NULL].ROL_FUNCIONALIDAD as rf
+	USING @funcionalidades as f 
+	ON (rf.rol_funcionalidad_id = f.rol_funcionalidad_id)
+	WHEN NOT MATCHED BY TARGET
+	THEN INSERT (func_id, rol_id) VALUES (f.func_id,@rol_id)
+	WHEN NOT MATCHED BY SOURCE AND rf.rol_id = @rol_id
+	THEN DELETE;
+
+COMMIT TRANSACTION;
+GO
+
+
+
 
  -------------------- REPORTES ---------------------
 
@@ -1487,7 +1861,6 @@ BEGIN
 	FROM @tablaRecorridos
 	order by pasajes_comprados DESC 
 END
-
 GO
   
 
@@ -1608,7 +1981,6 @@ select viaj_id ,
 		and (@puertoDestino IS NULL OR @puertoDestino in (select puer_nombre from [MACACO_NOT_NULL].TRAMO inner join [MACACO_NOT_NULL].PUERTO origen ON tram_puerto_hasta = origen.puer_id
 			where tram_recorrido_id = reco_id))
 END
-
 GO
 
 
@@ -1633,7 +2005,6 @@ BEGIN
 		and @cruceroID = cabi_crucero_id
     RETURN
 END
-
 GO
 
 CREATE PROCEDURE [MACACO_NOT_NULL].GetTipoServicioByDescription @descripcion NVARCHAR(255)
@@ -1693,30 +2064,30 @@ BEGIN
 		VALUES (@nombre,@apellido,@dni,@direccion,@telefono,@mail,@nacimiento)
 	END
 END
+GO
 
 
-
-ALTER PROCEDURE [MACACO_NOT_NULL].VerificarViajeYaRerservadOComprado @usua_id INT, @viaje_id INT
+CREATE PROCEDURE [MACACO_NOT_NULL].VerificarViajeYaRerservadOComprado @usua_id INT, @viaje_id INT
 AS
 BEGIN
 DECLARE @fecha_salida DATETIME2
 DECLARE @fecha_llegada DATETIME2
 SET @fecha_salida = (SELECT viaj_fecha_salida FROM MACACO_NOT_NULL.VIAJE WHERE viaj_id = @viaje_id)
 SET @fecha_llegada= (SELECT viaj_fecha_llegada_estimada FROM MACACO_NOT_NULL.VIAJE WHERE viaj_id = @viaje_id)
-IF(EXISTS (SELECT 1 FROM MACACO_NOT_NULL.PASAJE p JOIN MACACO_NOT_NULL.VIAJE v ON p.pasa_viaje_id = v.viaj_id 
-		JOIN MACACO_NOT_NULL.PAGO pa ON pa.pago_id = p.pasa_pago_id 
-		WHERE pa.pago_usuario_id = @usua_id and (viaj_fecha_llegada_estimada between @fecha_salida and @fecha_llegada
-											or viaj_fecha_salida between @fecha_salida and @fecha_llegada)
-		UNION 
-		SELECT 1 FROM MACACO_NOT_NULL.RESERVA r
-		JOIN MACACO_NOT_NULL.VIAJE v ON r.rese_viaje_id = v.viaj_id
-		WHERE rese_usuario_id = @usua_id and (viaj_fecha_llegada_estimada between @fecha_salida and @fecha_llegada
-											or viaj_fecha_salida between @fecha_salida and @fecha_llegada)))
-BEGIN
-RAISERROR('YA TIENE UN VIAJE EN ESA FECHA',16,1)
+	IF(EXISTS (SELECT 1 FROM MACACO_NOT_NULL.PASAJE p JOIN MACACO_NOT_NULL.VIAJE v ON p.pasa_viaje_id = v.viaj_id 
+			JOIN MACACO_NOT_NULL.PAGO pa ON pa.pago_id = p.pasa_pago_id 
+			WHERE pa.pago_usuario_id = @usua_id and (viaj_fecha_llegada_estimada between @fecha_salida and @fecha_llegada
+												or viaj_fecha_salida between @fecha_salida and @fecha_llegada)
+			UNION 
+			SELECT 1 FROM MACACO_NOT_NULL.RESERVA r
+			JOIN MACACO_NOT_NULL.VIAJE v ON r.rese_viaje_id = v.viaj_id
+			WHERE rese_usuario_id = @usua_id and (viaj_fecha_llegada_estimada between @fecha_salida and @fecha_llegada
+												or viaj_fecha_salida between @fecha_salida and @fecha_llegada)))
+		BEGIN
+		RAISERROR('YA TIENE UN VIAJE EN ESA FECHA',16,1)
+		END
 END
-END
-
+GO
 
 /*
 DROP TABLE [MACACO_NOT_NULL].[TRAMO]
@@ -1743,111 +2114,3 @@ DROP SEQUENCE [MACACO_NOT_NULL].CountBy1
 DROP SCHEMA MACACO_NOT_NULL */
 
 
-/********************************************************
- COPYRIGHTS http://www.ranjithk.com
-*********************************************************/  
-CREATE PROCEDURE MACACO_NOT_NULL.CleanUpSchema
-(
-  @SchemaName varchar(100)
- ,@WorkTest char(1) = 'w'  -- use 'w' to work and 't' to print
-)
-AS
-BEGIN    
-
-declare @SQL varchar(4000)
-declare @msg varchar(500)
- 
-IF OBJECT_ID('tempdb..#dropcode') IS NOT NULL DROP TABLE #dropcode
-CREATE TABLE #dropcode
-(
-   ID int identity(1,1)
-  ,SQLstatement varchar(1000) 
- )
-
--- removes all the foreign keys that reference a PK in the target schema
- SELECT @SQL = 
-  'select 
-       '' ALTER TABLE ''+SCHEMA_NAME(fk.schema_id)+''.''+OBJECT_NAME(fk.parent_object_id)+'' DROP CONSTRAINT ''+ fk.name
-  FROM sys.foreign_keys fk
-  join sys.tables t on t.object_id = fk.referenced_object_id
-  where t.schema_id = schema_id(''' + @SchemaName+''')
-    and fk.schema_id <> t.schema_id 
-  order by fk.name desc'
- 
- IF @WorkTest = 't' PRINT (@SQL )
- INSERT INTO #dropcode
- EXEC (@SQL)
-   
- -- drop all default constraints, check constraints and Foreign Keys
- SELECT @SQL = 
- 'SELECT 
-       '' ALTER TABLE ''+schema_name(t.schema_id)+''.''+OBJECT_NAME(fk.parent_object_id)+'' DROP CONSTRAINT ''+ fk.[Name]
-  FROM sys.objects fk
-  join sys.tables t on t.object_id = fk.parent_object_id
-  where t.schema_id = schema_id(''' + @SchemaName+''')
-   and fk.type IN (''D'', ''C'', ''F'')'
-   
- IF @WorkTest = 't' PRINT (@SQL )
- INSERT INTO #dropcode
- EXEC (@SQL)
-  
- -- drop all other objects in order    
- SELECT @SQL =   
- 'SELECT 
-      CASE WHEN SO.type=''PK'' THEN '' ALTER TABLE ''+SCHEMA_NAME(SO.schema_id)+''.''+OBJECT_NAME(SO.parent_object_id)+'' DROP CONSTRAINT ''+ SO.name
-           WHEN SO.type=''U'' THEN '' DROP TABLE ''+SCHEMA_NAME(SO.schema_id)+''.''+ SO.[Name]
-           WHEN SO.type=''V'' THEN '' DROP VIEW  ''+SCHEMA_NAME(SO.schema_id)+''.''+ SO.[Name]
-           WHEN SO.type=''P'' THEN '' DROP PROCEDURE  ''+SCHEMA_NAME(SO.schema_id)+''.''+ SO.[Name]          
-           WHEN SO.type=''TR'' THEN ''  DROP TRIGGER  ''+SCHEMA_NAME(SO.schema_id)+''.''+ SO.[Name]
-           WHEN SO.type  IN (''FN'', ''TF'',''IF'',''FS'',''FT'') THEN '' DROP FUNCTION  ''+SCHEMA_NAME(SO.schema_id)+''.''+ SO.[Name]
-       END
-FROM sys.objects SO
-WHERE SO.schema_id = schema_id('''+ @SchemaName +''')
-  AND SO.type IN (''PK'', ''FN'', ''TF'', ''TR'', ''V'', ''U'', ''P'')
-ORDER BY CASE WHEN type = ''PK'' THEN 1 
-              WHEN type in (''FN'', ''TF'', ''P'',''IF'',''FS'',''FT'') THEN 2
-              WHEN type = ''TR'' THEN 3
-              WHEN type = ''V'' THEN 4
-              WHEN type = ''U'' THEN 5
-            ELSE 6 
-          END'
-
-IF @WorkTest = 't' PRINT (@SQL )
-INSERT INTO #dropcode
-EXEC (@SQL)
-  
-DECLARE @ID int, @statement varchar(1000)
-DECLARE statement_cursor CURSOR
-FOR SELECT SQLstatement
-      FROM #dropcode
-  ORDER BY ID ASC
-     
- OPEN statement_cursor
- FETCH statement_cursor INTO @statement 
- WHILE (@@FETCH_STATUS = 0)
- BEGIN
- 
- IF @WorkTest = 't' PRINT (@statement)
- ELSE
-  BEGIN
-    PRINT (@statement)
-    EXEC(@statement) 
-  END
-   
- FETCH statement_cursor INTO @statement     
-END
-  
-CLOSE statement_cursor
-DEALLOCATE statement_cursor
-  
-IF @WorkTest = 't' PRINT ('DROP SCHEMA '+@SchemaName)
-ELSE
- BEGIN
-   PRINT ('DROP SCHEMA '+@SchemaName)
-   EXEC ('DROP SCHEMA '+@SchemaName)
- END  
- 
-PRINT '------- ALL - DONE -------'    
-END
-
-exec MACACO_NOT_NULL.CleanUpSchema 'MACACO_NOT_NULL'  EJEMPLO PARA BORRAR TODO

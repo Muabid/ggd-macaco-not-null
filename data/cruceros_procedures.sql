@@ -88,9 +88,6 @@ BEGIN CATCH
 END CATCH
 GO
 
-select * 
-from MACACO_NOT_NULL.CRUCERO
-
 CREATE PROCEDURE [MACACO_NOT_NULL].UpdateCrucero @crucero_id INT, @nombre NVARCHAR(256), @modelo NVARCHAR(256), @compania INT
 AS
 BEGIN TRANSACTION
@@ -104,6 +101,7 @@ BEGIN
 	THROW 51000, 'Nombre ya utilizado', 1;
 END
 COMMIT TRANSACTION; 
+GO
 
 CREATE PROCEDURE [MACACO_NOT_NULL].GetCabinasXPisoYServicio @crucero_id INT
 AS
