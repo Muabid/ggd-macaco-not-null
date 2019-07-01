@@ -133,6 +133,8 @@
             this.Controls.Add(this.btnRol);
             this.Name = "PantallaPrincipal";
             this.Text = "PantallaPrincipal";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PantallaPrincipal_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PantallaPrincipal_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 

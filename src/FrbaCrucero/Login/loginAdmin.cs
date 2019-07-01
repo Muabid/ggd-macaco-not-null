@@ -50,10 +50,11 @@ namespace FrbaCrucero.Login
                 SqlCommand cmd = Utils.Database.createCommand("[MACACO_NOT_NULL].ComprobarVigenciaReservasDelSistema");
                 cmd.Parameters.Add("@fecha_sistema", SqlDbType.DateTime2).Value = DateTime.Parse(ConfigurationManager.AppSettings["DATE"]);
                 Utils.Database.executeProcedure(cmd);
+                new PantallaPrincipal("ADMINISTRADOR").Show(this.Owner);
                 this.Close();
                 
 
-                new PantallaPrincipal("ADMINISTRADOR").ShowDialog();
+              
                 
 
 
@@ -69,6 +70,7 @@ namespace FrbaCrucero.Login
 
         private void btn_atras_Click(object sender, EventArgs e)
         {
+            this.Owner.Show();
             this.Close();
         }
 

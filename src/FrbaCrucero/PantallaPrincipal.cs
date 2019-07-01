@@ -104,6 +104,16 @@ namespace FrbaCrucero
             new PagoReserva.PagoReserva().Show(this);
         }
 
+        private void PantallaPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+           
+        }
+
+        private void PantallaPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Owner.Show();
+        }
+
 
      
     }

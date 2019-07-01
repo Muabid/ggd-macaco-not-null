@@ -29,11 +29,13 @@ namespace FrbaCrucero.Login
         private void admin_Click(object sender, EventArgs e)
         {
             new LoginAdmin().Show(this);
+            this.Hide();
         }
 
         private void usuario_Click(object sender, EventArgs e)
         {
-            new PantallaPrincipal("CLIENTE").ShowDialog(this);
+            new PantallaPrincipal("CLIENTE").Show(this);
+            this.Hide();
         }
     }
 }
