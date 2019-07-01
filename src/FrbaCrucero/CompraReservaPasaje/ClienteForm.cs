@@ -169,8 +169,12 @@ namespace FrbaCrucero.CompraReservaPasaje
             cmd.Parameters.Add("@nacimiento",SqlDbType.DateTime2).Value = fecha_alta;
             cmd.Parameters.Add("@telefono", SqlDbType.Int).Value = telefono;
             Database.executeProcedure(cmd);
+            SqlCommand cmdCli =  Database.createCommand("SELECT usua_id FROM MACACO_NOT_NULL.USUARIO WHERE usua_dni = @dni");
+            cmdCli.Parameters.Add("@dni", SqlDbType.Int).Value = dni;
+            usua_id = Database.executeScalar(cmdCli);
 
             Cliente elCliente = new Cliente(this.usua_id,dni,nombre+" " + apellido, direccion, telefono, mail, fecha_alta);
+
             SqlCommand cmd1 = Database.createCommand("[MACACO_NOT_NULL].VerificarViajeYaRerservadOComprado");
             cmd1.Parameters.Add("@usua_id", SqlDbType.Int).Value = usua_id;
             cmd1.Parameters.Add("@viaje_id", SqlDbType.Int).Value = viaje.id;
