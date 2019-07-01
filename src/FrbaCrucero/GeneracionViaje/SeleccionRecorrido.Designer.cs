@@ -198,6 +198,7 @@
             this.codigoBox.Name = "codigoBox";
             this.codigoBox.Size = new System.Drawing.Size(132, 22);
             this.codigoBox.TabIndex = 11;
+            this.codigoBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.codigoBox_KeyPress);
             // 
             // label1
             // 

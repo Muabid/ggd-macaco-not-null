@@ -63,6 +63,7 @@
             this.btn_limpiar.TabIndex = 8;
             this.btn_limpiar.Text = "Limpiar";
             this.btn_limpiar.UseVisualStyleBackColor = true;
+            this.btn_limpiar.Click += new System.EventHandler(this.btn_limpiar_Click);
             // 
             // btn_buscar
             // 
@@ -167,7 +168,7 @@
             // txt_llegada
             // 
             this.txt_llegada.Location = new System.Drawing.Point(543, 132);
-            this.txt_llegada.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_llegada.Margin = new System.Windows.Forms.Padding(4);
             this.txt_llegada.Name = "txt_llegada";
             this.txt_llegada.ReadOnly = true;
             this.txt_llegada.Size = new System.Drawing.Size(132, 22);
@@ -176,7 +177,7 @@
             // txt_salida
             // 
             this.txt_salida.Location = new System.Drawing.Point(543, 66);
-            this.txt_salida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_salida.Margin = new System.Windows.Forms.Padding(4);
             this.txt_salida.Name = "txt_salida";
             this.txt_salida.ReadOnly = true;
             this.txt_salida.Size = new System.Drawing.Size(132, 22);

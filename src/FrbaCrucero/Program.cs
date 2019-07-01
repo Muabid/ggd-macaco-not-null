@@ -23,7 +23,7 @@ namespace FrbaCrucero
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new PantallaPrincipal());
             //Application.Run(new Login.PantallaInicio());
-          //  Application.Run(new CompraReservaPasaje.ComprarOReservarPasaje());
+            //Application.Run(new CompraReservaPasaje.ComprarOReservarPasaje());
             //Application.Run(new Login.pantallaInicio());
             //Application.Run(new CompraReservaPasaje.Cliente());
             //Application.Run(new AbmRecorrido.RecorridoAbm());
@@ -31,6 +31,7 @@ namespace FrbaCrucero
             //Application.Run(new GeneracionViaje.GenerarViaje());
             //Application.Run(new PagoReserva.PagoReserva());
             Application.Run(new ComprarOReservarPasaje());
+            //Application.Run(new AbmCrucero.FormPantallaInicio());
 
         }
     }
