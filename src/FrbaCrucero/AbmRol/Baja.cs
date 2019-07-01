@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using FrbaCrucero.Utils;
 namespace FrbaCrucero.AbmRol
 {
     public partial class Baja : Form
@@ -46,25 +47,31 @@ namespace FrbaCrucero.AbmRol
             try
             {
 
-                SqlConnection connection = Utils.Database.getConnection();
-                connection.Open();
+              
                 string textboxValue = textBox1.Text;
-                string query = "SELECT rol_id,rol_nombre,rol_activo FROM [MACACO_NOT_NULL].[ROL]" +
-                               "WHERE rol_nombre LIKE '" + textboxValue + "'";
+                string query  = "";
+                if(String.IsNullOrEmpty(textboxValue))
+                {
+                    query = "SELECT rol_id,rol_nombre,rol_activo FROM [MACACO_NOT_NULL].[ROL]" +
+                               "WHERE rol_nombre LIKE '%" + textboxValue + "%'";
+                }
+                else
+                {
+                    query = "SELECT rol_id,rol_nombre,rol_activo FROM [MACACO_NOT_NULL].[ROL]";
+                               
+                }
+
+                
                 SqlCommand sql = Utils.Database.createCommand(query);
-                SqlDataAdapter sqlDataAdap = new SqlDataAdapter(sql);
-                DataTable dtRecord = new DataTable();
-                sqlDataAdap.Fill(dtRecord);
-                dataGridView2.DataSource = dtRecord;
-                dataGridView2.ReadOnly = false;
-                dataGridView2.Columns[0].ReadOnly = true;
-                dataGridView2.Columns[1].ReadOnly = true;
+
+                dataGridView2.DataSource = Database.getData(sql);
+                //dataGridView2.ReadOnly = false;
+                //dataGridView2.Columns[0].ReadOnly = true;
+                //dataGridView2.Columns[1].ReadOnly = true;
                 Boolean str = this.prueba();
                 //Integer a = dataGridView2.Columns[0].DataGridView.Rows[0].ToString;
                // str =(Boolean) dataGridView2.Rows[dataGridView2.SelectedRows[2].Index].Cells[2].Value;
               //  Boolean a = this.dataGridView2_CellContentClick(dataGridView2);
-                connection.Close();
-                 
 
             }
             catch (Exception ex)
@@ -76,7 +83,8 @@ namespace FrbaCrucero.AbmRol
         
 
         private Boolean prueba(){
-        
+            if (dataGridView2.Rows.Count == 0)
+                return false;
             Boolean item = (Boolean)dataGridView2.Rows[0].Cells[2].Value;
             return item;
         }
