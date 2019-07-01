@@ -102,8 +102,8 @@ namespace FrbaCrucero.AbmCrucero
         }
 
         private void btn_atras_Click(object sender, EventArgs e)
-        {
-            this.Close();
+        { 
+           this.Close();
         }
 
         private void estadoPasajes_SelectedIndexChanged(object sender, EventArgs e)

@@ -27,11 +27,18 @@ namespace FrbaCrucero.PagoReserva
               procedure.Parameters.Add("@activo", SqlDbType.Bit).Value = 1;
               Utils.Database.executeProcedure(procedure); */
 
-            MediosDePago nuevo = new MediosDePago(codigoReservaBox.Text);
 
-            nuevo.Show();
+            if (pagoReservaTable.Rows.Count == 0)
+            {
+                MessageBox.Show("Ingrese una reserva", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MediosDePago nuevo = new MediosDePago(codigoReservaBox.Text);
+                nuevo.Show(this);
+                this.Hide();
+            }
 
-            this.Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -121,6 +128,7 @@ namespace FrbaCrucero.PagoReserva
 
         private void btn_atras_Click(object sender, EventArgs e)
         {
+            this.Owner.Show();
             this.Close();
         }
 

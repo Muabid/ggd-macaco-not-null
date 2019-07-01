@@ -64,11 +64,12 @@ namespace FrbaCrucero.CompraReservaPasaje
         private void button1_Click(object sender, EventArgs e)
         {
             MediosDeLosPagos form = new MediosDeLosPagos(elCliente, cabinas, viaje);
-            form.Show();
+            form.Show(this);
         }
 
         private void btn_atras_Click(object sender, EventArgs e)
         {
+            this.Owner.Show();
             this.Close();
         }
 

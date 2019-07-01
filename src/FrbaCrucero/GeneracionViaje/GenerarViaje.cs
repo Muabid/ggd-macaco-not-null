@@ -40,8 +40,9 @@ namespace FrbaCrucero.GeneracionViaje
                 Database.executeProcedure(cmd);
                 MessageBox.Show("Viaje generado con éxito","",
              MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+               
                 this.Close();
-
+                this.Owner.Show();
 
             }
             catch(Exception ex)
@@ -81,7 +82,7 @@ namespace FrbaCrucero.GeneracionViaje
 
         private void seleccionarRecorrido_Click(object sender, EventArgs e)
         {
-            new SeleccionRecorrido(this).Show();
+            new SeleccionRecorrido(this).ShowDialog(this);
         }
 
         private void seleccionarCrucero_Click(object sender, EventArgs e)
@@ -161,6 +162,12 @@ namespace FrbaCrucero.GeneracionViaje
             //recorrido = null;
             //btn_aceptar.Click -= btn_seleccionar_llegada_Aceptar;
             //btn_cancelar.Click -= btn_seleccionar_salida_Aceptar;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Owner.Show();
+            this.Close();
         }
 
 

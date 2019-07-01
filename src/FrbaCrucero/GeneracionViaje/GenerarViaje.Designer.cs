@@ -50,6 +50,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.panel_date.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
@@ -130,7 +131,7 @@
             // 
             // guardar
             // 
-            this.guardar.Location = new System.Drawing.Point(385, 290);
+            this.guardar.Location = new System.Drawing.Point(500, 290);
             this.guardar.Name = "guardar";
             this.guardar.Size = new System.Drawing.Size(75, 23);
             this.guardar.TabIndex = 10;
@@ -140,7 +141,7 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(69, 290);
+            this.btnLimpiar.Location = new System.Drawing.Point(385, 290);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 11;
@@ -251,12 +252,23 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(53, 290);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Atras";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // GenerarViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.ClientSize = new System.Drawing.Size(624, 344);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel_date);
             this.Controls.Add(this.btn_seleccionar_llegada);
             this.Controls.Add(this.btn_seleccionar_salida);
@@ -305,5 +317,6 @@
         private System.Windows.Forms.Button btn_cancelar;
         private System.Windows.Forms.Button btn_aceptar;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Button button1;
     }
 }

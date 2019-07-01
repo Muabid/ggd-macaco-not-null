@@ -71,7 +71,7 @@ namespace FrbaCrucero.AbmRol
                     Rol nuevoRol = new Rol(id,nombre);
 
                     FormularioModificacion fma = new FormularioModificacion(nuevoRol);
-                    fma.Show();
+                    fma.Show(this);
                 }
             }
         }
@@ -125,6 +125,7 @@ namespace FrbaCrucero.AbmRol
 
         private void btn_atras_Click(object sender, EventArgs e)
         {
+            this.Owner.Show();
             this.Close();
         }
 

@@ -19,20 +19,13 @@ namespace FrbaCrucero.AbmRecorrido
         private PuertoDAO puertoDao = new PuertoDAO();
         private ListadoModificacionRecorrido listadoRecorridos;
 
-        public ModificacionRecorrido(ListadoModificacionRecorrido _listadoRecorridos)
+        public ModificacionRecorrido(ListadoModificacionRecorrido _listadoRecorridos, Decimal codigoRecorrido, Decimal precio)
         {
             InitializeComponent();
             listadoRecorridos = _listadoRecorridos;
-        }
-
-
-        public void show(Decimal codigoRecorrido, Decimal precio)
-        {
             tramosTable.DataSource = recorridoDao.getTramos(codigoRecorrido);
             codigoText.Text = codigoRecorrido.ToString();
             precioText.Text = precio.ToString();
-            this.ShowDialog();
-
         }
 
         private void tramosTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -153,11 +146,13 @@ namespace FrbaCrucero.AbmRecorrido
 
         private void agregarTramoButton_Click(object sender, EventArgs e)
         {
-            new ModificacionTramo(this).Show();
+            this.Owner.Show();
+            this.Close();
         }
 
         private void btn_atras_Click(object sender, EventArgs e)
         {
+            this.Owner.Show();
             this.Close();
         }
 

@@ -63,21 +63,20 @@
             this.groupBox2.Controls.Add(this.cbo_tipo_servicio);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(15, 30);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox2.Location = new System.Drawing.Point(11, 24);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(537, 491);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(403, 399);
             this.groupBox2.TabIndex = 29;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Agregar Cantidad de Pasajes";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(437, 62);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(328, 50);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 28);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 15;
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
@@ -94,12 +93,12 @@
             this.cabi_piso,
             this.servicio1,
             this.agregar});
-            this.dataGridViewCabinasDisponibles.Location = new System.Drawing.Point(-12, 94);
-            this.dataGridViewCabinasDisponibles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridViewCabinasDisponibles.Location = new System.Drawing.Point(-9, 76);
+            this.dataGridViewCabinasDisponibles.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridViewCabinasDisponibles.Name = "dataGridViewCabinasDisponibles";
             this.dataGridViewCabinasDisponibles.ReadOnly = true;
             this.dataGridViewCabinasDisponibles.RowTemplate.Height = 24;
-            this.dataGridViewCabinasDisponibles.Size = new System.Drawing.Size(552, 373);
+            this.dataGridViewCabinasDisponibles.Size = new System.Drawing.Size(414, 303);
             this.dataGridViewCabinasDisponibles.TabIndex = 14;
             this.dataGridViewCabinasDisponibles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCabinasDisponibles_CellContentClick);
             // 
@@ -148,10 +147,10 @@
             // 
             // txt_piso
             // 
-            this.txt_piso.Location = new System.Drawing.Point(285, 66);
-            this.txt_piso.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txt_piso.Location = new System.Drawing.Point(214, 54);
+            this.txt_piso.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txt_piso.Name = "txt_piso";
-            this.txt_piso.Size = new System.Drawing.Size(143, 22);
+            this.txt_piso.Size = new System.Drawing.Size(108, 20);
             this.txt_piso.TabIndex = 9;
             this.txt_piso.TextChanged += new System.EventHandler(this.txt_piso_TextChanged);
             this.txt_piso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_piso_KeyPress);
@@ -160,18 +159,19 @@
             // 
             this.cbo_tipo_servicio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbo_tipo_servicio.FormattingEnabled = true;
-            this.cbo_tipo_servicio.Location = new System.Drawing.Point(9, 64);
-            this.cbo_tipo_servicio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbo_tipo_servicio.Location = new System.Drawing.Point(7, 52);
+            this.cbo_tipo_servicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbo_tipo_servicio.Name = "cbo_tipo_servicio";
-            this.cbo_tipo_servicio.Size = new System.Drawing.Size(271, 24);
+            this.cbo_tipo_servicio.Size = new System.Drawing.Size(204, 21);
             this.cbo_tipo_servicio.TabIndex = 8;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(283, 46);
+            this.label7.Location = new System.Drawing.Point(212, 37);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 17);
+            this.label7.Size = new System.Drawing.Size(27, 13);
             this.label7.TabIndex = 12;
             this.label7.Text = "Piso";
             this.label7.Click += new System.EventHandler(this.label7_Click);
@@ -179,20 +179,21 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(5, 44);
+            this.label6.Location = new System.Drawing.Point(4, 36);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(109, 17);
+            this.label6.Size = new System.Drawing.Size(82, 13);
             this.label6.TabIndex = 11;
             this.label6.Text = "Tipo Servicio (*)";
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dataGridViewCabinasReservadas);
-            this.groupBox1.Location = new System.Drawing.Point(560, 30);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Location = new System.Drawing.Point(420, 24);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(537, 491);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(403, 399);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cabinas seleccionadas";
@@ -208,12 +209,12 @@
             this.numero,
             this.piso,
             this.eliminar});
-            this.dataGridViewCabinasReservadas.Location = new System.Drawing.Point(9, 94);
-            this.dataGridViewCabinasReservadas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridViewCabinasReservadas.Location = new System.Drawing.Point(7, 76);
+            this.dataGridViewCabinasReservadas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridViewCabinasReservadas.Name = "dataGridViewCabinasReservadas";
             this.dataGridViewCabinasReservadas.ReadOnly = true;
             this.dataGridViewCabinasReservadas.RowTemplate.Height = 24;
-            this.dataGridViewCabinasReservadas.Size = new System.Drawing.Size(527, 373);
+            this.dataGridViewCabinasReservadas.Size = new System.Drawing.Size(395, 303);
             this.dataGridViewCabinasReservadas.TabIndex = 14;
             this.dataGridViewCabinasReservadas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCabinasReservadas_CellContentClick);
             // 
@@ -260,10 +261,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(916, 528);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button4.Location = new System.Drawing.Point(687, 429);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(181, 60);
+            this.button4.Size = new System.Drawing.Size(136, 49);
             this.button4.TabIndex = 31;
             this.button4.Text = "Agregar datos del cliente";
             this.button4.UseVisualStyleBackColor = true;
@@ -271,10 +271,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(709, 528);
-            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button5.Location = new System.Drawing.Point(532, 429);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(169, 60);
+            this.button5.Size = new System.Drawing.Size(127, 49);
             this.button5.TabIndex = 32;
             this.button5.Text = "Atras";
             this.button5.UseVisualStyleBackColor = true;
@@ -282,16 +281,16 @@
             // 
             // ElegirCabinas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1112, 922);
+            this.ClientSize = new System.Drawing.Size(834, 609);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ElegirCabinas";
             this.Text = "Seleccion de cabinas";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ElegirCabinas_FormClosed);
             this.Load += new System.EventHandler(this.ElegirCabinas_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

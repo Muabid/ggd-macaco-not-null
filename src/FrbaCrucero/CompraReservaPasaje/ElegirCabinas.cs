@@ -128,7 +128,7 @@ namespace FrbaCrucero.CompraReservaPasaje
 
                 // DataTable data = (DataTable)(dataGridViewCabinasReservadas.DataSource);
                 ClienteForm form = new ClienteForm(cabinasElegidas, viaje);
-                form.Show();
+                form.Show(this);
                 this.Hide();
             }
             else
@@ -140,9 +140,8 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void button5_Click(object sender, EventArgs e)
         {
-            CompraReservaPasaje.ComprarOReservarPasaje gorm = new ComprarOReservarPasaje();
-            gorm.Show();
-            this.Close();
+            this.Owner.Show();
+            this.Hide();
         }
 
         private void txt_piso_TextChanged(object sender, EventArgs e)
@@ -161,6 +160,11 @@ namespace FrbaCrucero.CompraReservaPasaje
             {
                 e.Handled = true;
             }
+        }
+
+        private void ElegirCabinas_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
         }
     }
 }

@@ -132,7 +132,7 @@ namespace FrbaCrucero.CompraReservaPasaje
                
                 var crucero = int.Parse(dataGridViewViajes["viaj_recorrido_id", e.RowIndex].Value.ToString());
                 var viaje = new Viaje(idViaje, fechaSalida, fechaLlegada, fechaLlegadaEstimada, crucero); 
-                new ElegirCabinas(viaje).ShowDialog(this);
+                new ElegirCabinas(viaje).Show(this);
                 this.Hide();
             }
             else if (e.ColumnIndex == dataGridViewViajes.Columns["verRecorridoButton"].Index)

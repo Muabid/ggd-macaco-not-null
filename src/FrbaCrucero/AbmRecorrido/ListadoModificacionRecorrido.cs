@@ -64,7 +64,7 @@ namespace FrbaCrucero.AbmRecorrido
             Decimal precio = Convert.ToDecimal(precioV == DBNull.Value ? 0 : precioV);
             if (e.ColumnIndex == recorridosTable.Columns["modificarColumn"].Index)
             {
-                new ModificacionRecorrido(this).show(codRecorrido, precio);
+                new ModificacionRecorrido(this, codRecorrido, precio).Show(this);
             }
         }
 
@@ -76,6 +76,7 @@ namespace FrbaCrucero.AbmRecorrido
 
         private void btn_atras_Click(object sender, EventArgs e)
         {
+            this.Owner.Show();
             this.Close();
         }
     }

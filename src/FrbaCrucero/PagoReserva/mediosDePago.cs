@@ -127,8 +127,7 @@ namespace FrbaCrucero.PagoReserva
         private void buttonAtras_Click(object sender, EventArgs e)
         {
             this.Hide();
-            PagoReserva pago = new PagoReserva();
-            pago.Show();
+            this.Owner.Show();
         }
 
         private void label3_Click(object sender, EventArgs e)

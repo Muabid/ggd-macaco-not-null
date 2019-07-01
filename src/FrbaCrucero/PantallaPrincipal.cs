@@ -94,6 +94,16 @@ namespace FrbaCrucero
             new FormPantallaInicio().Show(this);
         }
 
+        private void btnPasaje_Click(object sender, EventArgs e)
+        {
+            new CompraReservaPasaje.ComprarOReservarPasaje().Show(this);
+        }
+
+        private void btnPagoReserva_Click(object sender, EventArgs e)
+        {
+            new PagoReserva.PagoReserva().Show(this);
+        }
+
 
      
     }

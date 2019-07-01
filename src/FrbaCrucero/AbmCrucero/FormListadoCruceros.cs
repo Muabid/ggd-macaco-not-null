@@ -36,13 +36,13 @@ namespace FrbaCrucero.AbmCrucero
         public void ShowModificar(Form form)
         {
             dgv_cruceros.Columns["Editar"].Visible = true;
-            this.ShowDialog(form);
+            this.Show(form);
         }
 
         public void ShowBaja(Form form)
         {
             dgv_cruceros.Columns["Baja"].Visible = true;
-            this.ShowDialog(form);
+            this.Show(form);
         }
 
         private void dgv_cruceros_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -119,6 +119,7 @@ namespace FrbaCrucero.AbmCrucero
 
         private void btn_atras_Click(object sender, EventArgs e)
         {
+            this.Owner.Show();
             this.Close();
         }
     }

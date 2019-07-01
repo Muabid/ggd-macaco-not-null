@@ -19,7 +19,7 @@ namespace FrbaCrucero.AbmCrucero
 
         private void btn_alta_Click(object sender, EventArgs e)
         {
-            new FormAlta().ShowDialog(this);
+            new FormAlta().Show(this);
         }
 
         private void btn_baja_Click(object sender, EventArgs e)
@@ -34,6 +34,7 @@ namespace FrbaCrucero.AbmCrucero
 
         private void btn_atras_Click(object sender, EventArgs e)
         {
+            this.Owner.Show();
             this.Close();
         }
     }

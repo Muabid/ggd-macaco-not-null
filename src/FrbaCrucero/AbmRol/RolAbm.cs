@@ -20,23 +20,27 @@ namespace FrbaCrucero.AbmRol
         private void btnAlta_Click(object sender, EventArgs e)
         {
             AltaRol alta = new AltaRol();
-            alta.ShowDialog(this);
+            alta.Show(this);
+            this.Hide();
         }
 
         private void btnBaja_Click(object sender, EventArgs e)
         {
             Baja baja = new Baja();
-            baja.ShowDialog(this);
+            baja.Show(this);
+            this.Hide();
         }
 
         private void btnModificacion_Click(object sender, EventArgs e)
         {
             Modificacion modificacion = new Modificacion();
-            modificacion.ShowDialog(this);
+            modificacion.Show(this);
+            this.Hide();
         }
 
         private void btn_atras_Click(object sender, EventArgs e)
         {
+            this.Owner.Show();
             this.Close();
         }
     }

@@ -181,7 +181,7 @@ namespace FrbaCrucero.CompraReservaPasaje
             Database.executeProcedure(cmd1);
 
             Pago form = new Pago(elCliente, cabinas, viaje);
-            form.Show();
+            form.Show(this);
             }
             catch(Exception er)
             {
@@ -238,7 +238,7 @@ namespace FrbaCrucero.CompraReservaPasaje
                 Database.executeProcedure(cmd1);
 
                 Reserva form2 = new Reserva(loCliente, cabinas, viaje);
-                form2.Show();
+                form2.Show(this);
             }
             catch (Exception er)
             {
@@ -252,7 +252,7 @@ namespace FrbaCrucero.CompraReservaPasaje
         private void btn_atras_Click(object sender, EventArgs e)
         {
             ElegirCabinas trom = new ElegirCabinas(this.viaje);
-            trom.Show();
+            this.Owner.Show();
             this.Close();
         }
 

@@ -101,6 +101,7 @@ namespace FrbaCrucero.AbmRol
 
         private void btn_atras_Click(object sender, EventArgs e)
         {
+            this.Owner.Show();
             this.Close();
         }
 
