@@ -1695,15 +1695,25 @@ BEGIN
 END
 
 
-CREATE PROCEDURE [MACACO_NOT_NULL].VerificarViajeYaRerservadOComprado @usua_id INT, @viaje_id INT
+
+ALTER PROCEDURE [MACACO_NOT_NULL].VerificarViajeYaRerservadOComprado @usua_id INT, @viaje_id INT
 AS
 DECLARE @fecha_salida DATETIME2
 DECLARE @fecha_llegada DATETIME2
 SET @fecha_salida = (SELECT viaj_fecha_salida FROM MACACO_NOT_NULL.VIAJE WHERE viaj_id = @viaje_id)
 SET @fecha_llegada= (SELECT viaj_fecha_llegada_estimada FROM MACACO_NOT_NULL.VIAJE WHERE viaj_id = @viaje_id)
 IF(EXISTS (SELECT 1 FROM MACACO_NOT_NULL.PASAJE p JOIN MACACO_NOT_NULL.VIAJE v ON p.pasa_viaje_id = v.viaj_id 
-		WHERE viaj_fecha_llegada_estimada between @fecha_salida and @fecha_llegada
+		JOIN MACACO_NOT_NULL.PAGO pa ON pa.pago_id = p.pasa_pago_id 
+		WHERE pa.pago_usuario_id = @usua_id and viaj_fecha_llegada_estimada between @fecha_salida and @fecha_llegada
+											or viaj_fecha_salida between @fecha_salida and @fecha_llegada
+		UNION 
+		SELECT 1 FROM MACACO_NOT_NULL.RESERVA r
+		JOIN MACACO_NOT_NULL.VIAJE pa ON r.rese_viaje_id = @viaje_id 
+		WHERE rese_usuario_id = @usua_id and viaj_fecha_llegada_estimada between @fecha_salida and @fecha_llegada
 											or viaj_fecha_salida between @fecha_salida and @fecha_llegada))
+BEGIN
+RAISERROR('YA TIENE UN VIAJE EN ESA FECHA',16,1)
+END
 
 
 /*
