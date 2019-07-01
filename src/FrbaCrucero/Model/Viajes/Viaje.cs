@@ -22,5 +22,13 @@ namespace FrbaCrucero.Model.Viajes
             this.fecha_llegada_estimada = fechaLlegadaEstimada;
             this.crucero_id = cruceroId;
         }
+
+        public Viaje(int id, DateTime fechaSalida, DateTime fechaLlegadaEstimada, int cruceroId)
+        {
+            this.id = id;
+            this.fecha_salida = fechaSalida;
+            this.fecha_llegada_estimada = fechaLlegadaEstimada;
+            this.crucero_id = cruceroId;
+        }
     }
 }
