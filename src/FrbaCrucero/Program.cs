@@ -24,11 +24,11 @@ namespace FrbaCrucero
             //Application.Run(new PantallaPrincipal());
             //Application.Run(new Login.PantallaInicio());
             //Application.Run(new CompraReservaPasaje.ComprarOReservarPasaje());
-            //Application.Run(new Login.pantallaInicio());
+            Application.Run(new Login.PantallaInicio());
             //Application.Run(new CompraReservaPasaje.Cliente());
             //Application.Run(new AbmRecorrido.RecorridoAbm());
             //Application.Run(new AbmRol.RolAbm());
-            Application.Run(new GeneracionViaje.GenerarViaje());
+            //Application.Run(new GeneracionViaje.GenerarViaje());
             //Application.Run(new PagoReserva.PagoReserva());
             //Application.Run(new ComprarOReservarPasaje());
             //Application.Run(new AbmCrucero.FormPantallaInicio());
