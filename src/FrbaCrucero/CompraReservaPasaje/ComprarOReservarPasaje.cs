@@ -157,6 +157,10 @@ namespace FrbaCrucero.CompraReservaPasaje
                 salidaText.Text = salida.Value.ToShortDateString();
                 monthCalendar.Visible = false;
             }
+            else
+            {
+                MessageBox.Show("Ingrese una fecha anterior a hoy");
+            }
             
         }
 
