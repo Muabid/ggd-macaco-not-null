@@ -172,8 +172,8 @@ namespace FrbaCrucero.CompraReservaPasaje
 
             Cliente elCliente = new Cliente(this.usua_id,dni,nombre+" " + apellido, direccion, telefono, mail, fecha_alta);
             SqlCommand cmd1 = Database.createCommand("[MACACO_NOT_NULL].VerificarViajeYaRerservadOComprado");
-            cmd.Parameters.Add("@usua_id", SqlDbType.Int).Value = usua_id;
-            cmd.Parameters.Add("@viaje_id", SqlDbType.Int).Value = viaje.id;
+            cmd1.Parameters.Add("@usua_id", SqlDbType.Int).Value = usua_id;
+            cmd1.Parameters.Add("@viaje_id", SqlDbType.Int).Value = viaje.id;
             Database.executeProcedure(cmd1);
 
             Pago form = new Pago(elCliente, cabinas, viaje);
@@ -229,8 +229,8 @@ namespace FrbaCrucero.CompraReservaPasaje
                 Cliente loCliente = new Model.CompraReservaPasaje.Cliente(this.usua_id, dni, nombre + " "+ apellido, direccion, telefono, mail, fecha_alta);
 
                 SqlCommand cmd1 = Database.createCommand("[MACACO_NOT_NULL].VerificarViajeYaRerservadOComprado");
-                cmd.Parameters.Add("@usua_id", SqlDbType.Int).Value = usua_id;
-                cmd.Parameters.Add("@viaje_id", SqlDbType.Int).Value = viaje.id;
+                cmd1.Parameters.Add("@usua_id", SqlDbType.Int).Value = usua_id;
+                cmd1.Parameters.Add("@viaje_id", SqlDbType.Int).Value = viaje.id;
                 Database.executeProcedure(cmd1);
 
                 Reserva form2 = new Reserva(loCliente, cabinas, viaje);
