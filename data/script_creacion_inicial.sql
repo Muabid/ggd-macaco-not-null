@@ -1709,7 +1709,7 @@ IF(EXISTS (SELECT 1 FROM MACACO_NOT_NULL.PASAJE p JOIN MACACO_NOT_NULL.VIAJE v O
 											or viaj_fecha_salida between @fecha_salida and @fecha_llegada)
 		UNION 
 		SELECT 1 FROM MACACO_NOT_NULL.RESERVA r
-		JOIN MACACO_NOT_NULL.VIAJE pa ON r.rese_viaje_id = @viaje_id 
+		JOIN MACACO_NOT_NULL.VIAJE v ON r.rese_viaje_id = v.viaj_id
 		WHERE rese_usuario_id = @usua_id and (viaj_fecha_llegada_estimada between @fecha_salida and @fecha_llegada
 											or viaj_fecha_salida between @fecha_salida and @fecha_llegada)))
 BEGIN
