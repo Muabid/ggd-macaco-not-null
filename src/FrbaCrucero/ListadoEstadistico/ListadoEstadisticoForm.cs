@@ -109,7 +109,7 @@ namespace FrbaCrucero.ListadoEstadistico
                 }
                 catch (SqlException e)
                 {
-                    throw new Exception(e.Message, e);
+                    MessageBox.Show(e.Message);
                 }
             }
             return dataTable;
@@ -156,7 +156,7 @@ namespace FrbaCrucero.ListadoEstadistico
                 }
                 catch (SqlException e)
                 {
-                    throw new Exception(e.Message, e);
+                    MessageBox.Show(e.Message);
                 }
             }
             return dataTable;
