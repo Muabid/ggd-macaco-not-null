@@ -1574,14 +1574,14 @@ select viaj_id ,
 	viaj_recorrido_id,
 	reco_codigo	
 	from [MACACO_NOT_NULL].[VIAJE]
-	INNER JOIN [MACACO_NOT_NULL].RECORRIDO ON viaj_recorrido_id = reco_id
-	INNER JOIN [MACACO_NOT_NULL].TRAMO ON reco_id = tram_recorrido_id
-	inner join [MACACO_NOT_NULL].PUERTO origen ON tram_puerto_desde = origen.puer_id
-	inner join [MACACO_NOT_NULL].PUERTO destino ON tram_puerto_hasta = destino.puer_id
+	INNER JOIN [MACACO_NOT_NULL].RECORRIDO ON viaj_recorrido_id = reco_id	
 	inner join [MACACO_NOT_NULL].CRUCERO crucero ON crucero.cruc_id = viaj_crucero_id
 	where (@viaj_fecha_salida IS NULL OR CAST(@viaj_fecha_salida as DATE) = CAST(viaj_fecha_salida as DATE))
-		and (@puertoOrigen IS NULL OR @puertoOrigen =  origen.puer_nombre)
-		and (@puertoDestino IS NULL OR @puertoDestino =  destino.puer_nombre)
+		and (@puertoOrigen IS NULL OR @puertoOrigen in 
+			(select puer_nombre from [MACACO_NOT_NULL].TRAMO inner join [MACACO_NOT_NULL].PUERTO origen ON tram_puerto_desde = origen.puer_id
+			where tram_recorrido_id = reco_id))
+		and (@puertoDestino IS NULL OR @puertoDestino in (select puer_nombre from [MACACO_NOT_NULL].TRAMO inner join [MACACO_NOT_NULL].PUERTO origen ON tram_puerto_hasta = origen.puer_id
+			where tram_recorrido_id = reco_id))
 END
 
 GO
