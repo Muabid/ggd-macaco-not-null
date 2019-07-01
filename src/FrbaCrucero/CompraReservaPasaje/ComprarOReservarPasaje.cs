@@ -121,7 +121,7 @@ namespace FrbaCrucero.CompraReservaPasaje
                 var idViaje = int.Parse(dataGridViewViajes["viaj_id", e.RowIndex].Value.ToString());
                 var fechaSalida = DateTime.Parse(dataGridViewViajes["viaj_fecha_salida", e.RowIndex].Value.ToString());
                 var fechaLlegadaEstimada = DateTime.Parse(dataGridViewViajes["viaj_fecha_llegada_estimada", e.RowIndex].Value.ToString());
-                if (dataGridViewViajes["viaj_fecha_llegada", e.RowIndex].Value != null)
+                if (!String.IsNullOrEmpty(dataGridViewViajes["viaj_fecha_llegada", e.RowIndex].Value.ToString()))
                 { 
                    fechaLlegada = DateTime.Parse(dataGridViewViajes["viaj_fecha_llegada", e.RowIndex].Value.ToString());
                 }
@@ -131,7 +131,7 @@ namespace FrbaCrucero.CompraReservaPasaje
                 }
                
                 var crucero = int.Parse(dataGridViewViajes["viaj_recorrido_id", e.RowIndex].Value.ToString());
-                var viaje = new Viaje(idViaje, fechaSalida, fechaLlegada.Value, fechaLlegadaEstimada, crucero); 
+                var viaje = new Viaje(idViaje, fechaSalida, fechaLlegada, fechaLlegadaEstimada, crucero); 
                 new ElegirCabinas(viaje).ShowDialog(this);
                 this.Hide();
             }
