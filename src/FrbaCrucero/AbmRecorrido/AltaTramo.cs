@@ -61,7 +61,9 @@ namespace FrbaCrucero.AbmRecorrido
 
         private void limpiar_Click(object sender, EventArgs e)
         {
-           
+            origenComboBox.SelectedIndex = -1;
+            destinoComboBox.SelectedIndex = -1;
+            precioField.Clear();
         }
 
         private void precioField_TextChanged(object sender, EventArgs e)

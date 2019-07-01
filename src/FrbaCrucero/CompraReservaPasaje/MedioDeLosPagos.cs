@@ -75,6 +75,7 @@ namespace FrbaCrucero.CompraReservaPasaje
                  int escalar = Utils.Database.executeScalar(maxPago);
 
                  MessageBox.Show("Pago Realizado - Codigo: " + escalar.ToString());
+                 this.Close();
              }
              else
              {
@@ -86,13 +87,30 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void botonAgregar_Click(object sender, EventArgs e)
         {
-            String cuotas = cantCuotas.Text;
-            String variable = descripcion.Text;
+            try
+            {
+                if (String.IsNullOrEmpty(descripcion.Text) || String.IsNullOrEmpty(cantCuotas.Text))
+                {
+                    throw new Exception("Requiere completar todos los datos");
+                }
+                else
+                {
+                    String cuotas = cantCuotas.Text;
+                    String variable = descripcion.Text;
 
-            string[] new_row = new string[2];
-            new_row[0] = variable;
-            new_row[1] = cuotas;
-            tablaMediosDePago.Rows.Add(new_row);
+                    string[] new_row = new string[2];
+                    new_row[0] = variable;
+                    new_row[1] = cuotas;
+                    tablaMediosDePago.Rows.Add(new_row);
+                    descripcion.Text = "";
+                    cantCuotas.Text = "";
+
+                }
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void MediosDeLosPagos_Load(object sender, EventArgs e)
@@ -114,6 +132,14 @@ namespace FrbaCrucero.CompraReservaPasaje
                 {
                     tablaMediosDePago.Rows.RemoveAt(e.RowIndex);
                 }
+            }
+        }
+
+        private void cantCuotas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
 
