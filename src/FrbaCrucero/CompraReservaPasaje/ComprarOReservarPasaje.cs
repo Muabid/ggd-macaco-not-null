@@ -117,13 +117,17 @@ namespace FrbaCrucero.CompraReservaPasaje
         {
             if (e.ColumnIndex == dataGridViewViajes.Columns["ButtonSelection"].Index)
             {
-                DateTime? fechaLlegada = null;
+                DateTime fechaLlegada;
                 var idViaje = int.Parse(dataGridViewViajes["viaj_id", e.RowIndex].Value.ToString());
                 var fechaSalida = DateTime.Parse(dataGridViewViajes["viaj_fecha_salida", e.RowIndex].Value.ToString());
                 var fechaLlegadaEstimada = DateTime.Parse(dataGridViewViajes["viaj_fecha_llegada_estimada", e.RowIndex].Value.ToString());
                 if (dataGridViewViajes["viaj_fecha_llegada", e.RowIndex].Value != null)
                 { 
                    fechaLlegada = DateTime.Parse(dataGridViewViajes["viaj_fecha_llegada", e.RowIndex].Value.ToString());
+                }
+                else
+                {
+                   fechaLlegada=  fechaLlegadaEstimada;
                 }
                
                 var crucero = int.Parse(dataGridViewViajes["viaj_recorrido_id", e.RowIndex].Value.ToString());
