@@ -254,6 +254,14 @@ namespace FrbaCrucero.ListadoEstadistico
             this.Close();
         }
 
+        private void anio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
 
 
     }
