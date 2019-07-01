@@ -95,6 +95,7 @@ namespace FrbaCrucero.AbmCrucero
             {
                 cruceroDao.updateCrucero(crucero.cruc_id, txt_nombre.Text,cbo_modelo.Text, ((Compania)cbo_compania.SelectedItem).comp_id);
                 MessageBox.Show("El crucero fue MODIFICADO satisfactoriamente");
+                this.Close();
             }
             catch (Exception ex)
             {
