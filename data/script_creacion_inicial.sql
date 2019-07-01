@@ -1543,8 +1543,13 @@ BEGIN
 			END
 		group by pasa_viaje_id
 
-	DECLARE @tabla TABLE(cab_libres int,recorrido_id int);
-	insert into @tabla (cab_libres,recorrido_id)
+	IF not exists (select 1 from [MACACO_NOT_NULL].VIAJE
+		WHERE YEAR(viaj_fecha_salida) = @anio)
+		RAISERROR('No hay viajes en ese año', 16,1)
+	ELSE
+	BEGIN
+		DECLARE @tabla TABLE(cab_libres int,recorrido_id int);
+		insert into @tabla (cab_libres,recorrido_id)
 		select cruc_cantidad_cabinas - (select cab_ocupados from @tablaPasajes where viaje_id = viaj_id),viaj_recorrido_id
 		FROM [MACACO_NOT_NULL].[RECORRIDO] 	
 		INNER JOIN [MACACO_NOT_NULL].VIAJE ON reco_id = viaj_recorrido_id
@@ -1556,6 +1561,9 @@ BEGIN
 					SELECT AVG(cab_libres) from @tabla t
 					where t.recorrido_id = reco_id
 				) DESC 
+	
+	END
+	
   
  END
  
