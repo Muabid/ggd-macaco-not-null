@@ -25,6 +25,20 @@ namespace FrbaCrucero.PagoReserva
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            this.Controls.Cast<Control>().ToList()
+                .Where(c => c is GroupBox)
+                .SelectMany(c => c.Controls.Cast<Control>().ToList())
+                .ToList().ForEach(c =>
+                {
+                    if (c is TextBox)
+                    {
+                        if (String.IsNullOrEmpty(c.Text))
+                        {
+                            throw new Exception("Requiere completar todos los datos");
+                        }
+                    }
+                });
             String cuotas = cantCuotas.Text;
             String variable = descripcion.Text;
 

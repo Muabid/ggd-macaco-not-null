@@ -45,9 +45,9 @@
             this.label1.Location = new System.Drawing.Point(16, 53);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(331, 29);
+            this.label1.Size = new System.Drawing.Size(363, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Ingrese codigo de su reserva:";
+            this.label1.Text = "Ingrese codigo de su reserva (*):";
             // 
             // codigoReservaBox
             // 
@@ -56,6 +56,7 @@
             this.codigoReservaBox.Name = "codigoReservaBox";
             this.codigoReservaBox.Size = new System.Drawing.Size(213, 22);
             this.codigoReservaBox.TabIndex = 1;
+            this.codigoReservaBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.codigoReservaBox_KeyPress);
             // 
             // pagoReservaTable
             // 
