@@ -65,6 +65,8 @@ namespace FrbaCrucero.CompraReservaPasaje
         {
             MediosDeLosPagos form = new MediosDeLosPagos(elCliente, cabinas, viaje);
             form.Show(this);
+            this.Hide();
+            
         }
 
         private void btn_atras_Click(object sender, EventArgs e)

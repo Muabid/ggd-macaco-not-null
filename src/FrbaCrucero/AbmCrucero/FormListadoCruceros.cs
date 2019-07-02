@@ -22,6 +22,8 @@ namespace FrbaCrucero.AbmCrucero
         public FormListadoCruceros()
         {
             InitializeComponent();
+            monthCalendar1.TodayDate = ConfigurationUtils.Today();
+            monthCalendar1.SelectionStart = ConfigurationUtils.Today();
         }
 
         private void FormListadoCruceros_Load(object sender, EventArgs e)
@@ -121,6 +123,11 @@ namespace FrbaCrucero.AbmCrucero
         {
             this.Owner.Show();
             this.Close();
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+
         }
     }
 }

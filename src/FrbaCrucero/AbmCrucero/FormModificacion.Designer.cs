@@ -77,9 +77,9 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(8, 17);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(560, 224);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
@@ -89,7 +89,7 @@
             // txt_cabinas
             // 
             this.txt_cabinas.Location = new System.Drawing.Point(86, 128);
-            this.txt_cabinas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_cabinas.Margin = new System.Windows.Forms.Padding(2);
             this.txt_cabinas.Name = "txt_cabinas";
             this.txt_cabinas.ReadOnly = true;
             this.txt_cabinas.Size = new System.Drawing.Size(124, 20);
@@ -108,18 +108,19 @@
             // monthCalendar1
             // 
             this.monthCalendar1.Location = new System.Drawing.Point(295, 9);
-            this.monthCalendar1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.monthCalendar1.Margin = new System.Windows.Forms.Padding(7);
             this.monthCalendar1.MaxSelectionCount = 1;
             this.monthCalendar1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 7;
             this.monthCalendar1.Visible = false;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
             // 
             // btn_seleccionar
             // 
             this.btn_seleccionar.Location = new System.Drawing.Point(213, 163);
-            this.btn_seleccionar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_seleccionar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_seleccionar.Name = "btn_seleccionar";
             this.btn_seleccionar.Size = new System.Drawing.Size(73, 21);
             this.btn_seleccionar.TabIndex = 6;
@@ -133,7 +134,7 @@
             this.cbo_compania.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbo_compania.FormattingEnabled = true;
             this.cbo_compania.Location = new System.Drawing.Point(86, 89);
-            this.cbo_compania.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbo_compania.Margin = new System.Windows.Forms.Padding(2);
             this.cbo_compania.Name = "cbo_compania";
             this.cbo_compania.Size = new System.Drawing.Size(124, 21);
             this.cbo_compania.TabIndex = 3;
@@ -143,7 +144,7 @@
             this.cbo_modelo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbo_modelo.FormattingEnabled = true;
             this.cbo_modelo.Location = new System.Drawing.Point(86, 54);
-            this.cbo_modelo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbo_modelo.Margin = new System.Windows.Forms.Padding(2);
             this.cbo_modelo.Name = "cbo_modelo";
             this.cbo_modelo.Size = new System.Drawing.Size(124, 21);
             this.cbo_modelo.TabIndex = 2;
@@ -151,7 +152,7 @@
             // txt_fecha_alta
             // 
             this.txt_fecha_alta.Location = new System.Drawing.Point(86, 163);
-            this.txt_fecha_alta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_fecha_alta.Margin = new System.Windows.Forms.Padding(2);
             this.txt_fecha_alta.Name = "txt_fecha_alta";
             this.txt_fecha_alta.ReadOnly = true;
             this.txt_fecha_alta.Size = new System.Drawing.Size(123, 20);
@@ -170,7 +171,7 @@
             // txt_nombre
             // 
             this.txt_nombre.Location = new System.Drawing.Point(86, 22);
-            this.txt_nombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_nombre.Margin = new System.Windows.Forms.Padding(2);
             this.txt_nombre.Name = "txt_nombre";
             this.txt_nombre.Size = new System.Drawing.Size(124, 20);
             this.txt_nombre.TabIndex = 1;
@@ -216,9 +217,9 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Location = new System.Drawing.Point(8, 245);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(560, 216);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
@@ -228,7 +229,7 @@
             // 
             this.txt_piso.Enabled = false;
             this.txt_piso.Location = new System.Drawing.Point(326, 61);
-            this.txt_piso.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_piso.Margin = new System.Windows.Forms.Padding(2);
             this.txt_piso.Name = "txt_piso";
             this.txt_piso.Size = new System.Drawing.Size(102, 20);
             this.txt_piso.TabIndex = 10;
@@ -254,7 +255,7 @@
             this.Column3,
             this.Column4});
             this.dgv_cabinas.Location = new System.Drawing.Point(4, 82);
-            this.dgv_cabinas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgv_cabinas.Margin = new System.Windows.Forms.Padding(2);
             this.dgv_cabinas.Name = "dgv_cabinas";
             this.dgv_cabinas.ReadOnly = true;
             this.dgv_cabinas.RowTemplate.Height = 24;
@@ -297,7 +298,7 @@
             // 
             this.txt_cantidad.Enabled = false;
             this.txt_cantidad.Location = new System.Drawing.Point(213, 61);
-            this.txt_cantidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_cantidad.Margin = new System.Windows.Forms.Padding(2);
             this.txt_cantidad.Name = "txt_cantidad";
             this.txt_cantidad.Size = new System.Drawing.Size(108, 20);
             this.txt_cantidad.TabIndex = 9;
@@ -306,7 +307,7 @@
             // 
             this.btn_agregar.Enabled = false;
             this.btn_agregar.Location = new System.Drawing.Point(474, 52);
-            this.btn_agregar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_agregar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_agregar.Name = "btn_agregar";
             this.btn_agregar.Size = new System.Drawing.Size(73, 27);
             this.btn_agregar.TabIndex = 11;
@@ -320,7 +321,7 @@
             this.cbo_tipo_servicio.Enabled = false;
             this.cbo_tipo_servicio.FormattingEnabled = true;
             this.cbo_tipo_servicio.Location = new System.Drawing.Point(4, 59);
-            this.cbo_tipo_servicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbo_tipo_servicio.Margin = new System.Windows.Forms.Padding(2);
             this.cbo_tipo_servicio.Name = "cbo_tipo_servicio";
             this.cbo_tipo_servicio.Size = new System.Drawing.Size(204, 21);
             this.cbo_tipo_servicio.TabIndex = 8;
@@ -349,7 +350,7 @@
             // 
             this.btn_guardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_guardar.Location = new System.Drawing.Point(459, 465);
-            this.btn_guardar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_guardar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_guardar.Name = "btn_guardar";
             this.btn_guardar.Size = new System.Drawing.Size(73, 25);
             this.btn_guardar.TabIndex = 18;
@@ -361,7 +362,7 @@
             // 
             this.btn_limpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_limpiar.Location = new System.Drawing.Point(221, 465);
-            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_limpiar.Name = "btn_limpiar";
             this.btn_limpiar.Size = new System.Drawing.Size(73, 25);
             this.btn_limpiar.TabIndex = 17;
@@ -373,7 +374,7 @@
             // 
             this.btn_atras.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_atras.Location = new System.Drawing.Point(8, 465);
-            this.btn_atras.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_atras.Margin = new System.Windows.Forms.Padding(2);
             this.btn_atras.Name = "btn_atras";
             this.btn_atras.Size = new System.Drawing.Size(73, 25);
             this.btn_atras.TabIndex = 21;
@@ -391,7 +392,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btn_guardar);
             this.Controls.Add(this.btn_limpiar);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormModificacion";
             this.Text = "Modificacion Crucero";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormModificacion_FormClosing);

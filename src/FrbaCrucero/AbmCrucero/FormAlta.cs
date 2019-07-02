@@ -22,6 +22,8 @@ namespace FrbaCrucero.AbmCrucero
         public FormAlta()
         {
             InitializeComponent();
+            monthCalendar1.TodayDate = ConfigurationUtils.Today();
+            monthCalendar1.SelectionStart = ConfigurationUtils.Today();
         }
 
         public FormAlta(Crucero crucero)
@@ -74,6 +76,8 @@ namespace FrbaCrucero.AbmCrucero
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             };
+            monthCalendar1.TodayDate = ConfigurationUtils.Today();
+            monthCalendar1.SelectionStart = ConfigurationUtils.Today();
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -292,6 +296,11 @@ namespace FrbaCrucero.AbmCrucero
         }
 
         private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
 
         }

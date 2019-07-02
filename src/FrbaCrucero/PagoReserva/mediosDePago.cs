@@ -136,8 +136,6 @@ namespace FrbaCrucero.PagoReserva
             {
 
                 MessageBox.Show("No se eligieron  medios de pago");
-
-
             }
 
         }

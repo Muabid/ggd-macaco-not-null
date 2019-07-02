@@ -18,7 +18,8 @@ namespace FrbaCrucero.CompraReservaPasaje
         private List<Cabina> cabinas;
         private int crucero;
         private Model.Viajes.Viaje viaje;
-
+        
+         
         //  private DataTable cabinas;
 
 
@@ -29,6 +30,8 @@ namespace FrbaCrucero.CompraReservaPasaje
             this.cabinas = cabinasId;
             this.viaje = viaje;
             InitializeComponent();
+            descripcion.Items.AddRange(new object[]{"TARJETA VISA", "TARJETA MASTERCARD", "TARJETA AMERICANEXPRESS", "TARJETA CREDENCIAL"});
+            cantCuotas.Items.AddRange(new object[]{1, 2, 3, 6, 12});
         }
 
         // public MediosDeLosPagos(Model.CompraReservaPasaje.Cliente cliente, DataTable cabinas, int crucero)
@@ -102,8 +105,8 @@ namespace FrbaCrucero.CompraReservaPasaje
                     new_row[0] = variable;
                     new_row[1] = cuotas;
                     tablaMediosDePago.Rows.Add(new_row);
-                    descripcion.Text = "";
-                    cantCuotas.Text = "";
+                    cantCuotas.SelectedIndex = -1;
+                    descripcion.SelectedIndex = -1;
 
                 }
             }
@@ -120,6 +123,7 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void buttonAtras_Click(object sender, EventArgs e)
         {
+            this.Owner.Show();
             this.Close();
         }
 

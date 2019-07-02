@@ -27,6 +27,8 @@ namespace FrbaCrucero.CompraReservaPasaje
             InitializeComponent();
             this.cabinas = cabinas;
             this.viaje = viaje;
+            monthCalendar1.TodayDate = ConfigurationUtils.Today();
+            monthCalendar1.SelectionStart = ConfigurationUtils.Today();
         }
 
         private void txt_dni_LostFocus(object sender, System.EventArgs e)
@@ -182,6 +184,8 @@ namespace FrbaCrucero.CompraReservaPasaje
 
             Pago form = new Pago(elCliente, cabinas, viaje);
             form.Show(this);
+            this.Hide();
+           
             }
             catch(Exception er)
             {
@@ -239,6 +243,8 @@ namespace FrbaCrucero.CompraReservaPasaje
 
                 Reserva form2 = new Reserva(loCliente, cabinas, viaje);
                 form2.Show(this);
+                this.Hide();
+                
             }
             catch (Exception er)
             {
@@ -317,6 +323,11 @@ namespace FrbaCrucero.CompraReservaPasaje
             {
                 e.Handled = true;
             }
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+
         }
 
       ///  this.textBox1.AutoCompleteSource = AutoCompleteSource.CustomSource; 

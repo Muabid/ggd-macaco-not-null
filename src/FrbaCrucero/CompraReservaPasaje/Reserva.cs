@@ -75,6 +75,7 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void btn_atras_Click(object sender, EventArgs e)
         {
+           
             this.Close();
         }
 

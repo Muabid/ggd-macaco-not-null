@@ -22,6 +22,8 @@ namespace FrbaCrucero.AbmCrucero
         {
             InitializeComponent();
             this.crucero = crucero;
+            monthCalendar1.TodayDate = ConfigurationUtils.Today();
+            monthCalendar1.SelectionStart = ConfigurationUtils.Today();
         }
         int btn;
         private void btn_limpiar_Click(object sender, EventArgs e)
@@ -212,6 +214,11 @@ namespace FrbaCrucero.AbmCrucero
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
 
         }

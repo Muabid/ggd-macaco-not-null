@@ -24,6 +24,8 @@ namespace FrbaCrucero.GeneracionViaje
         public GenerarViaje()
         {
             InitializeComponent();
+            monthCalendar.TodayDate = ConfigurationUtils.Today();
+            monthCalendar.SelectionStart = ConfigurationUtils.Today();
         }
 
         private void guardar_Click(object sender, EventArgs e)
@@ -125,7 +127,8 @@ namespace FrbaCrucero.GeneracionViaje
 
         private void resetPanel()
         {
-            dateTimePicker.Value = DateTime.Today;
+           
+            dateTimePicker.Value = ConfigurationUtils.Today();
             panel_date.Visible = false;
         }
 
@@ -168,6 +171,11 @@ namespace FrbaCrucero.GeneracionViaje
         {
             this.Owner.Show();
             this.Close();
+        }
+
+        private void monthCalendar_DateChanged(object sender, DateRangeEventArgs e)
+        {
+
         }
 
 

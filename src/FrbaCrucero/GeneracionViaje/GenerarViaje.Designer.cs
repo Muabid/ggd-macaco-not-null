@@ -196,6 +196,7 @@
             this.monthCalendar.ShowToday = false;
             this.monthCalendar.ShowTodayCircle = false;
             this.monthCalendar.TabIndex = 16;
+            this.monthCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_DateChanged);
             // 
             // panel_date
             // 

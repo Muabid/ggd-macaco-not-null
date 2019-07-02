@@ -32,6 +32,8 @@ namespace FrbaCrucero.CompraReservaPasaje
                 origenComboBox.Items.Add(puerto);
                 destinoComboBox.Items.Add(puerto);
             }
+            monthCalendar.TodayDate = ConfigurationUtils.Today();
+            monthCalendar.SelectionStart = ConfigurationUtils.Today();
         }
 
 
@@ -151,7 +153,7 @@ namespace FrbaCrucero.CompraReservaPasaje
 
         private void monthCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
-            if (monthCalendar.SelectionStart <= DateTime.Today)
+            if (monthCalendar.SelectionStart <= ConfigurationUtils.Today())
             {
                 salida = monthCalendar.SelectionStart;
                 salidaText.Text = salida.Value.ToShortDateString();
