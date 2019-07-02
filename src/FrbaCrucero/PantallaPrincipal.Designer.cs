@@ -40,7 +40,7 @@
             // 
             // btnRol
             // 
-            this.btnRol.Location = new System.Drawing.Point(32, 32);
+            this.btnRol.Location = new System.Drawing.Point(163, 99);
             this.btnRol.Name = "btnRol";
             this.btnRol.Size = new System.Drawing.Size(75, 23);
             this.btnRol.TabIndex = 0;
@@ -60,7 +60,7 @@
             // 
             // btnRecorrido
             // 
-            this.btnRecorrido.Location = new System.Drawing.Point(163, 25);
+            this.btnRecorrido.Location = new System.Drawing.Point(163, 234);
             this.btnRecorrido.Name = "btnRecorrido";
             this.btnRecorrido.Size = new System.Drawing.Size(84, 36);
             this.btnRecorrido.TabIndex = 2;
@@ -70,7 +70,7 @@
             // 
             // btnPasaje
             // 
-            this.btnPasaje.Location = new System.Drawing.Point(163, 99);
+            this.btnPasaje.Location = new System.Drawing.Point(163, 32);
             this.btnPasaje.Name = "btnPasaje";
             this.btnPasaje.Size = new System.Drawing.Size(75, 23);
             this.btnPasaje.TabIndex = 3;
@@ -100,7 +100,7 @@
             // 
             // btnPagoReserva
             // 
-            this.btnPagoReserva.Location = new System.Drawing.Point(32, 234);
+            this.btnPagoReserva.Location = new System.Drawing.Point(32, 32);
             this.btnPagoReserva.Name = "btnPagoReserva";
             this.btnPagoReserva.Size = new System.Drawing.Size(75, 36);
             this.btnPagoReserva.TabIndex = 6;
