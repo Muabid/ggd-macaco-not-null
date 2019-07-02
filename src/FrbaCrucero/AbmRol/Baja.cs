@@ -61,7 +61,7 @@ namespace FrbaCrucero.AbmRol
                 }
                 else
                 {
-                    query = "SELECT rol_id,rol_nombre,rol_activo FROM [MACACO_NOT_NULL].[ROL]";
+                    MessageBox.Show("No se encontro el rol");
                                
                 }
 
