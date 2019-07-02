@@ -58,6 +58,9 @@ namespace FrbaCrucero.AbmRol
                 {
                     query = "SELECT rol_id,rol_nombre,rol_activo FROM [MACACO_NOT_NULL].[ROL]" +
                                "WHERE rol_nombre LIKE '%" + textboxValue + "%'";
+                    SqlCommand sql = Utils.Database.createCommand(query);
+                    dataGridView2.DataSource = Database.getData(sql);
+
                 }
                 else
                 {
@@ -66,9 +69,9 @@ namespace FrbaCrucero.AbmRol
                 }
 
                 
-                SqlCommand sql = Utils.Database.createCommand(query);
+               
 
-                dataGridView2.DataSource = Database.getData(sql);
+                
                 //dataGridView2.ReadOnly = false;
                 //dataGridView2.Columns[0].ReadOnly = true;
                 //dataGridView2.Columns[1].ReadOnly = true;
