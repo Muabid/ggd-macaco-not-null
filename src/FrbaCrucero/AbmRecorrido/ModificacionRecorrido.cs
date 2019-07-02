@@ -146,8 +146,7 @@ namespace FrbaCrucero.AbmRecorrido
 
         private void agregarTramoButton_Click(object sender, EventArgs e)
         {
-            this.Owner.Show();
-            this.Close();
+            new ModificacionTramo(this).Show();
         }
 
         private void btn_atras_Click(object sender, EventArgs e)
