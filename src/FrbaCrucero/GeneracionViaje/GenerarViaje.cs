@@ -179,6 +179,16 @@ namespace FrbaCrucero.GeneracionViaje
 
         }
 
+        private void salidaText_TextChanged(object sender, EventArgs e)
+        {
+            seleccionarCrucero.Enabled = !String.IsNullOrEmpty(llegadaText.Text) && !String.IsNullOrEmpty(salidaText.Text);
+        }
+
+        private void llegadaText_TextChanged(object sender, EventArgs e)
+        {
+            seleccionarCrucero.Enabled = !String.IsNullOrEmpty(llegadaText.Text) && !String.IsNullOrEmpty(salidaText.Text);
+        }
+
 
     }
 }

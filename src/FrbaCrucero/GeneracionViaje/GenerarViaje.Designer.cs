@@ -121,6 +121,7 @@
             // 
             // seleccionarCrucero
             // 
+            this.seleccionarCrucero.Enabled = false;
             this.seleccionarCrucero.Location = new System.Drawing.Point(286, 172);
             this.seleccionarCrucero.Name = "seleccionarCrucero";
             this.seleccionarCrucero.Size = new System.Drawing.Size(75, 23);
@@ -156,6 +157,7 @@
             this.salidaText.ReadOnly = true;
             this.salidaText.Size = new System.Drawing.Size(121, 20);
             this.salidaText.TabIndex = 12;
+            this.salidaText.TextChanged += new System.EventHandler(this.salidaText_TextChanged);
             this.salidaText.Validating += new System.ComponentModel.CancelEventHandler(this.field_Validating);
             // 
             // llegadaText
@@ -165,6 +167,7 @@
             this.llegadaText.ReadOnly = true;
             this.llegadaText.Size = new System.Drawing.Size(121, 20);
             this.llegadaText.TabIndex = 13;
+            this.llegadaText.TextChanged += new System.EventHandler(this.llegadaText_TextChanged);
             this.llegadaText.Validating += new System.ComponentModel.CancelEventHandler(this.field_Validating);
             // 
             // btn_seleccionar_salida
