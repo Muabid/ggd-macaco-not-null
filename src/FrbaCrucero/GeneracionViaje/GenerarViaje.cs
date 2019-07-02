@@ -42,9 +42,10 @@ namespace FrbaCrucero.GeneracionViaje
                 Database.executeProcedure(cmd);
                 MessageBox.Show("Viaje generado con éxito","",
              MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-               
-                this.Close();
+
                 this.Owner.Show();
+                this.Close();
+               
 
             }
             catch(Exception ex)
@@ -63,7 +64,7 @@ namespace FrbaCrucero.GeneracionViaje
                 error = error + "Faltan completar campos \n";
             
             if(salida >= llegada)
-               error = error + "Fecha de llegada anterior a la de salida";
+               error = error + "Fecha de llegada anterior o igual a la de salida";
 
             if (error.Length > 0)
                 throw new Exception(error);

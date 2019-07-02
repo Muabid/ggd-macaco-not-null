@@ -1859,7 +1859,7 @@ BEGIN
 			END
 		group by reco_id,reco_codigo
 
-	SELECT TOP 5 recorrido_id,recorrido_codigo --atributos
+	SELECT TOP 5 recorrido_id,recorrido_codigo,pasajes_comprados AS 'Pasajes Comprados' --atributos
 	FROM @tablaRecorridos
 	order by pasajes_comprados DESC 
 END
@@ -1899,7 +1899,14 @@ BEGIN
 	END
 	ELSE
 	BEGIN		
-	  SELECT TOP 5 cruc_modelo,cruc_nombre,comp_nombre 
+	  SELECT TOP 5 cruc_modelo,cruc_nombre,comp_nombre, (SELECT SUM(DATEDIFF(day,baja_cruc_fecha_fuera_servicio, baja_cruc_fecha_reinicio_servicio))
+					FROM [MACACO_NOT_NULL].[BAJA_CRUCERO] 	
+					where baja_cruc_id = cruc_id
+					and YEAR(baja_cruc_fecha_fuera_servicio) = @anio
+					and @semestre = CASE
+							WHEN DATEPART(month,baja_cruc_fecha_fuera_servicio) <= 6 THEN 1
+							WHEN DATEPART(month,baja_cruc_fecha_fuera_servicio) > 7 THEN 2
+						END) AS 'Reparaciones'
 	  FROM [MACACO_NOT_NULL].[CRUCERO]
 	  INNER JOIN [MACACO_NOT_NULL].[COMPANIA] ON cruc_compañia_id = comp_id
 	  order by  (
@@ -1947,7 +1954,7 @@ BEGIN
 		INNER JOIN [MACACO_NOT_NULL].VIAJE ON reco_id = viaj_recorrido_id
 		INNER JOIN [MACACO_NOT_NULL].[CRUCERO] ON cruc_id = viaj_crucero_id	
 		
-	  SELECT TOP 5 reco_id,reco_codigo --atributos
+	  SELECT TOP 5 reco_id,reco_codigo,(SELECT AVG(cab_libres) from @tabla t where t.recorrido_id = reco_id) as 'Cabinas libres' --atributos
 	  FROM [MACACO_NOT_NULL].[RECORRIDO]
 	  order by  (
 					SELECT AVG(cab_libres) from @tabla t
