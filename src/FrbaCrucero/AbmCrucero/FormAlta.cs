@@ -111,6 +111,7 @@ namespace FrbaCrucero.AbmCrucero
                 cmd.Parameters.Add("@fecha_alta", SqlDbType.DateTime2).Value = crucero.cruc_fecha_alta;
                 cmd.Parameters.Add("@cabinas", SqlDbType.Structured).Value = dt;
                 Database.executeProcedure(cmd);
+                MessageBox.Show("Alta realizada");
                 this.Close();
             }
             catch(Exception ex)

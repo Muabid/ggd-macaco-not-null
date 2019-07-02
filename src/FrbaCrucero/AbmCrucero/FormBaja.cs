@@ -129,6 +129,7 @@ namespace FrbaCrucero.AbmCrucero
                     Database.executeProcedure(cmd1);
 
                     MessageBox.Show("El  crucero fue dado de baja definitivo");
+                    this.Close();
 
                 }
                 else if (chb_fuera_de_servicio.Checked)
@@ -144,6 +145,7 @@ namespace FrbaCrucero.AbmCrucero
                     Database.executeProcedure(cmd2);
 
                     MessageBox.Show("El  crucero fue dado de baja temporal");
+                    this.Close();
                 }
 
 
