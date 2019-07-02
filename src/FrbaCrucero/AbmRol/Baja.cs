@@ -33,6 +33,10 @@ namespace FrbaCrucero.AbmRol
                     c.Text = "";
                 }
             }
+
+            this.dataGridView2.DataSource = null;
+            this.dataGridView2.Rows.Clear();
+
         }
 
 
@@ -50,7 +54,7 @@ namespace FrbaCrucero.AbmRol
               
                 string textboxValue = textBox1.Text;
                 string query  = "";
-                if(String.IsNullOrEmpty(textboxValue))
+                if(!String.IsNullOrEmpty(textboxValue))
                 {
                     query = "SELECT rol_id,rol_nombre,rol_activo FROM [MACACO_NOT_NULL].[ROL]" +
                                "WHERE rol_nombre LIKE '%" + textboxValue + "%'";
@@ -131,6 +135,11 @@ namespace FrbaCrucero.AbmRol
         }
 
         private void Baja_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

@@ -85,6 +85,7 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(404, 150);
             this.dataGridView2.TabIndex = 5;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
             // button3
             // 
@@ -100,7 +101,7 @@
             // 
             this.btn_atras.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_atras.Location = new System.Drawing.Point(27, 322);
-            this.btn_atras.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_atras.Margin = new System.Windows.Forms.Padding(2);
             this.btn_atras.Name = "btn_atras";
             this.btn_atras.Size = new System.Drawing.Size(73, 25);
             this.btn_atras.TabIndex = 22;
