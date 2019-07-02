@@ -31,22 +31,31 @@ namespace FrbaCrucero.AbmRol
 
         private void button1_Click(object sender, EventArgs e)
         {
-           // SqlConnection connection = Utils.Database.getConnection();
-            //connection.Open();
-            SqlCommand procedure = Utils.Database.createCommand("MACACO_NOT_NULL.AltaRol");
-            procedure.Parameters.Add("@nombre_rol", SqlDbType.NVarChar).Value = NombreNuevoRol.Text;
-            procedure.Parameters.Add("@activo", SqlDbType.Bit).Value = 1;
-            Utils.Database.executeProcedure(procedure);
+            try
+            {
+                // SqlConnection connection = Utils.Database.getConnection();
+                //connection.Open();
+                SqlCommand procedure = Utils.Database.createCommand("MACACO_NOT_NULL.AltaRol");
+                procedure.Parameters.Add("@nombre_rol", SqlDbType.NVarChar).Value = NombreNuevoRol.Text;
+                procedure.Parameters.Add("@activo", SqlDbType.Bit).Value = 1;
+                Utils.Database.executeProcedure(procedure);
 
-            SqlCommand query = Utils.Database.createCommand("SELECT max (rol_id) FROM [MACACO_NOT_NULL].ROL");
-            int id = Utils.Database.executeScalar(query);
-            SqlCommand procedure2 = Utils.Database.createCommand("MACACO_NOT_NULL.AgregarFuncionalidadRol");
-            String funcionalidad =Funcionalidades.Text;
-            procedure2.Parameters.Add("@nombreNuevaFuncionalidadRol", SqlDbType.VarChar).Value = Funcionalidades.Text;
-            procedure2.Parameters.Add("@rol_id", SqlDbType.Int).Value = id;
-            Utils.Database.executeProcedure(procedure2);
-           // connection.Close();
-            MessageBox.Show("Alta realizada");
+                SqlCommand query = Utils.Database.createCommand("SELECT max (rol_id) FROM [MACACO_NOT_NULL].ROL");
+                int id = Utils.Database.executeScalar(query);
+                SqlCommand procedure2 = Utils.Database.createCommand("MACACO_NOT_NULL.AgregarFuncionalidadRol");
+                String funcionalidad = Funcionalidades.Text;
+                procedure2.Parameters.Add("@nombreNuevaFuncionalidadRol", SqlDbType.VarChar).Value = Funcionalidades.Text;
+                procedure2.Parameters.Add("@rol_id", SqlDbType.Int).Value = id;
+                Utils.Database.executeProcedure(procedure2);
+                // connection.Close();
+                MessageBox.Show("Alta realizada");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR",
+   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
             
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

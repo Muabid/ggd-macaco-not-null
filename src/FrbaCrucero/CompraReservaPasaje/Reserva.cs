@@ -117,6 +117,7 @@ namespace FrbaCrucero.CompraReservaPasaje
                 
             }
             MessageBox.Show("Reserva Realizada - Codigo: " + reserva_id.ToString());
+            this.Close();
         }
 
         private void textBox9_TextChanged(object sender, EventArgs e)

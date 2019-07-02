@@ -94,5 +94,10 @@ namespace FrbaCrucero.AbmRecorrido
             this.Close();
         }
 
+        private void BajaRecorrido_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
