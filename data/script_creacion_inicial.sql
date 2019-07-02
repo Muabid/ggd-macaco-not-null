@@ -1069,13 +1069,13 @@ END
   
 GO
  
-CREATE PROCEDURE MACACO_NOT_NULL.IdCruceroRemplazante (@cruc_id int)
+CREATE PROCEDURE MACACO_NOT_NULL.IdCruceroRemplazante (@cruc_id int, @fechaDesde DATETIME2(3))
 AS	
 	BEGIN 
 				
 		CREATE TABLE #CRUCEROS_NO_REEMPLAZANTES(id int identity(1,1) primary key,cruc_id int)
 
-		DECLARE @fechaDesde date = getdate();
+		
 		DECLARE @crucero_reemplazo_id int 
 
 		DECLARE @viajes TABLE 
@@ -1242,7 +1242,7 @@ END
 GO
 
 ----------- GENERACION RESERVA ------------
-CREATE PROCEDURE [MACACO_NOT_NULL].[GenerarReserva]
+CREATE PROCEDURE [MACACO_NOT_NULL].[GenerarReserva] @fecha_sistema DATETIME2(3),
 @id_usuario INT,
 @idViaje INT
 --agregar fechaNac telefono y mail y generar el rese_codigo para q no se repita
@@ -1251,7 +1251,7 @@ BEGIN
 	DECLARE @reseProxId INT 
 	SET @reseProxId = (SELECT MAX(rese_id) from [MACACO_NOT_NULL].RESERVA) + 1
 	INSERT INTO [MACACO_NOT_NULL].RESERVA (rese_usuario_id,rese_codigo,rese_fecha,rese_viaje_id)	
-		VALUES (@id_usuario,@reseProxId,CONVERT(datetime2(3), GETDATE(),121),@idViaje)		
+		VALUES (@id_usuario,@reseProxId,CONVERT(datetime2(3), @fecha_sistema,121),@idViaje)		
 END
 GO
 
@@ -1291,7 +1291,8 @@ GO
 -- 3) SE LLAMA A ESTE PROCEDURE TANTAS VECES COMO PASAJES HAYA COMPRADO (LOS PARAMETROS DEL VIAJE Y PAGO SON LOS MISMOS PERO EL IDCABINA CAMBIA)
 CREATE PROCEDURE [MACACO_NOT_NULL].AgregarPasajeA_Cliente
 	@cab_id_pasaje int,
-	@viaje_id_pasaje int
+	@viaje_id_pasaje int,
+	@fecha_sistema DATETIME2(3)
 AS
 BEGIN
 	DECLARE @porcentajeRecargo DECIMAL (18,2)
@@ -1307,7 +1308,7 @@ BEGIN
 			INNER JOIN [MACACO_NOT_NULL].VIAJE ON reco_id = viaj_recorrido_id
 			WHERE viaj_id =@viaje_id_pasaje
 		 ) * @porcentajeRecargo,				
-		 CONVERT(datetime2(3), GETDATE(),121),
+		 CONVERT(datetime2(3), @fecha_sistema,121),
 		 @cab_id_pasaje,@viaje_id_pasaje,(SELECT MAX(pago_id) FROM [MACACO_NOT_NULL].PAGO)
 	)
 END
@@ -1337,7 +1338,8 @@ END
 GO
 
 CREATE PROCEDURE [MACACO_NOT_NULL].AgregarPagoReserva_Y_PasajesAlCliente
-@codigo_reserva DECIMAL(18,0)
+@codigo_reserva DECIMAL(18,0),
+@fecha_sistema DATETIME2(3)
 AS
 BEGIN 
 	DECLARE @id_reserva INT, @id_usuario INT
@@ -1349,7 +1351,7 @@ BEGIN
 		SELECT 
 			(SELECT MAX(pasa_id) from [MACACO_NOT_NULL].PASAJE) + 1,
 			rese_cabi_costo,
-			CONVERT(datetime2(3), GETDATE(),121),
+			CONVERT(datetime2(3), @fecha_sistema,121),
 			cabina_id,
 			rese_viaje_id,
 			(SELECT MAX(pago_id) from [MACACO_NOT_NULL].PAGO)
@@ -1706,7 +1708,7 @@ BEGIN
 END 
 GO
 
-CREATE PROCEDURE [MACACO_NOT_NULL].BajaRecorrido @reco_codigo decimal(18,0)
+CREATE PROCEDURE [MACACO_NOT_NULL].BajaRecorrido @reco_codigo decimal(18,0),@fecha_sistema DATETIME2(3)
 AS
 BEGIN
 IF EXISTS (SELECT pasa_id FROM [MACACO_NOT_NULL].RECORRIDO AS r 
@@ -1715,7 +1717,7 @@ IF EXISTS (SELECT pasa_id FROM [MACACO_NOT_NULL].RECORRIDO AS r
 			JOIN [MACACO_NOT_NULL].PASAJE AS p
 			ON (v.viaj_recorrido_id = p.pasa_viaje_id)
 			WHERE reco_codigo = @reco_codigo
-			AND v.viaj_fecha_llegada > GETDATE())
+			AND v.viaj_fecha_llegada > @fecha_sistema)
 		THROW 51000, 'Existen pasajes de viajes que contienen al recorrido', 1;
 	 ELSE
 		UPDATE [MACACO_NOT_NULL].RECORRIDO

@@ -1,4 +1,5 @@
 ﻿using FrbaCrucero.Model.Cruceros;
+using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -68,8 +69,9 @@ namespace FrbaCrucero.CompraReservaPasaje
                  SqlCommand procedure2 = Utils.Database.createCommand("MACACO_NOT_NULL.AgregarPasajeA_Cliente");
                  procedure2.Parameters.Add("@cab_id_pasaje", SqlDbType.Int).Value = cabi_id;
                  procedure2.Parameters.Add("@viaje_id_pasaje", SqlDbType.Int).Value = viaje.id;
+                 procedure2.Parameters.Add("@fecha_sistema", SqlDbType.DateTime2).Value = ConfigurationUtils.Today();
                  Utils.Database.executeProcedure(procedure2);
-
+                    
              }
              if (tablaMediosDePago.Rows.Count > 0 && cabinas.Count > 0)
              {

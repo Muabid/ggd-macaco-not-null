@@ -155,6 +155,7 @@ namespace FrbaCrucero.AbmCrucero
 
                     SqlCommand reemplazarCrucero = Database.createCommand("[MACACO_NOT_NULL].IdCruceroRemplazante");
                     reemplazarCrucero.Parameters.Add("@cruc_id", SqlDbType.Int).Value = crucero.cruc_id;
+                    reemplazarCrucero.Parameters.Add("@fechaDesde", SqlDbType.DateTime2).Value = ConfigurationUtils.Today();
                     int? cruceroDeReemplazo = Database.executeProcedure(reemplazarCrucero);
                     if (cruceroDeReemplazo.HasValue)
                     {

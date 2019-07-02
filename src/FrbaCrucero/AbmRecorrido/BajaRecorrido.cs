@@ -62,8 +62,17 @@ namespace FrbaCrucero.AbmRecorrido
             }
             else if (e.ColumnIndex == recorridosTable.Columns["bajaColumn"].Index)
             {
-                recorridoDao.darDeBaja(codRecorrido);
-                recorridosTable.Rows.RemoveAt(e.RowIndex);
+                try
+                {
+                    recorridoDao.darDeBaja(codRecorrido);
+                    recorridosTable.Rows.RemoveAt(e.RowIndex);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR",
+    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+               
             }
 
         }

@@ -33,7 +33,7 @@ namespace FrbaCrucero
             //Application.Run(new ComprarOReservarPasaje());
             //Application.Run(new AbmCrucero.FormPantallaInicio());
             //Application.Run(new ListadoEstadistico.ListadoEstadisticoForm());
-
+                
         }
     }
 }

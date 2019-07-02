@@ -79,6 +79,7 @@ namespace FrbaCrucero.Utils
         {
             SqlCommand cmd = Database.createCommand("[MACACO_NOT_NULL].BajaRecorrido");
             cmd.Parameters.Add("@reco_codigo", SqlDbType.Decimal).Value = codRecorrido;
+            cmd.Parameters.Add("@fecha_sistema", SqlDbType.DateTime2).Value = ConfigurationUtils.Today();
             Database.executeProcedure(cmd);
         }
 

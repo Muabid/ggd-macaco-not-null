@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrbaCrucero.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -106,6 +107,7 @@ namespace FrbaCrucero.PagoReserva
             Decimal cod_reserva = decimal.Parse(reserva.Text);
             SqlCommand procedure = Utils.Database.createCommand("MACACO_NOT_NULL.AgregarPagoReserva_Y_PasajesAlCliente");
             procedure.Parameters.Add("@codigo_reserva", SqlDbType.Decimal).Value = cod_reserva;
+            procedure.Parameters.Add("@fecha_sistema", SqlDbType.DateTime2).Value = ConfigurationUtils.Today();
             Utils.Database.executeProcedure(procedure);
 
 

@@ -1,6 +1,7 @@
 ﻿using FrbaCrucero.Model.CompraReservaPasaje;
 using FrbaCrucero.Model.Cruceros;
 using FrbaCrucero.Model.Viajes;
+using FrbaCrucero.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -100,6 +101,7 @@ namespace FrbaCrucero.CompraReservaPasaje
             SqlCommand procedure = Utils.Database.createCommand("MACACO_NOT_NULL.[GenerarReserva]");
             procedure.Parameters.Add("@id_usuario", SqlDbType.Int).Value = cliente.id;
             procedure.Parameters.Add("@idViaje", SqlDbType.Int).Value = viaje.id;
+            procedure.Parameters.Add("@fecha_sistema", SqlDbType.DateTime2).Value = ConfigurationUtils.Today();
             Utils.Database.executeProcedure(procedure);
                     
             SqlCommand query = Utils.Database.createCommand("SELECT top 1 rese_id FROM [MACACO_NOT_NULL].RESERVA order by rese_id desc");
